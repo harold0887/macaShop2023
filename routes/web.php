@@ -49,6 +49,12 @@ Route::get('/prueba', function () {
   return $product->grado;
 });
 
+Route::get('/D6MGXLF1', function () {
+  $target = '/home3/materi65/macashop2023/storage/app/public';
+  $link =   '/home3/materi65/public_html/storage';
+  symlink($target, $link);
+  echo "Done";
+});
 
 
 
