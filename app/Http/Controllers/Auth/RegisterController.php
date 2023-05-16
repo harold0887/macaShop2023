@@ -71,6 +71,14 @@ class RegisterController extends Controller
             'password_confirmation' => ['required', 'string', 'min:6'],
             'policy' => ['required'],
         ]);
+
+        // $request->validate([
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'last_name' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        //     'policy' => ['required'],
+        // ]);
     }
 
     /**

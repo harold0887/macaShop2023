@@ -4,20 +4,24 @@
 'activePage' => 'home',
 'title' =>"Inicio",
 'pageBackground' => asset("material").'/img/login.jpg',
-'navbarClass'=>'text-primary'
+'navbarClass'=>'text-primary',
+'background'=>'#eee !important'
 ])
 
 @section('content')
 
 @include('includes.cart-1')
 
-<div class="container d-flex justify-content-center  p-0">
+
+<div class="container-fluid  p-0 ">
 
     <div class="content-main ">
-        <div class="d-block d-lg-none">
-            <div class="row ">
 
-                <div class="col-2">
+        @include('includes.borders')
+        <div class="d-block d-lg-none">
+            <div class="row">
+
+                <div class="col-2 pt-2">
                     <img src=" {{ asset('./img/logo2.png') }} " alt="" width="100">
 
                 </div>
@@ -49,169 +53,159 @@
         </div>
 
 
-        <div class="row justify-content-center pr-2">
+        <div class="row pt-2 justify-content-center">
 
-            <div class="col-10 col-lg-11 pr-0">
+
+            <div class="col-10 col-md-8 pr-0">
                 <form class="form-group">
                     <div class="input-group rounded">
-                        <input id="input-search" type="search" class="form-control px-3" placeholder="Buscar título, categoria, grado, etc...">
+                        <input id="input-search-home" type="search" class="form-control px-3  " placeholder=" Buscar por título..." style="border-radius: 30px !important">
+                    
                     </div>
                 </form>
+
             </div>
-            <div class="col-2 col-lg-1 ">
-                <button type="submit" class="btn bg-transparent  btn-round btn-just-icon" style="border:solid 1px #c09aed">
+            <div class="col-2 col-lg-1 p-0">
+                <button type="submit" class="btn bg-transparent   btn-round btn-just-icon p-0" style="border:solid 1px #c09aed">
                     <i class="material-icons " style="color:#c09aed">search</i>
                 </button>
             </div>
-
-
         </div>
 
 
         <div class="row mt-3">
-            <div class="col-12">
-                <!-- Button trigger modal-->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAbandonedCart">Launch
-                    modal</button>
+            <div class="col-12 rounded  px-0">
+                <div class="d-none d-lg-block">
+                    @if(isset($newsDesktop) && $newsDesktop->items->count() >0)
+                    <div id="carouselDesktop" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+                        <div class="carousel-indicators">
+                            @foreach($newsDesktop->items as $item)
+                            <button class=" bg-primary @if ($loop->first) active  @endif" data-mdb-target="#carouselDesktop" data-mdb-slide-to="{{ $loop->index }}" aria-label="Slide {{ $loop->index+1 }}"></button>
+                            @endforeach
+                        </div>
+                        <div class="carousel-inner">
+                            @foreach($newsDesktop->items as $item)
+                            <div class="carousel-item   @if ($loop->first) active  @endif  ">
+                                <img class=" w-100 d-block shadow" src="{{ Storage::url($item->photo) }}" alt="">
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+                </div>
+
+                
+            </div>
+        </div>
+        <div class="row justify-content-between mt-3 px-2">
+
+            <div class="col-6 col-md-3 p-1 text-center">
+                <a href="{{route('shop.index')}}">
+                    <div class="rounded" style=" background-color:#FF2D82;">
+                        <video class="rounded  w-100 " src="{{asset('img//tienda.mp4')}}" autoplay muted loop></video>
+
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3 p-1 text-center">
+                <a href="{{route('membership')}}">
+                    <div class="rounded" style=" background-color:#FCC552">
+
+                        <video class="rounded  w-100 " src="{{asset('img//preescolar.mp4')}}" autoplay muted loop></video>
+                    </div>
+                </a>
+
 
             </div>
-            <div class="col-12 rounded">
-                <div id="carousel-home" class="carousel slide carousel-fade d-none d-md-block" data-mdb-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-mdb-target="#carouselHome" data-mdb-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <div class="col-6 col-md-3 p-1 text-center">
+                <a href="{{route('membership')}}">
+                    <div class="rounded" style=" background-color:#52CFDD">
+                        <video class="rounded  w-100 " src="{{asset('img//primaria.mp4')}}" autoplay muted loop></video>
                     </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{asset('img/slide/slide1.png')}}" class="d-none d-md-block w-100 rounded" alt="...">
-                        </div>
+                </a>
+
+
+
+            </div>
+            <div class="col-6 col-md-3 p-1 text-center">
+                <a href="{{route('free')}}">
+                    <div class="rounded" style=" background-color:#A578DA">
+                        <video class="rounded  w-100 " src="{{asset('img//gratis.mp4')}}" autoplay muted loop></video>
                     </div>
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+        <livewire:novedades />
+        <livewire:subscribers-render />
+
+        <div class="row">
+            <div class="col-12 p-0">
+                <div class="text-center">
+                    <h2 class="pt-5  lg:text-4xl lg:pt-12 md:text-3xl md:font-bold text-center  text-2xl " style="font-size:27px;font-weight:700; color:#4d4d4d">
+                    ¿Aún no estás convencid@? 
+                    </h2>
+                    
+                    <p style="color:#4d4d4d">
+                    Mira lo que lo que piensan los clientes de nuestros materiales didácticos.
+
+                    </p>
+                   
                 </div>
-
-                <div id="carousel-mobile" class="carousel slide carousel-fade d-block d-md-none" data-mdb-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-mdb-target="#carouselHome" data-mdb-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{asset('img/slide/slide1-mobile.jpeg')}}" class="d-block d-md-none w-100 rounded" alt="...">
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
 
 
-
-
-
-
-        <div class="row justify-content-center  justify-content-md-center   justify-content-lg-between mt-3">
-
-
-            <div class="col-12  col-md-6 col-lg-6  px-5 ">
-                <a style="color: inherit" href="">
-                    <div class="row ">
-                        <div class="col-12 col-sm-5 align-self-end">
-                            <img src="{{asset('img/slide/membresia2.png')}}" class="w-100 d-none d-sm-block" alt="...">
-                        </div>
-                        <div class="col-12 col-sm-7  border rounded">
-                            <div class="row rounded">
-                                <div class="col-12 text-center rounded-top bg-primary-light pt-2">
-
-                                    <h1 class="text-white   text-4xl sm:text-4x1 md:text-4xl  lg:text-4xl   " style="font-family: 'Fredericka the Great'">MEMBRESÍA</h1>
-                                    <h1 class="text-white text-5xl sm:text-5x1 md:text-6xl  lg:text-6xl" style="font-family: 'Indie Flower'">Primaria</h1>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-12 text-center">
-                                            <h3 class="text-primary-light">SEMESTRAL</h3>
-                                            <h1 class="font-weight-bold ">
-                                                <small class=" text-mindle align-top ">$</small>320.00<small class="text-md"></small>
-                                            </h1>
-                                            <small class="text-muted">VIGENCIA DE JULIO A DIECIEMBRE 2023
-                                            </small>
-                                        </div>
-                                        <div class="col-12 text-center">
-                                            <h3 class="text-primary-light">ANUAL</h3>
-
-                                            <h1 class="font-weight-bold ">
-                                                <small class=" text-mindle align-top ">$</small>590.00<small class="text-md"></small>
-                                            </h1>
-
-
-                                            <small class="text-muted">VIGENCIA DE JULIO A JUNIO 2023-2024
-
-                                            </small>
-                                        </div>
-                                        <div class="col-12 text-center">
-                                            <button class="btn   btn-rose btn-round ">Más informacion</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+        <div>
+        <div id="comments-slick" class="coments-autoplay " style="display: show">
+            @if (isset($comments) && $comments->count() > 0)
+            @foreach ($comments as $comment)
+            <div class="px-2  pb-5">
+                <div class="card card-testimonial ">
+                    <div class="icon icon-primary">
+                        <i class="material-icons">format_quote</i>
                     </div>
-
-
-                </a>
-            </div>
-            <div class="col-12  col-md-6 col-lg-6  px-5 pt-3 pt-lg-0">
-                <a style="color: inherit" href="">
-                    <div class="row  rouded">
-                        <div class="col-12 col-sm-7 rounded border  ">
-                            <div class="row rounded">
-                                <div class="col-12 text-center rounded-top bg-rose-light pt-2">
-
-                                    <h1 class="text-white   text-4xl sm:text-4x1 md:text-4xl  lg:text-4xl   " style="font-family: 'Fredericka the Great'">MEMBRESÍA</h1>
-                                    <h1 class="text-white text-5xl sm:text-5x1 md:text-6xl  lg:text-6xl" style="font-family: 'Indie Flower'">Preescolar</h1>
-
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-12 text-center">
-                                            <h3 class="text-rose-light">SEMESTRAL</h3>
-                                            <h1 class="font-weight-bold ">
-                                                <small class=" text-mindle align-top ">$</small>320.00<small class="text-md"></small>
-                                            </h1>
-                                            <small class="text-muted">VIGENCIA DE JULIO A DIECIEMBRE 2023
-                                            </small>
-                                        </div>
-                                        <div class="col-12 text-center">
-                                            <h3 class="text-rose-light">ANUAL</h3>
-
-                                            <h1 class="font-weight-bold ">
-                                                <small class=" text-mindle align-top ">$</small>590.00<small class="text-md"></small>
-                                            </h1>
-
-
-                                            <small class="text-muted">VIGENCIA DE JULIO A JUNIO 2023-2024
-
-                                            </small>
-                                        </div>
-                                        <div class="col-12 text-center ">
-                                            <button class="btn   btn-rose btn-round ">Más informacion</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-5 align-self-end">
-                            <img src="{{asset('img/slide/membresia1.png')}}" class="w-100 d-none d-sm-block" alt="...">
-                        </div>
+                    <div class="card-body ">
+                        <h5 class="card-description" style="height: 120px;">
+                            {{Str::limit($comment->comment,200)}}
+                        </h5>
                     </div>
+                    <div class="card-footer">
+
+                        <h4 class="card-title">
+                        @php
+                            $name = explode(" ", $comment->user->name);
+                            echo $name[0];
+                            @endphp
+                        </h4>
+                        <div class="card-avatar">
+                            @if ($comment->user->picture)
+                            <img class="img" src="{{Storage::url($comment->user->picture)}}">
+                            @else
+                            <img class="img" src="{{ asset('material') }}/img/placeholder.jpg" alt="...">
+                            @endif
+                         
+                        </div>
 
 
-                </a>
+                       
+                    </div>
+                </div>
             </div>
 
-
-
-
+            @endforeach
+            @endif
+        </div>
         </div>
 
+       
+
+
+        @include('includes.borders')
 
 
 
@@ -233,3 +227,31 @@
 
 
 @endsection
+
+@push('js')
+<script>
+    $("#input-search-home").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "{{route('search.products')}}",
+                dataType: 'json',
+                data: {
+                    term: request.term
+                },
+                success: function(data) {
+                    response(data)
+                },
+
+            })
+        },
+        select: function(event, ui) {
+            window.location.href = "http://127.0.0.1:8000/tienda/productos/" + ui.item.value
+        }
+
+
+    })
+</script>
+
+
+
+@endpush

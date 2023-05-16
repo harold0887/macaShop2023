@@ -43,5 +43,9 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
+    'mercadopago'=> [
+        'key' => env('YOUR_PUBLIC_KEY'),
+        'token'=> env('PROD_ACCESS_TOKEN'),
+    ],
 
 ];

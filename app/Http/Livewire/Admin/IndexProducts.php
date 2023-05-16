@@ -29,7 +29,7 @@ class IndexProducts extends Component
             $products = Product::where(function ($query) {
                 $query->where('title', 'like', '%' . $this->search . '%');
             })->orderBy($this->sortField, $this->sortDirection)
-                ->paginate(15);
+                ->paginate(50);
 
         return view('livewire.admin.index-products', compact('products'));
     }

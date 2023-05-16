@@ -11,10 +11,10 @@
                       <i class="material-icons">clear</i>
                   </button>
               </div>
-              <div class="modal-body">
+              <div class="modal-body border-top border-bottom">
                   <div class="row">
                       <div class="col-6 img-product">
-                          <img class="w-100" src="{{$img}}" alt="">
+                          <img class="w-100 shadow rounded" src="{{$img}}" alt="">
                       </div>
                       <div class="col-6 ">
                           <h4> <b>{{$title}}</b> </h4>
@@ -24,15 +24,16 @@
                       </div>
                   </div>
               </div>
-              <div class="modal-footer ">
+              <div class="modal-footer  justify-content-center">
+               
 
-                  <div class="row">
-                      <div class="col-12 col-md-6">
-                          <button type="button" class="btn btn-block  btn-link border h5 mt-2 b-close w-100">Seguir comprando</button>
+                  <div class="row justify-content-center  w-100">
+                      <div class="col-12 col-md-6 ">
+                          <button type="button" class="btn btn-block  btn-outline-primary  b-close w-100 mt-1">Seguir comprando</button>
                       </div>
                       <div class="col-12 col-md-6">
-                          <a href="{{ route('cart.index') }}" class="btn btn-block  btn-primary h5 mt-2">
-                              Ver carrito y pago
+                          <a href="{{ route('cart.index') }}" class="btn btn-block  btn-primary w-100  ">
+                              Ver carrito y pagar
                           </a>
 
                       </div>

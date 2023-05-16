@@ -13,6 +13,8 @@ class Membership extends Model
     //Relacion muchos a muchos con productos
     public function products()
     {
-        return $this->belongsToMany('App\Models\Product');
+        return $this->belongsToMany('App\Models\Product')
+        ->whereNotIn('title', ['newsDesktop','newsMobile'])
+        ->orderBy('title','asc');
     }
 }

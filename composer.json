@@ -11,11 +11,16 @@
         "php": "^7.3|^8.0",
         "darryldecode/cart": "^4.2",
         "fideloper/proxy": "^4.0",
+        "guzzlehttp/guzzle": "^7.6",
         "laravel/framework": "^8.65",
         "laravel/legacy-factories": "^1.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
         "livewire/livewire": "^2.12",
+        "mercadopago/dx-php": "^2.5",
+        "setasign/fpdf": "^1.8",
+        "setasign/fpdi": "^2.3",
+        "setasign/fpdi-fpdf": "^2.3",
         "spatie/laravel-permission": "^5.9"
     },
     "require-dev": {

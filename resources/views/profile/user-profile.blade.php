@@ -7,11 +7,20 @@
 @section('content')
 
 
-<div class="content pt-0">
+<div class="container-fluid  p-0 ">
 
-    <div class="container-fluid">
+    <div class="content-main ">
 
+        @include('includes.borders')
         <div class="row ">
+            <div class="col-12">
+                <nav aria-label="breadcrumb ">
+                    <ol class="breadcrumb my-0 text-xs lg:text-base">
+                        <li class="breadcrumb-item"><a href="{{route('home')}}">Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Cuenta</li>
+                    </ol>
+                </nav>
+            </div>
             <div class="col-md-8">
                 <div class="card shadow">
                     <div class="card-header card-header-icon card-header-primary">
@@ -27,7 +36,7 @@
                             @method('put')
 
                             <div class="row">
-                                <label class="col-sm-2 col-form-label">{{ __('Profile photo') }}</label>
+                                <label class="col-sm-2 col-form-label">{{ __('Profile Photo') }}</label>
                                 <div class="col-sm-7">
                                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                         <div class="fileinput-new thumbnail img-circle">
@@ -135,8 +144,10 @@
                 </div>
             </div>
         </div>
+        @include('includes.borders')
     </div>
 </div>
+
 
 
 

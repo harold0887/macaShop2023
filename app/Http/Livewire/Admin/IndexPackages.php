@@ -26,6 +26,9 @@ class IndexPackages extends Component
     }
     public function render()
     {
+
+        //dd(Package::all());
+
         $packages = Package::where(function ($query) {
             $query->where('packages.title', 'like', '%' . $this->search . '%');
         })->orderBy($this->sortField, $this->sortDirection)

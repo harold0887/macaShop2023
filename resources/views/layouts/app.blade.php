@@ -35,7 +35,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick-theme.css') }}">
 
-
+    <!-- CSS animate -->
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
 
 
@@ -44,7 +45,7 @@
     @livewireStyles
 </head>
 
-<body class="{{ $class ?? '' }}">
+<body class="{{ $class ?? '' }}" >
 
     <style>
         #ofBar {
@@ -58,7 +59,7 @@
     @if (Route::is('dashboard','dashboard.*','products.*','memberships.*','category.*','package.*','degrees.*','users.*','comments.*','sales.*'))
     @include('layouts.page_templates.admin')
 
-    @elseif(Route::is('profile.*'))
+    @elseif(Route::is('profile.*','customer.*','order.*'))
     @include('layouts.page_templates.user')
 
     @elseif(Route::is('login','register','password.email','password.request','password.reset'))
@@ -142,10 +143,14 @@
      
   
     
+<!-- jquery-ui-search -->
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
 
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+
+
     @stack('js')
     @livewireScripts
+    
 </body>
 
 </html>

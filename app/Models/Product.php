@@ -16,7 +16,7 @@ class Product extends Model
   //relacion con items, retorna las fotos del producto
   public function items()
   {
-    return $this->hasMany(Item::class, 'products_id');
+    return $this->hasMany(Item::class, 'products_id')->orderBy('created_at','desc');
   }
 
   //relacion con grado, retorna el grado al que pertenece
@@ -35,7 +35,7 @@ class Product extends Model
   //Relacion muchos a muchos con paquete
   public function package()
   {
-    return $this->belongsToMany('App\Models\Package');
+    return $this->belongsToMany('App\Models\Package')->orderBy('name','desc');
   }
 
   //Relacion muchos a muchos con membresias
@@ -71,5 +71,11 @@ class Product extends Model
   public function descargas()
   {
     return $this->hasMany(Descarga::class,'id_product');
+  }
+
+  //Relacion muchos a muchos con membresias
+  public function orders()
+  {
+    return $this->hasMany('App\Models\Order_Details');
   }
 }

@@ -15,14 +15,14 @@
      <div class="carousel-inner justify-content-center ">
          <!-- Single item -->
          <div class="carousel-item active  d-flex justify-content-center ">
-             <img class="rounded w-100 d-block d-xl-none" src="{{ Storage::url($product->itemMain) }}" alt="" class="carousel-img">
-             <img class="rounded w-75 d-none d-xl-block" src="{{ Storage::url($product->itemMain) }}" alt="" class="carousel-img">
+             <img class="rounded w-100 d-block d-xl-none border" src="{{ Storage::url($product->itemMain) }}" alt="" class="carousel-img">
+             <img class="rounded w-75 d-none d-xl-block border" src="{{ Storage::url($product->itemMain) }}" alt="" class="carousel-img">
          </div>
 
          @foreach($product->items as $item)
          <div class="carousel-item   d-flex justify-content-center ">
-             <img class="rounded w-100 d-block d-xl-none " src="{{ Storage::url($item->photo) }}" alt="" class="carousel-img">
-             <img class="rounded w-75 d-none d-xl-block " src="{{ Storage::url($item->photo) }}" alt="" class="carousel-img">
+             <img class="rounded w-100 d-block d-xl-none border" src="{{ Storage::url($item->photo) }}" alt="" class="carousel-img">
+             <img class="rounded w-75 d-none d-xl-block border" src="{{ Storage::url($item->photo) }}" alt="" class="carousel-img">
          </div>
          @endforeach
 

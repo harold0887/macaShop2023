@@ -26,4 +26,15 @@
 </script>
 @endif
 
+@if (session('status'))
+<script>
+
+swal("¡Buen trabajo!", "{{session('status')}}", "success");
+
+</script>
+@endif
+
+
+
+
 @endpush

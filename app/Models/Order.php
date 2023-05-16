@@ -15,4 +15,21 @@ class Order extends Model
      {
          return $this->belongsTo('App\User','customer_id');
      }
+
+      //Relacion muchos a muchos
+    public function products()
+    {
+        return $this->belongsToMany('App\Models\Product','order_details');
+    }
+      //Relacion muchos a muchos paquetes
+      public function Packages()
+      {
+          return $this->belongsToMany('App\Models\Package','order_details');
+      }
+
+    //Relacion muchos a muchos membresias
+    public function memberships()
+    {
+        return $this->belongsToMany('App\Models\Membership','order_details');
+    }
 }

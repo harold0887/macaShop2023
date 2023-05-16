@@ -166,6 +166,7 @@ return [
         'new comment'=>'comentario',
         'subject'=>'asunto',
         'message'=>'mensaje',
+        'price_with_discount'=>'precio con descuento'
     
 
     ],

@@ -56,6 +56,19 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
+                                    <th style="cursor:pointer" wire:click="setSort('id')">
+                                            @if($sortField=='id')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
+
+                                            Id
+                                        </th>
                                         <th style="cursor:pointer" wire:click="setSort('payment_id')">
                                             @if($sortField=='payment_id')
                                             @if($sortDirection=='asc')
@@ -124,6 +137,7 @@
                                 <tbody>
                                     @foreach ($orders as $order)
                                     <tr>
+                                    <td>{{ $order->id }}</td>
                                         <td>{{ $order->payment_id }}</td>
                                         <td>{{date_format($order->created_at, 'd-M-Y H:i')}}</td>
                                         <td>{{ $order->amount }}</td>

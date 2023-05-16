@@ -59,6 +59,19 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
+                                    <th style="cursor:pointer" wire:click="setSort('id')">
+                                            @if($sortField=='id')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
+
+                                            ID
+                                        </th>
 
                                         <th style="cursor:pointer" wire:click="setSort('name')">
                                             @if($sortField=='name')
@@ -85,6 +98,18 @@
                                             @endif
                                             Precio
                                         </th>
+                                        <th style="cursor:pointer" wire:click="setSort('price_with_discount')">
+                                            @if($sortField=='price_with_discount')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
+                                            Precio con descuento
+                                        </th>
                                         <th>Materiales del paquete</th>
                                         <th style="cursor:pointer" wire:click="setSort('status')">
                                             @if($sortField=='status')
@@ -107,9 +132,11 @@
                                 <tbody>
                                     @foreach ($packages as $product)
                                     <tr class="{{ $product->percentage >0 ?'text-danger':'' }}">
-
+                                    <td>{{ $product->id }}</td>
                                         <td>{{ $product->title }}</td>
                                         <td>{{ $product->price }}</td>
+                                        <td>{{ $product->price_with_discount }}</td>
+
                                         <td>{{ $product->products->count() }}</td>
                                         <td>
                                             <div class="togglebutton" wire:click="changeStatusPackage({{ $product->id }}, '{{ $product->status }}')">

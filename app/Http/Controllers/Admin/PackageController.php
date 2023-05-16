@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Package;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -28,14 +29,14 @@ class PackageController extends Controller
         $request->validate([
             'title' => 'required',
             'price' => 'required',
+            'price_with_discount'=>'required',
             'itemMain' => 'required|image',
-            'discount' => 'required',
+            'information' => 'required',
+         
         ]);
 
 
-        $price = number_format((float)request('price'), 2, '.', '');
-        $percentage = request('discount');
-        $price_with_discount = $price - (($price / 100) * $percentage);
+       
 
         try {
             Package::create([
@@ -43,10 +44,11 @@ class PackageController extends Controller
                 'price' => request('price'),
                 'itemMain' => $request->itemMain ? $request->itemMain->store('portadas', 'public') : null,
                 'status' => true,
-                'price_with_discount' => request('price'),
-                'discount_percentage' => $percentage,
-                'price_with_discount' => $price_with_discount,
-                //'codeSend' => 'Package'
+                'discount_percentage' => 0,
+                'price_with_discount' => request('price_with_discount'),
+                'model' => 'Package',
+                'slug' => Str::slug(request('title'), '-'),
+                'information' => request('information'),
             ]);
             return back()->with('success', 'Registro exitoso');
         } catch (QueryException $e) {
@@ -65,6 +67,9 @@ class PackageController extends Controller
         $request->validate([
             'title' => 'required',
             'price' => 'required',
+            'price_with_discount'=>'required',
+            'information' => 'required',
+          
         ]);
 
         $package = Package::findOrFail($id);
@@ -79,7 +84,10 @@ class PackageController extends Controller
             Package::findOrFail($id)->update([
                 'title' => request('title'),
                 'itemMain' => $itemMain,
-                'price' => request('price')
+                'price' => request('price'),
+                'price_with_discount' => request('price_with_discount'),
+                'information' => request('information'),
+                'slug' => Str::slug(request('title'), '-'),
             ]);
             return back()->with('success', 'El paquete se actualizo de manera correcta');
         } catch (QueryException $e) {

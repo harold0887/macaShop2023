@@ -1,16 +1,20 @@
-<nav id="{{$navbarClass}}" class="navbar fixed-top navbar-expand-lg {{$navbarClass}} navbar-transparent " style="{{Request::route()->getName() !='login'? 'background-color: #eee !important': '' }} ">
+<nav id="{{$navbarClass}}" class="navbar fixed-top navbar-expand-lg {{$navbarClass}} navbar-transparent " style="background-color: {{$background}} ;  ">
 
   <!--    -->
   <!-- navbar fixed-top navbar-expand-lg    {{$navbarClass}} shadow -->
   <div class="container-fluid">
+
     <div class="navbar-wrapper ">
-      <a class="navbar-brand {{ $navbarClass }}" style="padding: 0px !important">
+      <a class="navbar-brand" style="padding: 0px !important">
 
 
         @if(Request::route()->getName() =='home')
-        <img class="d-none d-lg-block " src=" {{ asset('./img/logo2.png') }} " alt="" width="100">
+        <a class="navbar-brand d-block d-lg-none" href="{{route('home')}}" style="font-family: 'Fredericka the Great'">Material didáctico MaCa</a>
+        <a class="navbar-brand py-0 d-none d-lg-block" href="{{route('home')}}" style="font-family: 'Fredericka the Great'"><img class="logo-main" src=" {{ asset('./img/logo2.png') }} " alt=""></a>
+
         @else
-        <img src=" {{ asset('./img/logo2.png') }} " alt="" width="100">
+        <a class="navbar-brand py-0" href="{{route('home')}}" style="font-family: 'Fredericka the Great'"><img class="logo-main" src=" {{ asset('./img/logo2.png') }} " alt=""></a>
+
         @endif
       </a>
     </div>
@@ -40,7 +44,7 @@
         <li class="nav-item{{ $activePage == 'membership' ? ' active' : '' }}">
           <a href="{{ route('membership') }}" class="nav-link {{ $navbarClass }}">
             <i class="material-icons">card_membership</i>
-            Membresia vip
+            Membresía vip
           </a>
         </li>
         <li class="nav-item{{ $activePage == 'free' ? ' active' : '' }}">
@@ -73,15 +77,6 @@
           </a>
         </li>
         @endrole
-        <li class="nav-item{{ $activePage == 'cart' ? ' active' : '' }}">
-          <a href="{{ route('free') }}" class="nav-link {{ $navbarClass }}">
-            <i class="material-icons">shopping_cart</i>
-            <span class="badge rounded-pill badge-notification" style="position: absolute; top:0; left:25px">
-              <livewire:cart-count />
-            </span>
-          </a>
-        </li>
-
 
         @auth
         <li class="nav-item dropdown">
@@ -95,6 +90,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background:#e9e9e8;">
 
             <a class="dropdown-item" href="{{route('profile.edit')}}">{{ __('My Profile') }}</a>
+            <a class="dropdown-item" href="{{route('customer.orders')}}">Mis compras</a>
             <form method="POST" action="{{ route('logout') }}">
               @csrf
               <a class="dropdown-item" href="route('logout')" onclick="event.preventDefault();
@@ -103,7 +99,22 @@
           </div>
         </li>
         @endauth
+
+
+        <li class="nav-item{{ $activePage == 'cart' ? ' active' : '' }}">
+          <a href="{{ route('cart.index') }}" class="nav-link {{ $navbarClass }}">
+            <i class="material-icons">shopping_cart</i>Carrito
+            <span class="badge rounded-pill badge-notification" style="position: absolute; top:0; left:-10px">
+              <livewire:cart-count />
+            </span>
+          </a>
+        </li>
+
+
+
       </ul>
     </div>
+
   </div>
+
 </nav>

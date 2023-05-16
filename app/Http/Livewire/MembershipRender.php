@@ -22,41 +22,55 @@ class MembershipRender extends Component
                 'classPage' => 'login-page',
                 'activePage' => 'membership',
                 'title' => "Membresía VIP",
-                'navbarClass' => 'text-primary'
+                'navbarClass' => 'text-primary',
+                'background'=>'#eee !important'
+                
             ])
 
             ->section('content');
     }
 
+  
     public function addCart($id, $model)
     {
+        try {
+            if ($model == "Product") {
+                $product = Product::find($id);
+            }
+            if ($model == "Package") {
+                $product = Package::find($id);
+            }
+            if ($model == "Membership") {
+                $product = Membership::find($id);
+            }
 
-        if ($model == "Product") {
-            $product = Product::find($id);
+
+            \Cart::add(array(
+                'id' => $product->id,
+                'name' => $product->title,
+                'price' => $product->price_with_discount,
+                'quantity' => 1,
+                'attributes' => array(
+                    'type' => 'Membership',
+                ),
+                'associatedModel' => $product
+            ));
+
+
+
+            $this->img = Storage::url($product->itemMain);
+            $this->title = $product->title;
+            $this->price = $product->price_with_discount;
+
+
+
+
+            $this->emit('cart:update');
+            $this->emit('addCartAlert');
+        } catch (\Throwable $th) {
+            $this->emit('error', [
+                'message' => "Error al agregar el producto al carrito - " . $th->getMessage(),
+            ]);
         }
-        if ($model == "Membership") {
-            $product = Membership::find($id);
-        }
-        if ($model == "Package") {
-            $product = Package::find($id);
-        }
-
-
-        $this->img=Storage::url($product->itemMain);
-        $this->title=$product->title;
-        $this->price=$product->price;
-
-        \Cart::add(array(
-            'id' => $product->id,
-            'name' => $product->title,
-            'price' => $product->price,
-            'quantity' => 1,
-            'attributes' => array([]),
-            'associatedModel' => $product
-        ));
-
-
-        $this->emit('cart:update');
-        $this->emit('addCartAlert');
     }
 }

@@ -6,10 +6,10 @@
 -->
     <div class="logo">
         <a href="{{route('home')}}" class="simple-text logo-mini">
-            MA
+            <i class="material-icons">home</i>
         </a>
         <a href="{{route('home')}}" class="simple-text logo-normal">
-            MaCa
+            inicio
         </a>
     </div>
     <div class="sidebar-wrapper">
@@ -25,13 +25,23 @@
                 <a data-toggle="collapse" href="#collapseExample" class="username">
                     <span>
                         @auth
-                        {{ auth()->user()->name }}
+                        @php
+                        $name = explode(" ", Auth::user()->name);
+                        echo $name[0];
+                        @endphp
                         @endauth
                         <b class="caret"></b>
                     </span>
                 </a>
                 <div class="collapse" id="collapseExample">
                     <ul class="nav">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('home') }}">
+                                <span class="sidebar-mini"> IR </span>
+                                <span class="sidebar-normal"> Ir al inicio </span>
+                            </a>
+                        </li>
+
                         @auth
                         <li>
                             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -51,26 +61,31 @@
                     <p>Perfil</p>
                 </a>
             </li>
-            <li class="nav-item {{ ($menuParent == 'ventas' || $activePage == 'ventas') ? ' active' : '' }}">
-                <a class="nav-link" data-toggle="collapse" href="#laravelExample" {{ ($menuParent == 'laravel' || $activePage == 'dashboard') ? ' aria-expanded="true"' : '' }}>
-                    <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
-                    <p>Mis compras
-                        <b class="caret"></b>
-                    </p>
+            <li class="nav-item{{ $activePage == 'orders' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('customer.orders') }}">
+                    <i class="material-icons">shopping_bag</i>
+                    <p>Mis Compras</p>
                 </a>
-                <div class="collapse {{ ($menuParent == 'ventas' || $menuParent == 'ventas') ? ' show' : '' }}" id="laravelExample">
-                    <ul class="nav">
-                        <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
-                            <a class="nav-link" href="{{ route('profile.edit') }}">
-                                <span class="sidebar-mini"> UP </span>
-                                <span class="sidebar-normal">{{ __('User profile') }} </span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
             </li>
-
+            <li class="nav-item{{ $activePage == 'products' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('customer.products') }}">
+                    <i class="material-icons">view_list</i>
+                    <p>Mis Productos</p>
+                </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'packages' ? ' active' : '' }}">
+                <a class="nav-link" href="{{route('customer.packages')}}">
+                <i class="material-icons">library_add</i>
+                    <p>Mis Paquetes</p>
+                </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'memberships' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('customer.memberships') }}">
+                <i class="material-icons">card_membership</i>
+                    <p>Mis Membresías</p>
+                </a>
+            </li>
+          
 
 
 

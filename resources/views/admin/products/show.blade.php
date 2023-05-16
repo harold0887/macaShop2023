@@ -1,7 +1,8 @@
-@extends('layouts.app',[
+    @extends('layouts.app',[
 'title'=>'Productos',
 'navbarClass'=>'navbar-transparent',
 'activePage'=>'products',
+
 ])
 @section('content')
 <div class="content  pt-0">

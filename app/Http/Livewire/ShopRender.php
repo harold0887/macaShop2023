@@ -22,13 +22,23 @@ class ShopRender extends Component
     public $gradeSelect = [];
     public $img, $title, $price;
     protected $paginationTheme = 'bootstrap';
-
+    public $membership;
     public $icon, $showFilter, $showCategory, $collapseCategory, $showGrade, $collapseGrade;
+
+    
+
 
     public function updatingSearch()
     {
         $this->resetPage();
     }
+
+    public function mount()
+    {
+        $this->membership = Membership::where('main','=',1)->first();
+    }
+
+
     public function render()
     {
         $busqueaCat = $this->categoriesSelect;
@@ -48,7 +58,19 @@ class ShopRender extends Component
         })->where('price', '>', 0)
             ->where('status',  true)
             ->orderBy('created_at', 'desc')
+            ->whereNotIn('title', ['newsDesktop','newsMobile'])
             ->paginate(40);
+
+        $packages = Package::where(function ($query) {
+            $query->where('title', 'like', '%' . $this->search . '%');
+            //->orWhere('information', 'like', '%' . $this->search . '%');
+        })->where('price', '>', 0)
+            ->where('status',  true)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+
+
 
 
         if (!empty($this->categoriesSelect)) {
@@ -61,6 +83,7 @@ class ShopRender extends Component
                 ->whereHas('categorias', function ($query) use ($busqueaCat) {
                     $query->whereIn('categories.id', $busqueaCat);
                 })
+                ->whereNotIn('title', ['newsDesktop','newsMobile'])
                 ->paginate(40);
         }
 
@@ -72,6 +95,7 @@ class ShopRender extends Component
                 ->where('status',  true)
                 ->orderBy('created_at', 'desc')
                 ->whereIn('grade',  $this->gradeSelect)
+                ->whereNotIn('title', ['newsDesktop','newsMobile'])
                 ->paginate(40);
         }
 
@@ -86,6 +110,7 @@ class ShopRender extends Component
                 ->whereHas('categorias', function ($query) use ($busqueaCat) {
                     $query->whereIn('categories.id', $busqueaCat);
                 })
+                ->whereNotIn('title', ['newsDesktop','newsMobile'])
                 ->paginate(40);
         }
 
@@ -94,13 +119,15 @@ class ShopRender extends Component
 
 
 
-        return view('livewire.shop-render', compact('products', 'categories', 'degrees'))
+        return view('livewire.shop-render', compact('products', 'categories', 'degrees', 'packages'))
             ->extends('layouts.app', [
                 'class' => 'off-canvas-sidebar',
                 'classPage' => 'login-page',
                 'activePage' => 'shop',
                 'title' => "Tienda",
-                'navbarClass' => 'text-primary'
+                'navbarClass' => 'text-primary',
+                'pageBackground' => asset("material").'/img/markus-spiske-187777.jpg',
+                'background'=>'#eee !important'
             ])
 
             ->section('content');
@@ -120,9 +147,9 @@ class ShopRender extends Component
         $this->reset(['gradeSelect']);
     }
 
-    public function setCategory($id){
+    public function setCategory($id)
+    {
         $this->categoriesSelect = [$id];
-        
     }
 
 
@@ -165,33 +192,47 @@ class ShopRender extends Component
 
     public function addCart($id, $model)
     {
+      
+        try {
+            if ($model == "Product") {
+                $product = Product::find($id);
+            }
+            if ($model == "Package") {
+                $product = Package::find($id);
+            }
+            if ($model == "Membership") {
+                $product = Membership::find($id);
+            }
 
-        if ($model == "Product") {
-            $product = Product::find($id);
+
+            \Cart::add(array(
+                'id' => $product->id,
+                'name' => $product->title,
+                'price' => $product->price_with_discount,
+                'quantity' => 1,
+                'attributes' => array(
+                    'type' => 'Membership',
+                ),
+                'associatedModel' => $product
+            ));
+
+
+
+            $this->img = Storage::url($product->itemMain);
+            $this->title = $product->title;
+            $this->price = $product->price_with_discount;
+
+
+
+
+            $this->emit('cart:update');
+            $this->emit('addCartAlert');
+        } catch (\Throwable $th) {
+            $this->emit('error', [
+                'message' => "Error al agregar el producto al carrito - " . $th->getMessage(),
+            ]);
         }
-        if ($model == "Membership") {
-            $product = Membership::find($id);
-        }
-        if ($model == "Package") {
-            $product = Package::find($id);
-        }
-
-
-        $this->img=Storage::url($product->itemMain);
-        $this->title=$product->title;
-        $this->price=$product->price;
-
-        \Cart::add(array(
-            'id' => $product->id,
-            'name' => $product->title,
-            'price' => $product->price,
-            'quantity' => 1,
-            'attributes' => array([]),
-            'associatedModel' => $product
-        ));
-
-
-        $this->emit('cart:update');
-        $this->emit('addCartAlert');
     }
+
+    
 }

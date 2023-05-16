@@ -2,6 +2,11 @@
 @import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
 @import url(https://fonts.googleapis.com/css?family=Indie+Flower);
 @import url(https://fonts.googleapis.com/css?family=Fredericka+the+Great);
+@import url(https://fonts.googleapis.com/css2?family=Advent+Pro:wght@600&display=swap);
+.text-xxs{
+  font-size: 0.70rem;
+  line-height: 1rem;
+}
 .text-xs{
     font-size: 0.75rem;
     line-height: 1rem;
@@ -151621,31 +151626,30 @@
 .avatar-md {
     width: 80px !important;
     height: 80px !important;
-   
+
     border-radius: 50%;
-  
-  }
+}
 .avatar-sm {
     width: 50px !important;
     height: 50px !important;
-   
-    border-radius: 50%;
-  
-  }
-.content-main {
-    max-width: 1520px;
-    width: 100%;
-    margin-top: 75px !important;
-    margin-bottom: 80px;
-    height: auto !important;
 
+    border-radius: 50%;
 }
+.content-main {
+    margin-top: 80px !important;
+    height: auto !important;
+    padding-left: 1%;
+    padding-right: 1%;
+    background-color: white;
+}
+/* .container {
+    margin-top: 60px !important;
+} */
 .container-fluid {
     max-width: 1520px;
     width: 100%;
 }
-.slick-dots li button:before
-{
+.slick-dots li button:before {
     font-size: 20px !important;
     line-height: 20px !important;
 }
@@ -151687,14 +151691,51 @@
 .text-rose-light {
     color: #cc99ff;
 }
-@media  (max-width: 991px) {
-    .navbar-collapse {
-        /* ocultar el sidebar  */
+.membership-sticky {
+    position: sticky;
+    padding: 5px;
+    top: 80px;
+    z-index: 300;
+}
+.border-sticky {
+    position: sticky;
+    z-index: 300;
+    top: 65px;
+}
+.breadcrumb {
+    background-color: white;
+}
+.logo-main {
+    width: 100px;
+}
+@media (max-width: 991px) {
+    /* ocultar el sidebar  */
+    /* .navbar-collapse {
+        
         transform: translate3d(260px, 0, 0) !important;
+    } */
+
+    /*text barra colapsed*/
+    .off-canvas-sidebar
+        .navbar
+        .navbar-collapse
+        .navbar-nav
+        .nav-item
+        .nav-link {
+        color: #9c27b0 !important;
     }
+
+    .off-canvas-sidebar .navbar-collapse:after {
+        /* background-color: #282828;  */
+        /*Cambio mobile*/
+        background-color: #eee;
+    }
+
     .content-main {
-        width: 100%;
-        margin-top: 80px !important;
+        margin-top: 75px !important;
+    }
+    .logo-main {
+        width: 80px;
     }
 }
 /* ---------------------------------------------------
@@ -151725,8 +151766,6 @@
     end navbar
 ----------------------------------------------------- */
 .price-label {
-    background-color: #34b5b8;
-    background-color: red;
     position: absolute;
     top: 16px;
     right: -31px;
@@ -151747,4 +151786,104 @@
     -webkit-perspective: 800px;
     z-index: 500;
 }
+.price-label1 {
+    position: absolute;
+    top: -5px;
+    right: -31px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    color: #fff;
+    height: 40px;
+    white-space: nowrap;
+    transform: rotate(40deg);
+    width: 130px;
+    backface-visibility: hidden;
+    perspective: 800px;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 800px;
+    z-index: 500;
+}
+/***********************Mercado pago**********************/
+button.mercadopago-button,
+.chekout {
+    border-radius: 30px;
+    display: block;
+    width: 100%;
+    color: #fff;
+    background-color: #9c27b0;
+    border-color: #9c27b0;
+    box-shadow: 0 2px 2px 0 rgb(156 39 176 / 14%),
+        0 3px 1px -2px rgb(156 39 176 / 20%), 0 1px 5px 0 rgb(156 39 176 / 12%);
+    font-size: 1.0625rem;
+    line-height: 1.4em;
+    margin-bottom: 15px;
+    padding: 12px 30px;
+}
+/***********************search**********************/
+#input-search-home{
+    background-color: #A578DA;
+    color: white !important;
 
+}
+#input-search-home::-moz-placeholder {
+    color: white !important;
+  }
+#input-search-home::placeholder {
+    color: white !important;
+  }
+.ui-autocomplete {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 14px;
+    text-align: left;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+    width: 380px !important;
+    max-height: 500px;
+    min-height: 250px;
+  }
+.ui-autocomplete > li > div {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333333;
+    white-space: nowrap;
+  }
+.ui-state-hover,
+  .ui-state-active,
+  .ui-state-focus {
+    text-decoration: none;
+    color: #262626;
+    background-color: #a578da !important;
+    cursor: pointer;
+  }
+.ui-helper-hidden-accessible {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  

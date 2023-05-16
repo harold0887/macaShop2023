@@ -130,6 +130,10 @@
                             </div>
                         </form>
                     </div>
+                    <div class="card-body ">
+                    <livewire:edit-membership />
+
+                    </div>
                 </div>
             </div>
         </div>

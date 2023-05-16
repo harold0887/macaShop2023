@@ -4,7 +4,7 @@
 'activePage'=>'package',
 ])
 @section('content')
-
+@include('includes.spinner')
 <div class="content pt-0">
 
     <div class="container-fluid">
@@ -20,7 +20,7 @@
                         <h4 class="card-title">Agregar Paquete</h4>
                     </div>
                     <div class="card-body ">
-                        <form action="{{ route('package.store') }}" enctype="multipart/form-data" method="POST">
+                        <form id="create-package" action="{{ route('package.store') }}" enctype="multipart/form-data" method="POST">
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-4">
@@ -37,13 +37,24 @@
                                     <small class="text-danger"> {{ $message }} </small>
                                     @enderror
                                 </div>
-                                <div class="form-group col-12 col-md-4">
-                                    <label class="bmd-label-floating">Descuento (porcentaje %)</label>
-                                    <input type="number" class="form-control" name="discount" value="{{ old('discount') }}" step="0.01">
-                                    @error('discount')
+                                <div class="form-group col-md-4">
+                                    <label class="bmd-label-floating" for="price_with_discount">Precio con descuento</label>
+                                    <input type="number" class="form-control" name="price_with_discount" value="{{ old('price_with_discount') }}" step="0.01">
+                                    @error('price_with_discount')
                                     <small class="text-danger"> {{ $message }} </small>
                                     @enderror
                                 </div>
+                               
+                            </div>
+                            <div class="form-row   mt-lg-5">
+                                <div class="form-group col-12">
+                                    <label class="bmd-label-floating">Informacion</label>
+                                    <textarea class="form-control border rounded" name="information" rows="5" value="">{{ old('information') }}</textarea>
+                                    @error('information')
+                                    <small class="text-danger"> {{ $message }} </small>
+                                    @enderror
+                                </div>
+
                             </div>
                             <div class="form-row border-bottom text-center mt-5">
                                 <div class="col-12 col-md-6 col-lg-3 text-center">

@@ -83,7 +83,7 @@
                                             @else
                                             <i class="fa-solid fa-sort mr-1"></i>
                                             @endif
-                                            ID
+                                            Precio
 
                                         </th>
                                         <th style="cursor:pointer" wire:click="setSort('discount_percentage')">
@@ -151,6 +151,18 @@
                                             @endif
                                             Estatus
                                         </th>
+                                        <th style="cursor:pointer" wire:click="setSort('main')">
+                                            @if($sortField=='main')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
+                                            Ofreta
+                                        </th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -170,6 +182,14 @@
                                             <div class="togglebutton" wire:click="changeStatus({{ $membership->id }}, '{{ $membership->status }}')">
                                                 <label>
                                                     <input type="checkbox" {{ $membership->status == 1 ? 'checked ' : '' }} name="status">
+                                                    <span class="toggle"></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="togglebutton" wire:click="changeMain({{ $membership->id }}, '{{ $membership->main }}')">
+                                                <label>
+                                                    <input type="checkbox" {{ $membership->main == 1 ? 'checked ' : '' }} name="status">
                                                     <span class="toggle"></span>
                                                 </label>
                                             </div>

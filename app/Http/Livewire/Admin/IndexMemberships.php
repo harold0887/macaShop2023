@@ -69,6 +69,34 @@ class IndexMemberships extends Component
             ]);
         }
     }
+
+    public function changeMain($id, $status)
+    {
+        $oferta = Membership::findOrFail($id);
+        try {
+
+            if ($oferta->price_with_discount>=  $oferta->price ) {
+                $this->emit('error', [
+                    'message' => "Esta membresía no tiene descuento"
+                ]);
+            } elseif ($oferta->status == '0') {
+                $this->emit('error', [
+                    'message' => "Esta membresía no esta activa"
+                ]);
+            } else {
+                $oferta->update([
+                    'main' => $status == 0 ? true : false
+                ]);
+                $this->emit('success-auto-close', [
+                    'message' => 'El cambio se realizo con éxito',
+                ]);
+            }
+        } catch (QueryException $e) {
+            $this->emit('error', [
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
     //sort
     public function setSort($field)
     {

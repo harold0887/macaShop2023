@@ -4,7 +4,7 @@
 'activePage'=>'products',
 ])
 @section('content')
-
+@include('includes.spinner')
 <div class="content pt-0">
     <div class="container-fluid">
         <div class="row ">
@@ -17,7 +17,7 @@
                         <h4 class="card-title">Editar {{ $product->title }}</h4>
                     </div>
                     <div class="card-body ">
-                        <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+                        <form id="edit-product" action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf @method('PATCH')
                             <div class="form-row mt-lg-5">
                                 <div class="form-group col-md-3">

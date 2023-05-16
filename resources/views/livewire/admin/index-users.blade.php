@@ -52,6 +52,18 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
+                                    <th style="cursor:pointer" wire:click="setSort('id')">
+                                            @if($sortField=='id')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
+                                            ID
+                                        </th>
                                        
                                         <th style="cursor:pointer" wire:click="setSort('name')">
                                             @if($sortField=='name')
@@ -100,7 +112,7 @@
                                 <tbody>
                                     @foreach ($users as $user)
                                     <tr class=" {{ $user->status == 0 ? 'table-danger ' : '' }}">
-                                     
+                                    <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{date_format($user->created_at, 'd-M-Y')}}</td>

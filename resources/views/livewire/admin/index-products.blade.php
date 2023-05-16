@@ -58,6 +58,18 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
+                                        <th style="cursor:pointer" wire:click="setSort('id')">
+                                            @if($sortField=='id')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
+                                            Id
+                                        </th>
                                         <th style="cursor:pointer" wire:click="setSort('title')">
                                             @if($sortField=='title')
                                             @if($sortDirection=='asc')
@@ -107,9 +119,21 @@
                                             Precio final
                                         </th>
                                         <th>Categoría</th>
+                                        <th>Ventas</th>
                                         <th>Grado</b></th>
                                         <th>Membresía</b></th>
-                                        <th>Status</b> </th>
+                                        <th style="cursor:pointer" wire:click="setSort('status')">
+                                            @if($sortField=='status')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
+                                            Status
+                                        </th>
                                         <th>Descargas</b> </th>
                                         <th>Acciones</b></th>
                                     </tr>
@@ -117,7 +141,7 @@
                                 <tbody>
                                     @foreach ($products as $product)
                                     <tr class="{{ $product->percentage > 0 ? 'text-danger' : '' }}">
-
+                                        <td>{{ $product->id }}</td>
                                         <td>{{ $product->title }}</td>
                                         <td>{{ $product->price }}</td>
                                         <td>{{ $product->discount_percentage }}%</td>
@@ -132,6 +156,11 @@
                                             @endforeach
 
 
+
+                                        </td>
+                                        <td>
+
+                                        {{ $product->orders->count() }}
 
                                         </td>
                                         <td>{{ $product->grado->name }}</td>

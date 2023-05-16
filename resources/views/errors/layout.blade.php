@@ -15,17 +15,18 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" />
+  
+
+
 </head>
 
 <body class="off-canvas-sidebar">
- 
+
 <div class="wrapper wrapper-full-page">
     <div class="page-header {{ $classPage }} header-filter" filter-color="black" style="background-image: url('{{ $pageBackground }}'); background-size: cover; background-position: top center;align-items: center;">
 
     @yield('content')
-    @include('includes.footer')
+
   </div>
 </div>
 

@@ -5,6 +5,7 @@
   'title' => 'Restablecer contraseña',
   'pageBackground' => asset("material").'/img/login.jpg',
   'navbarClass'=>'navbar-transparent',
+  'background'=>''
 ])
 
 @section('content')
@@ -15,7 +16,7 @@
         @csrf
 
         <div class="card card-login card-hidden mb-3">
-          <div class="card-header card-header-rose text-center">
+          <div class="card-header card-header-primary text-center">
             <h4 class="card-title"><strong>{{ __('Reset Password') }}</strong></h4>
           </div>
           <div class="card-body">
@@ -36,7 +37,7 @@
             </div>
           </div>
           <div class="card-footer justify-content-center">
-            <button type="submit" class="btn btn-rose btn-link btn-lg">{{ __('Send Password Reset Link') }}</button>
+            <button type="submit" class="btn btn-primary btn-link btn-lg">{{ __('Send Password Reset Link') }}</button>
           </div>
         </div>
       </form>
@@ -44,7 +45,7 @@
   </div>
 </div>
 @endsection
-
+@include('includes.alert-error')
 @push('js')
 <script>
   $(document).ready(function() {

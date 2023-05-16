@@ -1,10 +1,11 @@
 @extends('layouts.app', [
 'class' => 'off-canvas-sidebar',
-'classPage' => 'register-page',
+'classPage' => 'login-page',
 'activePage' => 'register',
 'title' => __('Register'),
 'pageBackground' => asset("material").'/img/register.jpg',
-'navbarClass'=>'text-white'
+'navbarClass'=>'text-white navbar-transparent',
+'background'=>'#red !important'
 ])
 
 @section('content')
@@ -18,7 +19,7 @@
                     <h4 class="card-title "><strong>{{ __('Register') }}</strong></h4>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body ">
                     <div class="row">
 
                         <div class="col mr-auto">
@@ -97,12 +98,12 @@
                                     </div>
                                 </div>
                                 <div class="form-check">
-                                    <label class="form-check-label">
+                                    <label class="form-check-label text-xxs">
                                         <input class="form-check-input" type="checkbox" name="policy" value="1" {{ old('policy', 1) ? 'checked' : '' }}>
                                         <span class="form-check-sign">
                                             <span class="check"></span>
                                         </span>
-                                        {{ __('I agree to the') }} <a href="#">{{ __('terms and conditions') }}</a>
+                                        {{ __('I agree to the') }} <a href="{{route('information.terminos')}}">{{ __('terms and conditions') }}</a>
                                     </label>
                                     @if ($errors->has('policy'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
@@ -110,7 +111,7 @@
                                     </span>
                                     @endif
                                 </div>
-                                <div class="text-center">
+                                <div class="text-center mb-3">
                                     <button type="submit" class="btn btn-primary btn-round mt-4">{{ __('Get Started') }}</button>
                                 </div>
                             </form>
@@ -132,6 +133,5 @@
             $('.card').removeClass('card-hidden');
         }, 700);
     });
-
 </script>
 @endpush

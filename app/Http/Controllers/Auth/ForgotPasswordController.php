@@ -55,9 +55,7 @@ class ForgotPasswordController extends Controller
     {
         $this->validateEmail($request);
 
-        if (env('IS_DEMO')){
-            return redirect()->back()->withInfo('Emails are not sent in the demo environment.');
-        }
+       
 
         // We will send the password reset link to this user. Once we have attempted
         // to send the link, we will examine the response then see the message we

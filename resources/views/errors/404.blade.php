@@ -3,7 +3,8 @@
 'activePage' => '404',
 'pageBackground' => asset("material").'/img/bg-pricing.jpg',
 'navbarClass'=>'text-white',
-'title'=>'Error 404'
+'title'=>'Error 404',
+'background'=>''
 ])
 
 @section('content')

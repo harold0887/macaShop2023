@@ -23,7 +23,8 @@ class EditPackages extends Component
     }
     public function render()
     {
-        $products = Product::where('status', true)->get();
+        $products = Product::where('status', true)
+        ->orderBy('name','asc')->get();
 
         return view('livewire.admin.edit-packages', compact('products'));
     }

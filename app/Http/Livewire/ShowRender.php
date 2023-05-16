@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class ShowRender extends Component
 {
     public $product, $articles;
-
+    public $img, $title, $price;
     public $newComment;
 
     protected $listeners = [
@@ -35,7 +35,7 @@ class ShowRender extends Component
         $this->articles = Product::where('grade', '=', $this->product->grade)
             ->orderBy('title')
             ->where('price', '>', 0)
-      
+            ->whereNotIn('title', ['newsDesktop','newsMobile'])
             ->where('status', true)
             ->whereNotIn('id', [$this->product->id])
             ->take(5)
@@ -52,7 +52,8 @@ class ShowRender extends Component
                 'classPage' => 'login-page',
                 'activePage' => 'shop',
                 'title' => $this->product->title,
-                'navbarClass' => 'text-primary'
+                'navbarClass' => 'text-primary',
+                'background'=>'#eee !important'
             ])
 
             ->section('content');
@@ -72,7 +73,7 @@ class ShowRender extends Component
                 'user_id' => Auth::user()->id,
                 'best' => false,
             ]);
-
+            
 
             $this->emit('alertComment', [
                 'message' => "<span class='text-sm'><b>Gracias !</b> - Su comentario fue registrado correctamentes.</span>"
@@ -84,37 +85,53 @@ class ShowRender extends Component
         }
 
 
-        $this->emit('refreshComponent');
+        //$this->emit('refreshComponent');
+    
         $this->newComment = "";
     }
 
 
     public function addCart($id, $model)
     {
+        try {
+            if ($model == "Product") {
+                $product = Product::find($id);
+            }
+            if ($model == "Package") {
+                $product = Package::find($id);
+            }
+            if ($model == "Membership") {
+                $product = Membership::find($id);
+            }
 
-        if ($model == "Product") {
-            $product = Product::find($id);
+
+            \Cart::add(array(
+                'id' => $product->id,
+                'name' => $product->title,
+                'price' => $product->price_with_discount,
+                'quantity' => 1,
+                'attributes' => array(
+                    'type' => 'Membership',
+                ),
+                'associatedModel' => $product
+            ));
+
+
+
+            $this->img = Storage::url($product->itemMain);
+            $this->title = $product->title;
+            $this->price = $product->price;
+
+
+
+
+            $this->emit('cart:update');
+            $this->emit('addCartAlert');
+        } catch (\Throwable $th) {
+            $this->emit('error', [
+                'message' => "Error al agregar el producto al carrito - " . $th->getMessage(),
+            ]);
         }
-        if ($model == "Membership") {
-            $product = Membership::find($id);
-        }
-        //dd($product);
-        \Cart::add(array(
-            'id' => $product->id,
-            'name' => $product->title,
-            'price' => $product->price_with_discount,
-            'quantity' => 1,
-            'attributes' => array([]),
-            'associatedModel' => $product
-        ));
-
-
-        $this->emit('cart:update');
-        $this->emit('addCartAlert', [
-            'itemMain' => Storage::url($product->itemMain),
-            'title' => $product->title,
-            'price' => $product->price_with_discount,
-        ]);
     }
 
 

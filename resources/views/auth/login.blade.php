@@ -4,7 +4,8 @@
 'activePage' => 'login',
 'title' => __('Login'),
 'pageBackground' => asset("material").'/img/markus-spiske-187777.jpg',
-'navbarClass'=>'text-white navbar-transparent'
+'navbarClass'=>'text-white navbar-transparent',
+'background'=>''
 ])
 
 @section('content')
@@ -29,7 +30,7 @@
                                         <i class="material-icons">email</i>
                                     </span>
                                 </div>
-                                <input type="email" class="form-control err-email" id="exampleEmails" name="email" placeholder="{{ __('Email...') }}" value="{{ old('email', 'harold0887@hotmail.com') }}" required>
+                                <input type="email" class="form-control err-email" id="exampleEmails" name="email" placeholder="{{ __('Email...') }}" value="{{ old('email', '') }}" required>
                                 @include('alerts.feedback', ['field' => 'email'])
                             </div>
                         </span>
@@ -40,7 +41,7 @@
                                         <i class="material-icons">lock_outline</i>
                                     </span>
                                 </div>
-                                <input type="password" class="form-control" id="examplePassword" name="password" placeholder="{{ __('Password...') }}" value="5514404046" required>
+                                <input type="password" class="form-control" id="examplePassword" name="password" placeholder="{{ __('Password...') }}" required>
                                 @include('alerts.feedback', ['field' => 'password'])
                             </div>
                         </span>
@@ -54,7 +55,7 @@
                         </div>
                     </div>
                     <div class="card-footer justify-content-center">
-                        <button type="submit" class="btn btn-primary  btn-lg" id="btn-login-modal">
+                        <button type="submit" class="btn btn-primary   btn-lg">
                             INGRESAR
                         </button>
                     </div>

@@ -1,12 +1,15 @@
-<div class="container-fluid px-2 px-lg-4">
+<div class="container-fluid  p-0 ">
     @include('includes.spinner-livewire')
-    <div class="content-main">
+    @include('includes.modal.cart-modal')
+    <div class="content-main ">
+        @include('includes.borders')
         <div class="row">
             <div class="col-12 ">
                 <nav aria-label="breadcrumb ">
                     <ol class="breadcrumb my-0 text-xs lg:text-base">
                         <li class="breadcrumb-item"><a href="{{route('home')}}">Inicio</a></li>
                         <li class="breadcrumb-item"><a href="{{route('shop.index')}}">Tienda</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('shop.index')}}">Productos</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ $product->title }}</li>
                     </ol>
                 </nav>
@@ -14,11 +17,10 @@
         </div>
         <div class="row">
             <div class="col-12">
-
                 <h1 class="rounded text-center text-primary text-xl sm:text-2x1 md:text-3xl  lg:text-3xl font-weight-bold mb-4">{{ $product->title }}</h1>
             </div>
         </div>
-        <div class="row">
+        <div class="row px-3">
             <div class="col-12 col-lg-8">
                 <div class="row justify-content-center">
                     @if($product->video)
@@ -31,17 +33,27 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-4 ">
+            <div class="col-12 col-lg-4 shadow rounded  mt-3 mt-lg-0" style=" overflow:hidden !important;">
+                @if ($product->price > $product->price_with_discount )
+                <div class="price-label bg-primary "><span>Oferta</span></div>
+                @endif
+
                 <div class="row justify-content-center  @if(!$product->video) mt-3 mt-lg-0 @endif">
+
+
                     @if($product->status==true)
-                    <div class="col-5 col-lg-12 text-center">
-                        <h2 class="font-weight-bold text-muted ">
-                            <small class=" text-mindle align-top ">$</small>{{ $product->price_with_discount }}<small class="text-md"></small>
-                        </h2>
+                    <div class="col-lg-12 text-center   d-flex align-items-top justify-content-center mt-3 ">
+                        @if ($product->price > $product->price_with_discount )
+                        <span class=" text-muted text-sm sm:text-sm md:text-sm  lg:text-lg  mr-3" style="text-decoration:line-through;">${{ $product->price }}</span>
+                        <span class="font-weight-bold text-muted text-2xl sm:text-3x1 md:text-3xl  lg:text-4xl  mr-3">${{ $product->price_with_discount }} </span>
+                        @else
+                        <span class="font-weight-bold text-muted text-2xl sm:text-3x1 md:text-3xl  lg:text-4xl  mr-3">${{ $product->price_with_discount }} </span>
+                        @endif
+
 
                     </div>
 
-                    <div class="col-12 text-center p-0">
+                    <div class="col-12 text-center p-0 mt-3">
                         @if($product->price==0)
 
                         <button class="btn  btn-primary btn-round mt-2" wire:click="downloadFree('{{ $product->id }}')">
@@ -53,7 +65,7 @@
                         @if(!\Cart::get($product->id))
                         <button class=" btn btn-primary btn-round" wire:click="addCart('{{ $product->id }}','Product')">
                             <i class="material-icons">shopping_cart</i>
-                            <span>Añadir al carrito</span>
+                            <span>Agregar al carrito</span>
                         </button>
                         @else
                         <a href="{{ route('cart.index') }}" class="btn btn-primary btn-round">
@@ -86,7 +98,7 @@
                         <form wire:submit.prevent="addComment">
                             <div class="form-row justify-center">
                                 <div class="form-group col-md-12">
-                                    <textarea type="text" class="form-control bg-white  rounded @error('newComment')border-danger @enderror px-3" rows="4" wire:model.defer="newComment">
+                                    <textarea type="text" class="form-control bg-white border  rounded @error('newComment')border-danger @enderror px-3" rows="4" wire:model.defer="newComment">
 
                                     </textarea>
                                 </div>
@@ -207,7 +219,7 @@
                                                 @if (!\Cart::get($article->id))
                                                 <button class=" btn btn-primary btn-round" wire:click="addCart('{{ $article->id }}','Product')">
                                                     <i class="material-icons">shopping_cart</i>
-                                                    <span>Añadir al carrito</span>
+                                                    <span>Agregar al carrito</span>
                                                 </button>
                                                 @else
                                                 <a href="{{ route('cart.index') }}" class="btn btn-primary btn-round">
@@ -218,7 +230,7 @@
                                             </div>
                                         </div>
                                         <h3 class="card-title pt-3  text-base ">
-                                            <a href="{{ route('shop.show', $product->slug) }}"><strong>{{ $product->title }}</strong></a>
+                                            <a href="{{ route('shop.show', $article->slug) }}"><strong>{{ $article->title }}</strong></a>
                                         </h3>
                                         <div class="card-description">
                                             {{ Str::limit($article->information, $limit = 100, $end = '...') }}
@@ -227,7 +239,7 @@
                                     <div class="card-footer">
                                         @if ($article->price_with_discount < $article->price)
                                             <div class=" stats">
-                                                <p class="item-discount text-secondary">$ {{ $article->price }}</p>
+                                                <p class="item-discount text-secondary" style="text-decoration:line-through;">$ {{ $article->price }}</p>
                                             </div>
                                             <div class="price">
                                                 <p class="item-price text-primary ">$ {{ $article->price_with_discount }}
@@ -237,7 +249,7 @@
                                             <div class=" stats ">
                                             </div>
                                             <div class="price ">
-                                                <p class="item-price text-primary ">$ {{ $product->price_with_discount }}
+                                                <p class="item-price text-primary ">$ {{ $article->price_with_discount }}
                                                 </p>
                                             </div>
                                             @endif
@@ -257,5 +269,6 @@
 
             </div>
         </div>
+        @include('includes.borders')
     </div>
 </div>

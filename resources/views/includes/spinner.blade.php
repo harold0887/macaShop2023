@@ -1,16 +1,6 @@
+<div id="modal-spinner" class="modal fade bg-white" id="staticBackdrop" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="opacity: 0.8;">
 
-<div id="modal-spinner"
-  class="modal fade bg-white"
-  id="staticBackdrop"
-  data-mdb-backdrop="static"
-  data-mdb-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
-  style="opacity: 0.8;"
->
-
-<div class="modal-dialog modal-sm  ">
+    <div class="modal-dialog modal-sm  ">
 
         <div class="text-center">
 
@@ -41,6 +31,7 @@
             </div>
 
         </div>
+
 
     </div>
 </div>

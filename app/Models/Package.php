@@ -13,6 +13,7 @@ class Package extends Model
      //Relacion muchos a muchos con productos
      public function products()
      {
-         return $this->belongsToMany('App\Models\Product');
+         return $this->belongsToMany('App\Models\Product')
+         ->orderBy('title','asc');
      }
 }

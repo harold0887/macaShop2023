@@ -3,6 +3,6 @@
     <div class="page-header {{ $classPage }} header-filter" filter-color="black" style="background-image: url('{{ $pageBackground }}'); background-size: cover; background-position: top center;align-items: center;">
 
     @yield('content')
-    @include('includes.footer')
+
   </div>
 </div>
