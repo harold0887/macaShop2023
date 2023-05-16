@@ -16,6 +16,7 @@ use App\Http\Livewire\AccountProducts;
 use App\Http\Livewire\Admin\SalesEdit;
 use App\Http\Livewire\AccountShowOrder;
 use App\Http\Livewire\MembershipRender;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Livewire\AccountShowPackages;
@@ -54,6 +55,10 @@ Route::get('/D6MGXLF1', function () {
   $link =   '/home3/materi65/public_html/storage';
   symlink($target, $link);
   echo "Done";
+});
+
+Route::get('/foo', function () {
+  Artisan::call('storage:link');
 });
 
 
