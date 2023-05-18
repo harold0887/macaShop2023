@@ -43,18 +43,13 @@ use App\Http\Controllers\Admin\MembershipController;
 |
 */
 
-Route::get('/prueba', function () {
 
-  $product = Product::find(61);
 
-  return $product->grado;
-});
-
-Route::get('/D6MGXLF1', function () {
-  $target = '/home3/materi65/macashop2023/storage/app/public';
+Route::get('/link', function () {
+  $target = '/home3/materi65/maca/storage/app/public';
   $link =   '/home3/materi65/public_html/storage';
   symlink($target, $link);
-  echo "Done";
+  echo "Link done";
 });
 
 Route::get('/foo', function () {
