@@ -33,7 +33,7 @@
                             </a>
                         </div>
                         <div class="col-6 text-left px-0">
-                            <a href="" class="btn btn-round" style="background-color: #fcc552;">
+                            <a href="{{ route('free') }}" class="btn btn-round" style="background-color: #fcc552;">
                                 Gratiutos
                             </a>
                         </div>
@@ -245,7 +245,7 @@
             })
         },
         select: function(event, ui) {
-            window.location.href = "http://127.0.0.1:8000/tienda/productos/" + ui.item.value
+            window.location.href = "https://materialdidacticomaca.com/tienda/productos/" + ui.item.value
         }
 
 
