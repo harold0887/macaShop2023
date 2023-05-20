@@ -151825,22 +151825,22 @@ button.mercadopago-button,
     padding: 12px 30px;
 }
 /***********************search**********************/
-#input-search-home{
-    background-color: #A578DA;
+#input-search-home,#input-search-home1{
+    background-color: #a678da54;
     color: white !important;
 
 }
-#input-search-home::-moz-placeholder {
+#input-search-home::-moz-placeholder, #input-search-home1::-moz-placeholder {
     color: white !important;
   }
-#input-search-home::placeholder {
+#input-search-home::placeholder,#input-search-home1::placeholder {
     color: white !important;
   }
 .ui-autocomplete {
     position: absolute;
     top: 100%;
     left: 0;
-    z-index: 1000;
+    z-index: 5000;
     display: none;
     float: left;
     min-width: 160px;

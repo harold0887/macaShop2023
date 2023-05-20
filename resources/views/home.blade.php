@@ -52,25 +52,28 @@
             </div>
         </div>
 
+        <div class="d-none d-lg-block">
+            <div class="row pt-2 justify-content-center ">
 
-        <div class="row pt-2 justify-content-center">
 
+                <div class="col-10 col-md-8 pr-0">
+                    <form class="form-group">
+                        <div class="input-group rounded">
+                            <input id="input-search-home1" type="search" class="form-control px-3  " placeholder=" Buscar por título..." style="border-radius: 30px !important">
 
-            <div class="col-10 col-md-8 pr-0">
-                <form class="form-group">
-                    <div class="input-group rounded">
-                        <input id="input-search-home" type="search" class="form-control px-3  " placeholder=" Buscar por título..." style="border-radius: 30px !important">
-                    
-                    </div>
-                </form>
+                        </div>
+                    </form>
 
-            </div>
-            <div class="col-2 col-lg-1 p-0">
-                <button type="submit" class="btn bg-transparent   btn-round btn-just-icon p-0" style="border:solid 1px #c09aed">
-                    <i class="material-icons " style="color:#c09aed">search</i>
-                </button>
+                </div>
+                <div class="col-2 col-lg-1 p-0">
+                    <button type="submit" class="btn bg-transparent   btn-round btn-just-icon p-0" style="border:solid 1px #c09aed">
+                        <i class="material-icons " style="color:#c09aed">search</i>
+                    </button>
+                </div>
             </div>
         </div>
+
+
 
 
         <div class="row mt-3">
@@ -94,7 +97,7 @@
                     @endif
                 </div>
 
-                
+
             </div>
         </div>
         <div class="row justify-content-between mt-3 px-2">
@@ -147,62 +150,62 @@
             <div class="col-12 p-0">
                 <div class="text-center">
                     <h2 class="pt-5  lg:text-4xl lg:pt-12 md:text-3xl md:font-bold text-center  text-2xl " style="font-size:27px;font-weight:700; color:#4d4d4d">
-                    ¿Aún no estás convencid@? 
+                        ¿Aún no estás convencid@?
                     </h2>
-                    
+
                     <p style="color:#4d4d4d">
-                    Mira lo que lo que piensan los clientes de nuestros materiales didácticos.
+                        Mira lo que lo que piensan los clientes de nuestros materiales didácticos.
 
                     </p>
-                   
+
                 </div>
             </div>
         </div>
 
 
         <div>
-        <div id="comments-slick" class="coments-autoplay " style="display: show">
-            @if (isset($comments) && $comments->count() > 0)
-            @foreach ($comments as $comment)
-            <div class="px-2  pb-5">
-                <div class="card card-testimonial ">
-                    <div class="icon icon-primary">
-                        <i class="material-icons">format_quote</i>
-                    </div>
-                    <div class="card-body ">
-                        <h5 class="card-description" style="height: 120px;">
-                            {{Str::limit($comment->comment,200)}}
-                        </h5>
-                    </div>
-                    <div class="card-footer">
-
-                        <h4 class="card-title">
-                        @php
-                            $name = explode(" ", $comment->user->name);
-                            echo $name[0];
-                            @endphp
-                        </h4>
-                        <div class="card-avatar">
-                            @if ($comment->user->picture)
-                            <img class="img" src="{{Storage::url($comment->user->picture)}}">
-                            @else
-                            <img class="img" src="{{ asset('material') }}/img/placeholder.jpg" alt="...">
-                            @endif
-                         
+            <div id="comments-slick" class="coments-autoplay " style="display: show">
+                @if (isset($comments) && $comments->count() > 0)
+                @foreach ($comments as $comment)
+                <div class="px-2  pb-5">
+                    <div class="card card-testimonial ">
+                        <div class="icon icon-primary">
+                            <i class="material-icons">format_quote</i>
                         </div>
+                        <div class="card-body ">
+                            <h5 class="card-description" style="height: 120px;">
+                                {{Str::limit($comment->comment,200)}}
+                            </h5>
+                        </div>
+                        <div class="card-footer">
+
+                            <h4 class="card-title">
+                                @php
+                                $name = explode(" ", $comment->user->name);
+                                echo $name[0];
+                                @endphp
+                            </h4>
+                            <div class="card-avatar">
+                                @if ($comment->user->picture)
+                                <img class="img" src="{{Storage::url($comment->user->picture)}}">
+                                @else
+                                <img class="img" src="{{ asset('material') }}/img/placeholder.jpg" alt="...">
+                                @endif
+
+                            </div>
 
 
-                       
+
+                        </div>
                     </div>
                 </div>
+
+                @endforeach
+                @endif
             </div>
-
-            @endforeach
-            @endif
-        </div>
         </div>
 
-       
+
 
 
         @include('includes.borders')
@@ -230,7 +233,7 @@
 
 @push('js')
 <script>
-    $("#input-search-home").autocomplete({
+    $("#input-search-home,#input-search-home1").autocomplete({
         source: function(request, response) {
             $.ajax({
                 url: "{{route('search.products')}}",
@@ -247,8 +250,6 @@
         select: function(event, ui) {
             window.location.href = "https://materialdidacticomaca.com/tienda/productos/" + ui.item.value
         }
-
-
     })
 </script>
 

@@ -4,20 +4,41 @@
   <!-- navbar fixed-top navbar-expand-lg    {{$navbarClass}} shadow -->
   <div class="container-fluid">
 
-    <div class="navbar-wrapper ">
+    @if(Request::route()->getName() =='home')
+    <div class="d-block d-lg-none  px-0 ">
+      <div class="d-flex align-items-center">
+        <form class="form-group">
+          <div class="input-group rounded">
+            <input id="input-search-home" type="search" class="form-control px-3  " placeholder=" Buscar por título..." style="border-radius: 30px !important; width: 270px !important;">
+
+          </div>
+        </form>
+
+
+
+        <button type="submit" class="btn bg-transparent   btn-round btn-just-icon" style="border:solid 1px #c09aed">
+          <i class="material-icons " style="color:#c09aed">search</i>
+        </button>
+      </div>
+
+
+    </div>
+    <div class="navbar-wrapper d-none d-lg-block ">
       <a class="navbar-brand" style="padding: 0px !important">
 
-
-        @if(Request::route()->getName() =='home')
-        <a class="navbar-brand d-block d-lg-none" href="{{route('home')}}" style="font-family: 'Fredericka the Great'">Material didáctico MaCa</a>
-        <a class="navbar-brand py-0 d-none d-lg-block" href="{{route('home')}}" style="font-family: 'Fredericka the Great'"><img class="logo-main" src=" {{ asset('./img/logo2.png') }} " alt=""></a>
-
-        @else
         <a class="navbar-brand py-0" href="{{route('home')}}" style="font-family: 'Fredericka the Great'"><img class="logo-main" src=" {{ asset('./img/logo2.png') }} " alt=""></a>
-
-        @endif
       </a>
     </div>
+
+    @else
+    <div class="navbar-wrapper ">
+      <a class="navbar-brand" style="padding: 0px !important">
+        <a class="navbar-brand py-0" href="{{route('home')}}" style="font-family: 'Fredericka the Great'"><img class="logo-main" src=" {{ asset('./img/logo2.png') }} " alt=""></a>
+      </a>
+    </div>
+    @endif
+
+
 
 
     <button class="navbar-toggler " type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">

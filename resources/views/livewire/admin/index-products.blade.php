@@ -187,10 +187,10 @@
                                             <a class="btn btn-warning btn-link " wire:click="downloadOriginalDocument({{ $product->id }})">
                                                 <i class="material-icons">download</i>
                                             </a>
-                                            <a class="btn btn-info btn-link " href="{{ route('products.show', $product->id) }}">
+                                            <a class="btn btn-info btn-link " href="{{ route('products.show', $product->id) }}" target="_blank">
                                                 <i class="material-icons">visibility</i>
                                             </a>
-                                            <a class="btn btn-success btn-link " href="{{ route('products.edit', $product->id) }}">
+                                            <a class="btn btn-success btn-link " href="{{ route('products.edit', $product->id) }}" target="_blank">
                                                 <i class="material-icons">edit</i>
                                             </a>
                                             <a class="btn btn-success btn-link text-danger " onclick="confirmDelete('{{ $product->id }}', '{{ $product->title }}')">
