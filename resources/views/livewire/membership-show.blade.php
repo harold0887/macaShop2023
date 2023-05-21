@@ -38,25 +38,25 @@
                                 @endif
                             </div>
                             <h3 class="card-title text-center text-dark mt-2">
-                            {{ $membership->title }}
-                        </h3>
+                                {{ $membership->title }}
+                            </h3>
                             <div class="card-description">
                                 <div class="row">
-                                <div class="col-12" style="height:170px">
-                                    <h3 class="text-primary text-uppercase font-weight-bold  mt-0">{{$membership->vigencia}} </h3>
-                                    @if ($membership->discount_percentage > 0)
-                                    <div class=" text-2xl text-gray-500 mt-3" style="height: 30px;">
-                                        Antes: <span style="text-decoration:line-through;">${{ round($membership->price) }}</span>
+                                    <div class="col-12" style="height:170px">
+                                        <h3 class="text-primary text-uppercase font-weight-bold  mt-0">{{$membership->vigencia}} </h3>
+                                        @if ($membership->discount_percentage > 0)
+                                        <div class=" text-2xl text-gray-500 mt-3" style="height: 30px;">
+                                            Antes: <span style="text-decoration:line-through;">${{ round($membership->price) }}</span>
+                                        </div>
+                                        @else
+                                        <div class=" text-2xl text-gray-500 mt-3" style="height: 30px;">
+                                            <span style="text-decoration:line-through;"></span>
+                                        </div>
+                                        @endif
+                                        <h1 class="font-weight-bold text-black">
+                                            <small class=" text-mindle align-top ">$</small>{{ round($membership->price_with_discount) }}.00
+                                        </h1>
                                     </div>
-                                    @else
-                                    <div class=" text-2xl text-gray-500 mt-3" style="height: 30px;">
-                                        <span style="text-decoration:line-through;"></span>
-                                    </div>
-                                    @endif
-                                    <h1 class="font-weight-bold text-black">
-                                        <small class=" text-mindle align-top ">$</small>{{ round($membership->price_with_discount) }}.00
-                                    </h1>
-                                </div>
                                     <div class="col-12 text-center">
 
                                         <small class="text-black">VIGENCIA <span>
@@ -160,7 +160,7 @@
             <div class="col-11 col-md-8 col-lg-9     ">
                 <div class="row">
 
-                    
+
                     <div class="col-12">
                         <div class="row">
                             <div class="col-6 col-lg-3 d-flex   align-items-center  py-0">
@@ -273,7 +273,12 @@
                     @endforeach
 
 
-
+                    <div class="col-12 text-center mt-5 text-muted">
+                        <h1 class="mb-5">Membresía en preventa</h1>
+                    <h2>👉🏻Material disponible a partir del 21 de julio del 2023.🫶🏻</h2>
+                        <h4>🌈Por que ustedes lo pidieron muchos de NUESTROS RECURSOS serán EDITABLES para que puedan ajustarlo a sus necesidades!!!!🌟🫶🏻</h4>
+                        
+                    </div>
 
                 </div>
 
@@ -288,6 +293,6 @@
 
 
         </div>
-        @include('includes.borders')    
+        @include('includes.borders')
     </div>
 </div>
