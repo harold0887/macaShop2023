@@ -15,6 +15,7 @@ class MainController extends Controller
     //envios reales pagina web
     public function thanks_you() //Metodo al que retorna al finalizar la compra
     {
+        
         $newOrder = Order::create([
             'customer_id' => Auth::user()->id,
             'amount' => \Cart::getTotal(),
@@ -24,6 +25,7 @@ class MainController extends Controller
             'order_id' => request('merchant_order_id')
         ]);
 
+        //return "creo la orden";
 
         foreach (\Cart::getContent() as $item) {
             if ($item->associatedModel->model == 'Membership') {
@@ -69,7 +71,7 @@ class MainController extends Controller
                 Mail::to(Auth::user()->email)
                     //->cc('arnulfoacosta0887@gmail.com')
                     ->send($correo);
-                return view('shop.pending', compact('productosCart', 'Total', 'lastOrderCustomer_id', 'payment_type'));
+                return view('shop.pending', compact('productosCart', 'Total', 'order', 'payment_type'));
                 break;
             case 'in_process':
                 return redirect()->route('customer.orders')->with('in_process', 'Tu compra fue realizada con éxito y esta en proceso de validación para garantizar la total seguridad de la transacción.');

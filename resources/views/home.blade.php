@@ -78,7 +78,7 @@
 
         <div class="row mt-3">
             <div class="col-12 rounded  px-0">
-                <div class="d-none d-lg-block">
+                <div class="">
                     @if(isset($newsDesktop) && $newsDesktop->items->count() >0)
                     <div id="carouselDesktop" class="carousel slide carousel-fade" data-mdb-ride="carousel">
                         <div class="carousel-indicators">
