@@ -151737,6 +151737,26 @@
     .logo-main {
         width: 80px;
     }
+
+    .floatWhats {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 10px;
+        right: 10px;
+        background-color: #25d366;
+        color: #fff;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 2px 2px 3px #999;
+        z-index: 100;
+    }
+    
+    .my-float {
+        margin-top: 16px;
+    }
+    
 }
 /* ---------------------------------------------------
     fin nuevos estilos
@@ -151825,17 +151845,18 @@ button.mercadopago-button,
     padding: 12px 30px;
 }
 /***********************search**********************/
-#input-search-home,#input-search-home1{
+#input-search-home,
+#input-search-home1 {
     background-color: #a678da54;
     color: white !important;
-
 }
 #input-search-home::-moz-placeholder, #input-search-home1::-moz-placeholder {
     color: white !important;
-  }
-#input-search-home::placeholder,#input-search-home1::placeholder {
+}
+#input-search-home::placeholder,
+#input-search-home1::placeholder {
     color: white !important;
-  }
+}
 .ui-autocomplete {
     position: absolute;
     top: 100%;
@@ -151858,7 +151879,7 @@ button.mercadopago-button,
     width: 380px !important;
     max-height: 500px;
     min-height: 250px;
-  }
+}
 .ui-autocomplete > li > div {
     display: block;
     padding: 3px 20px;
@@ -151867,15 +151888,15 @@ button.mercadopago-button,
     line-height: 1.42857143;
     color: #333333;
     white-space: nowrap;
-  }
+}
 .ui-state-hover,
-  .ui-state-active,
-  .ui-state-focus {
+.ui-state-active,
+.ui-state-focus {
     text-decoration: none;
     color: #262626;
     background-color: #a578da !important;
     cursor: pointer;
-  }
+}
 .ui-helper-hidden-accessible {
     border: 0;
     clip: rect(0 0 0 0);
@@ -151885,5 +151906,37 @@ button.mercadopago-button,
     padding: 0;
     position: absolute;
     width: 1px;
-  }
-  
+}
+.float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+}
+/***********************float whats app**********************/
+.floatWhats {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    bottom: 5px;
+    right: 10px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+}
+.my-float {
+    margin-top: 11px;
+}
+

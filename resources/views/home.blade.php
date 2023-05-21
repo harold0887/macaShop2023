@@ -9,7 +9,7 @@
 ])
 
 @section('content')
-
+<div class="elfsight-app-65828c12-e535-42f6-bef5-6b70b836fdab"></div>
 @include('includes.cart-1')
 
 

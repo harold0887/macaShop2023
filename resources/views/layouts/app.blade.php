@@ -37,7 +37,10 @@
 
     <!-- CSS animate -->
     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Banner oferta -->
     <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+
+
 
 
 
@@ -53,7 +56,9 @@
 </head>
 
 <body class="{{ $class ?? '' }}" >
-<div class="elfsight-app-65828c12-e535-42f6-bef5-6b70b836fdab"></div>
+<a href="https://wa.me/message/GUNXZZ666PN3I1" class="floatWhats" target="_blank">
+<i class="fa fa-whatsapp my-float"></i>
+</a>
     <style>
         #ofBar {
             display: none;
