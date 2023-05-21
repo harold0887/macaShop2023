@@ -147,7 +147,7 @@
         <livewire:subscribers-render />
 
         <div class="row">
-            <div class="col-12 p-0">
+            <div class="col-12">
                 <div class="text-center">
                     <h2 class="pt-5  lg:text-4xl lg:pt-12 md:text-3xl md:font-bold text-center  text-2xl " style="font-size:27px;font-weight:700; color:#4d4d4d">
                         ¿Aún no estás convencid@?
