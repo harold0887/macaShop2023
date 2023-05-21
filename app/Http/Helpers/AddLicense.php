@@ -13,7 +13,7 @@ use setasign\Fpdi\Fpdi; // Like this
 class AddLicense
 {
 
-    public  $order, $product, $licencia;
+    public  $order, $product, $licencia, $message;
 
 
     public function __construct($id, $order)
@@ -21,7 +21,10 @@ class AddLicense
 
         $this->product = Product::findOrFail($id);
         $this->order = Order::findOrFail($order);
-        $this->licencia = " © " . date("Y") . " Material didáctico MaCa. Licensed number w-". $this->order->id  . " to " . $this->order->user->name . " - " . $this->order->user->email;
+        $this->message="Documento con derechos de autor © Material didáctico MaCa. Queda prohibida su reventa";
+        $this->licencia = "w". $this->order->user->id . "- licencia de uso personal para ". $this->order->user->name." - ".$this->order->user->email;
+       
+        //$this->licencia = " © " . date("Y") . " Material didáctico MaCa. Licensed number w-". $this->order->id  . " to " . $this->order->user->name . " - " . $this->order->user->email;
     }
 
    
@@ -43,6 +46,8 @@ class AddLicense
             $pdf->useTemplate($templateId, ['adjustPageSize' => true]);
             $pdf->SetFont('Arial', 'i', 8);
             $pdf->SetXY(2, 0);
+            $pdf->Write(8, utf8_decode($this->message));
+            $pdf->SetXY(2, 4);
             $pdf->Write(8, utf8_decode($this->licencia));
         }
 
