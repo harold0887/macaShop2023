@@ -59,7 +59,7 @@
                 <div class="col-10 col-md-8 pr-0">
                     <form class="form-group">
                         <div class="input-group rounded">
-                            <input id="input-search-home1" type="search" class="form-control px-3  " placeholder=" Buscar por título..." style="border-radius: 30px !important">
+                            <input id="input-search-home1" type="search" class="form-control px-3  " placeholder=" Buscar por título..." style="border-radius: 18px !important">
 
                         </div>
                     </form>

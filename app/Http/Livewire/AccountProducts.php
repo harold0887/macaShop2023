@@ -43,6 +43,7 @@ class AccountProducts extends Component
             ->orderBy('products.title')
             ->get();
 
+     
         return view('livewire.account-products', compact('purchases'))
             ->extends('layouts.app', [
                 'title' => 'Mis productos',

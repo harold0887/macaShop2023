@@ -5,18 +5,14 @@
   <div class="container-fluid">
 
     @if(Request::route()->getName() =='home')
-    <div class="d-block d-lg-none  px-0 ">
-      <div class="d-flex align-items-center">
-        <form class="form-group">
-          <div class="input-group rounded">
-            <input id="input-search-home" type="search" class="form-control px-3  " placeholder=" Buscar por título..." style="border-radius: 30px !important; width: 270px !important;">
-
+    <div class="d-block d-lg-none  px-0 " style="width: 80% !important;">
+      <div class="d-flex align-items-center" >
+        <form class="form-group " style="width: 100% !important;">
+          <div class="input-group rounded " >
+            <input id="input-search-home" type="search" class="form-control px-3  " placeholder=" Buscar por título..." style="border-radius: 18px !important; ">
           </div>
         </form>
-
-
-
-        <button type="submit" class="btn bg-transparent   btn-round btn-just-icon" style="border:solid 1px #c09aed">
+        <button type="submit" class="btn bg-transparent   btn-round btn-just-icon " style="border:solid 1px #c09aed">
           <i class="material-icons " style="color:#c09aed">search</i>
         </button>
       </div>

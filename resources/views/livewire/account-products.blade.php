@@ -30,7 +30,7 @@
                                         <th><b>Producto</b></th>
                                         <th class="text-center"><b>Acciones</b></th>
                      
-                                        <th><b>Fecha de compra</b></th>
+                                   
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -89,10 +89,7 @@
                                         @endif
                                        
 
-                                        <td>
-                                            {{date_format($purchase->created_at, 'd-M-Y H:i')}}
-
-                                        </td>
+                                      
                                         
 
 
