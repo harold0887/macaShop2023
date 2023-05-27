@@ -151706,7 +151706,8 @@
     background-color: white;
 }
 .logo-main {
-    width: 100px;
+    width: 160px;
+    position: absolute;
 }
 @media (max-width: 991px) {
     /* ocultar el sidebar  */
@@ -151735,7 +151736,8 @@
         margin-top: 75px !important;
     }
     .logo-main {
-        width: 80px;
+        width: 120px;
+        position: absolute;
     }
 
     .floatWhats {
