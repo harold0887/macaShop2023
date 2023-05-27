@@ -82,8 +82,10 @@ class MainController extends Controller
                     $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name);
                     Mail::to(Auth::user()->email)
                         ->send($correo);
+
+                    $correoCopia = new PaymentApprovedEmail($newOrder->id, Auth::user()->name);
                     Mail::to('arnulfoacosta0887@gmail.com')
-                        ->send($correo);
+                        ->send($correoCopia);
                 }
 
                 //enviar correo de membresias
@@ -95,16 +97,18 @@ class MainController extends Controller
                         $correo = new MembresiaPreescolar($newOrder->id, Auth::user()->name, $membresia['price']);
                         Mail::to(Auth::user()->email)
                             ->send($correo);
+                        $correoCopia = new MembresiaPreescolar($newOrder->id, Auth::user()->name, $membresia['price']);
                         Mail::to('arnulfoacosta0887@gmail.com')
-                            ->send($correo);
+                            ->send($correoCopia);
                     }
 
                     if ($membresia['membership_id'] == 2007) {
                         $correo = new MembresiaPrimaria($newOrder->id, Auth::user()->name, $membresia['price']);
                         Mail::to(Auth::user()->email)
                             ->send($correo);
+                        $correoCopia = new MembresiaPrimaria($newOrder->id, Auth::user()->name, $membresia['price']);
                         Mail::to('arnulfoacosta0887@gmail.com')
-                            ->send($correo);
+                            ->send($correoCopia);
                     }
                 }
 
