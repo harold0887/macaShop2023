@@ -2,7 +2,7 @@
 
   <!--    -->
   <!-- navbar fixed-top navbar-expand-lg    {{$navbarClass}} shadow -->
-  <div class="container-fluid">
+  <div class="container-fluid px-0  ">
 
     @if(Request::route()->getName() =='home')
     <div class="d-block d-lg-none  px-0 " style="width: 80% !important;">
@@ -19,16 +19,16 @@
 
 
     </div>
-    <div class="navbar-wrapper d-none d-lg-block ">
-      <a class="navbar-brand" style="padding: 0px !important">
+    <div class="navbar-wrapper d-none d-lg-block px-0 mx-0">
+      <a class="navbar-brand px-0 mx-0" style="padding: 0px !important">
 
         <a class="navbar-brand py-0" href="{{route('home')}}" style="font-family: 'Fredericka the Great'"><img class="logo-main" src=" {{ asset('./img/logo2.png') }} " alt=""></a>
       </a>
     </div>
 
     @else
-    <div class="navbar-wrapper ">
-      <a class="navbar-brand" style="padding: 0px !important">
+    <div class="navbar-wrapper px-0 mx-0 ">
+      <a class="navbar-brand px-0 mx-0" style="padding: 0px !important">
         <a class="navbar-brand py-0" href="{{route('home')}}" style="font-family: 'Fredericka the Great'"><img class="logo-main" src=" {{ asset('./img/logo2.png') }} " alt=""></a>
       </a>
     </div>
