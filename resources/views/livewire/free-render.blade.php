@@ -1,6 +1,6 @@
 <div class="container-fluid  p-0 ">
-    @include('includes.modal.login-modal')
-    @include('includes.modal.cart-modal')
+   
+  
     @include('includes.spinner-livewire')
     <div class="content-main rounded">
         @include('includes.borders')
@@ -28,7 +28,7 @@
                             <div class="card-body px-2">
                                 <div class="card-actions text-center pt-4">
                                     <div class="d-flex justify-content-center">
-                                        <button class="btn  btn-primary btn-round mt-2" wire:click="downloadFree('{{ $product->id }}')">
+                                        <button class="btn  btn-primary btn-round mt-2" wire:click="downloadFree('{{ $product->id }}')" wire:loading.attr="disabled">
                                             <i class="material-icons">download</i>
                                             <span>Descargar</span>
                                         </button>
@@ -105,7 +105,7 @@
                             <div class="card-body mt-3">
                                 <div class="text-center">
                                     @if (!\Cart::get($membership->id))
-                                    <button class=" btn btn-primary btn-round" wire:click="addCart('{{ $membership->id }}','{{ $membership->model }}' )">
+                                    <button class=" btn btn-primary btn-round" wire:click="addCart('{{ $membership->id }}','{{ $membership->model }}' )" wire:loading.attr="disabled">
                                         <i class="material-icons">shopping_cart</i>
                                         <span>Agregar al carrito</span>
                                     </button>

@@ -37,8 +37,7 @@
 
     <!-- CSS animate -->
     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <!-- Banner oferta -->
-    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+
 
 
 
@@ -54,8 +53,11 @@
 
     @livewireStyles
 </head>
-
+@include('includes.modal.cart-modal')
+@include('includes.modal.login-modal')
 <body class="{{ $class ?? '' }}" >
+
+
 <a href="https://wa.me/message/GUNXZZ666PN3I1" class="floatWhats" target="_blank">
 <i class="fa fa-whatsapp my-float"></i>
 </a>
@@ -67,6 +69,7 @@
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
+   
 
     @if (Route::is('dashboard','dashboard.*','products.*','memberships.*','category.*','package.*','degrees.*','users.*','comments.*','sales.*'))
     @include('layouts.page_templates.admin')
@@ -78,11 +81,12 @@
     @include('layouts.page_templates.guest')
     @else
     @include('layouts.page_templates.white')
+
     @endif
 
 
 
-
+   
 
 
 

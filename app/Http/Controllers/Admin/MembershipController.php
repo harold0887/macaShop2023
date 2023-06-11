@@ -99,20 +99,17 @@ class MembershipController extends Controller
             }
 
 
-            $price = number_format((float)request('price'), 2, '.', '');
-            $percentage = request('discount');
-            $price_with_discount = $price - (($price / 100) * $percentage);
-
+      
 
             Membership::findOrFail($id)->update([
                 'title' => request('title'),
-                'price' => $price,
-                'price_with_discount' => $price_with_discount,
+                'price' => request('price'),
+                'price_with_discount' => request('discount'),
                 'itemMain' => $itemMain,
                 'start' => request('start'),
                 'expiration' => request('expiration'),
                 'status' => true,
-                'discount_percentage' => $percentage,
+
                 'information' => request('information'),
                 'vigencia' => request('vigencia'),
             ]);

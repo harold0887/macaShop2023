@@ -2,7 +2,7 @@
 background-image: linear-gradient(180deg, #a578da 0%, #a578da 33%, #ffffff 66%, #ffffff 100%);
 
 ">
-    @include('includes.modal.cart-modal')
+
     <h1 class=" text-center  text-2xl  lg:text-4xl   font-bold text-white  py-2 " style="font-family: 'Advent Pro'">
         Conoce nuestras novedades
     </h1>
@@ -25,7 +25,7 @@ background-image: linear-gradient(180deg, #a578da 0%, #a578da 33%, #ffffff 66%, 
                     <div class="card-actions text-center">
                         <div class="mt-2">
                             @if(!\Cart::get($product->id))
-                            <button class=" btn   btn-primary btn-round  px-2 w-full " wire:click="addCart('{{ $product->id }}','Product')">
+                            <button class=" btn   btn-primary btn-round  px-2 w-full " wire:click="addCart('{{ $product->id }}','Product')" wire:loading.attr="disabled">
                                 <i class="material-icons">shopping_cart</i>
                                 <span>Agregar al carrito</span>
                             </button>

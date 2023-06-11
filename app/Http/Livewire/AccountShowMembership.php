@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 class AccountShowMembership extends Component
 {
     public $membership, $product, $order;
+    public $productModal;
 
     public function mount($order, $id)
     {
@@ -185,4 +186,14 @@ class AccountShowMembership extends Component
             ]);
         }
     }
+
+
+    public function setProduct($id){
+        $this->reset('productModal');
+        $this->productModal= Product::findOrFail($id);
+ 
+        $this->emit('showAcordeon');
+    }
+
+   
 }

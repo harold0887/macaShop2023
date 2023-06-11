@@ -1,5 +1,4 @@
 <div class="container-fluid  p-0 ">
-    @include('includes.modal.cart-modal')
     @include('includes.spinner-livewire')
     <div class="content-main  rounded">
         @include('includes.borders')
@@ -67,7 +66,7 @@
                                 <div class="card-actions text-center pt-4">
                                     <div class="d-flex justify-content-center">
                                         @if(!\Cart::get($package->id))
-                                        <button class=" btn   btn-primary btn-round  px-2 w-full " wire:click="addCart('{{ $package->id }}','Package')">
+                                        <button class=" btn   btn-primary btn-round  px-2 w-full " wire:click="addCart('{{ $package->id }}','Package')" wire:loading.attr="disabled">
                                             <i class="material-icons">shopping_cart</i>
                                             <span>Agregar al carrito</span>
                                         </button>

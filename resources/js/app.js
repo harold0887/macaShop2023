@@ -165,7 +165,7 @@ function novedadesAutoplay() {
 
 function showloginModal() {
     $("#loginModal").modal("show");
-    $(".modal-backdrop").remove();
+    //$(".modal-backdrop").remove();
 }
 
 function showFilters() {
@@ -290,10 +290,17 @@ Livewire.on("deleteCartAlert", ($message) => {
 });
 
 Livewire.on("addCartAlert", function ($product) {
-    //novedadesAutoplay();
+    $("#cartTitle").text($product['title']);
+    $("#cartPrice").text($product['price']);
+    $("#cartImage").attr("src",$product['image']);
     $("#adCart").modal("show");
-    $(".modal-backdrop").remove();
+    //$(".modal-backdrop").remove();
     novedadesAutoplay();
+});
+
+Livewire.on("showAcordeon", function () {
+    $("#staticBackdrop").modal("show");
+    $(".modal-backdrop").remove();
 });
 
 

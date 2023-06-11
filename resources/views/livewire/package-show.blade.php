@@ -1,5 +1,5 @@
 <div class="container-fluid  p-0 ">
-    @include('includes.modal.cart-modal')
+
     <div class="content-main  rounded">
         @include('includes.borders')
         <div class="row">
@@ -27,7 +27,7 @@
                         <div class="card-body">
                         <div class="text-center">
                                 @if (!\Cart::get($package->id))
-                                <button class=" btn btn-primary btn-round" wire:click="addCart('{{ $package->id }}','{{ $package->model }}' )">
+                                <button class=" btn btn-primary btn-round" wire:click="addCart('{{ $package->id }}','{{ $package->model }}' )" wire:loading.attr="disabled">
                                     <i class="material-icons">shopping_cart</i>
                                     <span>Agregar al carrito</span>
                                 </button>

@@ -90,7 +90,11 @@ class PackageRender extends Component
 
 
             $this->emit('cart:update');
-            $this->emit('addCartAlert');
+            $this->emit('addCartAlert',[
+                'title' => $this->title,
+                'price'=>$this->price,
+                'image'=>$this->img
+            ]);
         } catch (\Throwable $th) {
             $this->emit('error', [
                 'message' => "Error al agregar el producto al carrito - " . $th->getMessage(),

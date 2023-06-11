@@ -1,7 +1,9 @@
 <div class="container-fluid  p-0 ">
 
+
     <div class="content-main ">
         @include('includes.spinner-livewire')
+    
         @include('includes.borders')
         <div class="row">
             <div class="col-12">
@@ -34,18 +36,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     @foreach ($membership->products as $purchase)
-
-
-
                                     <tr>
 
                                         <td>
                                             <div class="img-container ">
-                                                <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                <img src="{{ Storage::url($purchase->itemMain) }}" alt="..."  >
                                             </div>
-                                            <span class="h5"><small>{{ $purchase->title }} </small></span>
+                                            <span class="h5" data-mdb-toggle="modal"><small>{{ $purchase->title }} </small></span>
                                             <br><small>Archivo en formato {{ $purchase->format }} </small>
                                             <!-- <br><small class="italic text-muted">{{ $purchase->price }} MXN </small> -->
                                         </td>
@@ -69,8 +67,6 @@
                                                 </button>
                                             </div>
                                             @else
-
-
                                             <div class="col-12 text-center">
                                                 <button class="btn  btn-primary btn-link show-spinner" disabled>
 

@@ -1,7 +1,20 @@
 @component('mail::message')
-# ¡Confirmación de compra!
 
-## Hola {{$name}}, sigue estos pasos para descargar los materiales. ##
+
+## {{$name}}, muchas gracias por su compra!!🫶🏻 ##
+
+RESUMEN DE COMPRA: {{$order}}
+
+CANTIDAD PAGADA: ${{$price}} MXN
+
+FECHA DE COMPRA: {{date_format(now(),'d-M-Y')}}
+
+
+
+
+
+
+Sigue estos pasos para descargar los materiales didácticos.
 
 <ol>
     <li>Iniciar sesión con tu usuario y contraseña</li>
@@ -10,9 +23,7 @@
     <li>Da click en el botón descargar.</li>
     <li>Disfruta el material didáctico.</li>
 </ol>
-
 <hr>
-
 Queda estrictamente prohibido:
 <ul>
     <li>Revender el documento.</li>
@@ -36,11 +47,15 @@ Queda estrictamente prohibido:
     Si tiene alguna pregunta, no dude en contactarme. Solo da click en el logo de WhatsApp
 </small>
 <br>
+<div class="justify-contente-center border">
 <a href="https://wa.me/message/GUNXZZ666PN3I1" target="_blank">
     <img src="{{ asset('img/whatsapp.png') }}" alt="logo WhatsApp" width="60">
 </a>
+</div>
 
 @endcomponent
 
 
+Saludos,<br>
+Material Didáctico MaCa
 @endcomponent

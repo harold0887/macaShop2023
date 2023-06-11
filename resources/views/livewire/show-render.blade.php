@@ -1,6 +1,6 @@
 <div class="container-fluid  p-0 ">
     @include('includes.spinner-livewire')
-    @include('includes.modal.cart-modal')
+  
     <div class="content-main ">
         @include('includes.borders')
         <div class="row">
@@ -63,7 +63,7 @@
 
                         @else
                         @if(!\Cart::get($product->id))
-                        <button class=" btn btn-primary btn-round" wire:click="addCart('{{ $product->id }}','Product')">
+                        <button class=" btn btn-primary btn-round" wire:click="addCart('{{ $product->id }}','Product')" wire:loading.attr="disabled">
                             <i class="material-icons">shopping_cart</i>
                             <span>Agregar al carrito</span>
                         </button>
@@ -217,7 +217,7 @@
                                         <div class="card-actions text-center">
                                             <div class="mt-2">
                                                 @if (!\Cart::get($article->id))
-                                                <button class=" btn btn-primary btn-round" wire:click="addCart('{{ $article->id }}','Product')">
+                                                <button class=" btn btn-primary btn-round" wire:click="addCart('{{ $article->id }}','Product')" wire:loading.attr="disabled">
                                                     <i class="material-icons">shopping_cart</i>
                                                     <span>Agregar al carrito</span>
                                                 </button>

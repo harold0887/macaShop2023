@@ -3,9 +3,10 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class PaymentApprovedEmail extends Mailable
 {
@@ -18,14 +19,17 @@ class PaymentApprovedEmail extends Mailable
     public $document;
     public $order;
     public $url;
+    public $price;
 
 
-    public function __construct($order, $name)
+
+    public function __construct($order, $name, $price)
     {
-        $this->subject = 'Confirmación de Compra ' . $order;
+        $this->subject = 'Confirmación de compra ' . $order;
         $this->name = $name;
         $this->order = $order;
         $this->url = "https://materialdidacticomaca.com/";
+        $this->price= $price;
     }
 
     /**

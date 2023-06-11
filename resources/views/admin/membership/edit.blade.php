@@ -36,8 +36,8 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="discount">Descuento (porcentaje %)</label>
-                                    <input type="number" class="form-control" name="discount" value="{{ $membership->discount_percentage }}{{ old('discount') }}" step="0.01">
+                                    <label for="discount">Precio con descuento</label>
+                                    <input type="number" class="form-control" name="discount" value="{{ $membership->price_with_discount }}{{ old('discount') }}" step="0.01">
                                     @error('discount')
                                     <small class="text-danger"> {{ $message }} </small>
                                     @enderror

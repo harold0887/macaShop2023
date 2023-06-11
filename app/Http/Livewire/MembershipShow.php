@@ -12,10 +12,15 @@ class MembershipShow extends Component
 {
     public $img, $title, $price;
     public $membership;
+    public $productModal;
+
+  
+
 
     public function mount($id)
     {
         $this->membership = Membership::findOrFail($id);
+ 
     }
     public function render()
     {
@@ -67,11 +72,22 @@ class MembershipShow extends Component
 
 
             $this->emit('cart:update');
-            $this->emit('addCartAlert');
+            $this->emit('addCartAlert',[
+                'title' => $this->title,
+                'price'=>$this->price,
+                'image'=>$this->img
+            ]);
         } catch (\Throwable $th) {
             $this->emit('error', [
                 'message' => "Error al agregar el producto al carrito - " . $th->getMessage(),
             ]);
         }
+    }
+
+    public function setProduct($id){
+        $this->reset('productModal');
+        $this->productModal= Product::findOrFail($id);
+ 
+        $this->emit('showAcordeon');
     }
 }

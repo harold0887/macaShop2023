@@ -1,6 +1,7 @@
 <div class="container-fluid  p-0 ">
-    @include('includes.modal.cart-modal')
+  
     <div class="content-main  rounded">
+    
         @include('includes.borders')
         <div class="row">
             <div class="col-12 ">
@@ -26,7 +27,7 @@
                         <div class="card-body ">
                             <div class="text-center">
                                 @if (!\Cart::get($membership->id))
-                                <button class=" btn btn-primary btn-round" wire:click="addCart('{{ $membership->id }}','{{ $membership->model }}' )">
+                                <button class=" btn btn-primary btn-round" wire:click="addCart('{{ $membership->id }}','{{ $membership->model }}' )" wire:loading.attr="disabled">
                                     <i class="material-icons">shopping_cart</i>
                                     <span>Agregar al carrito</span>
                                 </button>
@@ -213,15 +214,14 @@
                     @foreach($membership->products as $product)
                     <div class="col-6 col-md-4 col-lg-3 mb-4" style="position: relative; padding:5px !important">
                         <div class=" card card-primary  card-product">
-                            <div class="card-header  card-header-image " data-header-animation="true">
-                                <a href="{{ route('shop.show', $product->slug) }}">
-                                    <img class="img" src="{{ Storage::url($product->itemMain) }} ">
-                                </a>
+                            <div class="card-header  card-header-image " data-header-animation="true" style="cursor:pointer" wire:click="setProduct({{$product->id}})">
+                                    <img class="img" src="{{ Storage::url($product->itemMain) }} "  >
                             </div>
                             <div class="card-body  px-0">
 
                                 <h3 class="card-title">
-                                    <a href="{{ route('shop.show', $product->slug) }}" class="card-title text-center text-dark text-xs">{{ $product->title }}</a>
+                                    <span style="cursor:pointer" wire:click="setProduct({{$product->id}})" class="card-title text-center text-dark text-xs">{{ $product->title }} </span>
+                                  
                                     @role('admin')
                                     <a class="btn btn-success btn-link p-0" href="{{ route('products.edit', $product->id) }}">
                                         <i class="material-icons">edit</i>

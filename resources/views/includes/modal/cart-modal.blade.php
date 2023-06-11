@@ -1,5 +1,5 @@
   <!--Modal add cart-->
-  <div class="modal fade" id="adCart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal fade" id="adCart"  data-mdb-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">
@@ -14,11 +14,11 @@
               <div class="modal-body border-top border-bottom">
                   <div class="row">
                       <div class="col-6 img-product">
-                          <img class="w-100 shadow rounded" src="{{$img}}" alt="">
+                          <img class="w-100 shadow rounded" id="cartImage" src="" alt="">
                       </div>
                       <div class="col-6 ">
-                          <h4> <b>{{$title}}</b> </h4>
-                          <h4 class="text-muted">${{$price}}</h4>
+                          <h4> <b id="cartTitle"> </b> </h4>
+                          <h4 class="text-muted" id="cartPrice"></h4>
 
 
                       </div>

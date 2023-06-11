@@ -1,5 +1,4 @@
 <div class="container-fluid  p-0 ">
-    @include('includes.modal.cart-modal')
     <div class="content-main  rounded">
         @include('includes.borders')
         @if (isset($memberships) && $memberships->count() > 0)

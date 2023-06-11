@@ -182,6 +182,9 @@
                                             <a class="btn btn-success btn-link text-primary" wire:click="updateStatus({{ $order->payment_id }})">
                                                 <i class=" material-icons">autorenew</i>
                                             </a>
+                                            <a class="btn btn-success btn-link text-secondary" wire:click="resendOrder({{ $order->id }})">
+                                                <i class=" material-icons">mail</i>
+                                            </a>
                                             <a class="btn btn-success btn-link text-danger " wire:click="deleteOrder({{ $order->id }})">
                                                 <i class="material-icons ">close</i>
                                             </a>

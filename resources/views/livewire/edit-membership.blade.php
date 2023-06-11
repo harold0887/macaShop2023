@@ -1,7 +1,7 @@
 <div class="row ">
 
     <div class="col-12 col-lg-6 shadow rounded">
-        <h4 class="title  text-center text-muted">Documentos incluidos en el paquete</h4>
+        <h4 class="title  text-center text-muted">Documentos incluidos en la membresía</h4>
         @foreach($membership->products as $item)
         <div class="row justify-content-center">
             <div class="col-7 col-md-3">
@@ -21,7 +21,7 @@
 
     </div>
     <div class="col-12 col-lg-6 shadow rounded">
-        <h4 class="title  text-center text-muted">Agregar documentos al paquete</h4>
+        <h4 class="title  text-center text-muted">Agregar documentos a la membresía</h4>
         @foreach($products as $products)
 
         <div class="row pt-2">

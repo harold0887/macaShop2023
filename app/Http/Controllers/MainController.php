@@ -62,11 +62,11 @@ class MainController extends Controller
 
         $productosCart = \Cart::getContent();
 
-        $Total = \Cart::getTotal();
+        $Total = \Cart::getTotal().".00";
         $order = $newOrder->id;
         $payment_type = request('payment_type');
 
-
+    
 
 
 
@@ -79,11 +79,11 @@ class MainController extends Controller
 
                 //enviar correo de materiales
                 if ($materialesComprados) {
-                    $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name);
+                    $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name, $Total);
                     Mail::to(Auth::user()->email)
                         ->send($correo);
 
-                    $correoCopia = new PaymentApprovedEmail($newOrder->id, Auth::user()->name);
+                    $correoCopia = new PaymentApprovedEmail($newOrder->id, Auth::user()->name,$Total);
                     Mail::to('arnulfoacosta0887@gmail.com')
                         ->send($correoCopia);
                 }
@@ -127,7 +127,7 @@ class MainController extends Controller
                 // return view('shop.success', compact('productosCart', 'Total', 'order', 'payment_type'));
                 // break;
             case 'pending':
-                $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name);
+                $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name,$Total);
                 Mail::to(Auth::user()->email)
                     //->cc('arnulfoacosta0887@gmail.com')
                     ->send($correo);
@@ -230,7 +230,7 @@ class MainController extends Controller
 
                 //enviar correo de materiales
                 if ($materialesComprados) {
-                    $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name);
+                    $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name,$Total);
                     Mail::to(Auth::user()->email)
                         ->cc('arnulfoacosta0887@gmail.com')
                         ->send($correo);
@@ -279,7 +279,7 @@ class MainController extends Controller
                 return view('shop.success', compact('productosCart', 'Total', 'order', 'payment_type'));
                 break;
             case 'pending':
-                $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name);
+                $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name,$Total);
                 Mail::to(Auth::user()->email)
                     //->cc('arnulfoacosta0887@gmail.com')
                     ->send($correo);

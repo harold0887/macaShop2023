@@ -4,7 +4,8 @@
   'activePage' => 'Restablecer contraseña',
   'title' => 'Restablecer contraseña',
   'pageBackground' => asset("material").'/img/login.jpg',
-  'navbarClass'=>'text-white'
+  'navbarClass'=>'text-white',
+  'background'=>''
 ])
 
 @section('content')
