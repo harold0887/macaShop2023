@@ -10,7 +10,7 @@ use App\Models\Order_Details;
 use App\Mail\MembresiaPrimaria;
 use App\Mail\MembresiaPreescolar;
 use App\Mail\PaymentApprovedEmail;
-use Illuminate\Support\Facades\Auth;
+use App\User;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\QueryException;
@@ -105,8 +105,8 @@ class IndexSales extends Component
             } else {
                 $messageError = $e->getMessage();
             }
-            $this->emit('deleteError', [
-                'error' => 'Error al eliminar el registro - ' . $messageError,
+            $this->emit('error', [
+                'message' => 'Error al eliminar el registro - ' . $messageError,
             ]);
         }
     }
@@ -122,6 +122,9 @@ class IndexSales extends Component
 
 
         $productosOrder = Order_Details::where('order_id', $this->order->id)->get();
+        $customer =User::findOrFail ($this->order->customer_id);
+
+     
 
         
        
@@ -147,11 +150,11 @@ class IndexSales extends Component
 
         //enviar correo de materiales
         if ($materialesComprados) {
-            $correo = new PaymentApprovedEmail($this->order->id, Auth::user()->name, $this->order->amount);
-            Mail::to(Auth::user()->email)
+            $correo = new PaymentApprovedEmail($this->order->id, $customer->name, $this->order->amount);
+            Mail::to($customer->email)
                 ->send($correo);
 
-            $correoCopia = new PaymentApprovedEmail($this->order->id, Auth::user()->name, $this->order->amount);
+            $correoCopia = new PaymentApprovedEmail($this->order->id, $customer->name, $this->order->amount);
             Mail::to('arnulfoacosta0887@gmail.com')
                 ->send($correoCopia);
                 $this->emit('success-auto-close', [
@@ -165,10 +168,10 @@ class IndexSales extends Component
             //validar si es membresia preescolar, se tiene que cambiar cada año
             if ($membresia['membership_id'] == 2006) {
 
-                $correo = new MembresiaPreescolar($this->order->id, Auth::user()->name, $membresia['price']);
-                Mail::to(Auth::user()->email)
+                $correo = new MembresiaPreescolar($this->order->id, $customer->name, $membresia['price']);
+                Mail::to($customer->email)
                     ->send($correo);
-                $correoCopia = new MembresiaPreescolar($this->order->id, Auth::user()->name, $membresia['price']);
+                $correoCopia = new MembresiaPreescolar($this->order->id, $customer->name, $membresia['price']);
                 Mail::to('arnulfoacosta0887@gmail.com')
                     ->send($correoCopia);
                     $this->emit('success-auto-close', [
@@ -177,10 +180,10 @@ class IndexSales extends Component
             }
 
             if ($membresia['membership_id'] == 2007) {
-                $correo = new MembresiaPrimaria($this->order->id, Auth::user()->name, $membresia['price']);
-                Mail::to(Auth::user()->email)
+                $correo = new MembresiaPrimaria($this->order->id, $customer->name, $membresia['price']);
+                Mail::to($customer->email)
                     ->send($correo);
-                $correoCopia = new MembresiaPrimaria($this->order->id, Auth::user()->name, $membresia['price']);
+                $correoCopia = new MembresiaPrimaria($this->order->id, $customer->name, $membresia['price']);
                 Mail::to('arnulfoacosta0887@gmail.com')
                     ->send($correoCopia);
                     $this->emit('success-auto-close', [
