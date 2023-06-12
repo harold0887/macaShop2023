@@ -79,11 +79,11 @@ class MainController extends Controller
 
                 //enviar correo de materiales
                 if ($materialesComprados) {
-                    $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name, Auth::user()->email, $Total);
+                    $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name, $Total);
                     Mail::to(Auth::user()->email)
                         ->send($correo);
 
-                    $correoCopia = new PaymentApprovedEmail($newOrder->id, Auth::user()->name, Auth::user()->email, $Total);
+                    $correoCopia = new PaymentApprovedEmail($newOrder->id, Auth::user()->name, $Total);
                     Mail::to('arnulfoacosta0887@gmail.com')
                         ->send($correoCopia);
                 }

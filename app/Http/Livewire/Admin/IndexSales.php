@@ -150,11 +150,11 @@ class IndexSales extends Component
 
         //enviar correo de materiales
         if ($materialesComprados) {
-            $correo = new PaymentApprovedEmail($this->order->id, $customer->name, $customer->email, $this->order->amount);
+            $correo = new PaymentApprovedEmail($this->order->id, $customer->name,  $this->order->amount);
             Mail::to($customer->email)
                 ->send($correo);
 
-            $correoCopia = new PaymentApprovedEmail($this->order->id, $customer->name, $customer->email, $this->order->amount);
+            $correoCopia = new PaymentApprovedEmail($this->order->id, $customer->name, $this->order->amount);
             Mail::to('arnulfoacosta0887@gmail.com')
                 ->send($correoCopia);
                 $this->emit('success-auto-close', [
