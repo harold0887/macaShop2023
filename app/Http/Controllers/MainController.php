@@ -79,11 +79,11 @@ class MainController extends Controller
 
                 //enviar correo de materiales
                 if ($materialesComprados) {
-                    $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name, $Total);
+                    $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name, Auth::user()->email, $Total);
                     Mail::to(Auth::user()->email)
                         ->send($correo);
 
-                    $correoCopia = new PaymentApprovedEmail($newOrder->id, Auth::user()->name,$Total);
+                    $correoCopia = new PaymentApprovedEmail($newOrder->id, Auth::user()->name, Auth::user()->email, $Total);
                     Mail::to('arnulfoacosta0887@gmail.com')
                         ->send($correoCopia);
                 }
@@ -94,19 +94,19 @@ class MainController extends Controller
                     //validar si es membresia preescolar, se tiene que cambiar cada año
                     if ($membresia['membership_id'] == 2006) {
 
-                        $correo = new MembresiaPreescolar($newOrder->id, Auth::user()->name, $membresia['price']);
+                        $correo = new MembresiaPreescolar($newOrder->id, Auth::user()->name, Auth::user()->email, $membresia['price']);
                         Mail::to(Auth::user()->email)
                             ->send($correo);
-                        $correoCopia = new MembresiaPreescolar($newOrder->id, Auth::user()->name, $membresia['price']);
+                        $correoCopia = new MembresiaPreescolar($newOrder->id, Auth::user()->name, Auth::user()->email, $membresia['price']);
                         Mail::to('arnulfoacosta0887@gmail.com')
                             ->send($correoCopia);
                     }
 
                     if ($membresia['membership_id'] == 2007) {
-                        $correo = new MembresiaPrimaria($newOrder->id, Auth::user()->name, $membresia['price']);
+                        $correo = new MembresiaPrimaria($newOrder->id, Auth::user()->name, Auth::user()->email, $membresia['price']);
                         Mail::to(Auth::user()->email)
                             ->send($correo);
-                        $correoCopia = new MembresiaPrimaria($newOrder->id, Auth::user()->name, $membresia['price']);
+                        $correoCopia = new MembresiaPrimaria($newOrder->id, Auth::user()->name, Auth::user()->email, $membresia['price']);
                         Mail::to('arnulfoacosta0887@gmail.com')
                             ->send($correoCopia);
                     }

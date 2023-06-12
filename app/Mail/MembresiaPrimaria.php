@@ -19,14 +19,14 @@ class MembresiaPrimaria extends Mailable
     public $email;
     public $title;
     public $price;
-    public function __construct($order, $name, $price)
+    public function __construct($order, $name, $email, $price)
     {
         $this->subject="Confirmación de compra membresía Primaria VIP";
         $this->name = $name;
         $this->order = $order;
         $this->title="MEMBRESÍA PRIMARIA 2023-2024";
         $this->price= $price;
-        $this->email=Auth::user()->email;
+        $this->email=$email;
         $this->url="https://api.whatsapp.com/send?phone=+9981838908&text=Quiero%20activar%20mi%20membres%C3%ADa%20PRIMARIA%20-%20compra%20web: ".$order." - ".$this->email;
     }
 
