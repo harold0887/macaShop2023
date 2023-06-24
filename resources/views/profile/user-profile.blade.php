@@ -72,7 +72,7 @@
                                 <label class="col-sm-2 col-form-label">{{ __('Email') }}</label>
                                 <div class="col-sm-7">
                                     <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-                                        <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" id="input-email" type="email" placeholder="{{ __('Email') }}" value="{{ old('email', auth()->user()->email) }}" required />
+                                        <input disabled  class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" id="input-email" type="email" placeholder="{{ __('Email') }}" value="{{ old('email', auth()->user()->email) }}" required />
                                         @include('alerts.feedback', ['field' => 'email'])
                                     </div>
                                 </div>
@@ -155,3 +155,4 @@
 
 
 @endsection
+@include('includes.alert-error')

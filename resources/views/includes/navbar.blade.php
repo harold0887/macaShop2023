@@ -108,6 +108,7 @@
 
             <a class="dropdown-item" href="{{route('profile.edit')}}">{{ __('My Profile') }}</a>
             <a class="dropdown-item" href="{{route('customer.orders')}}">Mis compras</a>
+            <a class="dropdown-item" href="{{ route('customer.memberships') }}">Mis Membresías</a>
             <form method="POST" action="{{ route('logout') }}">
               @csrf
               <a class="dropdown-item" href="route('logout')" onclick="event.preventDefault();

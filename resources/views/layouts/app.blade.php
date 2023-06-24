@@ -53,6 +53,7 @@
 
     @livewireStyles
 </head>
+@include('includes.spinner')
 @include('includes.modal.cart-modal')
 @include('includes.modal.login-modal')
 <body class="{{ $class ?? '' }}" >

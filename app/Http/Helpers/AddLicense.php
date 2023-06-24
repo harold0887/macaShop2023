@@ -23,8 +23,6 @@ class AddLicense
         $this->order = Order::findOrFail($order);
         $this->message="Documento con derechos de autor © Material didáctico MaCa. Queda prohibida su reventa";
         $this->licencia = "w". $this->order->user->id . "- licencia de uso personal para ". $this->order->user->name." - ".$this->order->user->email;
-       
-        //$this->licencia = " © " . date("Y") . " Material didáctico MaCa. Licensed number w-". $this->order->id  . " to " . $this->order->user->name . " - " . $this->order->user->email;
     }
 
    
@@ -36,7 +34,6 @@ class AddLicense
         $pdf = new Fpdi();
         set_time_limit(0);
         $patch = "./storage/" . $this->product->document;
-        //$pdf->setSourceFile($patch);
 
         $pageCount = $pdf->setSourceFile($patch);
         for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {

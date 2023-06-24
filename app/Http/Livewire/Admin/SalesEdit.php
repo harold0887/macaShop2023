@@ -8,13 +8,19 @@ use App\Models\Product;
 use Livewire\Component;
 use App\Models\Membership;
 use App\Models\Order_Details;
+use Illuminate\Support\Facades\Request;
 
 class SalesEdit extends Component
 {
-    public $order;
-    public function mount($id)
+    public $order,$ids,$patch;
+    public function mount()
     {
-        $this->order = Order::find($id);
+        $patch = Request::fullUrl();
+        $this->patch = Request::fullUrl();
+        $div = explode("/", $patch);
+        $this->ids = $div[5];
+
+        $this->order = Order::findOrFail($this->ids);
     }
     public function render()
     {

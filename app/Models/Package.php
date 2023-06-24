@@ -16,4 +16,6 @@ class Package extends Model
          return $this->belongsToMany('App\Models\Product')
          ->orderBy('title','asc');
      }
+
+  
 }

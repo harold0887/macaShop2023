@@ -90,6 +90,22 @@ class IndexProducts extends Component
         }
     }
 
+    public function changeFolio($id, $status)
+    {
+        try {
+            Product::findOrFail($id)->update([
+                'folio' => $status == 0 ? true : false
+            ]);
+            $this->emit('success-auto-close', [
+                'message' => 'El cambio se realizo con éxito',
+            ]);
+        } catch (QueryException $e) {
+            $this->emit('error', [
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
     //sort
     public function setSort($field)
     {

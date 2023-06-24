@@ -22,12 +22,14 @@ class EnvioMaterial extends Mailable
     public $format;
     public $articles;
     public $document;
+    public $folio;
     public function __construct($product)
     {
         $this->subject = $product->title;
         $this->name = $product->name;
         $this->format = $product->format;
         $this->document = $product->document;
+        $this->folio = $product->folio;
     }
 
     /**
@@ -37,19 +39,20 @@ class EnvioMaterial extends Mailable
      */
     public function build()
     {
-        
-        if ($this->format == 'pdf') {
-       
+
+        //enviar PDF con folio
+        if ($this->format == 'pdf' && $this->folio == true) {
+
             return $this->markdown('email.resend')
                 ->attach('./pdf/newpdf.pdf', [
                     'as' => $this->name,
-                    'mime' => 'application/pdf',
+                    'mime' => 'application/pdf',    
                 ]);
         } else {
-          
-            //enviar power point
+
+            //enviar power point o pdf sin folio
             return $this->markdown('email.resend')
-                ->attach('storage/' . substr($this->document, 7, 250), [
+                ->attach('storage/' . $this->document, [
                     'as' => $this->name,
                 ]);
         }

@@ -56,7 +56,7 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                    <th style="cursor:pointer" wire:click="setSort('id')">
+                                        <th style="cursor:pointer" wire:click="setSort('id')">
                                             @if($sortField=='id')
                                             @if($sortDirection=='asc')
                                             <i class="fa-solid fa-arrow-down-a-z"></i>
@@ -137,7 +137,7 @@
                                 <tbody>
                                     @foreach ($orders as $order)
                                     <tr>
-                                    <td>{{ $order->id }}</td>
+                                        <td>{{ $order->id }}</td>
                                         <td>{{ $order->payment_id }}</td>
                                         <td>{{date_format($order->created_at, 'd-M-Y H:i')}}</td>
                                         <td>{{ $order->amount }}</td>
@@ -173,21 +173,29 @@
                                             {{ $order->user->email }}
                                         </td>
                                         <td class="td-actions">
-                                            <a class="btn btn-info btn-link" href="{{ route('sales.show', $order->id) }}">
-                                                <i class=" material-icons">visibility</i>
-                                            </a>
-                                            <a class="btn btn-success btn-link " href="{{ route('sales.edit', $order->id) }}">
-                                                <i class="material-icons">edit</i>
-                                            </a>
-                                            <a class="btn btn-success btn-link text-primary" wire:click="updateStatus({{ $order->payment_id }})">
-                                                <i class=" material-icons">autorenew</i>
-                                            </a>
-                                            <a class="btn btn-success btn-link text-secondary" wire:click="resendOrder({{ $order->id }})">
-                                                <i class=" material-icons">mail</i>
-                                            </a>
-                                            <a class="btn btn-success btn-link text-danger " wire:click="deleteOrder({{ $order->id }})">
-                                                <i class="material-icons ">close</i>
-                                            </a>
+                                            <div class="btn-group m-0 d-flex" style="box-shadow: none !important">
+                                                <a class="btn btn-info btn-link" href="{{ route('sales.show', $order->id) }}">
+                                                    <i class=" material-icons">visibility</i>
+                                                </a>
+                                                <a class="btn btn-success btn-link " href="{{ route('sales.edit', $order->id) }}">
+                                                    <i class="material-icons">edit</i>
+                                                </a>
+                                                <a class="btn btn-success btn-link text-primary" wire:click="updateStatus({{ $order->payment_id }})">
+                                                    <i class=" material-icons">autorenew</i>
+                                                </a>
+                                                <a class="btn btn-success btn-link text-secondary" wire:click="resendOrder({{ $order->id }})">
+                                                    <i class=" material-icons">mail</i>
+                                                </a>
+                                                <form method="post" action="{{ route('sales.destroy', $order->id) }} ">
+                                                    <input type="text" hidden value="{{$order->id}}">
+                                                    <button class=" btn btn-danger btn-link btn-icon btn-sm confirm-delete">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <i class="material-icons ">close</i>
+                                                    </button>
+                                                </form>
+                                            </div>
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -209,3 +217,4 @@
         </div>
     </div>
 </div>
+@include('includes.alert-error')

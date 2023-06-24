@@ -90,26 +90,7 @@ class IndexSales extends Component
         $this->reset(['search']);
     }
 
-    public function deleteOrder($id)
-    {
-
-        try {
-
-            Order::destroy($id);
-
-            $this->emit('deleteSuccess', $id);
-        } catch (QueryException $e) {
-
-            if ($e->getCode() == 23000) {
-                $messageError = 'La orden tene uno o mas productos asignados.';
-            } else {
-                $messageError = $e->getMessage();
-            }
-            $this->emit('error', [
-                'message' => 'Error al eliminar el registro - ' . $messageError,
-            ]);
-        }
-    }
+ 
 
     public function resendOrder($order)
     {

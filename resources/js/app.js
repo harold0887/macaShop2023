@@ -5,6 +5,7 @@ $(function () {
     //changeSearch();
     showFilters();
     loginModal();
+    confirmDelete();
 
     $(".b-close").on("click", function () {
         return $("#adCart").modal("hide");
@@ -245,6 +246,46 @@ function loginModal() {
         });
     });
 }
+
+function confirmDelete() {
+    $(".confirm-delete").on("click", function () {
+        var form = $(this).closest("form");
+
+        var title = form.find("input:text").val();
+        //var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+            title: "¿Realmente quiere eliminar " + title + "  ? ",
+            //type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si, eliminar!",
+        }).then((result) => {
+            if (result.value) {
+                $("#modal-spinner").modal("show");
+                form.submit();
+            } else {
+                console.log("no acepto");
+            }
+        });
+    });
+}
+
+
+/* de aqui en adelante es livewire*/ 
+
+
+
+
+
+
+
+
+
+
+
+
 
 Livewire.on("error", function ($message) {
     swal("¡error!", $message["message"], "error");

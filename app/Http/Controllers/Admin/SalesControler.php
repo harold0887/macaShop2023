@@ -52,12 +52,7 @@ class SalesControler extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $order = Order::findOrFail($id);
@@ -104,37 +99,26 @@ class SalesControler extends Controller
         return view('admin.sales.show', compact('purchases', 'packages', 'memberships'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
-        //
+        return view('admin.sales.edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        try {
+
+            Order::destroy($id);
+            return back()->with('success', 'La orden se elimino de manera correcta');
+        } catch (QueryException $e) {
+            if ($e->getCode() == 23000) {
+                $messageError = 'La orden tiene uno o más productos';
+            } else {
+                $messageError = $e->getMessage();
+            }
+            return back()->with('error', 'Error al eliminar el registro - ' . $messageError);
+        }
     }
 }

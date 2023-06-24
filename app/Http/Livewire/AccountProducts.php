@@ -43,7 +43,7 @@ class AccountProducts extends Component
             ->orderBy('products.title')
             ->get();
 
-     
+
         return view('livewire.account-products', compact('purchases'))
             ->extends('layouts.app', [
                 'title' => 'Mis productos',
@@ -70,7 +70,8 @@ class AccountProducts extends Component
         try {
             if ($orderId > 0) {
 
-                if ($this->product->format == 'pdf') {
+                //validar si es un PDF y que tenga folio activado
+                if ($this->product->format == 'pdf' && $this->product->folio == 1) {
 
                     //agregar licencia
                     $addLicense = new AddLicense($id, $this->order->id);
@@ -128,9 +129,10 @@ class AccountProducts extends Component
         try {
             if ($orderId > 0) {
 
-                //agregar licencia
 
-                if ($this->product->format == 'pdf') {
+
+                //validar si es un PDF y que tenga folio activado
+                if ($this->product->format == 'pdf' && $this->product->folio == 1) {
 
                     //agregar licencia
                     $addLicense = new AddLicense($id, $this->order->id);

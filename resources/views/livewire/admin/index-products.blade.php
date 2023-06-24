@@ -118,6 +118,18 @@
                                             @endif
                                             Precio final
                                         </th>
+                                        <th style="cursor:pointer" wire:click="setSort('folio')">
+                                            @if($sortField=='folio')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
+                                            Folio
+                                        </th>
                                         <th>Categoría</th>
                                         <th>Ventas</th>
                                         <th>Grado</b></th>
@@ -147,11 +159,18 @@
                                         <td>{{ $product->discount_percentage }}%</td>
                                         <td>{{ $product->price_with_discount }}</td>
                                         <td>
+                                            <div class="togglebutton" wire:click="changeFolio({{ $product->id }}, '{{ $product->folio }}')">
+                                                <label>
+                                                    <input type="checkbox" {{ $product->folio == 1 ? 'checked ' : '' }}>
+                                                    <span class="toggle"></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
 
                                             @foreach($product->categorias as $categoria)
                                             <span class="badge badge-info d-block my-1">
                                                 {{ $categoria->name }}
-
                                             </span>
                                             @endforeach
 
@@ -160,7 +179,7 @@
                                         </td>
                                         <td>
 
-                                        {{ $product->orders->count() }}
+                                            {{ $product->orders->count() }}
 
                                         </td>
                                         <td>{{ $product->grado->name }}</td>
@@ -177,25 +196,28 @@
                                         <td>
                                             <div class="togglebutton" wire:click="changeStatus({{ $product->id }}, '{{ $product->status }}')">
                                                 <label>
-                                                    <input type="checkbox" {{ $product->status == 1 ? 'checked ' : '' }} name="status">
+                                                    <input type="checkbox" {{ $product->status == 1 ? 'checked ' : '' }}>
                                                     <span class="toggle"></span>
                                                 </label>
                                             </div>
                                         </td>
                                         <td>{{ $product->descargas->count() }}</td>
                                         <td class="td-actions">
-                                            <a class="btn btn-warning btn-link " wire:click="downloadOriginalDocument({{ $product->id }})">
-                                                <i class="material-icons">download</i>
-                                            </a>
-                                            <a class="btn btn-info btn-link " href="{{ route('products.show', $product->id) }}" target="_blank">
-                                                <i class="material-icons">visibility</i>
-                                            </a>
-                                            <a class="btn btn-success btn-link " href="{{ route('products.edit', $product->id) }}" target="_blank">
-                                                <i class="material-icons">edit</i>
-                                            </a>
-                                            <a class="btn btn-success btn-link text-danger " onclick="confirmDelete('{{ $product->id }}', '{{ $product->title }}')">
-                                                <i class="material-icons ">close</i>
-                                            </a>
+                                            <div class="btn-group m-0 d-flex" style="box-shadow: none !important">
+                                                <a class="btn btn-warning btn-link " wire:click="downloadOriginalDocument({{ $product->id }})">
+                                                    <i class="material-icons">download</i>
+                                                </a>
+                                                <a class="btn btn-info btn-link " href="{{ route('products.show', $product->id) }}" target="_blank">
+                                                    <i class="material-icons">visibility</i>
+                                                </a>
+                                                <a class="btn btn-success btn-link " href="{{ route('products.edit', $product->id) }}" target="_blank">
+                                                    <i class="material-icons">edit</i>
+                                                </a>
+                                                <a class="btn btn-success btn-link text-danger " onclick="confirmDelete('{{ $product->id }}', '{{ $product->title }}')">
+                                                    <i class="material-icons ">close</i>
+                                                </a>
+                                            </div>
+
                                         </td>
                                     </tr>
                                     @endforeach

@@ -99,8 +99,8 @@ Route::group(['middleware' => ['role:admin']], function () {
   Route::resource('dashboard/degrees', GradeController::class)->except('show');
   Route::resource('dashboard/users', UsersController::class)->only(['index', 'update', 'edit']);
   Route::get('dashboard/comments', IndexComments::class)->name('comments.index');
-  Route::resource('dashboard/sales', SalesControler::class)->except(['delete']);
-  Route::get('dashboard/order/edit/{id}', SalesEdit::class)->name('sales.edit');
+  Route::resource('dashboard/sales', SalesControler::class);
+ 
 });
 
 

@@ -71,7 +71,8 @@ class AccountShowPackages extends Component
         try {
             if ($orderId > 0) {
 
-                if ($this->product->format == 'pdf') {
+                //validar si es un PDF y que tenga folio activado
+                if ($this->product->format == 'pdf' && $this->product->folio == 1) {
 
                     //agregar licencia
                     $addLicense = new AddLicense($id, $this->order->id);
@@ -111,7 +112,7 @@ class AccountShowPackages extends Component
         }
     }
 
-    
+
     public function sendEmail($id)
     {
         $this->product = Product::findOrFail($id);
@@ -119,18 +120,17 @@ class AccountShowPackages extends Component
 
 
         $orderId = Order_Details::join('orders', 'order_details.order_id', '=', 'orders.id')
-        ->join('packages', 'order_details.package_id', '=', 'packages.id')
-        ->where('orders.customer_id', Auth::user()->id)
-        ->where('order_details.package_id', $this->package->id)
-        ->where('orders.status', 'approved')
-        ->get()
-        ->count();
+            ->join('packages', 'order_details.package_id', '=', 'packages.id')
+            ->where('orders.customer_id', Auth::user()->id)
+            ->where('order_details.package_id', $this->package->id)
+            ->where('orders.status', 'approved')
+            ->get()
+            ->count();
         try {
             if ($orderId > 0) {
 
-                //agregar licencia
-
-                if ($this->product->format == 'pdf') {
+                //validar si es un PDF y que tenga folio activado
+                if ($this->product->format == 'pdf' && $this->product->folio == 1) {
 
                     //agregar licencia
                     $addLicense = new AddLicense($id, $this->order->id);
@@ -151,7 +151,7 @@ class AccountShowPackages extends Component
                     $this->emit('sendSuccessHtml', [
                         'note' => 'Se han enviado correctamente a: ',
                         'product' => $this->product->title,
-                        'email' =>Auth::user()->email
+                        'email' => Auth::user()->email
                     ]);
                 }
             } else {
@@ -181,6 +181,4 @@ class AccountShowPackages extends Component
             ]);
         }
     }
-
-  
 }

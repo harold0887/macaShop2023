@@ -90,19 +90,6 @@
                             <span class="h4 text-muted">Visite la <a href=" {{route('membership')}} ">tienda</a> para comprar su primera membresía. <span>
                         </div>
 
-                        <div class="col-12">
-                            <!-- Tabs navs -->
-                            <ul class="nav nav-pills border-bottom justify-content-center mb-3" id="ex-with-icons" role="tablist">
-
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href=" {{route('membership')}}" style="position:relative"> <i class="material-icons">card_membership</i>
-                                        Membresía vip
-
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- Tabs navs -->
-                        </div>
                         @endif
                     </div>
                 </div>

@@ -66,21 +66,7 @@
                         <div class="col-12">
                             <span class="h4 text-muted">Visite la <a href=" {{route('paquete')}} ">tienda</a> para comprar su primer paquete de materiales didácticos. <span>
                         </div>
-                        <div class="col-12">
-                            <!-- Tabs navs -->
-                            <ul class="nav nav-pills border-bottom justify-content-center mb-3" id="ex-with-icons" role="tablist">
-
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" href=" {{route('paquete')}}" style="position:relative"><i class="material-icons">library_add</i>Paquetes
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info mt-1">
-                                            Nuevo
-                                            <span class="visually-hidden">unread messages</span>
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- Tabs navs -->
-                        </div>
+                      
                         @endif
                     </div>
                 </div>

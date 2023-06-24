@@ -18,6 +18,7 @@
                     <div class="card-header card-header-icon card-header-rose">
 
                         <h4 class="card-title h3"><strong>Número de compra: {{ $order->id }}</strong> </h4>
+                        <h4></h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -55,7 +56,7 @@
                                     <thead>
                                         <tr>
                                             <th><b>Producto</b></th>
-                                            <th class="text-center"><b>Acciones</b></th>
+                                            <th class="pl-5"><b>Acciones</b></th>
 
 
                                         </tr>
@@ -74,39 +75,40 @@
                                                 <br><small class="italic text-muted">{{ $purchase->price }} MXN </small>
                                             </td>
 
-                                            @if ($order->status == 'approved')
-                                            <td class="px-5">
-                                                <div class="row justify-content-center">
-                                                    <div class="col-12 text-center">
-                                                        <button class="btn btn-primary show-spinner" wire:click="finalDownload({{ $purchase->id }},{{ $purchase->order_id }})" wire:loading.attr="disabled">
-                                                            <i class="material-icons" wire:loading.remove>download</i>
-                                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" disabled wire:loading></span>
-                                                            Descargar
+
+                                            <td>
+                                                <div class="col-12   align-self-center">
+                                                    @if ($order->status == 'approved')
+
+                                                    <div wire:loading.remove>
+                                                        <button class="btn btn-outline-info btn-round" wire:click="finalDownload({{ $purchase->id }},{{ $purchase->order_id }})" wire:loading.attr="disabled">
+                                                            <i class="material-icons">download</i> Descargar
                                                         </button>
-                                                    </div>
-                                                    <div class="col-12 text-center ">
-                                                        <span>o</span>
-                                                    </div>
-                                                    <div class="col-12 text-center">
-                                                        <button class="btn  btn-primary btn-link show-spinner" wire:click="sendEmail({{ $purchase->id }},{{ $purchase->order_id }})">
-                                                            <i class="material-icons" wire:loading.remove>email</i>
-                                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" disabled wire:loading></span>
+                                                        <button class="btn btn-outline-primary btn-round btn-link " wire:click="sendEmail({{ $purchase->id }},{{ $purchase->order_id }})">
                                                             Enviar a email
                                                         </button>
+
                                                     </div>
+                                                    <button class="btn btn-outline-primary btn-round " disabled wire:loading wire:target="sendEmail">
+                                                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                        enviando...
+                                                    </button>
+
+                                                    <button class="btn btn-outline-info btn-round " disabled wire:loading wire:target="finalDownload">
+                                                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                        Descargando...
+                                                    </button>
+                                                    @else
+
+                                                    <button class="btn btn-outline-primary btn-round" disabled>
+                                                        <i class=" material-icons">file_download</i>
+                                                        No disponible
+                                                    </button>
+                                                    @endif
                                                 </div>
                                             </td>
 
-                                            @else
-                                            <td class="text-center">
-                                                <button class="btn text-primary  btn-primary btn-outline" disabled>
-                                                    <i class=" material-icons">file_download</i>
-                                                    No disponible
-                                                </button>
 
-                                            </td>
-
-                                            @endif
 
                                         </tr>
                                         @endforeach
@@ -123,30 +125,19 @@
                                                 <br><small>Membresía </small>
                                                 <br><small class="italic text-muted">{{ $package->price }} MXN </small>
                                             </td>
-
-
-                                            @if ($order->status == 'approved')
-
-                                            <td class="text-center">
-
-                                                <a href="{{ route('customer.packages-show',['order' => $order->id,'id'=>$package->id]) }}" class="btn  btn-primary btn-md">
-                                                    Ver materiales
-                                                </a>
-
+                                            <td>
+                                                <div class="col-12   align-self-center">
+                                                    @if ($order->status == 'approved')
+                                                    <a href="{{ route('customer.packages-show',['order' => $order->id,'id'=>$package->id]) }}" class="btn btn-outline-primary btn-round ">
+                                                        Ver materiales
+                                                    </a>
+                                                    @else
+                                                    <button class="btn btn-outline-primary btn-round" disabled>
+                                                        <i class="material-icons">visibility_off</i> Ver materiales
+                                                    </button>
+                                                    @endif
+                                                </div>
                                             </td>
-
-                                            @else
-                                            <td class="text-center">
-                                                <button class="btn text-primary  btn-primary btn-outline" disabled>
-
-                                                    <i class="material-icons">visibility_off</i> Ver materiales
-
-                                                </button>
-                                            </td>
-
-                                            @endif
-
-
                                         </tr>
                                         @endforeach
                                         @endif
@@ -165,34 +156,26 @@
                                             </td>
 
 
-                                            @if ($order->status == 'approved')
-                                            @if ($membership->expiration > now())
-                                            <td class="text-center">
-                                                <a href="{{ route('customer.membership-show', ['order' => $order->id,'id'=>$membership->id]) }}" class="btn  btn-primary btn-md">
-                                                    Ver materiales
-                                                </a>
-                                            </td>
-                                            @else
-                                            <td class="text-center">
-                                                <button class="btn  btn-sm  btn-primary btn-outline" disabled>
-                                                    <a href="" class="nav-link text-primary">
-                                                        Tu membresia ha expirado
+
+                                            <td>
+                                                <div class="col-12 ">
+                                                    @if ($order->status == 'approved')
+                                                    @if ($membership->expiration > now())
+                                                    <a href="{{ route('customer.membership-show', ['order' => $order->id,'id'=>$membership->id]) }}" class="btn btn-outline-primary btn-round">
+                                                        Ver materiales
                                                     </a>
-                                                </button>
+                                                    @else
+                                                    <button class="btn btn-outline-danger btn-round" disabled>
+                                                        <i class="material-icons">visibility_off</i> La membresía ha expirado
+                                                    </button>
+                                                    @endif
+                                                    @else
+                                                    <button class="btn btn-outline-primary btn-round" disabled>
+                                                        <i class="material-icons">visibility_off</i> Ver materiales
+                                                    </button>
+                                                    @endif
+                                                </div>
                                             </td>
-                                            @endif
-                                            @else
-                                            <td class="text-center">
-                                                <button class="btn text-primary  btn-primary btn-outline" disabled>
-
-                                                    <i class="material-icons">visibility_off</i> Ver materiales
-
-                                                </button>
-                                            </td>
-
-                                            @endif
-
-
                                         </tr>
                                         @endforeach
                                         @endif

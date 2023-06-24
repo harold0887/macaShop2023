@@ -117,7 +117,8 @@ class AccountShowOrder extends Component
         try {
             if ($orderId > 0) {
 
-                if ($this->product->format == 'pdf') {
+                //validar si es un PDF y que tenga folio activado
+                if ($this->product->format == 'pdf' && $this->product->folio == 1) {
 
                     //agregar licencia
                     $addLicense = new AddLicense($id, $this->order->id);
@@ -174,9 +175,8 @@ class AccountShowOrder extends Component
         try {
             if ($orderId > 0) {
 
-                //agregar licencia
-
-                if ($this->product->format == 'pdf') {
+                //validar si es un PDF y que tenga folio activado
+                if ($this->product->format == 'pdf' && $this->product->folio == 1) {
 
                     //agregar licencia
                     $addLicense = new AddLicense($id, $this->order->id);
@@ -191,13 +191,14 @@ class AccountShowOrder extends Component
                             'email' => Auth::user()->email
                         ]);
                     }
+                    
                 } else {
                     $correo = new EnvioMaterial($this->product);
                     Mail::to(Auth::user()->email)->send($correo);
                     $this->emit('sendSuccessHtml', [
                         'note' => 'Se han enviado correctamente a: ',
                         'product' => $this->product->title,
-                        'email' =>Auth::user()->email
+                        'email' => Auth::user()->email
                     ]);
                 }
             } else {

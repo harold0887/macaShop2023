@@ -29,8 +29,8 @@
                                 <thead>
                                     <tr>
                                         <th><b>Producto</b></th>
-                                        <th class="text-center" ><b>Acciones</b></th>
-                           
+                                        <th class="pl-5"><b>Acciones</b></th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,32 +46,31 @@
                                             <br><small>Archivo en formato {{ $purchase->format }} </small>
                                             <br><small class="italic text-muted">{{ $purchase->price }} MXN </small>
                                         </td>
-                                        <td class="px-5">
-                                            <div class="row justify-content-center">
-                                                <div class="col-12 text-center">
-                                                    <button class="btn btn-primary show-spinner" wire:click="finalDownload({{ $purchase->id }},{{ $purchase->order_id }})" wire:loading.attr="disabled">
-                                                        <i class="material-icons" wire:loading.remove>download</i>
-                                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" disabled wire:loading></span>
-                                                        Descargar
+                                        <td>
+                                            <div class="col-12   align-self-center">
+                                                <div wire:loading.remove>
+                                                    <button class="btn btn-outline-info btn-round" wire:click="finalDownload({{ $purchase->id }},{{ $purchase->order_id }})" wire:loading.attr="disabled">
+                                                        <i class="material-icons">download</i> Descargar
                                                     </button>
-                                                </div>
-                                                <div class="col-12 text-center ">
-                                                    <span>o</span>
-                                                </div>
-                                                <div class="col-12 text-center">
-                                                    <button class="btn  btn-primary btn-link show-spinner" wire:click="sendEmail({{ $purchase->id }},{{ $purchase->order_id }})">
-                                                        <i class="material-icons" wire:loading.remove>email</i>
-                                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" disabled wire:loading></span>
+
+                                                    <button class="btn btn-outline-primary btn-round btn-link " wire:click="sendEmail({{ $purchase->id }},{{ $purchase->order_id }})">
+
                                                         Enviar a email
                                                     </button>
+
                                                 </div>
+                                                <button class="btn btn-outline-primary btn-round " disabled wire:loading wire:target="sendEmail">
+                                                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                    enviando...
+                                                </button>
+
+                                                <button class="btn btn-outline-info btn-round " disabled wire:loading wire:target="finalDownload">
+                                                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                    Descargando...
+                                                </button>
                                             </div>
-
-
-
-
                                         </td>
-                                      
+
                                     </tr>
                                     @endforeach
 

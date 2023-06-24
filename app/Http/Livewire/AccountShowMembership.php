@@ -75,7 +75,8 @@ class AccountShowMembership extends Component
         try {
             if ($orderId > 0) {
 
-                if ($this->product->format == 'pdf') {
+                //validar si es un PDF y que tenga folio activado
+                if ($this->product->format == 'pdf' && $this->product->folio == 1) {
 
                     //agregar licencia
                     $addLicense = new AddLicense($id, $this->order->id);
@@ -130,12 +131,15 @@ class AccountShowMembership extends Component
             ->where('orders.status', 'approved')
             ->get()
             ->count();
+
+
         try {
+
             if ($orderId > 0) {
 
-                //agregar licencia
 
-                if ($this->product->format == 'pdf') {
+                //validar si es un PDF y que tenga folio activado
+                if ($this->product->format == 'pdf' && $this->product->folio == 1) {
 
                     //agregar licencia
                     $addLicense = new AddLicense($id, $this->order->id);
@@ -188,12 +192,11 @@ class AccountShowMembership extends Component
     }
 
 
-    public function setProduct($id){
+    public function setProduct($id)
+    {
         $this->reset('productModal');
-        $this->productModal= Product::findOrFail($id);
- 
+        $this->productModal = Product::findOrFail($id);
+
         $this->emit('showAcordeon');
     }
-
-   
 }
