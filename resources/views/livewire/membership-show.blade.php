@@ -200,7 +200,7 @@
                     </div>
                     <div class="col-12 mt-2 border-top">
                         <h2 class="my-0 title text-center text-primary text-lg sm:text-2x1 md:text-2xl  lg:text-2xl">
-                            Materiales didácticos incluidos en la membresía {{ $membership->title }}
+                        Lista de materiales didácticos incluidos en la membresía {{ $membership->title }}
                         </h2>
                     </div>
                     <div class="col-12">
