@@ -182,8 +182,8 @@
 
                     </div>
                     <div class="card-footer justify-content-center">
-                        <a href=" {{route('membership.show',$membership->id)}} " class="btn   btn-link text-info">
-                            Más informacion
+                        <a href=" {{route('membership.show',$membership->id)}} " class="btn   btn-link text-primary animate__animated  animate__flash animate__repeat-3	 animate__slow ">
+                            Ver materiales didácticos incluidos
                         </a>
                     </div>
                 </div>

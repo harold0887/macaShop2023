@@ -1,11 +1,11 @@
-<div class="content pt-0">
+<div class="content pt-0 px-0">
     @include('includes.spinner-livewire')
     <div class="container-fluid">
 
-        <div class="row ">
+        <div class="row">
 
 
-            <div class="col-12">
+            <div class="col-12  px-1">
                 <div class="card">
                     <div class="card-header card-header-primary card-header-icon">
                         <div class="card-icon">

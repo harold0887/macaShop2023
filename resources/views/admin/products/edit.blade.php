@@ -107,31 +107,6 @@
                                     @enderror
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             <div class="form-row mt-lg-5">
                                 <div class="form-group col-md-12">
                                     <label for="information">Informacion</label>

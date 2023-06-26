@@ -1,4 +1,4 @@
-<div class="content pt-0">
+<div class="content pt-0 px-0">
     @include('includes.spinner-livewire')
     <div class="container-fluid">
 
@@ -7,7 +7,7 @@
 
 
 
-            <div class="col-12 ">
+            <div class="col-12 px-1">
                 <div class="card">
                     <div class="card-header card-header-primary card-header-icon">
                         <div class="card-icon">
@@ -152,7 +152,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($products as $product)
-                                    <tr class="{{ $product->percentage > 0 ? 'text-danger' : '' }}">
+                                    <tr class="{{ $product->percentage > 0 ? 'text-danger' : '' }} {{ Storage::exists('public/'.$product->document) ||Storage::exists('public/'.$product->itemMain) ? '' : 'table-danger' }}  ">
                                         <td>{{ $product->id }}</td>
                                         <td>{{ $product->title }}</td>
                                         <td>{{ $product->price }}</td>
