@@ -83,8 +83,8 @@ class FreeRender extends Component
                         'message' => "<span class='text-sm'><b>Importante !</b> - Si tiene problemas con la descarga, se recomienda descargar desde una computadora.</span>"
                     ]);
                     //return Storage::download('public/' . $product->document, $product->name);
-                    $file = "./storage/" . $this->product->document;
-                    return response()->download($file, $this->product->title . "." . $this->product->format);
+                    $file = "./storage/" . $product->document;
+                    return response()->download($file, $product->title . "." . $product->format);
                 } catch (\Throwable $th) {
                     $this->emit('error', [
                         'message' => 'Error al descargar el documento - ' . $th->getMessage(),
