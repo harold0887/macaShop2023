@@ -146,8 +146,8 @@ class ProductsController extends Controller
         $newVideo = request()->file('video');
 
         $price = number_format((float)request('price'), 2, '.', '');
-        $percentage = request('discount');
-        $price_with_discount = $price - (($price / 100) * $percentage);
+      
+        
 
         if (isset($newItemMain)) {
             File::delete(storage_path("/app/public/{$product->itemMain}"));
@@ -183,7 +183,7 @@ class ProductsController extends Controller
             Product::findOrFail($id)->update([
                 'title' => request('title'),
                 'price' => $price,
-                'price_with_discount' => $price_with_discount,
+                'price_with_discount' => request('discount'),
                 'information' => request('information'),
                 'grade' => request('grade'),
                 'itemMain' => $itemMain,
@@ -192,7 +192,7 @@ class ProductsController extends Controller
                 'name' => $name,
                 'slug' => Str::slug(request('title'), '-'),
                 'format' => $ext,
-                'discount_percentage' => $percentage,
+            
                 'fecha_membresia' => request('disponible'),
             ]);
 

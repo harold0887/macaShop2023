@@ -35,9 +35,10 @@
                                     <small class="text-danger"> {{ $message }} </small>
                                     @enderror
                                 </div>
+                               
                                 <div class="form-group col-md-3">
-                                    <label for="discount">Descuento (porcentaje %)</label>
-                                    <input type="number" class="form-control" name="discount" value="{{ old('discount') ?: $product->discount_percentage }}" step="0.01">
+                                    <label for="discount">Precio con descuento</label>
+                                    <input type="number" class="form-control" name="discount" value="{{ $product->price_with_discount }}{{ old('discount') }}" step="0.01">
                                     @error('discount')
                                     <small class="text-danger"> {{ $message }} </small>
                                     @enderror

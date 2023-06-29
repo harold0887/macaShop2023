@@ -200,7 +200,7 @@
                     </div>
                     <div class="col-12 mt-2 border-top">
                         <h2 class="my-0 title text-center text-primary text-lg sm:text-2x1 md:text-2xl  lg:text-2xl">
-                        Lista de materiales didácticos incluidos en la membresía {{ $membership->title }}
+                            Lista de materiales didácticos incluidos en la membresía {{ $membership->title }}
                         </h2>
                     </div>
                     <div class="col-12">
@@ -605,48 +605,48 @@
                                 <!-- Card body -->
                                 <div id="collapse16" class="collapse" role="tabpanel" aria-labelledby="heading16" data-parent="#accordionEx2">
                                     <div class="card-body rgba-teal-strong white-text">
-                                    <div class="card-body rgba-teal-strong white-text">
-                                        <div class="table-responsive px-0">
-                                            <table class="table table-hover table-shopping">
-                                                <thead>
-                                                    <tr>
-                                                        <th><b>Producto</b></th>
-                                                        <th><b>Disponible</b></th>
+                                        <div class="card-body rgba-teal-strong white-text">
+                                            <div class="table-responsive px-0">
+                                                <table class="table table-hover table-shopping">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><b>Producto</b></th>
+                                                            <th><b>Disponible</b></th>
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($membership->products as $purchase)
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($membership->products as $purchase)
 
-                                                    @if(Str::substr($purchase->fecha_membresia, 0,7) =="2024-02" )
-                                                    <tr>
-                                                        <td>
-                                                            <div class="img-container ">
-                                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
-                                                                <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                        @if(Str::substr($purchase->fecha_membresia, 0,7) =="2024-02" )
+                                                        <tr>
+                                                            <td>
+                                                                <div class="img-container ">
+                                                                    @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
+                                                                    <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                                    @endif
+                                                                </div>
+                                                                <span class="h5"><small>{{ $purchase->title }} </small></span>
+                                                                <br><small>Archivo en formato {{ $purchase->format }} </small>
+                                                            </td>
+                                                            <td>
+                                                                @if(now() >= $purchase->fecha_membresia)
+                                                                <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
+                                                                    Descarga inmediata
+                                                                </button>
+                                                                @else
+                                                                <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
+                                                                    {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
+                                                                </button>
                                                                 @endif
-                                                            </div>
-                                                            <span class="h5"><small>{{ $purchase->title }} </small></span>
-                                                            <br><small>Archivo en formato {{ $purchase->format }} </small>
-                                                        </td>
-                                                        <td>
-                                                            @if(now() >= $purchase->fecha_membresia)
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                Descarga inmediata
-                                                            </button>
-                                                            @else
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
-                                                            </button>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                    @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                                            </td>
+                                                        </tr>
+                                                        @endif
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -669,48 +669,48 @@
                                 <!-- Card body -->
                                 <div id="collapse17" class="collapse" role="tabpanel" aria-labelledby="heading17" data-parent="#accordionEx2">
                                     <div class="card-body rgba-teal-strong white-text">
-                                    <div class="card-body rgba-teal-strong white-text">
-                                        <div class="table-responsive px-0">
-                                            <table class="table table-hover table-shopping">
-                                                <thead>
-                                                    <tr>
-                                                        <th><b>Producto</b></th>
-                                                        <th><b>Disponible</b></th>
+                                        <div class="card-body rgba-teal-strong white-text">
+                                            <div class="table-responsive px-0">
+                                                <table class="table table-hover table-shopping">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><b>Producto</b></th>
+                                                            <th><b>Disponible</b></th>
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($membership->products as $purchase)
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($membership->products as $purchase)
 
-                                                    @if(Str::substr($purchase->fecha_membresia, 0,7) =="2024-03" )
-                                                    <tr>
-                                                        <td>
-                                                            <div class="img-container ">
-                                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
-                                                                <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                        @if(Str::substr($purchase->fecha_membresia, 0,7) =="2024-03" )
+                                                        <tr>
+                                                            <td>
+                                                                <div class="img-container ">
+                                                                    @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
+                                                                    <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                                    @endif
+                                                                </div>
+                                                                <span class="h5"><small>{{ $purchase->title }} </small></span>
+                                                                <br><small>Archivo en formato {{ $purchase->format }} </small>
+                                                            </td>
+                                                            <td>
+                                                                @if(now() >= $purchase->fecha_membresia)
+                                                                <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
+                                                                    Descarga inmediata
+                                                                </button>
+                                                                @else
+                                                                <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
+                                                                    {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
+                                                                </button>
                                                                 @endif
-                                                            </div>
-                                                            <span class="h5"><small>{{ $purchase->title }} </small></span>
-                                                            <br><small>Archivo en formato {{ $purchase->format }} </small>
-                                                        </td>
-                                                        <td>
-                                                            @if(now() >= $purchase->fecha_membresia)
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                Descarga inmediata
-                                                            </button>
-                                                            @else
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
-                                                            </button>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                    @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                                            </td>
+                                                        </tr>
+                                                        @endif
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -734,48 +734,48 @@
                                 <!-- Card body -->
                                 <div id="collapse18" class="collapse" role="tabpanel" aria-labelledby="heading18" data-parent="#accordionEx2">
                                     <div class="card-body rgba-teal-strong white-text">
-                                    <div class="card-body rgba-teal-strong white-text">
-                                        <div class="table-responsive px-0">
-                                            <table class="table table-hover table-shopping">
-                                                <thead>
-                                                    <tr>
-                                                        <th><b>Producto</b></th>
-                                                        <th><b>Disponible</b></th>
+                                        <div class="card-body rgba-teal-strong white-text">
+                                            <div class="table-responsive px-0">
+                                                <table class="table table-hover table-shopping">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><b>Producto</b></th>
+                                                            <th><b>Disponible</b></th>
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($membership->products as $purchase)
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($membership->products as $purchase)
 
-                                                    @if(Str::substr($purchase->fecha_membresia, 0,7) =="2024-04" )
-                                                    <tr>
-                                                        <td>
-                                                            <div class="img-container ">
-                                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
-                                                                <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                        @if(Str::substr($purchase->fecha_membresia, 0,7) =="2024-04" )
+                                                        <tr>
+                                                            <td>
+                                                                <div class="img-container ">
+                                                                    @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
+                                                                    <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                                    @endif
+                                                                </div>
+                                                                <span class="h5"><small>{{ $purchase->title }} </small></span>
+                                                                <br><small>Archivo en formato {{ $purchase->format }} </small>
+                                                            </td>
+                                                            <td>
+                                                                @if(now() >= $purchase->fecha_membresia)
+                                                                <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
+                                                                    Descarga inmediata
+                                                                </button>
+                                                                @else
+                                                                <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
+                                                                    {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
+                                                                </button>
                                                                 @endif
-                                                            </div>
-                                                            <span class="h5"><small>{{ $purchase->title }} </small></span>
-                                                            <br><small>Archivo en formato {{ $purchase->format }} </small>
-                                                        </td>
-                                                        <td>
-                                                            @if(now() >= $purchase->fecha_membresia)
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                Descarga inmediata
-                                                            </button>
-                                                            @else
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
-                                                            </button>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                    @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                                            </td>
+                                                        </tr>
+                                                        @endif
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -799,48 +799,48 @@
                                 <!-- Card body -->
                                 <div id="collapse19" class="collapse" role="tabpanel" aria-labelledby="heading19" data-parent="#accordionEx2">
                                     <div class="card-body rgba-teal-strong white-text">
-                                    <div class="card-body rgba-teal-strong white-text">
-                                        <div class="table-responsive px-0">
-                                            <table class="table table-hover table-shopping">
-                                                <thead>
-                                                    <tr>
-                                                        <th><b>Producto</b></th>
-                                                        <th><b>Disponible</b></th>
+                                        <div class="card-body rgba-teal-strong white-text">
+                                            <div class="table-responsive px-0">
+                                                <table class="table table-hover table-shopping">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><b>Producto</b></th>
+                                                            <th><b>Disponible</b></th>
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($membership->products as $purchase)
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($membership->products as $purchase)
 
-                                                    @if(Str::substr($purchase->fecha_membresia, 0,7) =="2024-05" )
-                                                    <tr>
-                                                        <td>
-                                                            <div class="img-container ">
-                                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
-                                                                <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                        @if(Str::substr($purchase->fecha_membresia, 0,7) =="2024-05" )
+                                                        <tr>
+                                                            <td>
+                                                                <div class="img-container ">
+                                                                    @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
+                                                                    <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                                    @endif
+                                                                </div>
+                                                                <span class="h5"><small>{{ $purchase->title }} </small></span>
+                                                                <br><small>Archivo en formato {{ $purchase->format }} </small>
+                                                            </td>
+                                                            <td>
+                                                                @if(now() >= $purchase->fecha_membresia)
+                                                                <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
+                                                                    Descarga inmediata
+                                                                </button>
+                                                                @else
+                                                                <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
+                                                                    {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
+                                                                </button>
                                                                 @endif
-                                                            </div>
-                                                            <span class="h5"><small>{{ $purchase->title }} </small></span>
-                                                            <br><small>Archivo en formato {{ $purchase->format }} </small>
-                                                        </td>
-                                                        <td>
-                                                            @if(now() >= $purchase->fecha_membresia)
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                Descarga inmediata
-                                                            </button>
-                                                            @else
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
-                                                            </button>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                    @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                                            </td>
+                                                        </tr>
+                                                        @endif
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -863,48 +863,48 @@
                                 <!-- Card body -->
                                 <div id="collapse21" class="collapse" role="tabpanel" aria-labelledby="heading21" data-parent="#accordionEx2">
                                     <div class="card-body rgba-teal-strong white-text">
-                                    <div class="card-body rgba-teal-strong white-text">
-                                        <div class="table-responsive px-0">
-                                            <table class="table table-hover table-shopping">
-                                                <thead>
-                                                    <tr>
-                                                        <th><b>Producto</b></th>
-                                                        <th><b>Disponible</b></th>
+                                        <div class="card-body rgba-teal-strong white-text">
+                                            <div class="table-responsive px-0">
+                                                <table class="table table-hover table-shopping">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><b>Producto</b></th>
+                                                            <th><b>Disponible</b></th>
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($membership->products as $purchase)
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($membership->products as $purchase)
 
-                                                    @if(Str::substr($purchase->fecha_membresia, 0,7) =="2024-06" )
-                                                    <tr>
-                                                        <td>
-                                                            <div class="img-container ">
-                                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
-                                                                <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                        @if(Str::substr($purchase->fecha_membresia, 0,7) =="2024-06" )
+                                                        <tr>
+                                                            <td>
+                                                                <div class="img-container ">
+                                                                    @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
+                                                                    <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                                    @endif
+                                                                </div>
+                                                                <span class="h5"><small>{{ $purchase->title }} </small></span>
+                                                                <br><small>Archivo en formato {{ $purchase->format }} </small>
+                                                            </td>
+                                                            <td>
+                                                                @if(now() >= $purchase->fecha_membresia)
+                                                                <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
+                                                                    Descarga inmediata
+                                                                </button>
+                                                                @else
+                                                                <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
+                                                                    {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
+                                                                </button>
                                                                 @endif
-                                                            </div>
-                                                            <span class="h5"><small>{{ $purchase->title }} </small></span>
-                                                            <br><small>Archivo en formato {{ $purchase->format }} </small>
-                                                        </td>
-                                                        <td>
-                                                            @if(now() >= $purchase->fecha_membresia)
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                Descarga inmediata
-                                                            </button>
-                                                            @else
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
-                                                            </button>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                    @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                                            </td>
+                                                        </tr>
+                                                        @endif
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                             </div>

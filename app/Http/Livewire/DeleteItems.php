@@ -15,6 +15,8 @@ class DeleteItems extends Component
 
     public $patch, $ids;
 
+ 
+
     public function mount()
     {
         $patch = Request::fullUrl();
