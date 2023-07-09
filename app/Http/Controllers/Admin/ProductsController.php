@@ -139,6 +139,7 @@ class ProductsController extends Controller
 
         ]);
 
+        //dd($request);
 
         $product = Product::findOrFail($id);
         $newDocument = request()->file('document');

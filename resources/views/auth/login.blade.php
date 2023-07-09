@@ -17,10 +17,10 @@
                 @csrf
 
                 <div class="card card-login card-primary card-hidden mb-3 border border-primary">
-                <div class="card-header card-header-primary text-center flex justify-center items-center">
-                            <i class="material-icons px-2">fingerprint</i>
-                            <h4 class="card-title pt-2 "><strong>Ingresa con tu cuenta</strong></h4>
-                        </div>
+                    <div class="card-header card-header-primary text-center flex justify-center items-center">
+                        <i class="material-icons px-2 my-0 py-0">fingerprint</i>
+                        <h4 class="card-title my-0 px-0"><strong>Ingresa con tu cuenta</strong></h4>
+                    </div>
 
                     <div class="card-body">
                         <span class="form-group  bmd-form-group email-error {{ $errors->has('email') ? ' has-danger' : '' }}">
@@ -59,10 +59,10 @@
                             INGRESAR
                         </button>
                     </div>
-                    <div class="card-footer justify-content-center">
-                        <p class="card-description ">No tienes cuenta todavia? </p>
+                    <div class="card-footer justify-content-center my-0 py-0">
+                        <p class="card-description p-0 my-0">No tiene cuenta todavia? </p>
                     </div>
-                    <div class="card-footer justify-content-center">
+                    <div class="card-footer justify-content-center my-0 py-0">
                         <a href="{{ route('register') }}" class="nav-link  text-primary">
                             <i class="material-icons">person_add</i> REGISTRATE
                         </a>

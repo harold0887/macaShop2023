@@ -112,7 +112,15 @@
                                     @endif
                                 </div>
                                 <div class="text-center mb-3">
-                                    <button type="submit" class="btn btn-primary btn-round mt-4">{{ __('Get Started') }}</button>
+                                    <button type="submit" class="btn btn-primary btn-round mt-4 btn-lg">{{ __('Get Started') }}</button>
+                                </div>
+                                <div class="card-footer justify-content-center  my-0 py-0">
+                                    <p class="card-description p-0 my-0">Ya tiene una cuenta? </p>
+                                </div>
+                                <div class="card-footer justify-content-center  my-0 py-0">
+                                    <a href="{{ route('login') }}" class="nav-link  text-primary">
+                                        <i class="material-icons">fingerprint</i> INGRESAR
+                                    </a>
                                 </div>
                             </form>
                         </div>
