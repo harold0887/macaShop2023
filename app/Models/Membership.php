@@ -15,6 +15,6 @@ class Membership extends Model
     {
         return $this->belongsToMany('App\Models\Product')
         ->whereNotIn('title', ['newsDesktop','newsMobile'])
-        ->orderBy('title','asc');
+        ->orderBy('created_at','asc');
     }
 }
