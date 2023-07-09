@@ -9,9 +9,16 @@
             <div class="accordion-body px-2">
 
                 <div class="d-flex ">
-             
+
                     <span class="text-sm lh-lg">{{ $product->information }} </span>
                 </div>
+                @foreach($product->membresias as $membresia)
+                <a href="{{route('membership.show',$membresia->id)}}">
+                    <span class="badge badge-sm badge-info m small px-1 mx-0" style="cursor:pointer">
+                        Gratis en la membresía {{$membresia->title}}
+                    </span>
+                </a>
+                @endforeach
 
             </div>
         </div>
@@ -24,7 +31,7 @@
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-mdb-parent="#accordionExample">
             <div class="accordion-body px-2">
-            <div class="d-flex  mt-2 ">
+                <div class="d-flex  mt-2 ">
                     <i class="material-icons my-auto mr-2 text-xs">done</i>
                     <span class="text-xs">Descarga inmediata. </span>
                 </div>

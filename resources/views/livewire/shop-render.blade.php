@@ -1,5 +1,5 @@
 <div class="container-fluid  p-0 ">
-  
+
     @include('includes.spinner-livewire')
     <div class="content-main  rounded">
         @include('includes.borders')
@@ -61,7 +61,7 @@
 
                                 </a>
                             </div>
-                            <div class="card-body px-2 pb-0 ">
+                            <div class="card-body px-1 pb-0 ">
                                 <div class="card-actions text-center pt-4">
                                     <div class="d-flex justify-content-center">
                                         @if(!\Cart::get($product->id))
@@ -88,11 +88,13 @@
 
                                 </h3>
                                 <div class="card-description mt-4 ">
-
                                     @foreach($product->membresias as $membresia)
-                                    <div class="text-left">
-                                        <i class="material-icons my-auto mr-1 text-xs text-success">check</i>
-                                        <span class="text-xs text-muted">Disponible en membresía {{$membresia->title}} </span>
+                                    <div class="text-center ">
+                                        <a href="{{route('membership.show',$membresia->id)}}">
+                                            <span class="badge badge-sm badge-info m small px-1 mx-0" style="cursor:pointer">
+                                                Gratis en la membresía {{$membresia->title}}
+                                            </span>
+                                        </a>
                                     </div>
                                     @endforeach
 
@@ -290,147 +292,147 @@
                         </div>
                     </div>
                     <div class="col-12 shadow  rounded py-2 mt-5 d-none d-lg-block">
-                    @if(isset($membership) && $membership->count()>0)
-                <div class="row membership-sticky bg-white rounded">
-                    <div class="col-12">
-                        <div class=" animate__animated  animate__shakeX animate__repeat-3	 animate__slow  mt-0 card card-primary card-product {{($membership->discount_percentage > 0) ? 'border  border-primary' : 'border' }}" style=" overflow: hidden;">
-                            @if ($membership->discount_percentage > 0)
-                            <div class="price-label1 bg-white  "><span>prueba</span></div>
-                            <div class="price-label bg-primary animate__animated  animate__flash animate__infinite 	infinite	 animate__slow "><span>Oferta</span></div>
-                            @endif
-                            <div class="card-header card-header-image mt-2" data-header-animation="false">
-                                <img class="img" src="{{ Storage::url($membership->itemMain) }} ">
-                            </div>
-                            <div class="card-body mt-3">
-                                <div class="text-center">
-                                    @if (!\Cart::get($membership->id))
-                                    <button class=" btn btn-primary btn-round" wire:click="addCart('{{ $membership->id }}','{{ $membership->model }}' )">
-                                        <i class="material-icons">shopping_cart</i>
-                                        <span>Agregar al carrito</span>
-                                    </button>
-                                    @else
-                                    <a href="{{ route('cart.index') }}" class="btn btn-primary btn-round">
-                                        <i class="material-icons">shopping_cart</i>
-                                        <span>Ver en el carrito</span>
-                                    </a>
+                        @if(isset($membership) && $membership->count()>0)
+                        <div class="row membership-sticky bg-white rounded">
+                            <div class="col-12">
+                                <div class=" animate__animated  animate__shakeX animate__repeat-3	 animate__slow  mt-0 card card-primary card-product {{($membership->discount_percentage > 0) ? 'border  border-primary' : 'border' }}" style=" overflow: hidden;">
+                                    @if ($membership->discount_percentage > 0)
+                                    <div class="price-label1 bg-white  "><span>prueba</span></div>
+                                    <div class="price-label bg-primary animate__animated  animate__flash animate__infinite 	infinite	 animate__slow "><span>Oferta</span></div>
                                     @endif
-                                </div>
-                                <h3 class="card-title text-center text-dark">
-                                    {{ $membership->title }}
-                                </h3>
-                                <div class="card-description">
-                                    <div class="row">
-                                        <div class="col-12" style="height:170px">
-                                            <h3 class="text-primary text-uppercase font-weight-bold  mt-0">{{$membership->vigencia}} </h3>
-                                            @if ($membership->discount_percentage > 0)
-                                            <div class=" text-2xl text-gray-500 mt-3" style="height: 30px;">
-                                                Antes: <span style="text-decoration:line-through;">${{ round($membership->price) }}</span>
-                                            </div>
+                                    <div class="card-header card-header-image mt-2" data-header-animation="false">
+                                        <img class="img" src="{{ Storage::url($membership->itemMain) }} ">
+                                    </div>
+                                    <div class="card-body mt-3">
+                                        <div class="text-center">
+                                            @if (!\Cart::get($membership->id))
+                                            <button class=" btn btn-primary btn-round" wire:click="addCart('{{ $membership->id }}','{{ $membership->model }}' )">
+                                                <i class="material-icons">shopping_cart</i>
+                                                <span>Agregar al carrito</span>
+                                            </button>
                                             @else
-                                            <div class=" text-2xl text-gray-500 mt-3" style="height: 30px;">
-                                                <span style="text-decoration:line-through;"></span>
-                                            </div>
+                                            <a href="{{ route('cart.index') }}" class="btn btn-primary btn-round">
+                                                <i class="material-icons">shopping_cart</i>
+                                                <span>Ver en el carrito</span>
+                                            </a>
                                             @endif
-                                            <h1 class="font-weight-bold text-black">
-                                                <small class=" text-mindle align-top ">$</small>{{ round($membership->price_with_discount) }}.00
-                                            </h1>
                                         </div>
-                                        <div class="col-12 text-center">
-
-                                            <small class="text-black">VIGENCIA <span>
-
-                                                    @if(date_format(new DateTime($membership->start),'M')=='Jan')
-                                                    ENERO
-                                                    @elseif(date_format(new DateTime($membership->start),'M')=='Feb')
-                                                    FEBRERO
-                                                    @elseif(date_format(new DateTime($membership->start),'M')=='Mar')
-                                                    MARZO
-                                                    @elseif(date_format(new DateTime($membership->start),'M')=='Apr')
-                                                    ABRIL
-                                                    @elseif(date_format(new DateTime($membership->start),'M')=='May')
-                                                    MAYO
-                                                    @elseif(date_format(new DateTime($membership->start),'M')=='Jun')
-                                                    JUNIO
-                                                    @elseif(date_format(new DateTime($membership->start),'M')=='Jul')
-                                                    JULIO
-                                                    @elseif(date_format(new DateTime($membership->start),'M')=='Aug')
-                                                    AGOSTO
-                                                    @elseif(date_format(new DateTime($membership->start),'M')=='Sep')
-                                                    SEPTIEMBRE
-                                                    @elseif(date_format(new DateTime($membership->start),'M')=='Oct')
-                                                    OCTUBRE
-                                                    @elseif(date_format(new DateTime($membership->start),'M')=='Nov')
-                                                    NOVIEMBRE
-                                                    @elseif(date_format(new DateTime($membership->start),'M')=='Dec')
-                                                    DICIEMBRE
+                                        <h3 class="card-title text-center text-dark">
+                                            {{ $membership->title }}
+                                        </h3>
+                                        <div class="card-description">
+                                            <div class="row">
+                                                <div class="col-12" style="height:170px">
+                                                    <h3 class="text-primary text-uppercase font-weight-bold  mt-0">{{$membership->vigencia}} </h3>
+                                                    @if ($membership->discount_percentage > 0)
+                                                    <div class=" text-2xl text-gray-500 mt-3" style="height: 30px;">
+                                                        Antes: <span style="text-decoration:line-through;">${{ round($membership->price) }}</span>
+                                                    </div>
+                                                    @else
+                                                    <div class=" text-2xl text-gray-500 mt-3" style="height: 30px;">
+                                                        <span style="text-decoration:line-through;"></span>
+                                                    </div>
                                                     @endif
+                                                    <h1 class="font-weight-bold text-black">
+                                                        <small class=" text-mindle align-top ">$</small>{{ round($membership->price_with_discount) }}.00
+                                                    </h1>
+                                                </div>
+                                                <div class="col-12 text-center">
 
-                                                    {{date_format(new DateTime($membership->start),'Y')}}
+                                                    <small class="text-black">VIGENCIA <span>
+
+                                                            @if(date_format(new DateTime($membership->start),'M')=='Jan')
+                                                            ENERO
+                                                            @elseif(date_format(new DateTime($membership->start),'M')=='Feb')
+                                                            FEBRERO
+                                                            @elseif(date_format(new DateTime($membership->start),'M')=='Mar')
+                                                            MARZO
+                                                            @elseif(date_format(new DateTime($membership->start),'M')=='Apr')
+                                                            ABRIL
+                                                            @elseif(date_format(new DateTime($membership->start),'M')=='May')
+                                                            MAYO
+                                                            @elseif(date_format(new DateTime($membership->start),'M')=='Jun')
+                                                            JUNIO
+                                                            @elseif(date_format(new DateTime($membership->start),'M')=='Jul')
+                                                            JULIO
+                                                            @elseif(date_format(new DateTime($membership->start),'M')=='Aug')
+                                                            AGOSTO
+                                                            @elseif(date_format(new DateTime($membership->start),'M')=='Sep')
+                                                            SEPTIEMBRE
+                                                            @elseif(date_format(new DateTime($membership->start),'M')=='Oct')
+                                                            OCTUBRE
+                                                            @elseif(date_format(new DateTime($membership->start),'M')=='Nov')
+                                                            NOVIEMBRE
+                                                            @elseif(date_format(new DateTime($membership->start),'M')=='Dec')
+                                                            DICIEMBRE
+                                                            @endif
+
+                                                            {{date_format(new DateTime($membership->start),'Y')}}
 
 
-                                                </span> A
-                                                <span>
-                                                    @if(date_format(new DateTime($membership->expiration),'M')=='Jan')
-                                                    ENERO
-                                                    @elseif(date_format(new DateTime($membership->expiration),'M')=='Feb')
-                                                    FEBRERO
-                                                    @elseif(date_format(new DateTime($membership->expiration),'M')=='Mar')
-                                                    MARZO
-                                                    @elseif(date_format(new DateTime($membership->expiration),'M')=='Apr')
-                                                    ABRIL
-                                                    @elseif(date_format(new DateTime($membership->expiration),'M')=='May')
-                                                    MAYO
-                                                    @elseif(date_format(new DateTime($membership->expiration),'M')=='Jun')
-                                                    JUNIO
-                                                    @elseif(date_format(new DateTime($membership->expiration),'M')=='Jul')
-                                                    JULIO
-                                                    @elseif(date_format(new DateTime($membership->expiration),'M')=='Aug')
-                                                    AGOSTO
-                                                    @elseif(date_format(new DateTime($membership->expiration),'M')=='Sep')
-                                                    SEPTIEMBRE
-                                                    @elseif(date_format(new DateTime($membership->expiration),'M')=='Oct')
-                                                    OCTUBRE
-                                                    @elseif(date_format(new DateTime($membership->expiration),'M')=='Nov')
-                                                    NOVIEMBRE
-                                                    @elseif(date_format(new DateTime($membership->expiration),'M')=='Dec')
-                                                    DICIEMBRE
-                                                    @endif
-                                                </span>
+                                                        </span> A
+                                                        <span>
+                                                            @if(date_format(new DateTime($membership->expiration),'M')=='Jan')
+                                                            ENERO
+                                                            @elseif(date_format(new DateTime($membership->expiration),'M')=='Feb')
+                                                            FEBRERO
+                                                            @elseif(date_format(new DateTime($membership->expiration),'M')=='Mar')
+                                                            MARZO
+                                                            @elseif(date_format(new DateTime($membership->expiration),'M')=='Apr')
+                                                            ABRIL
+                                                            @elseif(date_format(new DateTime($membership->expiration),'M')=='May')
+                                                            MAYO
+                                                            @elseif(date_format(new DateTime($membership->expiration),'M')=='Jun')
+                                                            JUNIO
+                                                            @elseif(date_format(new DateTime($membership->expiration),'M')=='Jul')
+                                                            JULIO
+                                                            @elseif(date_format(new DateTime($membership->expiration),'M')=='Aug')
+                                                            AGOSTO
+                                                            @elseif(date_format(new DateTime($membership->expiration),'M')=='Sep')
+                                                            SEPTIEMBRE
+                                                            @elseif(date_format(new DateTime($membership->expiration),'M')=='Oct')
+                                                            OCTUBRE
+                                                            @elseif(date_format(new DateTime($membership->expiration),'M')=='Nov')
+                                                            NOVIEMBRE
+                                                            @elseif(date_format(new DateTime($membership->expiration),'M')=='Dec')
+                                                            DICIEMBRE
+                                                            @endif
+                                                        </span>
 
 
 
-                                                {{date_format(new DateTime($membership->expiration),'Y')}}
-                                            </small>
+                                                        {{date_format(new DateTime($membership->expiration),'Y')}}
+                                                    </small>
+                                                </div>
+
+                                                <p class="text-muted text-start mt-2" style="height:90px">
+                                                    {{ Str::limit($membership->information, $limit = 150, $end = '...') }}
+                                                </p>
+
+                                            </div>
+
+
+
+
+
+
+                                        </div>
+                                        <div class="card-footer justify-content-center border-top">
+                                            <a href=" {{route('membership.show',$membership->id)}} " class="btn   btn-link text-info">
+                                                Más informacion
+                                            </a>
                                         </div>
 
-                                        <p class="text-muted text-start mt-2" style="height:90px">
-                                            {{ Str::limit($membership->information, $limit = 150, $end = '...') }}
-                                        </p>
 
                                     </div>
 
-
-
-
-
-
                                 </div>
-                                <div class="card-footer justify-content-center border-top">
-                                    <a href=" {{route('membership.show',$membership->id)}} " class="btn   btn-link text-info">
-                                        Más informacion
-                                    </a>
-                                </div>
+
 
 
                             </div>
-
                         </div>
-
-
-
-                    </div>
-                </div>
-                @endif
+                        @endif
 
 
 

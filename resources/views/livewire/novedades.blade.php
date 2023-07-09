@@ -10,7 +10,7 @@ background-image: linear-gradient(180deg, #a578da 0%, #a578da 33%, #ffffff 66%, 
     <div class="novedades-autoplay">
         @if (isset($products) && $products->count() > 0)
         @foreach ($products as $product)
-        <div class="px-2">
+        <div class="px-1">
             <div class="card card-primary card-product ">
                 <div class="card-header card-header-image  mb-5" data-header-animation="false">
                     <a href="{{ route('shop.show', $product->slug) }}">
@@ -21,8 +21,8 @@ background-image: linear-gradient(180deg, #a578da 0%, #a578da 33%, #ffffff 66%, 
                         @endif
                     </a>
                 </div>
-                <div class="card-body">
-                    <div class="card-actions text-center">
+                <div class="card-body  px-1">
+                    <div class="card-actions text-center ">
                         <div class="mt-2">
                             @if(!\Cart::get($product->id))
                             <button class=" btn   btn-primary btn-round  px-2 w-full " wire:click="addCart('{{ $product->id }}','Product')" wire:loading.attr="disabled">
@@ -49,9 +49,18 @@ background-image: linear-gradient(180deg, #a578da 0%, #a578da 33%, #ffffff 66%, 
                         @endrole
 
                     </h3>
-                    <div class="card-description d-none d-lg-block">
-                        {{ Str::limit($product->information, $limit = 50, $end = '...') }}
+                    @foreach($product->membresias as $membresia)
+                    <div class="text-center ">
+                        <a href="{{route('membership.show',$membresia->id)}}">
+                            <span class="badge badge-sm badge-info m small px-1 mx-0" style="cursor:pointer">
+                                Gratis en la membresía {{$membresia->title}}
+                            </span>
+                        </a>
                     </div>
+                    @endforeach
+                    <!-- <div class="card-description d-none d-lg-block">
+                        {{ Str::limit($product->information, $limit = 50, $end = '...') }}
+                    </div> -->
                 </div>
                 <div class="card-footer">
                     @if($product->price_with_discount < $product->price)

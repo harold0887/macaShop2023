@@ -198,9 +198,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-2 border-top">
-                        <h2 class="my-0 title text-center text-primary text-lg sm:text-2x1 md:text-2xl  lg:text-2xl">
-                            Lista de materiales didácticos incluidos en la membresía {{ $membership->title }}
+                    <div class="col-12 mt-2 border-top ">
+                        <h2 class="my-0 title text-center text-primary text-sm sm:text-2x1 md:text-2xl  lg:text-2xl mt-2">
+                        Consulta la lista de materiales didácticos incluidos en la membresía  {{ $membership->title }}
                         </h2>
                     </div>
                     <div class="col-12">
@@ -934,12 +934,12 @@
 
 
 
-                    <div class="col-12 text-center mt-5 text-muted">
+                    <!-- <div class="col-12 text-center mt-5 text-muted">
                         <h1 class="mb-5">Membresía en preventa</h1>
                         <h2>👉🏻Material disponible a partir del 21 de julio del 2023.🫶🏻</h2>
                         <h4>🌈Por que ustedes lo pidieron muchos de NUESTROS RECURSOS serán EDITABLES para que puedan ajustarlo a sus necesidades!!!!🌟🫶🏻</h4>
 
-                    </div>
+                    </div> -->
 
                 </div>
 
