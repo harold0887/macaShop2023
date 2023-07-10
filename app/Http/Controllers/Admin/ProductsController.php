@@ -195,6 +195,7 @@ class ProductsController extends Controller
                 'format' => $ext,
             
                 'fecha_membresia' => request('disponible'),
+                'numero' => request('numero'),
             ]);
 
             $product->membresias()->sync(request('memberships'));

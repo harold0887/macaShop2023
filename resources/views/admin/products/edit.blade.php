@@ -20,6 +20,13 @@
                         <form id="edit-product" action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf @method('PATCH')
                             <div class="form-row mt-lg-5">
+                                <div class="form-group col-md-1">
+                                    <label for="numero">Número</label>
+                                    <input type="number" class="form-control" name="numero" value="{{ old('numero') ?: $product->numero }}" step="0.01">
+                                    @error('numero')
+                                    <small class="text-danger"> {{ $message }} </small>
+                                    @enderror
+                                </div>
                                 <div class="form-group col-md-3">
                                     <label for="title">Titulo</label>
                                     <input type="text" class="form-control" name="title" value=" {{ old('title') ?: $product->title }} ">
@@ -35,7 +42,7 @@
                                     <small class="text-danger"> {{ $message }} </small>
                                     @enderror
                                 </div>
-                               
+
                                 <div class="form-group col-md-3">
                                     <label for="discount">Precio con descuento</label>
                                     <input type="number" class="form-control" name="discount" value="{{ $product->price_with_discount }}{{ old('discount') }}" step="0.01">
@@ -43,7 +50,7 @@
                                     <small class="text-danger"> {{ $message }} </small>
                                     @enderror
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label for="disponible">Disponible en membresia</label>
                                     <input type="date" class="form-control" name="disponible" required value="{{ old('disponible')?: (new DateTime($product->fecha_membresia))->format('Y-m-d')  }}">
                                     @error('disponible')
