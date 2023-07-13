@@ -48,7 +48,7 @@
                             <div class="form-row">
 
                                 <div class="form-group col-12 col-md-4 ">
-                                    <select name="user" class="selectpicker form-control" data-size="7" data-style="select-with-transition " title="Usuario...">
+                                    <select id="create-sales-users"  name="user" class="form-control" >
                                         <option selected disabled value="">Selecciona...</option>
                                         @if (isset($users) && $users->count() > 0)
                                         @foreach ($users as $user)

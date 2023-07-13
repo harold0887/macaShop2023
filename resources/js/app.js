@@ -10,6 +10,8 @@ $(function () {
     $(".b-close").on("click", function () {
         return $("#adCart").modal("hide");
     });
+
+    $("#create-sales-users").select2();
 });
 
 //slider

@@ -36,7 +36,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick-theme.css') }}">
 
     <!-- CSS animate -->
-    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+
+    <!-- select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
 
 
@@ -56,12 +61,13 @@
 @include('includes.spinner')
 @include('includes.modal.cart-modal')
 @include('includes.modal.login-modal')
-<body class="{{ $class ?? '' }}" >
+
+<body class="{{ $class ?? '' }}">
 
 
-<a href="https://wa.me/message/GUNXZZ666PN3I1" class="floatWhats" target="_blank">
-<i class="fa fa-whatsapp my-float"></i>
-</a>
+    <a href="https://wa.me/message/GUNXZZ666PN3I1" class="floatWhats" target="_blank">
+        <i class="fa fa-whatsapp my-float"></i>
+    </a>
     <style>
         #ofBar {
             display: none;
@@ -70,7 +76,7 @@
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
-   
+
 
     @if (Route::is('dashboard','dashboard.*','products.*','memberships.*','category.*','package.*','degrees.*','users.*','comments.*','sales.*'))
     @include('layouts.page_templates.admin')
@@ -87,7 +93,7 @@
 
 
 
-   
+
 
 
 
@@ -145,9 +151,9 @@
 
 
 
- <!-- search -->
- <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js" type="text/javascript"></script>
-    
+    <!-- search -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js" type="text/javascript"></script>
+
 
 
 
@@ -157,17 +163,20 @@
     <!-- slick -->
     <script src="{{ asset('slick/slick.min.js') }}" type="text/javascript" charset="utf-8"></script>
 
-     
-  
-    
-<!-- jquery-ui-search -->
+
+
+
+    <!-- jquery-ui-search -->
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
+
+    <!-- select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
 
     @stack('js')
     @livewireScripts
-    
+
 </body>
 
 </html>
