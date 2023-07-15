@@ -247,7 +247,7 @@
                                                                 <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
                                                                 @endif
                                                             </div>
-                                                            <span class="h5"><small>{{ $purchase->title }} </small></span>
+                                                            <span class="h5"><small>{{ $purchase->numero }}_{{ $purchase->title }} </small></span>
                                                             <br><small>Archivo en formato {{ $purchase->format }} </small>
                                                         </td>
                                                         <td>

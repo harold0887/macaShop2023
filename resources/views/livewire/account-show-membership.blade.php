@@ -43,7 +43,7 @@
                                             <div class="img-container ">
                                                 <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
                                             </div>
-                                            <span class="h5" data-mdb-toggle="modal"><small>{{ $purchase->title }} </small></span>
+                                            <span class="h5" data-mdb-toggle="modal"><small>{{  $purchase->numero}}_{{$purchase->title }} </small></span>
                                             <br><small>Archivo en formato {{ $purchase->format }} </small>
                                             <!-- <br><small class="italic text-muted">{{ $purchase->price }} MXN </small> -->
                                         </td>
