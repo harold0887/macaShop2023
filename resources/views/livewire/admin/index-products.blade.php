@@ -94,18 +94,7 @@
                                             @endif
                                             Precio
                                         </th>
-                                        <th style="cursor:pointer" wire:click="setSort('discount_percentage')">
-                                            @if($sortField=='discount_percentage')
-                                            @if($sortDirection=='asc')
-                                            <i class="fa-solid fa-arrow-down-a-z"></i>
-                                            @else
-                                            <i class="fa-solid fa-arrow-up-z-a"></i>
-                                            @endif
-                                            @else
-                                            <i class="fa-solid fa-sort mr-1"></i>
-                                            @endif
-                                            descuento
-                                        </th>
+                                      
                                         <th style="cursor:pointer" wire:click="setSort('price_with_discount')">
                                             @if($sortField=='price_with_discount')
                                             @if($sortDirection=='asc')
@@ -156,7 +145,7 @@
                                         <td>{{ $product->id }}</td>
                                         <td>{{ $product->title }}</td>
                                         <td>{{ $product->price }}</td>
-                                        <td>{{ $product->discount_percentage }}%</td>
+                                     
                                         <td>{{ $product->price_with_discount }}</td>
                                         <td>
                                             <div class="togglebutton" wire:click="changeFolio({{ $product->id }}, '{{ $product->folio }}')">
