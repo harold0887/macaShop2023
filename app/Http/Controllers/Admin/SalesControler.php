@@ -96,7 +96,8 @@ class SalesControler extends Controller
 
 
 
-        return view('admin.sales.show', compact('purchases', 'packages', 'memberships'));
+        return view('admin.sales.show', compact(
+            'purchases', 'packages', 'memberships'));
     }
 
 

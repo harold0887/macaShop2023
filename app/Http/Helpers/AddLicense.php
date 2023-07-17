@@ -51,4 +51,29 @@ class AddLicense
         $pdf->Output('pdf/newpdf.pdf', 'F');
         return true;
     }
+    public function download()
+    {
+
+        //dd("llego a la descarga");
+        //Agregar folio a PDF
+        $pdf = new Fpdi();
+        set_time_limit(0);
+        $patch = "./storage/" . $this->product->document;
+        //$pdf->setSourceFile($patch);
+        $pageCount = $pdf->setSourceFile($patch);
+        for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+            $templateId = $pdf->importPage($pageNo);
+            $size = $pdf->getTemplateSize($templateId);
+            $pdf->AddPage($size['orientation']);
+            $pdf->useTemplate($templateId, ['adjustPageSize' => true]);
+            $pdf->SetFont('Arial', 'i', 8);
+            $pdf->SetXY(2, 0);
+            $pdf->Write(8, utf8_decode($this->message));
+            $pdf->SetXY(2, 4);
+            $pdf->Write(8, utf8_decode($this->licencia));
+        }
+        $pdf->Output('pdf/newpdf.pdf', 'F');
+
+        return true;
+    }
 }
