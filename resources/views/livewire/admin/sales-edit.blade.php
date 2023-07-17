@@ -29,9 +29,9 @@
                                 </div>
                                 @foreach($products as $products)
                                 <div class="row pt-2">
-                                    <div class="col-6 align-self-center">
+                                    <div class="col-6 align-self-center {{$products->status==0? 'text-danger':''}}">
                                         <p>
-                                            <b style="font-size: 1.2em">{{ $products->title }}</b>
+                                            <b style="font-size: 1.2em  ">{{ $products->title }}</b>
                                             <br>
                                         </p>
                                     </div>

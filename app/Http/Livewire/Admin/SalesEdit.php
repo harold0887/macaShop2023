@@ -24,8 +24,7 @@ class SalesEdit extends Component
     }
     public function render()
     {
-        $products = Product::where('status', true)
-            ->where('price', '>', 0)
+        $products = Product::where('price', '>', 0)
             ->orderBy('title')
             ->get();
 
@@ -43,7 +42,7 @@ class SalesEdit extends Component
             ->get();
 
         $productsIncluded = Order_Details::join('products', 'order_details.product_id', 'products.id')
-            ->where('status', true)
+            
             ->where('order_details.order_id', $this->order->id)
             ->select('products.title', 'products.id', 'products.itemMain', 'order_details.price')
             ->orderBy('title')
@@ -52,7 +51,7 @@ class SalesEdit extends Component
 
 
         $PackagesIcluded = Order_Details::join('packages', 'order_details.package_id', 'packages.id')
-            ->where('status', true)
+           
             ->where('order_details.order_id', $this->order->id)
             ->select('packages.title', 'packages.id', 'packages.itemMain', 'order_details.price')
             ->orderBy('title')
@@ -61,7 +60,7 @@ class SalesEdit extends Component
 
 
         $MembershipsIcluded = Order_Details::join('memberships', 'order_details.membership_id', 'memberships.id')
-            ->where('status', true)
+           
             ->where('order_details.order_id', $this->order->id)
             ->select('memberships.title', 'memberships.id', 'memberships.itemMain', 'order_details.price')
             ->orderBy('title')
@@ -69,20 +68,20 @@ class SalesEdit extends Component
 
 
         $sumaProductos = Order_Details::join('products', 'order_details.product_id', 'products.id')
-            ->where('status', true)
+           
             ->where('order_details.order_id', $this->order->id)
             ->sum('order_details.price');
 
 
         $sumaPackages = Order_Details::join('packages', 'order_details.package_id', 'packages.id')
-            ->where('status', true)
+     
             ->where('order_details.order_id', $this->order->id)
             ->sum('order_details.price');
 
 
 
         $sumaMembresias = Order_Details::join('memberships', 'order_details.membership_id', 'memberships.id')
-            ->where('status', true)
+         
             ->where('order_details.order_id', $this->order->id)
             ->sum('order_details.price');
 
