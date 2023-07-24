@@ -37,6 +37,7 @@ class IndexSales extends Component
                 $query->where('payment_id', 'like', '%' . $this->search . '%')
                     ->orWhere('status', 'like', '%' . $this->search . '%')
                     ->orWhere('order_id', 'like', '%' . $this->search . '%')
+                    ->orWhere('contacto', 'like', '%' . $this->search . '%')
                     ->orWhere('id', 'like', '%' . $this->search . '%');
             })
             ->orWhereHas('user', function ($query) {

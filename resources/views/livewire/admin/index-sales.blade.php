@@ -139,7 +139,8 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($orders as $order)
-                                    <tr class=" {{$order->active==0 ? 'table-danger':''}} ">
+                                    <tr class=" {{$order->active==0
+                                         ? 'table-danger':''}} ">
                                         <td>{{ $order->id }}</td>
                                         <td>{{ $order->payment_id }}</td>
                                         <td>{{date_format($order->created_at, 'd-M-Y H:i')}}</td>
