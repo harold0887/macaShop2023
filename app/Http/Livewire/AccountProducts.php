@@ -34,8 +34,10 @@ class AccountProducts extends Component
                 'products.id',
                 'products.itemMain',
                 'products.title',
+                'products.folio',
                 'products.format',
                 'orders.status',
+                'orders.active',
                 'orders.id as order_id',
                 'order_details.price',
                 'order_details.created_at'

@@ -31,7 +31,7 @@ class ProductsController extends Controller
             ->select('name', 'id')
             ->get();
         $memberships = Membership::orderBy('title', 'ASC')
-            ->select('title', 'id','vigencia')
+            ->select('title', 'id', 'vigencia')
             ->where('status', true)
             ->get();
         return view('admin.products.create', compact('categories', 'memberships', 'degrees'));
@@ -117,7 +117,7 @@ class ProductsController extends Controller
             ->select('name', 'id')
             ->get();
         $memberships = Membership::orderBy('title')
-            ->select('title', 'id','vigencia')
+            ->select('title', 'id', 'vigencia')
             ->where('status', true)
             ->get();
         $product = Product::findOrFail($id);
@@ -147,8 +147,8 @@ class ProductsController extends Controller
         $newVideo = request()->file('video');
 
         $price = number_format((float)request('price'), 2, '.', '');
-      
-        
+
+
 
         if (isset($newItemMain)) {
             File::delete(storage_path("/app/public/{$product->itemMain}"));
@@ -193,7 +193,7 @@ class ProductsController extends Controller
                 'name' => $name,
                 'slug' => Str::slug(request('title'), '-'),
                 'format' => $ext,
-            
+
                 'fecha_membresia' => request('disponible'),
                 'numero' => request('numero'),
             ]);

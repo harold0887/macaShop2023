@@ -40,6 +40,7 @@ class AccountShowPackages extends Component
             ->get()
             ->count();
 
+
         if ($packagesCount > 0) {
             return view('livewire.account-show-packages')
                 ->extends('layouts.app', [

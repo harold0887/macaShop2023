@@ -19,6 +19,7 @@ class MainController extends Controller
     {
         $materialesComprados = false;
         $MembresiasCompradas = [];
+        $orderActive = true; //Iniciar la order como active, solo se desactiva si es membresía, paquete o producto con folio
 
         $newOrder = Order::create([
             'customer_id' => Auth::user()->id,
@@ -43,6 +44,7 @@ class MainController extends Controller
                     'title' => $newOrder->title,
                     'price' => $item->price,
                 ];
+                $orderActive = false;
             } elseif ($item->associatedModel->model == 'Package') {
                 Order_Details::create([
                     'order_id' => $newOrder->id,
@@ -50,6 +52,7 @@ class MainController extends Controller
                     'price' => $item->price,
                 ]);
                 $materialesComprados = true;
+                $orderActive = false;
             } elseif ($item->associatedModel->model == 'Product') {
                 Order_Details::create([
                     'order_id' => $newOrder->id,
@@ -57,16 +60,26 @@ class MainController extends Controller
                     'price' => $item->price,
                 ]);
                 $materialesComprados = true;
+
+                if ($item->associatedModel->folio == 1) {
+                    $orderActive = false;
+                }
             }
         }
 
         $productosCart = \Cart::getContent();
 
-        $Total = \Cart::getTotal().".00";
+        $Total = \Cart::getTotal() . ".00";
         $order = $newOrder->id;
         $payment_type = request('payment_type');
 
-    
+
+        //Actualizar status de orden
+        Order::findOrFail($newOrder->id)->update([
+            'active' => $orderActive,
+        ]);
+
+
 
 
 
@@ -127,7 +140,7 @@ class MainController extends Controller
                 // return view('shop.success', compact('productosCart', 'Total', 'order', 'payment_type'));
                 // break;
             case 'pending':
-                $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name,$Total);
+                $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name, $Total);
                 Mail::to(Auth::user()->email)
                     //->cc('arnulfoacosta0887@gmail.com')
                     ->send($correo);
@@ -230,7 +243,7 @@ class MainController extends Controller
 
                 //enviar correo de materiales
                 if ($materialesComprados) {
-                    $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name,$Total);
+                    $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name, $Total);
                     Mail::to(Auth::user()->email)
                         ->cc('arnulfoacosta0887@gmail.com')
                         ->send($correo);
@@ -279,7 +292,7 @@ class MainController extends Controller
                 return view('shop.success', compact('productosCart', 'Total', 'order', 'payment_type'));
                 break;
             case 'pending':
-                $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name,$Total);
+                $correo = new PaymentApprovedEmail($newOrder->id, Auth::user()->name, $Total);
                 Mail::to(Auth::user()->email)
                     //->cc('arnulfoacosta0887@gmail.com')
                     ->send($correo);

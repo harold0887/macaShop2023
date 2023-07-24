@@ -21,14 +21,29 @@
 
     </div>
     <div class="col-12 col-lg-6 shadow rounded">
-        <h4 class="title  text-center text-muted">Agregar documentos al paquete</h4>
+        <div class="row ">
+            <div class="col-12">
+                <h4 class="title  text-center text-muted">Agregar documentos al paquete</h4>
+            </div>
+            <div class="col-8">
+                <input type="search" class="form-control px-3 w-full" placeholder="Buscar título..." wire:model.debounce.500ms='search' style="border-radius: 30px !important">
+            </div>
+            <div class="col-4 text-end">
+                @if ($search != '')
+                <div class="d-flex mt-2">
+                    <span class="text-base">Borrar filtros </span>
+                    <i class="material-icons my-auto ml-2 text-base text-danger" style="cursor:pointer" wire:click="clearSearch()">close</i>
+                </div>
+                @endif
+            </div>
+        </div>
         @foreach($products as $products)
 
         <div class="row pt-2">
 
             <div class="col-12 col-lg-8 align-self-center text-center text-lg-left">
                 <p>
-                    <b class="text-sm sm:text-1x1 ">{{ $products->title }}</b>
+                    <b class="text-sm sm:text-1x1 {{$products->status==0? 'text-danger':''}}">{{ $products->title }}</b>
                     <br>
                 </p>
             </div>

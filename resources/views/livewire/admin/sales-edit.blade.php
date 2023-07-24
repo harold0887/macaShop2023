@@ -24,12 +24,29 @@
                         <div class="form-row">
 
                             <div class="col-12 col-md-6 rounded shadow pl-4 border">
-                                <div class="col">
+                                <div class="row">
+                                <div class="col-12">
                                     <h4 class="title h3 text-center">Agregar documentos a la orden </h4>
                                 </div>
+
+                                    <div class="col-8">
+                                        <input type="search" class="form-control px-3 w-full" placeholder="Buscar título..." wire:model.debounce.500ms='search' style="border-radius: 30px !important">
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        @if ($search != '')
+                                        <div class="d-flex mt-2">
+                                            <span class="text-base">Borrar filtros </span>
+                                            <i class="material-icons my-auto ml-2 text-base text-danger" style="cursor:pointer" wire:click="clearSearch()">close</i>
+                                        </div>
+                                        @endif
+                                    </div>
+
+                                </div>
+
                                 @foreach($products as $products)
                                 <div class="row pt-2">
-                                    <div class="col-6 align-self-center {{$products->status==0? 'text-danger':''}}">
+                                    <div class="col-6 align-self-center {{$products->status==0? 'text-danger':''}}
+                                    ">
                                         <p>
                                             <b style="font-size: 1.2em  ">{{ $products->title }}</b>
                                             <br>

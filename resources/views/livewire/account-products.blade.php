@@ -53,6 +53,19 @@
                                         @if ($purchase->status == 'approved')
                                         <td>
                                             <div class="col-12   align-self-center">
+
+                                                @if($purchase->folio == 1 && $purchase->active == 0 )
+                                                <small>Este documento requiere activación.</small>
+                                                <br>
+                                                <small>
+                                                    Da clic en el logo de WhatsApp para enviar un mensaje y solicitar la activación.
+                                                </small>
+                                                <br>
+                                                <a href="https://api.whatsapp.com/send?phone=+9981838908&text=Quiero%20activar%20mi%20orden%20de%20compra%20web: {{ $purchase->order_id }}" target="_blank">
+                                                    <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
+                                                </a>
+
+                                                @else
                                                 <div wire:loading.remove>
                                                     <button class="btn btn-outline-info btn-round" wire:click="finalDownload({{ $purchase->id }},{{ $purchase->order_id }})" wire:loading.attr="disabled">
                                                         <i class="material-icons">download</i> Descargar
@@ -71,6 +84,12 @@
                                                     <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                                     Descargando...
                                                 </button>
+
+                                                @endif
+
+
+
+
                                             </div>
                                         </td>
 

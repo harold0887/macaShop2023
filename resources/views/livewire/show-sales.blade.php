@@ -24,7 +24,7 @@
                                 <br>
                                 <span class="text-muted">Pago: <b>{{ $order->payment_type }}</b></span>
                                 <br>
-                                <span class="text-muted">Status: <b>
+                                <span class="text-muted">Status de pago: <b>
 
                                         @if ($order->status == 'approved')
                                         <a class="text-success">
@@ -54,7 +54,27 @@
 
 
                                     </b></span>
+                                <br>
+                                <span class="text-muted">Contacto:
+                                    <input id="nota{{ $order->id }}" class="border text-muted rounded m-0" type="text" value="{{ $order->contacto }}" wire:model.defer="socialNetwork">
+                                    @error('socialNetwork')
+                                    <small class=" text-danger"> {{ $message }} </small>
+                                    @enderror
 
+
+
+                                </span>
+                                <br>
+
+
+                                <div class="togglebutton">
+                                    <label>
+                                        <span class="text-muted">WhatsApp:
+                                            <input type="checkbox" wire:click="activeOrder()" {{ $order->active == 1 ? 'checked ' : '' }}>
+                                            <span class="toggle"></span>
+                                        </span>
+                                    </label>
+                                </div>
                             </div>
 
                         </div>
@@ -88,6 +108,8 @@
                                                             @if (isset($purchases) && $purchases->count() > 0)
 
                                                             @foreach($purchases as $product)
+
+
                                                             <div class="row pt-2">
                                                                 <div class="col-md-2 my-1">
                                                                     <img src="{{ Storage::url($product->itemMain) }} " class="img-thumbnail w-75">
@@ -101,6 +123,16 @@
                                                                 </div>
 
                                                                 <div class="col-12 col-md-2 text-center align-self-center">
+
+                                                                    @if($product->folio == 1 && $product->active == 0 )
+                                                                    <small>Este documento requiere activación.</small>
+                                                                    <br><br>
+
+                                                                    <a href="https://api.whatsapp.com/send?phone=+9981838908&text=Quiero%20activar%20mi%20orden%20de%20compra%20web: {{ $product->order_id }}" target="_blank">
+                                                                        <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
+                                                                    </a>
+
+                                                                    @else
                                                                     <div wire:loading.remove>
                                                                         <button class="btn btn-outline-info btn-round w-100" wire:click.prevent="download('{{ $product->id }}')">
                                                                             <i class="material-icons">download</i> Descargar
@@ -115,9 +147,13 @@
                                                                         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                                                         Descargando...
                                                                     </button>
+                                                                    @endif
+
+
 
 
                                                                 </div>
+
                                                                 <div class="col-12">
                                                                     @if(isset($enviados) && $enviados->count() > 0)
 
@@ -184,15 +220,36 @@
                                                                     </p>
                                                                 </div>
                                                                 <div class="col-12 col-md-2 text-center align-self-center">
+
+                                                                    @if($package->active == 0 )
+                                                                    <small>Este paquete requiere activación.</small>
+                                                                    <br><br>
+
+                                                                    <a href="https://api.whatsapp.com/send?phone=+9981838908&text=Quiero%20activar%20mi%20orden%20de%20compra%20web: {{ $package->order_id }}" target="_blank">
+                                                                        <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
+                                                                    </a>
                                                                     <div wire:loading.remove>
                                                                         <button class="btn btn-outline-info btn-round w-100" wire:click="showPackages('{{ $package->id }}')">
-                                                                            ver materiale
+                                                                            ver materiales
+                                                                        </button>
+                                                                    </div>
+
+                                                                    @else
+                                                                    <div wire:loading.remove>
+                                                                        <button class="btn btn-outline-info btn-round w-100" wire:click="showPackages('{{ $package->id }}')">
+                                                                            ver materiales
                                                                         </button>
                                                                     </div>
                                                                     <button class="btn btn-outline-info btn-round w-100" type="button" disabled wire:loading wire:target="download">
                                                                         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                                                         Descargando...
                                                                     </button>
+
+                                                                    @endif
+
+
+
+
 
                                                                 </div>
 
@@ -239,7 +296,20 @@
                                                                     </p>
 
                                                                 </div>
-                                                                <div class="col-12 col-md-3 ">
+                                                                <div class="col-12 col-md-2 text-center align-self-center">
+                                                                    @if($membership->active == 0 )
+                                                                    <small>Esta membresía requiere activación.</small>
+                                                                    <br><br>
+
+                                                                    <a href="https://api.whatsapp.com/send?phone=+9981838908&text=Quiero%20activar%20mi%20orden%20de%20compra%20web: {{ $membership->order_id }}" target="_blank">
+                                                                        <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
+                                                                    </a>
+
+
+                                                                    @else
+
+
+                                                                    @endif
 
                                                                 </div>
 
@@ -284,6 +354,16 @@
                                                                     </p>
                                                                 </div>
                                                                 <div class="col-12 col-md-2 text-center align-self-center">
+
+                                                                    @if($product->folio == 1 && $order->active == 0 )
+                                                                    <small>Este documento requiere activación.</small>
+                                                                    <br><br>
+
+                                                                    <a href="https://api.whatsapp.com/send?phone=+9981838908&text=Quiero%20activar%20mi%20orden%20de%20compra%20web: {{ $product->order_id }}" target="_blank">
+                                                                        <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
+                                                                    </a>
+
+                                                                    @else
                                                                     <div wire:loading.remove>
 
                                                                         <button class="btn btn-outline-info btn-round w-100" wire:click.prevent="download('{{ $product->id }}')">
@@ -294,6 +374,11 @@
                                                                         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                                                         Descargando...
                                                                     </button>
+                                                                    @endif
+
+
+
+
                                                                 </div>
                                                                 <div class="col-12">
                                                                     @if(isset($enviados) && $enviados->count() > 0)

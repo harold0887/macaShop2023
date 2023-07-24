@@ -32,6 +32,7 @@ class SalesControler extends Controller
             'price' => 'required',
             'type' => 'required',
             'user' => 'required',
+            'contacto' => 'required'
         ]);
 
         //obtener al comprador
@@ -44,7 +45,8 @@ class SalesControler extends Controller
                 'status' => 'approved',
                 'payment_type' => request('type'),
                 'payment_id' => request('order'),
-                'order_id' => request('order')
+                'order_id' => request('order'),
+                'contacto' => request('contacto')
             ]);
             return back()->with('success', 'Registro exitoso');
         } catch (QueryException $e) {
@@ -97,7 +99,10 @@ class SalesControler extends Controller
 
 
         return view('admin.sales.show', compact(
-            'purchases', 'packages', 'memberships'));
+            'purchases',
+            'packages',
+            'memberships'
+        ));
     }
 
 

@@ -47,6 +47,7 @@ class AccountShowOrder extends Component
                 'products.itemMain',
                 'products.title',
                 'products.format',
+                'products.folio',
                 'orders.status',
                 'orders.id as order_id',
                 'order_details.price'

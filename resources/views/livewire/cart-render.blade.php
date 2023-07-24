@@ -1,4 +1,3 @@
-
 <div class="container-fluid  p-0 ">
     @include('includes.modal.login-modal')
 
@@ -74,6 +73,7 @@
                     Revise su pedido y luego continúe con el pago.
                 </p>
                 @foreach (\Cart::getContent() as $item)
+
                 <div class="row">
                     <div class="col-md-3 my-1">
                         <img src="{{ Storage::url($item->associatedModel->itemMain) }} " class="img-thumbnail">
@@ -173,11 +173,11 @@
                         @auth
                         @if(@Auth::user()->hasRole('admin'))
                         <form action="{{ route('shop.thanks1') }}" method="POST">
-                        @csrf
-                        <button class="btn btn-primary">
-                            prueba
-                        </button>
-                    </form>
+                            @csrf
+                            <button class="btn btn-primary">
+                                prueba
+                            </button>
+                        </form>
                         @endif
                         <div class="cho-container">
                         </div>

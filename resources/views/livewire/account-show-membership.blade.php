@@ -43,7 +43,7 @@
                                             <div class="img-container ">
                                                 <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
                                             </div>
-                                            <span class="h5" data-mdb-toggle="modal"><small>{{  $purchase->numero}}_{{$purchase->title }} </small></span>
+                                            <span class="h5" data-mdb-toggle="modal"><small>{{ $purchase->numero}}_{{$purchase->title }} </small></span>
                                             <br><small>Archivo en formato {{ $purchase->format }} </small>
                                             <!-- <br><small class="italic text-muted">{{ $purchase->price }} MXN </small> -->
                                         </td>
@@ -54,26 +54,42 @@
                                             @if(now() >= $purchase->fecha_membresia)
                                             <div class="col-12 ">
 
+                                                @if($purchase->folio == 1 && $order->active == 0 )
+                                                <small>Este documento requiere activación.</small>
+                                                <br>
+                                                <small>
+                                                    Da clic en el logo de WhatsApp para enviar un mensaje y solicitar la activación.
+                                                </small>
+                                                <br>
+                                                <a href="https://api.whatsapp.com/send?phone=+9981838908&text=Quiero%20activar%20mi%20orden%20de%20compra%20web: {{ $order->id }}" target="_blank">
+                                                    <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
+                                                </a>
+
+
+                                                @else
                                                 <div wire:loading.remove>
                                                     <button class="btn btn-outline-info btn-round" wire:click="finalDownload({{ $purchase->id }},{{ $purchase->order_id }})" wire:loading.attr="disabled">
                                                         <i class="material-icons">download</i> Descargar
                                                     </button>
-
                                                     <button class="btn btn-outline-primary btn-round btn-link " wire:click="sendEmail({{ $purchase->id }},{{ $purchase->order_id }})">
-
                                                         Enviar a email
                                                     </button>
-
                                                 </div>
                                                 <button class="btn btn-outline-primary btn-round " disabled wire:loading wire:target="sendEmail">
                                                     <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                                     enviando...
                                                 </button>
-
                                                 <button class="btn btn-outline-info btn-round " disabled wire:loading wire:target="finalDownload">
                                                     <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                                     Descargando...
                                                 </button>
+
+                                                @endif
+
+
+
+
+
                                             </div>
                                             @else
                                             <div class="col-12 ">

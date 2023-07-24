@@ -55,7 +55,7 @@
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
-                                    <tr>
+                                    <tr  >
                                         <th style="cursor:pointer" wire:click="setSort('id')">
                                             @if($sortField=='id')
                                             @if($sortDirection=='asc')
@@ -130,13 +130,16 @@
                                             @endif
                                             Estatus de pago
                                         </th>
+                                        
                                         <th>email</th>
+                                        <th>Contacto</th>
+                                        
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($orders as $order)
-                                    <tr>
+                                    <tr class=" {{$order->active==0 ? 'table-danger':''}} ">
                                         <td>{{ $order->id }}</td>
                                         <td>{{ $order->payment_id }}</td>
                                         <td>{{date_format($order->created_at, 'd-M-Y H:i')}}</td>
@@ -171,6 +174,9 @@
                                         </td>
                                         <td>
                                             {{ $order->user->email }}
+                                        </td>
+                                        <td>
+                                            {{ $order->contacto }}
                                         </td>
                                         <td class="td-actions">
                                             <div class="btn-group m-0 d-flex" style="box-shadow: none !important">

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Request;
 
 class EditPackages extends Component
 {
-    public $patch, $ids, $package;
+    public $patch, $ids, $package, $search = '';
 
     protected $listeners = ['some-event' => '$refresh'];
 
@@ -23,8 +23,10 @@ class EditPackages extends Component
     }
     public function render()
     {
-        $products = Product::where('status', true)
-        ->orderBy('name','asc')->get();
+        $products = Product::where(function ($query) {
+            $query->where('title', 'like', '%' . $this->search . '%');
+        })
+            ->orderBy('name', 'asc')->get();
 
         return view('livewire.admin.edit-packages', compact('products'));
     }
@@ -56,5 +58,9 @@ class EditPackages extends Component
                 'message' => 'Error al eliminar el archivo - ' . $e->getMessage(),
             ]);
         }
+    }
+    public function clearSearch()
+    {
+        $this->reset(['search']);
     }
 }

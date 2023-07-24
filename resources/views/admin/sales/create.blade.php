@@ -22,24 +22,31 @@
                             @csrf
                             <div class="form-row">
 
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label for="order">Order MP</label>
                                     <input type="number" class="form-control" name="order" value="{{ old('order') }}" step="0.01">
                                     @error('order')
                                     <small class="text-danger"> {{ $message }} </small>
                                     @enderror
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label for="price">Precio</label>
                                     <input type="number" class="form-control" name="price" value="{{ old('price') }}" step="0.01">
                                     @error('price')
                                     <small class="text-danger"> {{ $message }} </small>
                                     @enderror
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label class="mr-sm-2" for="type">Tipo de pago</label>
                                     <input type="text" class="form-control" name="type" value="{{ old('type') }}">
                                     @error('type')
+                                    <small class="text-danger"> {{ $message }} </small>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="mr-sm-2" for="contacto">Contacto</label>
+                                    <input type="text" class="form-control" name="contacto" value="{{ old('contacto') }}">
+                                    @error('contacto')
                                     <small class="text-danger"> {{ $message }} </small>
                                     @enderror
                                 </div>
@@ -48,7 +55,7 @@
                             <div class="form-row">
 
                                 <div class="form-group col-12 col-md-4 ">
-                                    <select id="create-sales-users"  name="user" class="form-control" >
+                                    <select id="create-sales-users" name="user" class="form-control">
                                         <option selected disabled value="">Selecciona...</option>
                                         @if (isset($users) && $users->count() > 0)
                                         @foreach ($users as $user)

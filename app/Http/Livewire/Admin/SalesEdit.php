@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Request;
 
 class SalesEdit extends Component
 {
-    public $order,$ids,$patch;
+    public $order, $ids, $patch, $search = '';
     public function mount()
     {
         $patch = Request::fullUrl();
@@ -25,6 +25,9 @@ class SalesEdit extends Component
     public function render()
     {
         $products = Product::where('price', '>', 0)
+            ->where(function ($query) {
+                $query->where('title', 'like', '%' . $this->search . '%');
+            })
             ->orderBy('title')
             ->get();
 
@@ -42,7 +45,7 @@ class SalesEdit extends Component
             ->get();
 
         $productsIncluded = Order_Details::join('products', 'order_details.product_id', 'products.id')
-            
+
             ->where('order_details.order_id', $this->order->id)
             ->select('products.title', 'products.id', 'products.itemMain', 'order_details.price')
             ->orderBy('title')
@@ -51,7 +54,7 @@ class SalesEdit extends Component
 
 
         $PackagesIcluded = Order_Details::join('packages', 'order_details.package_id', 'packages.id')
-           
+
             ->where('order_details.order_id', $this->order->id)
             ->select('packages.title', 'packages.id', 'packages.itemMain', 'order_details.price')
             ->orderBy('title')
@@ -60,7 +63,7 @@ class SalesEdit extends Component
 
 
         $MembershipsIcluded = Order_Details::join('memberships', 'order_details.membership_id', 'memberships.id')
-           
+
             ->where('order_details.order_id', $this->order->id)
             ->select('memberships.title', 'memberships.id', 'memberships.itemMain', 'order_details.price')
             ->orderBy('title')
@@ -68,20 +71,20 @@ class SalesEdit extends Component
 
 
         $sumaProductos = Order_Details::join('products', 'order_details.product_id', 'products.id')
-           
+
             ->where('order_details.order_id', $this->order->id)
             ->sum('order_details.price');
 
 
         $sumaPackages = Order_Details::join('packages', 'order_details.package_id', 'packages.id')
-     
+
             ->where('order_details.order_id', $this->order->id)
             ->sum('order_details.price');
 
 
 
         $sumaMembresias = Order_Details::join('memberships', 'order_details.membership_id', 'memberships.id')
-         
+
             ->where('order_details.order_id', $this->order->id)
             ->sum('order_details.price');
 
@@ -106,8 +109,8 @@ class SalesEdit extends Component
         $product = Product::findOrFail($id);
         $this->order->products()->attach($id, [
             'price' => $product->price_with_discount,
-            'created_at'=>now(),
-            'updated_at'=>now(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
     public function removeProduct($id)
@@ -121,8 +124,8 @@ class SalesEdit extends Component
         $package = Package::findOrFail($id);
         $this->order->Packages()->attach($id, [
             'price' => $package->price_with_discount,
-            'created_at'=>now(),
-            'updated_at'=>now(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
     public function removePackage($id)
@@ -136,12 +139,17 @@ class SalesEdit extends Component
         $membership = Membership::findOrFail($id);
         $this->order->Memberships()->attach($id, [
             'price' => $membership->price_with_discount,
-            'created_at'=>now(),
-            'updated_at'=>now(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
     public function removeMembership($id)
     {
         $this->order->Memberships()->detach($id);
+    }
+
+    public function clearSearch()
+    {
+        $this->reset(['search']);
     }
 }

@@ -36,7 +36,8 @@ class IndexSales extends Component
             ->when($this->search, function ($query) {
                 $query->where('payment_id', 'like', '%' . $this->search . '%')
                     ->orWhere('status', 'like', '%' . $this->search . '%')
-                    ->orWhere('order_id', 'like', '%' . $this->search . '%');
+                    ->orWhere('order_id', 'like', '%' . $this->search . '%')
+                    ->orWhere('id', 'like', '%' . $this->search . '%');
             })
             ->orWhereHas('user', function ($query) {
                 $query->where('email', 'like', '%' . $this->search . '%');
@@ -90,7 +91,7 @@ class IndexSales extends Component
         $this->reset(['search']);
     }
 
- 
+
 
     public function resendOrder($order)
     {
@@ -99,23 +100,23 @@ class IndexSales extends Component
 
         $this->order = Order::findOrFail($order);
 
-        
+
 
 
         $productosOrder = Order_Details::where('order_id', $this->order->id)->get();
-        $customer =User::findOrFail ($this->order->customer_id);
+        $customer = User::findOrFail($this->order->customer_id);
 
-     
 
-        
-       
+
+
+
 
         foreach ($productosOrder as $item) {
             if ($item->membership_id != null) {
-                
-            
+
+
                 $membresia = Membership::findOrFail($item->membership_id);
-       
+
                 $MembresiasCompradas[] = [
                     'membership_id' => $membresia->id,
                     'title' => $membresia->title,
@@ -138,9 +139,9 @@ class IndexSales extends Component
             $correoCopia = new PaymentApprovedEmail($this->order->id, $customer->name, $this->order->amount);
             Mail::to('arnulfoacosta0887@gmail.com')
                 ->send($correoCopia);
-                $this->emit('success-auto-close', [
-                    'message' => 'Orden enviada',
-                ]);
+            $this->emit('success-auto-close', [
+                'message' => 'Orden enviada',
+            ]);
         }
 
         //enviar correo de membresias
@@ -149,15 +150,15 @@ class IndexSales extends Component
             //validar si es membresia preescolar, se tiene que cambiar cada año
             if ($membresia['membership_id'] == 2006) {
 
-                $correo = new MembresiaPreescolar($this->order->id, $customer->name,$customer->email, $membresia['price']);
+                $correo = new MembresiaPreescolar($this->order->id, $customer->name, $customer->email, $membresia['price']);
                 Mail::to($customer->email)
                     ->send($correo);
                 $correoCopia = new MembresiaPreescolar($this->order->id, $customer->name, $customer->email, $membresia['price']);
                 Mail::to('arnulfoacosta0887@gmail.com')
                     ->send($correoCopia);
-                    $this->emit('success-auto-close', [
-                        'message' => 'Preescolar enviada',
-                    ]);
+                $this->emit('success-auto-close', [
+                    'message' => 'Preescolar enviada',
+                ]);
             }
 
             if ($membresia['membership_id'] == 2007) {
@@ -167,9 +168,9 @@ class IndexSales extends Component
                 $correoCopia = new MembresiaPrimaria($this->order->id, $customer->name, $customer->email, $membresia['price']);
                 Mail::to('arnulfoacosta0887@gmail.com')
                     ->send($correoCopia);
-                    $this->emit('success-auto-close', [
-                        'message' => 'Primaria enviada',
-                    ]);
+                $this->emit('success-auto-close', [
+                    'message' => 'Primaria enviada',
+                ]);
             }
         }
     }
