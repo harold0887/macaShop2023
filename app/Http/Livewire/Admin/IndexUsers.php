@@ -46,10 +46,10 @@ class IndexUsers extends Component
         $this->reset(['search']);
     }
 
-    public function changeStatus(User $user)
+    public function changeStatus($id, $status)
     {
-
-         try {
+        try {
+            $user = User::findOrFail($id);
 
             if ($user->hasRole('admin')) {
                 $this->emit('error', [
@@ -57,12 +57,12 @@ class IndexUsers extends Component
                 ]);
             } else {
 
-                if ($user->isNotBanned()) {
-                    $user->ban();
-                }
-                
+                $user->update([
+                    'status' => $status == 0 ? true : false
+                ]);
+
                 $this->emit('success-auto-close', [
-                    'message' => 'El usuario ha sido bloqueado con éxito',
+                    'message' => 'El cambio se realizo con éxito',
                 ]);
             }
         } catch (QueryException $e) {
@@ -70,30 +70,5 @@ class IndexUsers extends Component
                 'message' => $e->getMessage(),
             ]);
         }
-
-
-
-        // try {
-        //     $user = User::findOrFail($id);
-
-        //     if ($user->hasRole('admin')) {
-        //         $this->emit('error', [
-        //             'message' => 'No puede cambiar el status a un administrador',
-        //         ]);
-        //     } else {
-
-        //         $user->update([
-        //             'status' => $status == 0 ? true : false
-        //         ]);
-
-        //         $this->emit('success-auto-close', [
-        //             'message' => 'El cambio se realizo con éxito',
-        //         ]);
-        //     }
-        // } catch (QueryException $e) {
-        //     $this->emit('error', [
-        //         'message' => $e->getMessage(),
-        //     ]);
-        // }
     }
 }
