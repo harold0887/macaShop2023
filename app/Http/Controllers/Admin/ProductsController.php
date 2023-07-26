@@ -43,7 +43,7 @@ class ProductsController extends Controller
 
         $request->validate([
             'title' => ['required', 'unique:products'],
-            'document' => 'required|mimes:pdf,ppt,pptx',
+            'document' => 'required|mimes:pdf,ppt,pptx,zip',
             'itemMain' => 'required|image',
             'price' => 'required',
             'discount' => 'required',
@@ -136,7 +136,6 @@ class ProductsController extends Controller
             'information' => 'required',
             'items.*' => 'image',
             'disponible' => 'required|date',
-
         ]);
 
         //dd($request);

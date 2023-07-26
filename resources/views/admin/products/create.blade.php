@@ -132,7 +132,7 @@
                                             <span class="btn btn-rose btn-round btn-file">
                                                 <span class="fileinput-new">Selecciona el documento</span>
                                                 <span class="fileinput-exists">Cambiar</span>
-                                                <input type="file" name="document" accept=".doc,.docx,.pdf,.ppt,.pptx,.ppxs " />
+                                                <input type="file" name="document" accept=".doc,.docx,.pdf,.ppt,.pptx,.ppxs, .zip " />
                                             </span>
                                             <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Eliminar</a>
                                         </div>

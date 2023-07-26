@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
         "livewire/livewire": "^2.12",
+        "mchev/banhammer": "^1.2",
         "mercadopago/dx-php": "^2.5",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi": "^2.3",

@@ -130,7 +130,7 @@
 
                                         </td>
                                         <td>
-                                            <div class="togglebutton" wire:click="changeStatus({{ $user->id }}, '{{ $user->status }}')">
+                                            <div class="togglebutton" wire:click="changeStatus({{ $user->id }})">
                                                 <label>
                                                     <input type="checkbox" {{ $user->status == 1 ? 'checked ' : '' }} name="status">
                                                     <span class="toggle"></span>
