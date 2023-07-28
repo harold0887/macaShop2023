@@ -56,6 +56,7 @@ class ShowSales extends Component
                 'orders.active',
                 'products.title',
                 'products.folio',
+                'products.document',
             )->get();
 
         $packages = Package::join('order_details', 'order_details.package_id', '=', 'packages.id')

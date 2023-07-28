@@ -55,7 +55,7 @@
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
-                                    <tr  >
+                                    <tr>
                                         <th style="cursor:pointer" wire:click="setSort('id')">
                                             @if($sortField=='id')
                                             @if($sortDirection=='asc')
@@ -128,12 +128,15 @@
                                             @else
                                             <i class="fa-solid fa-sort mr-1"></i>
                                             @endif
-                                            Estatus de pago
+                                            Estatus
                                         </th>
-                                        
+                                        <th>
+                                            Membresía
+                                        </th>
+
                                         <th>email</th>
                                         <th>Contacto</th>
-                                        
+
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -172,6 +175,16 @@
                                                 <i class="material-icons">warning</i>{{ $order->status }}
                                             </a>
                                             @endif
+                                        </td>
+                                        <td>
+
+                                            @foreach($order->memberships as $membresia)
+                                            <span class="badge badge-info d-block my-1">
+                                                {{ $membresia->title }}
+
+                                            </span>
+                                            @endforeach
+
                                         </td>
                                         <td>
                                             {{ $order->user->email }}

@@ -55,15 +55,18 @@
                 <div class="col-12">
                     <h2>Lista de compras</h2>
                 </div>
-                <div class="col-12">
+                <div class="col-12 col-lg-6">
 
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
 
                                     <th>
                                         Order ID
+                                    </th>
+                                    <th>
+                                       Actions
                                     </th>
 
 
@@ -73,6 +76,11 @@
                                 @foreach ($product->orders as $order)
                                 <tr>
                                     <td>{{ $order->order_id }}</td>
+                                    <td>
+                                        <a class="btn btn-info btn-link m-0 p-0" href="{{ route('sales.show', $order->order_id) }}" target="_blank">
+                                            <i class=" material-icons">visibility</i>
+                                        </a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

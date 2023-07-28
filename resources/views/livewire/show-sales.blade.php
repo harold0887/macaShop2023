@@ -133,6 +133,8 @@
                                                                     </a>
 
                                                                     @else
+
+                                                                    @if(Storage::exists('public/'.$product->document))
                                                                     <div wire:loading.remove>
                                                                         <button class="btn btn-outline-info btn-round w-100" wire:click.prevent="download('{{ $product->id }}')">
                                                                             <i class="material-icons">download</i> Descargar
@@ -147,6 +149,17 @@
                                                                         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                                                         Descargando...
                                                                     </button>
+                                                                    @else
+
+                                                                    <div>
+                                                                        <button class="btn btn-link btn-round w-100 btn-danger" disabled>
+                                                                            <i class="material-icons">file_download_off</i> Expired
+                                                                        </button>
+                                                                    </div>
+                                                                    @endif
+
+
+
                                                                     @endif
 
 
