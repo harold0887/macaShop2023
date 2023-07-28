@@ -83,19 +83,12 @@
                                                     <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                                     Descargando...
                                                 </button>
-
                                                 @endif
-
-
-
-
-
                                             </div>
                                             @else
                                             <div class="col-12 ">
                                                 <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-
-                                                    Disponible {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
+                                                    Disponible próximamente
                                                 </button>
                                             </div>
 

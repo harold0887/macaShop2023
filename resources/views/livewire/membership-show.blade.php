@@ -200,7 +200,7 @@
                     </div>
                     <div class="col-12 mt-2 border-top ">
                         <h2 class="my-0 title text-center text-primary text-sm sm:text-2x1 md:text-2xl  lg:text-2xl mt-2">
-                        Consulta la lista de materiales didácticos incluidos en la membresía  {{ $membership->title }}
+                            Consulta la lista de materiales didácticos incluidos en la membresía {{ $membership->title }}
                         </h2>
                     </div>
                     <div class="col-12">
@@ -257,7 +257,7 @@
                                                             </button>
                                                             @else
                                                             <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
+                                                                Disponible próximamente
                                                             </button>
                                                             @endif
                                                         </td>
