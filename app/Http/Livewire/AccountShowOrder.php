@@ -192,7 +192,6 @@ class AccountShowOrder extends Component
                             'email' => Auth::user()->email
                         ]);
                     }
-                    
                 } else {
                     $correo = new EnvioMaterial($this->product);
                     Mail::to(Auth::user()->email)->send($correo);
@@ -222,6 +221,10 @@ class AccountShowOrder extends Component
         } catch (ErrorException  $e) {
             $this->emit('error', [
                 'message' => 'No se pudo enviar el archivo    - ' . $this->product->title . ' - ' . $e->getMessage(),
+            ]);
+        } catch (\Throwable $e) {
+            $this->emit('error', [
+                'message' => 'Error al enviar el email - ' . $e->getMessage(),
             ]);
         } finally {
             $this->emit('alertDownload', [

@@ -176,7 +176,15 @@ class AccountShowPackages extends Component
             $this->emit('error', [
                 'message' => 'No se pudo enviar el archivo    - ' . $this->product->title . ' - ' . $e->getMessage(),
             ]);
-        } finally {
+        } 
+        catch (\Throwable $e) {
+            $this->emit('error', [
+                'message' => 'Error al enviar el email - ' . $e->getMessage(),
+            ]);
+        }
+        
+        
+        finally {
             $this->emit('alertDownload', [
                 'message' => "<span class='text-sm'><b>Importante !</b> - Si tiene problemas con la descarga, se recomienda descargar desde una computadora.</span>"
             ]);
