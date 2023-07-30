@@ -128,7 +128,7 @@
                                             @else
                                             <i class="fa-solid fa-sort mr-1"></i>
                                             @endif
-                                            Estatus
+                                            Status
                                         </th>
                                         <th>
                                             Membresía
@@ -152,23 +152,23 @@
                                         <td>
                                             @if ($order->status == 'approved')
                                             <a class="text-success">
-                                                <i class="material-icons">check_circle</i> Aprobado
+                                                <i class="material-icons">check_circle</i> 
                                             </a>
                                             @elseif($order->status == 'pending')
                                             <a class="text-warning">
-                                                <i class="material-icons">pending</i> Pendiente
+                                                <i class="material-icons">pending</i> 
                                             </a>
                                             @elseif($order->status == 'in_process')
                                             <a class="text-warning">
-                                                <i class="material-icons">watch_later</i> En proceso
+                                                <i class="material-icons">watch_later</i> 
                                             </a>
                                             @elseif($order->status == 'cancel')
                                             <a class="text-danger">
-                                                <i class="material-icons">cancel</i>Cancelado
+                                                <i class="material-icons">cancel</i>
                                             </a>
                                             @elseif($order->status == 'refund')
                                             <a class="text-danger">
-                                                <i class="material-icons">settings_backup_restore</i>Reembolso
+                                                <i class="material-icons">settings_backup_restore</i>
                                             </a>
                                             @else
                                             <a>
