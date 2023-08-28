@@ -227,45 +227,17 @@
                                 <!-- Card body -->
                                 <div id="collapse10" class="collapse" role="tabpanel" aria-labelledby="heading10" data-parent="#accordionEx2">
                                     <div class="card-body rgba-teal-strong white-text">
-                                        <div class="table-responsive px-0">
-                                            <table class="table table-hover table-shopping">
-                                                <thead>
-                                                    <tr>
-                                                        <th><b>Producto</b></th>
-                                                        <th><b>Disponible</b></th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($membership->products as $purchase)
-
-                                                    @if(Str::substr($purchase->fecha_membresia, 0,7) =="2023-07" )
-                                                    <tr>
-                                                        <td>
-                                                            <div class="img-container ">
-                                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
-                                                                <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
-                                                                @endif
-                                                            </div>
-                                                            <span class="h5"><small>{{ $purchase->numero }}_{{ $purchase->title }} </small></span>
-                                                            <br><small>Archivo en formato {{ $purchase->format }} </small>
-                                                        </td>
-                                                        <td>
-                                                            @if(now() >= $purchase->fecha_membresia)
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                Descarga inmediata
-                                                            </button>
-                                                            @else
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                Disponible próximamente
-                                                            </button>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                    @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                        <div class="row">
+                                            @foreach ($membership->products as $purchase)
+                                            @if ($purchase->numero >= 1 && $purchase->numero <= 20 ) 
+                                             <div class="col-4 col-md-3">
+                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
+                                                    <img class="w-100 shadow rounded" src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                    <br><small>{{ $purchase->title }} </small>
+                                                @endif
+                                             </div>   
+                                            @endif
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -290,46 +262,19 @@
                                 <!-- Card body -->
                                 <div id="collapse11" class="collapse" role="tabpanel" aria-labelledby="heading11" data-parent="#accordionEx2">
                                     <div class="card-body rgba-teal-strong white-text">
-                                        <div class="table-responsive px-0">
-                                            <table class="table table-hover table-shopping">
-                                                <thead>
-                                                    <tr>
-                                                        <th><b>Producto</b></th>
-                                                        <th><b>Disponible</b></th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($membership->products as $purchase)
-
-                                                    @if(Str::substr($purchase->fecha_membresia, 0,7) =="2023-09" )
-                                                    <tr>
-                                                        <td>
-                                                            <div class="img-container ">
-                                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
-                                                                <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
-                                                                @endif
-                                                            </div>
-                                                            <span class="h5"><small>{{ $purchase->title }} </small></span>
-                                                            <br><small>Archivo en formato {{ $purchase->format }} </small>
-                                                        </td>
-                                                        <td>
-                                                            @if(now() >= $purchase->fecha_membresia)
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                Descarga inmediata
-                                                            </button>
-                                                            @else
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
-                                                            </button>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                    @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                        <div class="row">
+                                            @foreach ($membership->products as $purchase)
+                                            @if ($purchase->numero >= 21 && $purchase->numero <= 40 ) 
+                                             <div class="col-4 col-md-3">
+                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
+                                                    <img class="w-100 shadow rounded" src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                    <br><small>{{ $purchase->title }} </small>
+                                                @endif
+                                             </div>   
+                                            @endif
+                                            @endforeach
                                         </div>
+                                     
                                     </div>
                                 </div>
                             </div>
@@ -353,45 +298,17 @@
                                 <!-- Card body -->
                                 <div id="collapse12" class="collapse" role="tabpanel" aria-labelledby="heading12" data-parent="#accordionEx2">
                                     <div class="card-body rgba-teal-strong white-text">
-                                        <div class="table-responsive px-0">
-                                            <table class="table table-hover table-shopping">
-                                                <thead>
-                                                    <tr>
-                                                        <th><b>Producto</b></th>
-                                                        <th><b>Disponible</b></th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($membership->products as $purchase)
-
-                                                    @if(Str::substr($purchase->fecha_membresia, 0,7) =="2023-10" )
-                                                    <tr>
-                                                        <td>
-                                                            <div class="img-container ">
-                                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
-                                                                <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
-                                                                @endif
-                                                            </div>
-                                                            <span class="h5"><small>{{ $purchase->title }} </small></span>
-                                                            <br><small>Archivo en formato {{ $purchase->format }} </small>
-                                                        </td>
-                                                        <td>
-                                                            @if(now() >= $purchase->fecha_membresia)
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                Descarga inmediata
-                                                            </button>
-                                                            @else
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
-                                                            </button>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                    @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                        <div class="row">
+                                            @foreach ($membership->products as $purchase)
+                                            @if ($purchase->numero >= 41 && $purchase->numero <= 60 ) 
+                                             <div class="col-4 col-md-3">
+                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
+                                                    <img class="w-100 shadow rounded" src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                    <br><small>{{ $purchase->title }} </small>
+                                                @endif
+                                             </div>   
+                                            @endif
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -416,46 +333,18 @@
                                 <!-- Card body -->
                                 <div id="collapse13" class="collapse" role="tabpanel" aria-labelledby="heading13" data-parent="#accordionEx2">
                                     <div class="card-body rgba-teal-strong white-text">
-                                        <div class="table-responsive px-0">
-                                            <table class="table table-hover table-shopping">
-                                                <thead>
-                                                    <tr>
-                                                        <th><b>Producto</b></th>
-                                                        <th><b>Disponible</b></th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($membership->products as $purchase)
-
-                                                    @if(Str::substr($purchase->fecha_membresia, 0,7) =="2023-11" )
-                                                    <tr>
-                                                        <td>
-                                                            <div class="img-container ">
-                                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
-                                                                <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
-                                                                @endif
-                                                            </div>
-                                                            <span class="h5"><small>{{ $purchase->title }} </small></span>
-                                                            <br><small>Archivo en formato {{ $purchase->format }} </small>
-                                                        </td>
-                                                        <td>
-                                                            @if(now() >= $purchase->fecha_membresia)
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                Descarga inmediata
-                                                            </button>
-                                                            @else
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
-                                                            </button>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                    @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                            <div class="row">
+                                            @foreach ($membership->products as $purchase)
+                                            @if ($purchase->numero >= 61 && $purchase->numero <= 80 ) 
+                                             <div class="col-4 col-md-3">
+                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
+                                                    <img class="w-100 shadow rounded" src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                    <br><small>{{ $purchase->title }} </small>
+                                                @endif
+                                             </div>   
+                                            @endif
+                                            @endforeach
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -479,45 +368,17 @@
                                 <!-- Card body -->
                                 <div id="collapse14" class="collapse" role="tabpanel" aria-labelledby="heading14" data-parent="#accordionEx2">
                                     <div class="card-body rgba-teal-strong white-text">
-                                        <div class="table-responsive px-0">
-                                            <table class="table table-hover table-shopping">
-                                                <thead>
-                                                    <tr>
-                                                        <th><b>Producto</b></th>
-                                                        <th><b>Disponible</b></th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($membership->products as $purchase)
-
-                                                    @if(Str::substr($purchase->fecha_membresia, 0,7) =="2023-12" )
-                                                    <tr>
-                                                        <td>
-                                                            <div class="img-container ">
-                                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
-                                                                <img src="{{ Storage::url($purchase->itemMain) }}" alt="...">
-                                                                @endif
-                                                            </div>
-                                                            <span class="h5"><small>{{ $purchase->title }} </small></span>
-                                                            <br><small>Archivo en formato {{ $purchase->format }} </small>
-                                                        </td>
-                                                        <td>
-                                                            @if(now() >= $purchase->fecha_membresia)
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                Descarga inmediata
-                                                            </button>
-                                                            @else
-                                                            <button class="btn  btn-primary btn-link show-spinner  px-0" disabled>
-                                                                {{date_format(new DateTime($purchase->fecha_membresia), 'd-M-Y')}}
-                                                            </button>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                    @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                        <div class="row">
+                                            @foreach ($membership->products as $purchase)
+                                            @if ($purchase->numero >= 81 && $purchase->numero <= 100 ) 
+                                             <div class="col-4 col-md-3">
+                                                @if ($purchase->itemMain && Storage::exists('public/'.$purchase->itemMain))
+                                                    <img class="w-100 shadow rounded" src="{{ Storage::url($purchase->itemMain) }}" alt="...">
+                                                    <br><small>{{ $purchase->title }} </small>
+                                                @endif
+                                             </div>   
+                                            @endif
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
