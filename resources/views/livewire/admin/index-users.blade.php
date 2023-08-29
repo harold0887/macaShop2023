@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="card-body row">
-                    <div class="col-12">
+                        <div class="col-12">
                             @if ($search != '')
                             <div class="d-flex mt-2">
                                 <span class="text-base">Borrar filtros </span>
@@ -52,7 +52,7 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                    <th style="cursor:pointer" wire:click="setSort('id')">
+                                        <th style="cursor:pointer" wire:click="setSort('id')">
                                             @if($sortField=='id')
                                             @if($sortDirection=='asc')
                                             <i class="fa-solid fa-arrow-down-a-z"></i>
@@ -64,7 +64,7 @@
                                             @endif
                                             ID
                                         </th>
-                                       
+
                                         <th style="cursor:pointer" wire:click="setSort('name')">
                                             @if($sortField=='name')
                                             @if($sortDirection=='asc')
@@ -112,7 +112,7 @@
                                 <tbody>
                                     @foreach ($users as $user)
                                     <tr class=" {{ $user->status == 0 ? 'table-danger ' : '' }}">
-                                    <td>{{ $user->id }}</td>
+                                        <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{date_format($user->created_at, 'd-M-Y')}}</td>
@@ -123,7 +123,7 @@
                                             <span class="badge badge-info  my-1">
                                                 {{ $role->name }}
                                             </span>
-                                           
+
                                             @endif
                                             @endforeach
 
@@ -145,6 +145,10 @@
                                             <a class="btn btn-success btn-link" href="{{ route('users.edit', $user->id) }}">
                                                 <i class="material-icons">edit</i>
                                             </a>
+                                            <a class="btn btn-info btn-link" wire:click="newSales({{ $user->id }})">
+                                                <i class="material-icons">add</i>
+                                            </a>
+
                                             @endif
                                         </td>
                                     </tr>
