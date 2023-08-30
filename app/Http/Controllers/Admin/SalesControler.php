@@ -30,9 +30,8 @@ class SalesControler extends Controller
         $request->validate([
             'order' => 'required',
             'price' => 'required',
-            'type' => 'required',
             'user' => 'required',
-            'contacto' => 'required'
+            
         ]);
 
         //obtener al comprador
@@ -43,10 +42,11 @@ class SalesControler extends Controller
                 'customer_id' => $customer->id,
                 'amount' => request('price'),
                 'status' => 'approved',
-                'payment_type' => request('type'),
+                'payment_type' => 'mercado_pago',
                 'payment_id' => request('order'),
                 'order_id' => request('order'),
-                'contacto' => request('contacto')
+                'active' => false,
+                
             ]);
             return back()->with('success', 'Registro exitoso');
         } catch (QueryException $e) {

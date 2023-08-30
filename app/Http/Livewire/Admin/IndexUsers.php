@@ -90,6 +90,7 @@ class IndexUsers extends Component
                 'payment_type' => 'Externo',
                 'payment_id' => $lastOrder->payment_id + 1,
                 'order_id' => $lastOrder->payment_id + 1,
+                'active' => false,
 
             ]);
 

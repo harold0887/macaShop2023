@@ -36,20 +36,8 @@
                                     <small class="text-danger"> {{ $message }} </small>
                                     @enderror
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label class="mr-sm-2" for="type">Tipo de pago</label>
-                                    <input type="text" class="form-control" name="type" value="{{ old('type') }}">
-                                    @error('type')
-                                    <small class="text-danger"> {{ $message }} </small>
-                                    @enderror
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label class="mr-sm-2" for="contacto">Contacto</label>
-                                    <input type="text" class="form-control" name="contacto" value="{{ old('contacto') }}">
-                                    @error('contacto')
-                                    <small class="text-danger"> {{ $message }} </small>
-                                    @enderror
-                                </div>
+
+
 
                             </div>
                             <div class="form-row">
