@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Request;
 
 class SalesEdit extends Component
 {
-    public $order, $ids, $patch, $search = '';
+    public $order, $ids, $patch, $search = '', $contacto, $status;
     public function mount()
     {
         $patch = Request::fullUrl();
@@ -21,6 +21,8 @@ class SalesEdit extends Component
         $this->ids = $div[5];
 
         $this->order = Order::findOrFail($this->ids);
+        $this->contacto = $this->order->contacto;
+        $this->status = $this->order->status;
     }
     public function render()
     {
@@ -151,5 +153,21 @@ class SalesEdit extends Component
     public function clearSearch()
     {
         $this->reset(['search']);
+    }
+
+    public function save()
+    {
+        Order::findOrFail($this->order->id)->update([
+          
+            'status' => $this->status,
+            'contacto' => $this->contacto,
+            
+            
+        ]);
+
+
+        $this->emit('success-auto-close', [
+            'message' => 'La orden due actualizada de manera correcta' . $this->status,
+        ]);
     }
 }

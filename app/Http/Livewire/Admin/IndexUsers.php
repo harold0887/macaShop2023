@@ -95,7 +95,7 @@ class IndexUsers extends Component
             ]);
 
              
-           return redirect()->to('dashboard/sales/'.$newOrder->id.'/edit');
+           return redirect()->to('dashboard/sales/'.$newOrder->id.'/edit')->with('success-auto-close', 'Registro exitoso');
 
             //return back()->with('success', 'Registro exitoso');
         } catch (QueryException $e) {

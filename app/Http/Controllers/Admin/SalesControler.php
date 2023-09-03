@@ -31,14 +31,14 @@ class SalesControler extends Controller
             'order' => 'required',
             'price' => 'required',
             'user' => 'required',
-            
+
         ]);
 
         //obtener al comprador
         $customer = User::findOrFail(request('user'));
         try {
 
-            Order::create([
+            $newOrder = Order::create([
                 'customer_id' => $customer->id,
                 'amount' => request('price'),
                 'status' => 'approved',
@@ -46,9 +46,11 @@ class SalesControler extends Controller
                 'payment_id' => request('order'),
                 'order_id' => request('order'),
                 'active' => false,
-                
+
             ]);
-            return back()->with('success', 'Registro exitoso');
+
+
+            return redirect()->to('dashboard/sales/' . $newOrder->id . '/edit')->with('success-auto-close', 'Registro exitoso');
         } catch (QueryException $e) {
             return back()->with('error', 'Error al guardar el registro - ' .  $e->getMessage());
         }
@@ -124,7 +126,7 @@ class SalesControler extends Controller
             } else {
                 $messageError = $e->getMessage();
             }
-            return back()->with('error', 'Error al eliminar el registro - ' . $messageError);
+            return back()->with('error', 'Error al eliminar el registro - ');
         }
     }
 }

@@ -18,13 +18,44 @@
                         </div>
                     </div>
                     <div class="card-body row">
-                        <div class="col-12">
+                        <div class="col-12 col-md-6">
                             <h4 class="title h3 text-center">Total de la orden: {{ number_format($suma,2) }} MXN</h4>
                         </div>
+                        <div class="col-12 col-md-6">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <div class="form-row ">
+                                        <div class="form-group col-12 ">
+                                            <label class="bmd-label-floating">Contacto</label>
+                                            <input type="text" class="form-control" wire:model="contacto">
+                                        </div>
+                                        <div class="form-group col-12 ">
+                                            <select class="form-control" name="fop" wire:model="status">
+                                                <option value="">Selecciona un estatus...</option>
+                                                <option value="approved">approved</option>
+                                                <option value="pending">pending</option>
+                                                <option value="in_process">in_process</option>
+                                                <option value="cancel">cancel</option>
+                                                <option value="refund">refund</option>
+                                            </select>
+                                        </div>
+                                        @error('fop')
+                                        <small class=" text-danger"> {{ $message }} </small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-auto  d-flex">
+                                    <button class="btn btn-info btn-link text-success" wire:click='save'>
+                                        <i class=" material-icons ">save</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
                         <div class="form-row">
-
                             <div class="col-12 col-md-6 rounded shadow pl-4 border">
-
                                 <div class="col">
                                     <h4 class="title h3 text-center">Agregar membresías a la orden </h4>
                                 </div>
