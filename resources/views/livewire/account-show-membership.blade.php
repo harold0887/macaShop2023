@@ -19,6 +19,31 @@
             <div class="col-12">
                 <h4 class="card-title h3"><strong>{{$membership->title}}</strong> </h4>
             </div>
+
+            @if($order->active == 0)
+
+            <div class="col-12">
+                <small>Esta membresía requiere activación.</small>
+                <br>
+                <small>
+                    Da clic en el logo de WhatsApp para enviar un mensaje y solicitar la activación.
+                </small>
+                <br>
+                @if($membership->title=='Preescolar VIP 2023-2024')
+                <a href="https://api.whatsapp.com/send?phone=+9981838908&text=Quiero%20activar%20mi%20membres%C3%ADa%20PREESCOLAR%20-%20compra%20web: {{ $order->id }} - {{auth()->user()->email}} " target="_blank">
+                    <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
+                </a>
+
+                @elseif($membership->title=='Primaria VIP 2023-2024')
+
+                <a href="https://api.whatsapp.com/send?phone=+9981838908&text=Quiero%20activar%20mi%20membres%C3%ADa%20PRIMARIA%20-%20compra%20web: {{ $order->id }} - {{auth()->user()->email}} " target="_blank">
+                    <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
+                </a>
+                @endif
+            </div>
+
+            @else
+
             <div class="col-12">
                 <div class="card mt-0" id="orders">
 
@@ -122,6 +147,15 @@
                     </div>
                 </div>
             </div>
+
+
+            @endif
+
+
+
+
+
+
 
 
 

@@ -80,7 +80,8 @@ class AccountShowOrder extends Component
                 'memberships.title',
                 'memberships.status',
                 'memberships.expiration',
-                'order_details.price'
+                'order_details.price',
+                'orders.active'
             )->orderBy('memberships.title')
             ->get();
 

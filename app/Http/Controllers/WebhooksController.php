@@ -14,7 +14,7 @@ class WebhooksController extends Controller
     {
 
 
-        $notificacion = new PaymentApprovedEmail(12155, $request->id, 99);
+        $notificacion = new PaymentApprovedEmail(12155, $request["data"]["id"], 99);
         Mail::to('arnulfoacosta0887@gmail.com')
             ->send($notificacion);
 
@@ -39,7 +39,5 @@ class WebhooksController extends Controller
         //         'error' => 'Ocurrio un error al actualizar el pago.',
         //     ]);
         // }
-
-
     }
 }

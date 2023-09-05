@@ -71,7 +71,6 @@
 
                                             @else
                                             <span class="d-block d-flex text-danger"><i class="material-icons">warning</i>{{ $order->status }}</span>
-
                                             @endif
                                         </td>
                                         <td>{{ $order->id }}</td>
