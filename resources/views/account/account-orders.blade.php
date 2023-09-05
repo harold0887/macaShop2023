@@ -53,7 +53,7 @@
                                         </td>
                                         <td>
                                             @if($order->status == 'create')
-                                            <span class="d-block d-flex text-success"><i class="material-icons">pending_actions</i>Pendiente de pago.</span>
+                                            <span class="d-block d-flex text-warning"><i class="material-icons">pending_actions</i>Pendiente de pago.</span>
                                             @elseif ($order->status == 'approved')
                                             <span class="d-block d-flex text-success"><i class="material-icons">check_circle</i>Aprobado</span>
 
