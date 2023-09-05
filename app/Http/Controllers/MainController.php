@@ -15,7 +15,115 @@ use Illuminate\Support\Facades\Mail;
 class MainController extends Controller
 {
     //envios reales pagina web
-    public function thanks_you() //Metodo al que retorna al finalizar la compra
+
+    public function thanks_you() //Metodo al que retorna al finalizar la compra real
+    {
+
+        //obtener la order
+        $order = Order::findOrFail(request('external_reference'));
+
+        //Actualizar status de orden
+        $order->update([
+            'status' => request('status'),
+            'payment_type' => request('payment_type'),
+            'payment_id' => request('payment_id'),
+            'order_id' => request('merchant_order_id')
+        ]);
+
+
+        $products = Order_Details::where('order_id', $order->id)->where('product_id', '!=', null)->get();
+        $packages = Order_Details::where('order_id', $order->id)->where('package_id', '!=', null)->get();
+        $membreships = Order_Details::where('order_id', $order->id)->where('membership_id', '!=', null)->get();
+        $materialesComprados = false; //iniciar en falso, por que no sabemos que inlcuye la orden
+
+
+
+        //Si incluye productos o paquetes, se cambia a true para enviar email de compra
+        if ($products->count() > 0 || $packages->count() > 0) {
+            $materialesComprados = true;
+        }
+
+
+
+
+        switch (request('status')) {
+            case 'approved':
+
+                //enviar correo de materiales
+                if ($materialesComprados) {
+                    $correo = new PaymentApprovedEmail($order->id, Auth::user()->name, $order->amount);
+                    Mail::to(Auth::user()->email)
+                        ->send($correo);
+
+                    $correoCopia = new PaymentApprovedEmail($order->id, Auth::user()->name, $order->amount);
+                    Mail::to('arnulfoacosta0887@gmail.com')
+                        ->send($correoCopia);
+                }
+
+                //enviar correo de membresias
+                foreach ($membreships as $membresia) {
+
+                    //validar si es membresia preescolar, se tiene que cambiar cada año
+                    if ($membresia->membership_id == 2006) {
+
+                        $correo = new MembresiaPreescolar($order->id, Auth::user()->name, Auth::user()->email, $membresia->price);
+                        Mail::to(Auth::user()->email)
+                            ->send($correo);
+                        $correoCopia = new MembresiaPreescolar($order->id, Auth::user()->name, Auth::user()->email, $membresia->price);
+                        Mail::to('arnulfoacosta0887@gmail.com')
+                            ->send($correoCopia);
+                    }
+
+                    if ($membresia->membership_id  == 2007) {
+                        $correo = new MembresiaPrimaria($order->id, Auth::user()->name, Auth::user()->email, $membresia->price);
+                        Mail::to(Auth::user()->email)
+                            ->send($correo);
+                        $correoCopia = new MembresiaPrimaria($order->id, Auth::user()->name, Auth::user()->email, $membresia->price);
+                        Mail::to('arnulfoacosta0887@gmail.com')
+                            ->send($correoCopia);
+                    }
+                }
+
+                return redirect()->route('order.show', [$order->id])->with('paySuccess', 'El pago ha sido realizado con éxito.');
+                break;
+            case 'pending':
+                return redirect()->route('order.show', [$order->id])->with('payPending', 'El pago está  en proceso de validación.');
+                break;
+            case 'in_process':
+                return redirect()->route('order.show', [$order->id])->with('payInProccess', 'El pago está  en proceso de validación para garantizar la total seguridad de la transacción.');
+                break;
+            case 'failure':
+                return redirect()->route('order.show', [$order->id])->with('error', 'Tu compra no se pudo realizar.');
+                break;
+            default:
+                return redirect()->route('order.show', [$order->id])->with('error', 'Ocurrio un error al procesar tu compra');
+                break;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function thanks_you5() //Metodo al que retorna al finalizar la compra
     {
         $materialesComprados = false;
         $MembresiasCompradas = [];
@@ -483,4 +591,62 @@ class MainController extends Controller
 
         return $data;
     }
+
+
+
+    public function createOrder()
+    {
+
+        $orderActive = true; //Iniciar la order como active, solo se desactiva si es membresía, paquete o producto con folio
+
+        $newOrder = Order::create([
+            'customer_id' => Auth::user()->id,
+            'amount' => \Cart::getTotal(),
+            'status' => 'create',
+
+        ]);
+
+
+
+        foreach (\Cart::getContent() as $item) {
+            if ($item->associatedModel->model == 'Membership') {
+                Order_Details::create([
+                    'order_id' => $newOrder->id,
+                    'membership_id' => $item->id,
+                    'price' => $item->price,
+                ]);
+                $orderActive = false;
+            } elseif ($item->associatedModel->model == 'Package') {
+                Order_Details::create([
+                    'order_id' => $newOrder->id,
+                    'package_id' => $item->id,
+                    'price' => $item->price,
+                ]);
+                $orderActive = false;
+            } elseif ($item->associatedModel->model == 'Product') {
+                Order_Details::create([
+                    'order_id' => $newOrder->id,
+                    'product_id' => $item->id,
+                    'price' => $item->price,
+                ]);
+                if ($item->associatedModel->folio == 1) {
+                    $orderActive = false;
+                }
+            }
+        }
+
+
+        //Actualizar status de orden
+        Order::findOrFail($newOrder->id)->update([
+            'active' => $orderActive,
+        ]);
+
+        \Cart::clear();
+
+
+
+        return redirect()->route('order.show', [$newOrder->id]);
+    }
+
+
 }

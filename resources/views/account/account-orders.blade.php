@@ -52,24 +52,26 @@
                                             </a>
                                         </td>
                                         <td>
-                                            @if ($order->status == 'approved')
+                                            @if($order->status == 'create')
+                                            <span class="d-block d-flex text-success"><i class="material-icons">pending_actions</i>Pendiente de pago.</span>
+                                            @elseif ($order->status == 'approved')
                                             <span class="d-block d-flex text-success"><i class="material-icons">check_circle</i>Aprobado</span>
 
                                             @elseif($order->status == 'pending')
-                                            <span class="d-block d-flex text-warning"><i class="material-icons">pending</i> Pendiente</span>
-                                          
+                                            <span class="d-block d-flex text-warning"><i class="material-icons">pending</i> Pendiente de confirmación.</span>
+
                                             @elseif($order->status == 'in_process')
                                             <span class="d-block d-flex text-warning"><i class="material-icons">watch_later</i> En proceso</span>
-                                          
+
                                             @elseif($order->status == 'cancel')
-                                             <span class="d-block d-flex text-danger"><i class="material-icons">cancel</i>Cancelado</span>
-                                           
+                                            <span class="d-block d-flex text-danger"><i class="material-icons">cancel</i>Cancelado</span>
+
                                             @elseif($order->status == 'refund')
                                             <span class="d-block d-flex text-danger"><i class="material-icons">settings_backup_restore</i>Reembolso</span>
-                                           
+
                                             @else
                                             <span class="d-block d-flex text-danger"><i class="material-icons">warning</i>{{ $order->status }}</span>
-                                           
+
                                             @endif
                                         </td>
                                         <td>{{ $order->id }}</td>

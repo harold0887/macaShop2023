@@ -17,53 +17,6 @@
         <div class="row justify-content-center p-3">
 
             @if (\Cart::getContent()->count() > 0)
-
-            @php
-            // SDK de Mercado Pago
-            require base_path('vendor/autoload.php');
-            // Agrega credenciales
-            MercadoPago\SDK::setAccessToken(config('services.mercadopago.token'));
-
-            // Crea un objeto de preferencia
-            $preference = new MercadoPago\Preference();
-
-            // Crea un ítem en la preferencia
-            foreach (\Cart::getContent() as $prod) {
-            $item = new MercadoPago\Item();
-            $item->title = $prod->name;
-            $item->quantity = $prod->quantity;
-            $item->unit_price = $prod->price;
-            $products[]= $item;
-            }
-            $preference->items = $products;
-            $preference->back_urls = array(
-            "success" => route('shop.thanks'),
-            "failure" => route('shop.thanks'),
-            "pending" => route('shop.thanks'),
-            );
-            $preference->auto_return = "approved";
-
-            $preference->save();
-            @endphp
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="col-10 col-lg-6">
 
                 <span class="h3">
@@ -171,26 +124,20 @@
 
 
                         @auth
-                        @if(@Auth::user()->hasRole('admin'))
-                        <form action="{{ route('shop.thanks1') }}" method="POST">
+                        <form action="{{ route('shop.createOrder') }}" method="POST" style="cursor:pointer" id="create-product-admin">
                             @csrf
-                            <button class="btn btn-primary">
-                                prueba
+                            <button class="btn btn-lg   btn-primary btn-round  w-100">
+                                Finalizar orden
                             </button>
                         </form>
-                        @endif
-                        <div class="cho-container">
-                        </div>
-
                         @else
-                        <div class="chekout" wire:click="loginMessage()" style="cursor:pointer">
-                            Finalizar compra
-                        </div>
-
+                        <button class="btn btn-lg   btn-primary btn-round  w-100" wire:click="loginMessage()" style="cursor:pointer">
+                            Finalizar orden
+                        </button>
                         @endauth
                     </div>
                     <span class="text-center text-muted">
-                        Los recursos comprados se pueden descargar inmediatamente desde su cuenta
+                        Los recursos comprados se pueden descargar inmediatamente desde su cuenta*
                     </span>
                 </div>
 
@@ -198,50 +145,19 @@
             </div>
             @else
             <div class="col-12 col-lg-5 text-center ">
-
                 <img src="{{ asset('img/cart.png') }} " class="text-center  w-100">
-
-
                 <a href="{{ route('shop.index') }}" class="btn btn-primary h5">Ver tienda</a>
-
-
-
             </div>
 
 
             @endif
 
+            <div class="col-12 text-end">
+                <small class="text-xxs text-muted">*Algunos recursos pueden solicitar activación vía WhatsApp. </small>
+            </div>
         </div>
+
         @include('includes.borders')
 
     </div>
 </div>
-
-
-@push('js')
-@if (\Cart::getContent()->count() > 0)
-
-<script src="https://sdk.mercadopago.com/js/v2"></script>
-
-<script>
-    // Agrega credenciales de SDK
-    const mp = new MercadoPago("{{config('services.mercadopago.key')}}", {
-        locale: "es-MX",
-    });
-
-    // Inicializa el checkout
-    mp.checkout({
-        preference: {
-            id: "{{$preference->id}}",
-        },
-        render: {
-            container: ".cho-container", // Indica el nombre de la clase donde se mostrará el botón de pago
-            label: "Finalizar compra", // Cambia el texto del botón de pago (opcional)
-        },
-    });
-</script>
-
-
-@endif
-
-@endpush

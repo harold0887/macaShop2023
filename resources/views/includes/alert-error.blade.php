@@ -6,6 +6,26 @@
 @endif
 
 
+@if(session('paySuccess'))
+<script>
+    swal("¡Gracias por su compra!", "{{session('paySuccess')}}", "success");
+</script>
+@endif
+
+
+
+@if(session('payPending'))
+<script>
+    swal("¡Gracias por su compra!", "{{session('payPending')}}", "info");
+</script>
+@endif
+
+@if(session('payInProccess'))
+<script>
+    swal("¡Gracias por su compra!", "{{session('payInProccess')}}", "warning");
+</script>
+@endif
+
 @if(session('success-auto-close'))
 <script>
     alertFloat();

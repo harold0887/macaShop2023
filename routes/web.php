@@ -135,5 +135,10 @@ Route::get('aviso-de-privacidad', [MainController::class, 'aviso'])->name('infor
 
 Route::get('thanks_you', [MainController::class, 'thanks_you'])->name('shop.thanks');
 Route::POST('thanks_you1', [MainController::class, 'thanks_you1'])->name('shop.thanks1');
+Route::POST('createOrder', [MainController::class, 'createOrder'])->name('shop.createOrder');
+
+
+
+
 
 Route::post('webhooks', WebhooksController::class);

@@ -150,17 +150,21 @@
                                         <td>{{ $order->amount }}</td>
                                         <td>{{ $order->payment_type }}</td>
                                         <td>
-                                            @if ($order->status == 'approved')
+                                            @if($order->status == 'create')
+                                            <a class="text-warning">
+                                            <i class="material-icons">pending_actions</i>
+                                            </a>
+                                            @elseif ($order->status == 'approved')
                                             <a class="text-success">
-                                                <i class="material-icons">check_circle</i> 
+                                                <i class="material-icons">check_circle</i>
                                             </a>
                                             @elseif($order->status == 'pending')
                                             <a class="text-warning">
-                                                <i class="material-icons">pending</i> 
+                                                <i class="material-icons">pending</i>
                                             </a>
                                             @elseif($order->status == 'in_process')
                                             <a class="text-warning">
-                                                <i class="material-icons">watch_later</i> 
+                                                <i class="material-icons">watch_later</i>
                                             </a>
                                             @elseif($order->status == 'cancel')
                                             <a class="text-danger">
