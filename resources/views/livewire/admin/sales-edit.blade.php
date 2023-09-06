@@ -23,12 +23,18 @@
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="row">
-                                <div class="col-auto">
+                                <div class="col-12 col-md-9">
                                     <div class="form-row ">
                                         <div class="form-group col-12 ">
                                             <label class="bmd-label-floating">Contacto</label>
                                             <input type="text" class="form-control" wire:model="contacto">
                                         </div>
+                                        <div class="form-group col-12 ">
+                                            <label class="bmd-label-floating">Id Mercado Pago</label>
+                                            <input type="text" class="form-control" wire:model="mercadoPago">
+                                        </div>
+
+
                                         <div class="form-group col-12 ">
                                             <select class="form-control" name="fop" wire:model="status">
                                                 <option value="">Selecciona un estatus...</option>
@@ -39,9 +45,18 @@
                                                 <option value="refund">refund</option>
                                             </select>
                                         </div>
-                                        @error('fop')
-                                        <small class=" text-danger"> {{ $message }} </small>
-                                        @enderror
+                                        <div class="form-group col-12 ">
+                                            <div class="togglebutton">
+                                                <label>
+                                                    <span class="text-muted">WhatsApp:
+                                                        <input type="checkbox" wire:click="activeOrder()" {{ $order->active == 1 ? 'checked ' : '' }}>
+                                                        <span class="toggle"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="col-auto  d-flex">

@@ -65,7 +65,7 @@ class User extends Authenticatable
     //relacion con ordenes, retorna las ordenes de un usuario
     public function orders()
     {
-      return $this->hasMany('App\Models\Order');
+      return $this->hasMany('App\Models\Order','customer_id');
     }
    
 }

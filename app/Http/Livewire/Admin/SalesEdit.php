@@ -8,11 +8,13 @@ use App\Models\Product;
 use Livewire\Component;
 use App\Models\Membership;
 use App\Models\Order_Details;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Request;
 
 class SalesEdit extends Component
 {
-    public $order, $ids, $patch, $search = '', $contacto, $status;
+    protected $listeners = ['some-event2' => '$refresh'];
+    public $order, $ids, $patch, $search = '', $contacto, $status, $mercadoPago;
     public function mount()
     {
         $patch = Request::fullUrl();
@@ -23,6 +25,7 @@ class SalesEdit extends Component
         $this->order = Order::findOrFail($this->ids);
         $this->contacto = $this->order->contacto;
         $this->status = $this->order->status;
+        $this->mercadoPago = $this->order->payment_id;
     }
     public function render()
     {
@@ -158,16 +161,39 @@ class SalesEdit extends Component
     public function save()
     {
         Order::findOrFail($this->order->id)->update([
-          
+
             'status' => $this->status,
             'contacto' => $this->contacto,
-            
-            
+            'payment_id' => $this->mercadoPago,
         ]);
 
 
         $this->emit('success-auto-close', [
-            'message' => 'La orden due actualizada de manera correcta' . $this->status,
+            'message' => 'La orden fue actualizada de manera correcta',
         ]);
+    }
+
+
+    public function activeOrder()
+    {
+
+
+        try {
+            $venta = Order::findOrFail($this->order->id);
+            $status = $venta->active;
+
+            $venta->update([
+                'active' => $status == 0 ? true : false,
+            ]);
+            $this->emit('success-auto-close', [
+                'message' => 'El status se cambio de manera correcta',
+            ]);
+        } catch (QueryException $e) {
+            $this->emit('error', [
+                'message' => $e->getMessage(),
+            ]);
+        } finally {
+            $this->emit('some-event2');
+        }
     }
 }

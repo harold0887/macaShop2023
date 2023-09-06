@@ -102,6 +102,12 @@
                                             @endif
                                             Miembro desde
                                         </th>
+                                        <th style="cursor:pointer">
+                                            Ventas
+                                        </th>
+                                        <th style="cursor:pointer">
+                                            Membresías
+                                        </th>
                                         <th style="cursor:pointer" wire:click="setSort('role')">
                                             Rol
                                         </th>
@@ -117,6 +123,19 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{date_format($user->created_at, 'd-M-Y')}}</td>
                                         <td>
+                                            {{$user->orders->count()}}
+                                        </td>
+                                        <td>
+                                            @foreach($user->orders as $order)
+                                            @foreach($order->memberships as $memberships)
+                                            <span class="badge badge-info d-block my-1">
+                                                {{$memberships->title}}
+                                            </span>
+                                            @endforeach
+                                            @endforeach
+
+                                        </td>
+                                        <td>
 
                                             @foreach($user->roles as $role)
                                             @if($role->name =="admin")
@@ -129,6 +148,8 @@
 
 
                                         </td>
+
+
                                         <td>
                                             <div class="togglebutton" wire:click="changeStatus({{ $user->id }}, '{{ $user->status }}')">
                                                 <label>
