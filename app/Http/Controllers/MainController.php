@@ -55,9 +55,9 @@ class MainController extends Controller
                     Mail::to(Auth::user()->email)
                         ->send($correo);
 
-                    $correoCopia = new PaymentApprovedEmail($order->id, Auth::user()->name, $order->amount);
-                    Mail::to('arnulfoacosta0887@gmail.com')
-                        ->send($correoCopia);
+                    // $correoCopia = new PaymentApprovedEmail($order->id, Auth::user()->name, $order->amount);
+                    // Mail::to('arnulfoacosta0887@gmail.com')
+                    //     ->send($correoCopia);
                 }
 
                 //enviar correo de membresias

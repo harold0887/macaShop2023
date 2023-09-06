@@ -283,13 +283,13 @@ $preference->save();
 
                                                     @if($membership->title=='Preescolar VIP 2023-2024')
                                                     <a href="https://api.whatsapp.com/send?phone=+9981838908&text=Quiero%20activar%20mi%20membres%C3%ADa%20PREESCOLAR%20-%20compra%20web: {{ $order->id }} - {{auth()->user()->email}} " target="_blank">
-                                                        <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
+                                                    <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
                                                     </a>
 
                                                     @elseif($membership->title=='Primaria VIP 2023-2024')
 
                                                     <a href="https://api.whatsapp.com/send?phone=+9981838908&text=Quiero%20activar%20mi%20membres%C3%ADa%20PRIMARIA%20-%20compra%20web: {{ $order->id }} - {{auth()->user()->email}} " target="_blank">
-                                                        <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
+                                                    <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
                                                     </a>
                                                     @endif
 
