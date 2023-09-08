@@ -167,6 +167,10 @@
                                                 <i class="material-icons">watch_later</i>
                                             </a>
                                             @elseif($order->status == 'cancel')
+                                            <a class="text-warning">
+                                                <i class="material-icons">cancel</i>
+                                            </a>
+                                            @elseif($order->status == 'rejected')
                                             <a class="text-danger">
                                                 <i class="material-icons">cancel</i>
                                             </a>
@@ -175,8 +179,8 @@
                                                 <i class="material-icons">settings_backup_restore</i>
                                             </a>
                                             @else
-                                            <a>
-                                                <i class="material-icons">warning</i>{{ $order->status }}
+                                            <a class="text-danger">
+                                                <i class="material-icons">warning</i>
                                             </a>
                                             @endif
                                         </td>

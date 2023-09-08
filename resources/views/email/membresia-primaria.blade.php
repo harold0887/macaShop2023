@@ -1,10 +1,19 @@
 @component('mail::message')
+
+## {{$name}}, muchas gracias por su compra!!🫶🏻
+Me alegra poder darle la bienvenida al grupo VIP DE PRIMARIA!!🌈
+
+Favor de dar clic al siguiente enlace para enviarnos un mensaje en WhatsApp y activar tu membresía.
+
+@component('mail::button', ['url' => $url])
+Activar membresía
+@endcomponent
+
+
 RESUMEN DE COMPRA: {{$order}}
 
 
-
-
-## {{$title}} ##
+## {{$title}}
 
 CANTIDAD PAGADA: ${{$price}}.00 MXN
 
@@ -14,23 +23,6 @@ VÁLIDO POR: Más de 100 recursos de 1ro, 2do y 3ro PRIMARIA a lo largo del cicl
 
 
 
-
-{{$name}}, muchas gracias por su compra!!🫶🏻
-Me alegra poder darle la bienvenida al grupo VIP DE PRIMARIA!!🌈
-
-
-Favor de dar clic al siguiente enlace para enviarnos un mensaje en WhatsApp y activar tu membresía.
-
-@component('mail::button', ['url' => $url])
-Activar membresía
-@endcomponent
-
-
-
-
-
-
 Saludos,<br>
 Material Didáctico MaCa
 @endcomponent
-

@@ -54,14 +54,12 @@ class MainController extends Controller
                     $correo = new PaymentApprovedEmail($order->id, Auth::user()->name, $order->amount);
                     Mail::to(Auth::user()->email)
                         ->send($correo);
-
-                    // $correoCopia = new PaymentApprovedEmail($order->id, Auth::user()->name, $order->amount);
-                    // Mail::to('arnulfoacosta0887@gmail.com')
-                    //     ->send($correoCopia);
                 }
 
                 //enviar correo de membresias
                 foreach ($membreships as $membresia) {
+
+                            
 
                     //validar si es membresia preescolar, se tiene que cambiar cada año
                     if ($membresia->membership_id == 2006) {
@@ -69,18 +67,12 @@ class MainController extends Controller
                         $correo = new MembresiaPreescolar($order->id, Auth::user()->name, Auth::user()->email, $membresia->price);
                         Mail::to(Auth::user()->email)
                             ->send($correo);
-                        $correoCopia = new MembresiaPreescolar($order->id, Auth::user()->name, Auth::user()->email, $membresia->price);
-                        Mail::to('arnulfoacosta0887@gmail.com')
-                            ->send($correoCopia);
                     }
 
                     if ($membresia->membership_id  == 2007) {
                         $correo = new MembresiaPrimaria($order->id, Auth::user()->name, Auth::user()->email, $membresia->price);
                         Mail::to(Auth::user()->email)
                             ->send($correo);
-                        $correoCopia = new MembresiaPrimaria($order->id, Auth::user()->name, Auth::user()->email, $membresia->price);
-                        Mail::to('arnulfoacosta0887@gmail.com')
-                            ->send($correoCopia);
                     }
                 }
 
@@ -647,6 +639,4 @@ class MainController extends Controller
 
         return redirect()->route('order.show', [$newOrder->id]);
     }
-
-
 }

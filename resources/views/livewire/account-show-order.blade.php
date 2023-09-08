@@ -102,8 +102,8 @@ $preference->save();
                 <div class="card">
                     <div class="card-header card-header-icon card-header-rose">
 
-                        <h4 class="card-title h3"><strong>Número de compra: {{ $order->id }}</strong> </h4>
-                        <h4 class="text-muted">Total: {{ number_format($order->amount,2) }} MXN </h4>
+                        <h4 class="card-title h4 mb-3">Número de compra: {{ $order->id }}</h4>
+                        <h5 class="text-muted">Total: {{ number_format($order->amount,2) }} MXN </h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -134,12 +134,16 @@ $preference->save();
                                     <i class="material-icons">watch_later</i> En proceso.
                                 </a>
                                 @elseif($order->status == 'cancel')
+                                <a class="text-warning">
+                                    <i class="material-icons">cancel</i>Cancelado
+                                </a>
+                                @elseif($order->status == 'rejected')
                                 <a class="text-danger">
-                                    <i class="material-icons">cancel</i>Cancelado.
+                                    <i class="material-icons">cancel</i>Rechazado
                                 </a>
                                 @elseif($order->status == 'refund')
                                 <a class="text-danger">
-                                    <i class="material-icons">settings_backup_restore</i>Reembolso.
+                                    <i class="material-icons">settings_backup_restore</i>Reembolsado
                                 </a>
                                 @else
                                 <a>
@@ -258,7 +262,7 @@ $preference->save();
 
                                         @if (isset($memberships) && $memberships->count() > 0)
                                         @foreach ($memberships as $membership)
-                                     
+
                                         <tr>
                                             <td>
                                                 <div class="img-container ">
@@ -281,21 +285,10 @@ $preference->save();
                                                     </small>
                                                     <br>
 
-                                                    @if($membership->title=='Preescolar 2023-2024')
-                                                    <a href="https://api.whatsapp.com/send?phone=+9981838908&text=Quiero%20activar%20mi%20membres%C3%ADa%20PREESCOLAR%20-%20compra%20web: {{ $order->id }} - {{auth()->user()->email}} " target="_blank">
-                                                    <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
+                                                    <a href="https://api.whatsapp.com/send?phone=+9981838908&text=Quiero%20activar%20mi%20membres%C3%ADa%20{{$membership->title}}%20-%20compra%20web: {{ $order->id }} - {{auth()->user()->email}} " target="_blank">
+                                                        <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
                                                     </a>
 
-                                                    @elseif($membership->title=='Primaria 2023-2024')
-
-                                                    <a href="https://api.whatsapp.com/send?phone=+9981838908&text=Quiero%20activar%20mi%20membres%C3%ADa%20PRIMARIA%20-%20compra%20web: {{ $order->id }} - {{auth()->user()->email}} " target="_blank">
-                                                    <img src="{{ asset('img/whatsapp1.png') }}" alt="logo WhatsApp" width="60">
-                                                    </a>
-                                                    @endif
-
-
-
-                                                    
                                                     @else
                                                     <a href="{{ route('customer.membership-show', ['order' => $order->id,'id'=>$membership->id]) }}" class="btn btn-outline-primary btn-round">
                                                         Ver materiales

@@ -64,10 +64,12 @@
                                             <span class="d-block d-flex text-warning"><i class="material-icons">watch_later</i> En proceso</span>
 
                                             @elseif($order->status == 'cancel')
-                                            <span class="d-block d-flex text-danger"><i class="material-icons">cancel</i>Cancelado</span>
+                                            <span class="d-block d-flex text-warning"><i class="material-icons">cancel</i>Cancelado</span>
 
                                             @elseif($order->status == 'refund')
-                                            <span class="d-block d-flex text-danger"><i class="material-icons">settings_backup_restore</i>Reembolso</span>
+                                            <span class="d-block d-flex text-danger"><i class="material-icons">settings_backup_restore</i>Reembolsado</span>
+                                            @elseif($order->status == 'rejected')
+                                            <span class="d-block d-flex text-danger"><i class="material-icons">cancel</i>Rechazado</span>
 
                                             @else
                                             <span class="d-block d-flex text-danger"><i class="material-icons">warning</i>{{ $order->status }}</span>
