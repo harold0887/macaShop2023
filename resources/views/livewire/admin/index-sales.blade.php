@@ -174,7 +174,7 @@
                                             <a class="text-danger">
                                                 <i class="material-icons">cancel</i>
                                             </a>
-                                            @elseif($order->status == 'refund')
+                                            @elseif($order->status == 'refunded')
                                             <a class="text-danger">
                                                 <i class="material-icons">settings_backup_restore</i>
                                             </a>

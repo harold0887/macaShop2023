@@ -15,7 +15,7 @@ RESUMEN DE COMPRA: {{$order}}
 
 ## {{$title}}
 
-CANTIDAD PAGADA: ${{$price}}.00 MXN
+CANTIDAD PAGADA: ${{$price}} MXN
 
 FECHA DE COMPRA: {{date_format(now(),'d-M-Y')}}
 

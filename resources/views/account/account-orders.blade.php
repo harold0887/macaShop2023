@@ -66,7 +66,7 @@
                                             @elseif($order->status == 'cancel')
                                             <span class="d-block d-flex text-warning"><i class="material-icons">cancel</i>Cancelado</span>
 
-                                            @elseif($order->status == 'refund')
+                                            @elseif($order->status == 'refunded')
                                             <span class="d-block d-flex text-danger"><i class="material-icons">settings_backup_restore</i>Reembolsado</span>
                                             @elseif($order->status == 'rejected')
                                             <span class="d-block d-flex text-danger"><i class="material-icons">cancel</i>Rechazado</span>
