@@ -42,7 +42,7 @@
                                                 <option value="pending">pending</option>
                                                 <option value="in_process">in_process</option>
                                                 <option value="cancel">cancel</option>
-                                                <option value="refund">refund</option>
+                                                <option value="refunded">refund</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-12 ">

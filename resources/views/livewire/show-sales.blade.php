@@ -42,6 +42,10 @@
                                         <a class="text-danger">
                                             Cancelado
                                         </a>
+                                        @elseif($order->status == 'rejected')
+                                        <a class="text-danger">
+                                            <i class="material-icons">cancel</i>
+                                        </a>
                                         @elseif($order->status == 'refund')
                                         <a class="text-danger">
                                             Reembolso
