@@ -639,4 +639,9 @@ class MainController extends Controller
 
         return redirect()->route('order.show', [$newOrder->id]);
     }
+
+    public function webhooksPruebas(Request $request){
+
+
+    }
 }

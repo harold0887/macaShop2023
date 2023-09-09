@@ -140,7 +140,10 @@ Route::POST('createOrder', [MainController::class, 'createOrder'])->name('shop.c
 
 
 
-
+Route::post('webhooks1', [MainController::class, 'webhooksPruebas'])->name('webhooks.pruebas');
 
 Route::post('webhooks', WebhooksController::class);
-Route::post('webhookspruebas', WebhooksControllerPruebas::class);
+//Route::post('webhookspruebas', WebhooksControllerPruebas::class);
+
+
+
