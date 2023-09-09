@@ -15,6 +15,9 @@ class SalesEdit extends Component
 {
     protected $listeners = ['some-event2' => '$refresh'];
     public $order, $ids, $patch, $search = '', $contacto, $status, $mercadoPago;
+    protected $rules = [
+        'contacto' => 'required|string',
+    ];
     public function mount()
     {
         $patch = Request::fullUrl();
@@ -160,6 +163,7 @@ class SalesEdit extends Component
 
     public function save()
     {
+        $this->validate();
         Order::findOrFail($this->order->id)->update([
 
             'status' => $this->status,

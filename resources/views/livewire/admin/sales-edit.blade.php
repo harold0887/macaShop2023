@@ -28,6 +28,9 @@
                                         <div class="form-group col-12 ">
                                             <label class="bmd-label-floating">Contacto</label>
                                             <input type="text" class="form-control" wire:model="contacto">
+                                            @error('contacto')
+                                            <small class=" text-danger"> {{ $message }} </small>
+                                            @enderror
                                         </div>
                                         <div class="form-group col-12 ">
                                             <label class="bmd-label-floating">Id Mercado Pago</label>
@@ -41,6 +44,7 @@
                                                 <option value="approved">approved</option>
                                                 <option value="pending">pending</option>
                                                 <option value="in_process">in_process</option>
+                                                <option value="rejected">Rechazado</option>
                                                 <option value="cancel">cancel</option>
                                                 <option value="refunded">refund</option>
                                             </select>

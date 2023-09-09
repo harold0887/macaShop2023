@@ -26,29 +26,34 @@
                                 <br>
                                 <span class="text-muted">Status de pago: <b>
 
-                                        @if ($order->status == 'approved')
+
+                                        @if($order->status == 'create')
+                                        <a class="text-warning">
+                                            <i class="material-icons">pending_actions</i>Pendiente de pago.
+                                        </a>
+                                        @elseif ($order->status == 'approved')
                                         <a class="text-success">
-                                            Aprobado
+                                            <i class="material-icons">check_circle</i> Aprobado.
                                         </a>
                                         @elseif($order->status == 'pending')
                                         <a class="text-warning">
-                                            Pendiente
+                                            <i class="material-icons">pending</i> Pendiente de confirmación.
                                         </a>
                                         @elseif($order->status == 'in_process')
                                         <a class="text-warning">
-                                            En proceso
+                                            <i class="material-icons">watch_later</i> En proceso.
                                         </a>
                                         @elseif($order->status == 'cancel')
-                                        <a class="text-danger">
-                                            Cancelado
+                                        <a class="text-warning">
+                                            <i class="material-icons">cancel</i>Cancelado
                                         </a>
                                         @elseif($order->status == 'rejected')
                                         <a class="text-danger">
-                                            <i class="material-icons">cancel</i>
+                                            <i class="material-icons">cancel</i>Rechazado
                                         </a>
                                         @elseif($order->status == 'refund')
                                         <a class="text-danger">
-                                            Reembolso
+                                            <i class="material-icons">settings_backup_restore</i>Reembolsado
                                         </a>
                                         @else
                                         <a>
@@ -56,25 +61,15 @@
                                         </a>
                                         @endif
 
-
-                                    </b></span>
-                                <br>
-                                <span class="text-muted">Contacto:
-                                    <input id="nota{{ $order->id }}" class="border text-muted rounded m-0" type="text" value="{{ $order->contacto }}" wire:model.defer="socialNetwork">
-                                    @error('socialNetwork')
-                                    <small class=" text-danger"> {{ $message }} </small>
-                                    @enderror
-
-
-
+                                    </b>
                                 </span>
                                 <br>
-
-
+                                <span class="text-muted">Contacto: <b>{{ $order->contacto }}</b></span>
+                                <br>
                                 <div class="togglebutton">
                                     <label>
-                                        <span class="text-muted">WhatsApp:
-                                            <input type="checkbox" wire:click="activeOrder()" {{ $order->active == 1 ? 'checked ' : '' }}>
+                                        <span class="text-muted">Active:
+                                            <input disabled type="checkbox" wire:click="activeOrder()" {{ $order->active == 1 ? 'checked ' : '' }}>
                                             <span class="toggle"></span>
                                         </span>
                                     </label>
