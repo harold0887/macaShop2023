@@ -62,7 +62,7 @@ class WebhooksController extends Controller
                     $notificacion = new PaymentApprovedEmail($order->id, $order->user->name, $order->amount);
                     Mail::to($order->user->email) //enviar correo al cliente
                         ->send($notificacion);
-                    $notificacion = new PaymentApprovedEmail($order->id, $order->user->name, $order->amount . "approved");
+                    $notificacion = new PaymentApprovedEmail($order->id, $order->user->name, $order->amount);
                     Mail::to('arnulfoacosta0887@gmail.com') //copia
                         ->send($notificacion);
                 }
@@ -77,7 +77,7 @@ class WebhooksController extends Controller
                         Mail::to($order->user->email)
                             ->send($correoCopia);
 
-                        $correoCopia = new MembresiaPreescolar($order->id, $order->user->name, $order->user->email, $membresia->price . "approved");
+                        $correoCopia = new MembresiaPreescolar($order->id, $order->user->name, $order->user->email, $membresia->price);
                         Mail::to('arnulfoacosta0887@gmail.com')
                             ->send($correoCopia);
                     }
@@ -87,7 +87,7 @@ class WebhooksController extends Controller
                         Mail::to($order->user->email)
                             ->send($correoCopia);
 
-                        $correoCopia = new MembresiaPrimaria($order->id, $order->user->name, $order->user->email, $membresia->price . "approved");
+                        $correoCopia = new MembresiaPrimaria($order->id, $order->user->name, $order->user->email, $membresia->price);
                         Mail::to('arnulfoacosta0887@gmail.com')
                             ->send($correoCopia);
                     }
