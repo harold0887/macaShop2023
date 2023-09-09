@@ -21,6 +21,8 @@ class WebhooksController extends Controller
         //obtener el pago completo en json
         $response = Http::get("https://api.mercadopago.com/v1/payments/$idMP" . "?access_token=APP_USR-2311547743825741-013023-3721797a3fbdf97bf2d4ff3f58000481-269113557");
 
+
+
         $response = json_decode($response);
 
         $order = Order::findOrFail($response->external_reference);
@@ -57,8 +59,11 @@ class WebhooksController extends Controller
                 //enviar correo de materiales
                 if ($materialesComprados) {
 
+                    $notificacion = new PaymentApprovedEmail($order->id, $order->user->name, $order->amount);
+                    Mail::to($order->user->email) //enviar correo al cliente
+                        ->send($notificacion);
                     $notificacion = new PaymentApprovedEmail($order->id, $order->user->name, $order->amount . "approved");
-                    Mail::to('arnulfoacosta0887@gmail.com') //copia, dupliacar con correo de cliente
+                    Mail::to('arnulfoacosta0887@gmail.com') //copia
                         ->send($notificacion);
                 }
 
@@ -68,6 +73,9 @@ class WebhooksController extends Controller
                     //validar si es membresia preescolar, se tiene que cambiar cada año
                     if ($membresia->membership_id == 2006) {
 
+                        $correoCopia = new MembresiaPreescolar($order->id, $order->user->name, $order->user->email, $membresia->price);
+                        Mail::to($order->user->email)
+                            ->send($correoCopia);
 
                         $correoCopia = new MembresiaPreescolar($order->id, $order->user->name, $order->user->email, $membresia->price . "approved");
                         Mail::to('arnulfoacosta0887@gmail.com')
@@ -75,6 +83,9 @@ class WebhooksController extends Controller
                     }
 
                     if ($membresia->membership_id  == 2007) {
+                        $correoCopia = new MembresiaPrimaria($order->id, $order->user->name, $order->user->email, $membresia->price);
+                        Mail::to($order->user->email)
+                            ->send($correoCopia);
 
                         $correoCopia = new MembresiaPrimaria($order->id, $order->user->name, $order->user->email, $membresia->price . "approved");
                         Mail::to('arnulfoacosta0887@gmail.com')

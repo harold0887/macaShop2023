@@ -22,60 +22,9 @@ class MainController extends Controller
         //obtener la order
         $order = Order::findOrFail(request('external_reference'));
 
-        //Actualizar status de orden
-        $order->update([
-            'status' => request('status'),
-            'payment_type' => request('payment_type'),
-            'payment_id' => request('payment_id'),
-            'order_id' => request('merchant_order_id')
-        ]);
-
-
-        $products = Order_Details::where('order_id', $order->id)->where('product_id', '!=', null)->get();
-        $packages = Order_Details::where('order_id', $order->id)->where('package_id', '!=', null)->get();
-        $membreships = Order_Details::where('order_id', $order->id)->where('membership_id', '!=', null)->get();
-        $materialesComprados = false; //iniciar en falso, por que no sabemos que inlcuye la orden
-
-
-
-        //Si incluye productos o paquetes, se cambia a true para enviar email de compra
-        if ($products->count() > 0 || $packages->count() > 0) {
-            $materialesComprados = true;
-        }
-
-
-
 
         switch (request('status')) {
             case 'approved':
-
-                //enviar correo de materiales
-                if ($materialesComprados) {
-                    $correo = new PaymentApprovedEmail($order->id, Auth::user()->name, $order->amount);
-                    Mail::to(Auth::user()->email)
-                        ->send($correo);
-                }
-
-                //enviar correo de membresias
-                foreach ($membreships as $membresia) {
-
-                            
-
-                    //validar si es membresia preescolar, se tiene que cambiar cada año
-                    if ($membresia->membership_id == 2006) {
-
-                        $correo = new MembresiaPreescolar($order->id, Auth::user()->name, Auth::user()->email, $membresia->price);
-                        Mail::to(Auth::user()->email)
-                            ->send($correo);
-                    }
-
-                    if ($membresia->membership_id  == 2007) {
-                        $correo = new MembresiaPrimaria($order->id, Auth::user()->name, Auth::user()->email, $membresia->price);
-                        Mail::to(Auth::user()->email)
-                            ->send($correo);
-                    }
-                }
-
                 return redirect()->route('order.show', [$order->id])->with('paySuccess', 'El pago ha sido realizado con éxito.');
                 break;
             case 'pending':
@@ -638,10 +587,5 @@ class MainController extends Controller
 
 
         return redirect()->route('order.show', [$newOrder->id]);
-    }
-
-    public function webhooksPruebas(Request $request){
-
-
     }
 }

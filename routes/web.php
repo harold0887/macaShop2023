@@ -30,7 +30,6 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductsController;
-use App\Http\Controllers\WebhooksControllerPruebas;
 use App\Http\Controllers\Admin\MembershipController;
 
 /*
@@ -140,10 +139,10 @@ Route::POST('createOrder', [MainController::class, 'createOrder'])->name('shop.c
 
 
 
-Route::post('webhooks1', [MainController::class, 'webhooksPruebas'])->name('webhooks.pruebas');
+
 
 Route::post('webhooks', WebhooksController::class);
-//Route::post('webhookspruebas', WebhooksControllerPruebas::class);
+
 
 
 
