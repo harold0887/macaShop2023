@@ -186,6 +186,16 @@ class SalesEdit extends Component
             $venta = Order::findOrFail($this->order->id);
             $status = $venta->active;
 
+            if ($status == false) {
+                $this->validate();
+                Order::findOrFail($this->order->id)->update([
+
+                    'status' => $this->status,
+                    'contacto' => $this->contacto,
+                    'payment_id' => $this->mercadoPago,
+                ]);
+            }
+
             $venta->update([
                 'active' => $status == 0 ? true : false,
             ]);

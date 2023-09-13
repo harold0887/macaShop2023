@@ -24,15 +24,25 @@ class AccountShowMembership extends Component
 {
     public $membership, $product, $order;
     public $productModal;
+    public $sortDirection = 'asc';
+    public $sortField = 'numero';
+    public $products;
+    public $ids;
 
     public function mount($order, $id)
     {
 
         $this->membership = Membership::findOrFail($id);
+        $this->ids=$id;
+
+       
+
+        //dd( $this->membership);
         $this->order = Order::findOrFail($order);
     }
     public function render()
     {
+        $this->products = Membership::find($this->ids)->products()->orderBy($this->sortField, $this->sortDirection)->get();
 
         $membershipCount = Order_Details::join('orders', 'order_details.order_id', '=', 'orders.id')
             ->join('memberships', 'order_details.membership_id', '=', 'memberships.id')
@@ -202,5 +212,12 @@ class AccountShowMembership extends Component
         $this->productModal = Product::findOrFail($id);
 
         $this->emit('showAcordeon');
+    }
+
+
+    public function setSort($sort, $direction)
+    {
+        $this->sortField = $sort;
+        $this->sortDirection = $direction;
     }
 }

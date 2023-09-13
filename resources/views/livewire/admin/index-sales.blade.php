@@ -208,12 +208,12 @@
                                                 <a class="btn btn-success btn-link " href="{{ route('sales.edit', $order->id) }}">
                                                     <i class="material-icons">edit</i>
                                                 </a>
-                                                <a class="btn btn-success btn-link text-primary" wire:click="updateStatus({{ $order->payment_id }})">
+                                                <!-- <a class="btn btn-success btn-link text-primary" wire:click="updateStatus({{ $order->payment_id }})">
                                                     <i class=" material-icons">autorenew</i>
                                                 </a>
                                                 <a class="btn btn-success btn-link text-secondary" wire:click="resendOrder({{ $order->id }})">
                                                     <i class=" material-icons">mail</i>
-                                                </a>
+                                                </a> -->
                                                 <form method="post" action="{{ route('sales.destroy', $order->id) }} ">
                                                     <input type="text" hidden value="{{$order->id}}">
                                                     <button class=" btn btn-danger btn-link btn-icon btn-sm confirm-delete">

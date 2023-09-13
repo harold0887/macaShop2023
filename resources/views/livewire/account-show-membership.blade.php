@@ -16,8 +16,29 @@
                     </ol>
                 </nav>
             </div>
-            <div class="col-12">
+            <div class="col-12 col-md-6">
                 <h4 class="card-title h3"><strong>{{$membership->title}}</strong> </h4>
+            </div>
+            <div class="col-12 col-md-6   d-flex align-items-end justify-content-md-end ">
+                <div class="form-row ">
+
+                    <div class="form-group col-12 ">
+
+                        <label class="ms-0 h4">Ordenar por:</label>
+                        <select class="form-control h4">
+                            <option wire:click="setSort('created_at', 'asc')" {{$sortDirection=='asc' && $sortField=='created_at' ? 'selected' :''}}>Fecha (A-Z)</option>
+                            <option wire:click="setSort('created_at', 'desc')" {{$sortDirection=='desc' && $sortField=='created_at' ? 'selected' :''}}>Fecha (Z-A)</option>
+                            <option wire:click="setSort('title', 'asc')" {{$sortDirection=='asc' && $sortField=='title' ? 'selected' :''}}>Nombre (A-Z)</option>
+                            <option wire:click="setSort('title', 'desc')" {{$sortDirection=='desc' && $sortField=='title' ? 'selected' :''}}>Nombre (Z-A)</option>
+                            <option wire:click="setSort('numero', 'asc')" {{$sortDirection=='asc' && $sortField=='numero' ? 'selected' :''}}>Número (A-Z) - Predeterminado</option>
+                            <option wire:click="setSort('numero', 'desc')" {{$sortDirection=='desc' && $sortField=='numero' ? 'selected' :''}}>Número (Z-A)</option>
+
+                        </select>
+                    </div>
+
+                </div>
+
+
             </div>
 
             @if($order->active == 0)
@@ -53,7 +74,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($membership->products as $purchase)
+                                    @foreach ($products as $purchase)
                                     <tr>
 
                                         <td>

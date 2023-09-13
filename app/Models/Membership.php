@@ -14,7 +14,7 @@ class Membership extends Model
     public function products()
     {
         return $this->belongsToMany('App\Models\Product')
-        ->whereNotIn('title', ['newsDesktop','newsMobile'])
-        ->orderBy('numero','asc');
+        ->whereNotIn('title', ['newsDesktop','newsMobile']);
+        //->orderBy('numero','asc');
     }
 }
