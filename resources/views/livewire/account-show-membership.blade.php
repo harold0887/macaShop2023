@@ -19,8 +19,10 @@
             <div class="col-12 col-md-6">
                 <h4 class="card-title h3"><strong>{{$membership->title}}</strong> </h4>
             </div>
-            <div class="col-12 col-md-6   d-flex align-items-end justify-content-md-end ">
+            <!-- <div class="col-12 col-md-6   d-flex align-items-end justify-content-md-end ">
                 <div class="form-row ">
+
+
 
                     <div class="form-group col-12 ">
 
@@ -34,11 +36,22 @@
                             <option wire:click="setSort('numero', 'desc')" {{$sortDirection=='desc' && $sortField=='numero' ? 'selected' :''}}>Número (Z-A)</option>
 
                         </select>
+
                     </div>
 
                 </div>
 
 
+            </div> -->
+            <div class="col-12">
+                Ordernar Por:
+                <br>
+                <button type="button" class="btn btn-sm btn-round mx-0 px-2 {{$sortDirection=='asc' && $sortField=='created_at' ? 'btn-success ' :'btn-outline-secondary'}}" wire:click="setSort('created_at', 'asc')">Fecha (A-Z)</button>
+                <button type="button" class="btn btn-sm btn-round mx-0 px-2 {{$sortDirection=='desc' && $sortField=='created_at' ? 'btn-success ' :'btn-outline-secondary'}}" wire:click="setSort('created_at', 'desc')">Fecha (Z-A)</button>
+                <button type="button" class="btn btn-sm btn-round mx-0 px-2 {{$sortDirection=='asc' && $sortField=='title' ? 'btn-success ' :'btn-outline-secondary'}}" wire:click="setSort('title', 'asc')">Nombre (A-Z)</button>
+                <button type="button" class="btn btn-sm btn-round mx-0 px-2 {{$sortDirection=='desc' && $sortField=='title' ? 'btn-success ' :'btn-outline-secondary'}}" wire:click="setSort('title', 'desc')">Nombre (Z-A)</button>
+                <button type="button" class="btn btn-sm btn-round mx-0 px-2 {{$sortDirection=='asc' && $sortField=='numero' ? 'btn-success ' :'btn-outline-secondary'}}" wire:click="setSort('numero', 'asc')">Número (A-Z)</button>
+                <button type="button" class="btn btn-sm btn-round mx-0 px-2 {{$sortDirection=='desc' && $sortField=='numero' ? 'btn-success ' :'btn-outline-secondary'}}" wire:click="setSort('numero', 'desc')">Número (Z-A)</button>
             </div>
 
             @if($order->active == 0)
