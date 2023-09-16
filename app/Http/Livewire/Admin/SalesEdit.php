@@ -18,6 +18,7 @@ class SalesEdit extends Component
     public $order, $ids, $patch, $search = '', $contacto, $status, $mercadoPago, $facebook;
     protected $rules = [
         'contacto' => 'required|string',
+        'facebook' => 'required|string',
     ];
     public function mount()
     {
@@ -165,42 +166,80 @@ class SalesEdit extends Component
 
     public function save()
     {
-        $this->validate();
-        Order::findOrFail($this->order->id)->update([
 
-            'status' => $this->status,
-            'payment_id' => $this->mercadoPago,
-        ]);
-        User::findOrFail($this->order->customer_id)->update([
-            'whatsapp' => $this->contacto,
-        ]);
+        if ($this->order->memberships->count() > 0) {
+            $this->validate();
+            Order::findOrFail($this->order->id)->update([
+                'status' => $this->status,
+                'payment_id' => $this->mercadoPago,
+            ]);
+            User::findOrFail($this->order->customer_id)->update([
+                'whatsapp' => $this->contacto,
+                'facebook' => $this->facebook,
+            ]);
 
-
-        $this->emit('success-auto-close', [
-            'message' => 'La orden fue actualizada de manera correcta',
-        ]);
+            $this->emit('success-auto-close', [
+                'message' => 'La orden fue actualizada de manera correcta',
+            ]);
+        } else {
+            $this->validate([
+                'contacto' => 'required|string',
+            ]);
+            Order::findOrFail($this->order->id)->update([
+                'status' => $this->status,
+                'payment_id' => $this->mercadoPago,
+            ]);
+            User::findOrFail($this->order->customer_id)->update([
+                'whatsapp' => $this->contacto,
+            ]);
+            $this->emit('success-auto-close', [
+                'message' => 'La orden fue actualizada de manera correcta',
+            ]);
+        }
     }
 
 
     public function activeOrder()
     {
-
+        $venta = Order::findOrFail($this->order->id);
 
         try {
-            $venta = Order::findOrFail($this->order->id);
+
             $status = $venta->active;
 
             if ($status == false) {
-                $this->validate();
-                Order::findOrFail($this->order->id)->update([
+                if ($this->order->memberships->count() > 0) {
+                    $this->validate();
+                    Order::findOrFail($this->order->id)->update([
+                        'status' => $this->status,
+                        'payment_id' => $this->mercadoPago,
+                    ]);
+                    User::findOrFail($this->order->customer_id)->update([
+                        'whatsapp' => $this->contacto,
+                        'facebook' => $this->facebook,
+                    ]);
 
-                    'status' => $this->status,
-                    'payment_id' => $this->mercadoPago,
-                ]);
-                User::findOrFail($this->order->customer_id)->update([
-                    'whatsapp' => $this->contacto,
-                ]);
+                    $this->emit('success-auto-close', [
+                        'message' => 'La orden fue actualizada de manera correcta',
+                    ]);
+                } else {
+                    $this->validate([
+                        'contacto' => 'required|string',
+                    ]);
+                    Order::findOrFail($this->order->id)->update([
+                        'status' => $this->status,
+                        'payment_id' => $this->mercadoPago,
+                    ]);
+                    User::findOrFail($this->order->customer_id)->update([
+                        'whatsapp' => $this->contacto,
+                    ]);
+                    $this->emit('success-auto-close', [
+                        'message' => 'La orden fue actualizada de manera correcta',
+                    ]);
+                }
             }
+
+
 
             $venta->update([
                 'active' => $status == 0 ? true : false,
