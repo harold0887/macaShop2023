@@ -137,6 +137,7 @@
                                         <th>email</th>
                                         <th>Contacto</th>
                                         <th>WhatsApp</th>
+                                        <th>Facebook</th>
 
                                         <th>Acciones</th>
                                     </tr>
@@ -203,6 +204,9 @@
                                         </td>
                                         <td>
                                         {{ $order->user->whatsapp }}
+                                        </td>
+                                         <td>
+                                        {{ $order->user->facebook }}
                                         </td>
                                         <td class="td-actions">
                                             <div class="btn-group m-0 d-flex" style="box-shadow: none !important">

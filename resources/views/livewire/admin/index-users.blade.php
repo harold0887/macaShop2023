@@ -114,6 +114,18 @@
                                             @endif
                                             WhatsApp
                                         </th>
+                                        <th style="cursor:pointer" wire:click="setSort('facebook')">
+                                            @if($sortField=='facebook')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
+                                            Facebook
+                                        </th>
                                         <th style="cursor:pointer">
                                             Ventas
                                         </th>
@@ -135,6 +147,7 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{date_format($user->created_at, 'd-M-Y')}}</td>
                                         <td>{{$user->whatsapp}}</td>
+                                        <td>{{$user->facebook}}</td>
                                         <td>
                                             {{$user->orders->count()}}
                                         </td>
