@@ -13,8 +13,8 @@ class IndexUsers extends Component
     use WithPagination;
     public $search = '';
     protected $paginationTheme = 'bootstrap';
-    public $sortDirection = 'asc';
-    public $sortField = 'created_at';
+    public $sortDirection = 'desc';
+    public $sortField = 'id';
 
     public function updatingSearch()
     {

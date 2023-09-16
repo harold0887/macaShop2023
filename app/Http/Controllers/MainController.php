@@ -538,7 +538,7 @@ class MainController extends Controller
     public function createOrder()
     {
 
-        $orderActive = true; //Iniciar la order como active, solo se desactiva si es membresía, paquete o producto con folio
+        $orderActive = true; //Iniciar la order como active, solo se desactiva si es membresía, paquete o producto con folio y si ya tiene whatsApp
 
         $newOrder = Order::create([
             'customer_id' => Auth::user()->id,
@@ -563,14 +563,16 @@ class MainController extends Controller
                     'package_id' => $item->id,
                     'price' => $item->price,
                 ]);
-                $orderActive = false;
+                if ($newOrder->user->whatsapp == null) {
+                    $orderActive = false;
+                }
             } elseif ($item->associatedModel->model == 'Product') {
                 Order_Details::create([
                     'order_id' => $newOrder->id,
                     'product_id' => $item->id,
                     'price' => $item->price,
                 ]);
-                if ($item->associatedModel->folio == 1) {
+                if ($item->associatedModel->folio == 1 && $newOrder->user->whatsapp == null) {
                     $orderActive = false;
                 }
             }

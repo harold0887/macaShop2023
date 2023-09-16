@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\User;
 use App\Models\Order;
 use App\Models\Package;
 use App\Models\Product;
@@ -26,7 +27,7 @@ class SalesEdit extends Component
         $this->ids = $div[5];
 
         $this->order = Order::findOrFail($this->ids);
-        $this->contacto = $this->order->contacto;
+        $this->contacto = $this->order->user->whatsapp;
         $this->status = $this->order->status;
         $this->mercadoPago = $this->order->payment_id;
     }
@@ -167,8 +168,10 @@ class SalesEdit extends Component
         Order::findOrFail($this->order->id)->update([
 
             'status' => $this->status,
-            'contacto' => $this->contacto,
             'payment_id' => $this->mercadoPago,
+        ]);
+        User::findOrFail($this->order->customer_id)->update([
+            'whatsapp' => $this->contacto,
         ]);
 
 
@@ -191,8 +194,10 @@ class SalesEdit extends Component
                 Order::findOrFail($this->order->id)->update([
 
                     'status' => $this->status,
-                    'contacto' => $this->contacto,
                     'payment_id' => $this->mercadoPago,
+                ]);
+                User::findOrFail($this->order->customer_id)->update([
+                    'whatsapp' => $this->contacto,
                 ]);
             }
 

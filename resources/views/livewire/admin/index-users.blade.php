@@ -30,7 +30,7 @@
                         <div class="col-10 col-md-8 pr-0">
                             <form class="form-group">
                                 <div class="input-group rounded">
-                                    <input id="input-search" type="search" class="form-control px-3" placeholder=" Buascar por nombre o email..." wire:model.debounce.500ms='search' style="border-radius: 30px !important">
+                                    <input id="input-search" type="search" class="form-control px-3" placeholder=" Buascar por nombre o email..." wire:model.defer='search' style="border-radius: 30px !important">
                                 </div>
                             </form>
                         </div>
@@ -100,7 +100,19 @@
                                             @else
                                             <i class="fa-solid fa-sort mr-1"></i>
                                             @endif
-                                            Miembro desde
+                                            Registro
+                                        </th>
+                                        <th style="cursor:pointer" wire:click="setSort('whatsapp')">
+                                            @if($sortField=='whatsapp')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
+                                            WhatsApp
                                         </th>
                                         <th style="cursor:pointer">
                                             Ventas
@@ -122,6 +134,7 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{date_format($user->created_at, 'd-M-Y')}}</td>
+                                        <td>{{$user->whatsapp}}</td>
                                         <td>
                                             {{$user->orders->count()}}
                                         </td>
