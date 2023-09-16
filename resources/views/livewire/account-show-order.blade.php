@@ -134,8 +134,8 @@ $preference->save();
                                     <i class="material-icons">watch_later</i> En proceso.
                                 </a>
                                 @elseif($order->status == 'cancelled')
-                                <a class="text-warning">
-                                    <i class="material-icons">cancel</i>Cancelado
+                                <a class="text-danger">
+                                    <i class="material-icons">cancel_presentation</i>Cancelado
                                 </a>
                                 @elseif($order->status == 'rejected')
                                 <a class="text-danger">

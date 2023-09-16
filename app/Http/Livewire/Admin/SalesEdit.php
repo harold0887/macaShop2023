@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Request;
 class SalesEdit extends Component
 {
     protected $listeners = ['some-event2' => '$refresh'];
-    public $order, $ids, $patch, $search = '', $contacto, $status, $mercadoPago, $facebook;
+    public $order, $ids, $patch, $search = '', $contacto, $status, $mercadoPago, $facebook, $comentario;
     protected $rules = [
         'contacto' => 'required|string',
         'facebook' => 'required|string',
@@ -32,6 +32,8 @@ class SalesEdit extends Component
         $this->facebook = $this->order->user->facebook;
         $this->status = $this->order->status;
         $this->mercadoPago = $this->order->payment_id;
+        $this->comentario = $this->order->contacto;
+     
     }
     public function render()
     {
@@ -172,10 +174,12 @@ class SalesEdit extends Component
             Order::findOrFail($this->order->id)->update([
                 'status' => $this->status,
                 'payment_id' => $this->mercadoPago,
+                'contacto' => $this->comentario,
             ]);
             User::findOrFail($this->order->customer_id)->update([
                 'whatsapp' => $this->contacto,
                 'facebook' => $this->facebook,
+                
             ]);
 
             $this->emit('success-auto-close', [
@@ -188,6 +192,7 @@ class SalesEdit extends Component
             Order::findOrFail($this->order->id)->update([
                 'status' => $this->status,
                 'payment_id' => $this->mercadoPago,
+                'contacto' => $this->comentario,
             ]);
             User::findOrFail($this->order->customer_id)->update([
                 'whatsapp' => $this->contacto,
@@ -213,6 +218,7 @@ class SalesEdit extends Component
                     Order::findOrFail($this->order->id)->update([
                         'status' => $this->status,
                         'payment_id' => $this->mercadoPago,
+                        'contacto' => $this->comentario,
                     ]);
                     User::findOrFail($this->order->customer_id)->update([
                         'whatsapp' => $this->contacto,
@@ -229,6 +235,7 @@ class SalesEdit extends Component
                     Order::findOrFail($this->order->id)->update([
                         'status' => $this->status,
                         'payment_id' => $this->mercadoPago,
+                        'contacto' => $this->comentario,
                     ]);
                     User::findOrFail($this->order->customer_id)->update([
                         'whatsapp' => $this->contacto,

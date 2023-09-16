@@ -63,8 +63,8 @@
                                             @elseif($order->status == 'in_process')
                                             <span class="d-block d-flex text-warning"><i class="material-icons">watch_later</i> En proceso</span>
 
-                                            @elseif($order->status == 'cancel')
-                                            <span class="d-block d-flex text-warning"><i class="material-icons">cancel</i>Cancelado</span>
+                                            @elseif($order->status == 'cancelled')
+                                            <span class="d-block d-flex text-danger"><i class="material-icons">cancel_presentation</i>Cancelado</span>
 
                                             @elseif($order->status == 'refunded')
                                             <span class="d-block d-flex text-danger"><i class="material-icons">settings_backup_restore</i>Reembolsado</span>

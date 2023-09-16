@@ -177,9 +177,10 @@
                                             <a class="text-warning">
                                                 <i class="material-icons">watch_later</i>
                                             </a>
-                                            @elseif($order->status == 'cancel')
-                                            <a class="text-warning">
-                                                <i class="material-icons">cancel</i>
+                                            @elseif($order->status == 'cancelled')
+                                            <a class="text-danger">
+                                                <i class="material-icons">cancel_presentation</i>
+                                                
                                             </a>
                                             @elseif($order->status == 'rejected')
                                             <a class="text-danger">

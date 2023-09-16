@@ -43,11 +43,16 @@
                                             <label class="bmd-label-floating">Id Mercado Pago</label>
                                             <input type="text" class="form-control" wire:model.defer="mercadoPago">
                                         </div>
+                                        <div class="form-group col-12 ">
+                                            <label class="bmd-label-floating">Comentarios</label>
+                                            <input type="text" class="form-control" wire:model.defer="comentario">
+                                        </div>
 
 
                                         <div class="form-group col-12 ">
                                             <select class="form-control" name="fop" wire:model.defer="status">
                                                 <option value="">Selecciona un estatus...</option>
+                                                <option value="create">Nueva</option>
                                                 <option value="approved">approved</option>
                                                 <option value="pending">pending</option>
                                                 <option value="in_process">in_process</option>
@@ -59,7 +64,7 @@
                                         <div class="form-group col-12 ">
                                             <div class="togglebutton">
                                                 <label>
-                                                    <span class="text-muted">WhatsApp:
+                                                    <span class="text-muted">Active:
                                                         <input type="checkbox" wire:click="activeOrder()" {{ $order->active == 1 ? 'checked ' : '' }}>
                                                         <span class="toggle"></span>
                                                     </span>

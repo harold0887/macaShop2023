@@ -9,13 +9,18 @@
                             <i class="material-icons">receipt</i>
                         </div>
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-12 text-xs">
                                 <h4 class="card-title font-weight-bold">Resumen de compra - {{$order->id}}
                                     <a class="btn  btn-link  p-0" href="{{ route('sales.edit', $order->id) }}" target="_blank">
                                         <i class="material-icons text-success">edit</i>
                                     </a>
                                 </h4>
                                 <span class="text-muted">Email: <b>{{ $order->user->email }}</b></span>
+                                <br>
+                                <span class="text-muted">WhatsApp: <b>{{ $order->user->whatsapp }}</b></span>
+
+                                <br>
+                                <span class="text-muted">Facebook: <b>{{ $order->user->facebook }}</b></span>
 
                                 <br>
                                 <span class="text-muted">Fecha: <b>{{ date_format($order->created_at, 'd-M-Y H:i') }}</b></span>
@@ -44,8 +49,8 @@
                                             <i class="material-icons">watch_later</i> En proceso.
                                         </a>
                                         @elseif($order->status == 'cancelled')
-                                        <a class="text-warning">
-                                            <i class="material-icons">cancel</i>Cancelado
+                                        <a class="text-danger">
+                                            <i class="material-icons">cancel_presentation</i>Cancelado
                                         </a>
                                         @elseif($order->status == 'rejected')
                                         <a class="text-danger">
@@ -64,7 +69,7 @@
                                     </b>
                                 </span>
                                 <br>
-                                <span class="text-muted">Contacto: <b>{{ $order->contacto }}</b></span>
+                                <span class="text-muted">Comentarios: <b>{{ $order->contacto }}</b></span>
                                 <br>
                                 <div class="togglebutton">
                                     <label>
