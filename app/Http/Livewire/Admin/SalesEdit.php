@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Request;
 class SalesEdit extends Component
 {
     protected $listeners = ['some-event2' => '$refresh'];
-    public $order, $ids, $patch, $search = '', $contacto, $status, $mercadoPago;
+    public $order, $ids, $patch, $search = '', $contacto, $status, $mercadoPago, $facebook;
     protected $rules = [
         'contacto' => 'required|string',
     ];
@@ -28,6 +28,7 @@ class SalesEdit extends Component
 
         $this->order = Order::findOrFail($this->ids);
         $this->contacto = $this->order->user->whatsapp;
+        $this->facebook = $this->order->user->facebook;
         $this->status = $this->order->status;
         $this->mercadoPago = $this->order->payment_id;
     }

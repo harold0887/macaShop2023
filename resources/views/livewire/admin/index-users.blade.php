@@ -30,7 +30,7 @@
                         <div class="col-10 col-md-8 pr-0">
                             <form class="form-group">
                                 <div class="input-group rounded">
-                                    <input id="input-search" type="search" class="form-control px-3" placeholder=" Buascar por nombre o email..." wire:model.defer='search' style="border-radius: 30px !important">
+                                    <input id="input-search" type="search" class="form-control px-3" placeholder=" Buascar por nombre o email..." wire:model.debounce.500ms='search' style="border-radius: 30px !important">
                                 </div>
                             </form>
                         </div>

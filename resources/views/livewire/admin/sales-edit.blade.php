@@ -26,9 +26,16 @@
                                 <div class="col-12 col-md-9">
                                     <div class="form-row ">
                                         <div class="form-group col-12 ">
-                                            <label class="bmd-label-floating">Contacto</label>
+                                            <label class="bmd-label-floating">WhatsApp</label>
                                             <input type="text" class="form-control" wire:model.defer="contacto">
                                             @error('contacto')
+                                            <small class=" text-danger"> {{ $message }} </small>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group col-12 ">
+                                            <label class="bmd-label-floating">Facebook</label>
+                                            <input type="text" class="form-control" wire:model.defer="facebook">
+                                            @error('facebook')
                                             <small class=" text-danger"> {{ $message }} </small>
                                             @enderror
                                         </div>
