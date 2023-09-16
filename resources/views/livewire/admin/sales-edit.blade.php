@@ -52,7 +52,7 @@
                                                 <option value="pending">pending</option>
                                                 <option value="in_process">in_process</option>
                                                 <option value="rejected">Rechazado</option>
-                                                <option value="cancel">cancel</option>
+                                                <option value="cancelled">cancelled</option>
                                                 <option value="refunded">refund</option>
                                             </select>
                                         </div>
