@@ -133,12 +133,21 @@
                                         <th>
                                             Membresía
                                         </th>
-
                                         <th>email</th>
-                                        <th>Contacto</th>
+                                        <th style="cursor:pointer" wire:click="setSort('contacto')">
+                                            @if($sortField=='contacto')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
+                                            Contacto
+                                        </th>
                                         <th>WhatsApp</th>
                                         <th>Facebook</th>
-
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -154,7 +163,7 @@
                                         <td>
                                             @if($order->status == 'create')
                                             <a class="text-warning">
-                                            <i class="material-icons">pending_actions</i>
+                                                <i class="material-icons">pending_actions</i>
                                             </a>
                                             @elseif ($order->status == 'approved')
                                             <a class="text-success">
@@ -203,10 +212,10 @@
                                             {{ $order->contacto }}
                                         </td>
                                         <td>
-                                        {{ $order->user->whatsapp }}
+                                            {{ $order->user->whatsapp }}
                                         </td>
-                                         <td>
-                                        {{ $order->user->facebook }}
+                                        <td>
+                                            {{ $order->user->facebook }}
                                         </td>
                                         <td class="td-actions">
                                             <div class="btn-group m-0 d-flex" style="box-shadow: none !important">

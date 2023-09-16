@@ -41,7 +41,9 @@ class IndexSales extends Component
                     ->orWhere('id', 'like', '%' . $this->search . '%');
             })
             ->orWhereHas('user', function ($query) {
-                $query->where('email', 'like', '%' . $this->search . '%');
+                $query->where('email', 'like', '%' . $this->search . '%')
+                ->orWhere('facebook', 'like', '%' . $this->search . '%')
+                ->orWhere('whatsapp', 'like', '%' . $this->search . '%');
             })
 
             ->orderBy($this->sortField, $this->sortDirection)
