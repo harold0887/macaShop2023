@@ -153,13 +153,14 @@
                                         </td>
                                         <td>
                                             @foreach($user->orders as $order)
+                                            @if($order->status=='approved')
                                             @foreach($order->memberships as $memberships)
                                             <span class="badge badge-info d-block my-1">
                                                 {{$memberships->title}}
                                             </span>
                                             @endforeach
+                                            @endif
                                             @endforeach
-
                                         </td>
                                         <td>
 
