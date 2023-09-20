@@ -28,7 +28,7 @@ class IndexUsers extends Component
             ->orwhere('facebook', 'like', '%' . $this->search . '%')
             ->orwhere('whatsapp', 'like', '%' . $this->search . '%')
             ->orderBy($this->sortField, $this->sortDirection)
-            ->paginate(1000);
+            ->paginate(100);
         return view('livewire.admin.index-users', compact('users'));
     }
 
