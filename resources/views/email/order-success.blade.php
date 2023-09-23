@@ -7,7 +7,7 @@ RESUMEN DE COMPRA: {{$order}}
 
 CANTIDAD PAGADA: ${{$price}} MXN
 
-FECHA DE COMPRA: {{date_format(now(),'d-M-Y')}}
+FECHA DE COMPRA: {{date_format($date,'d-M-Y')}}
 
 
 

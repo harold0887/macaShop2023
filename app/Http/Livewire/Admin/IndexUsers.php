@@ -15,6 +15,9 @@ class IndexUsers extends Component
     protected $paginationTheme = 'bootstrap';
     public $sortDirection = 'desc';
     public $sortField = 'id';
+    protected $listeners = [
+        'deleteUser' => 'delete',
+    ];
 
     public function updatingSearch()
     {
@@ -86,7 +89,7 @@ class IndexUsers extends Component
 
         try {
 
-            $newOrder= Order::create([
+            $newOrder = Order::create([
                 'customer_id' => $user->id,
                 'amount' => 350,
                 'status' => 'approved',
@@ -96,12 +99,29 @@ class IndexUsers extends Component
                 'active' => false,
             ]);
 
-             
-           return redirect()->to('dashboard/sales/'.$newOrder->id.'/edit')->with('success-auto-close', 'Registro exitoso');
+
+            return redirect()->to('dashboard/sales/' . $newOrder->id . '/edit')->with('success-auto-close', 'Registro exitoso');
 
             //return back()->with('success', 'Registro exitoso');
         } catch (QueryException $e) {
             return back()->with('error', 'Error al guardar el registro - ' .  $e->getMessage());
+        }
+    }
+    public function delete(User $user)
+    {
+        try {
+
+            User::destroy($user->id);
+
+            $this->emit('success-auto-close', [
+                'title' => 'Eliminado!',
+                'message' => 'El usuario ha sido eliminado correctamente.',
+            ]);
+        } catch (QueryException $e) {
+
+            $this->emit('error', [
+                'message' => 'Error al eliminar el usuario - ' . $e->getMessage(),
+            ]);
         }
     }
 }

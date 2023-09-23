@@ -36,6 +36,24 @@
                                 </div>
                             </div>
                             <div class="form-row">
+                                <div class="form-group col-md-5">
+                                    <label for="whatsapp">WhatsApp</label>
+                                    <input type="whatsapp" class="form-control" name="whatsapp" value="{{ $user->whatsapp }}">
+                                    @error('whatsapp')
+                                    <small class="text-danger"> {{ $message }} </small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-5">
+                                    <label for="facebook">Facebook</label>
+                                    <input type="facebook" class="form-control" name="facebook" value="{{ $user->facebook }}">
+                                    @error('facebook')
+                                    <small class="text-danger"> {{ $message }} </small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-row">
 
                                 <div class="form-group col-12 col-md-4">
                                     <select name="roles[]" class="selectpicker form-control" data-size="7" data-style="select-with-transition " multiple title="Roles...">
@@ -43,8 +61,7 @@
                                         @if (isset($roles) && $roles->count() > 0)
                                         @foreach ($roles as $role)
 
-                                        <option value=" {{ $role->id }}" 
-                                        @foreach($user->roles as $rolUser)
+                                        <option value=" {{ $role->id }}" @foreach($user->roles as $rolUser)
                                             @if($rolUser->id == $role->id)
                                             selected
                                             @endif
@@ -59,10 +76,10 @@
                                     <small class="text-danger"> {{ $message }} </small>
                                     @enderror
                                 </div>
-                               
+
 
                             </div>
-                         
+
 
                             <div class="col-sm-10  mt-5">
                                 <button type="submit" class="btn btn-primary">Actualizar</button>

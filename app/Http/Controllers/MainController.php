@@ -22,6 +22,7 @@ class MainController extends Controller
         //obtener la order
         $order = Order::findOrFail(request('external_reference'));
 
+        
 
         switch (request('status')) {
             case 'approved':

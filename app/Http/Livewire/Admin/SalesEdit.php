@@ -17,7 +17,7 @@ class SalesEdit extends Component
     protected $listeners = ['some-event2' => '$refresh'];
     public $order, $ids, $patch, $search = '', $contacto, $status, $mercadoPago, $facebook, $comentario;
     protected $rules = [
-        'contacto' => 'required|string',
+        'contacto' => ['required', 'string'],
         'facebook' => 'required|string',
     ];
     public function mount()
@@ -33,7 +33,6 @@ class SalesEdit extends Component
         $this->status = $this->order->status;
         $this->mercadoPago = $this->order->payment_id;
         $this->comentario = $this->order->contacto;
-     
     }
     public function render()
     {
@@ -169,8 +168,17 @@ class SalesEdit extends Component
     public function save()
     {
 
-        if ($this->order->memberships->count() > 0) {
-            $this->validate();
+        try {
+            if ($this->order->memberships->count() > 0) {
+
+                $this->validate();
+            } else {
+
+                $this->validate([
+                    'contacto' => 'required|string',
+                ]);
+            }
+
             Order::findOrFail($this->order->id)->update([
                 'status' => $this->status,
                 'payment_id' => $this->mercadoPago,
@@ -179,26 +187,14 @@ class SalesEdit extends Component
             User::findOrFail($this->order->customer_id)->update([
                 'whatsapp' => $this->contacto,
                 'facebook' => $this->facebook,
-                
-            ]);
 
-            $this->emit('success-auto-close', [
-                'message' => 'La orden fue actualizada de manera correcta',
-            ]);
-        } else {
-            $this->validate([
-                'contacto' => 'required|string',
-            ]);
-            Order::findOrFail($this->order->id)->update([
-                'status' => $this->status,
-                'payment_id' => $this->mercadoPago,
-                'contacto' => $this->comentario,
-            ]);
-            User::findOrFail($this->order->customer_id)->update([
-                'whatsapp' => $this->contacto,
             ]);
             $this->emit('success-auto-close', [
                 'message' => 'La orden fue actualizada de manera correcta',
+            ]);
+        } catch (QueryException $th) {
+            $this->emit('error', [
+                'message' => 'Error al actualizar la orden' . $th->getMessage(),
             ]);
         }
     }
@@ -213,37 +209,30 @@ class SalesEdit extends Component
             $status = $venta->active;
 
             if ($status == false) {
-                if ($this->order->memberships->count() > 0) {
-                    $this->validate();
-                    Order::findOrFail($this->order->id)->update([
-                        'status' => $this->status,
-                        'payment_id' => $this->mercadoPago,
-                        'contacto' => $this->comentario,
-                    ]);
-                    User::findOrFail($this->order->customer_id)->update([
-                        'whatsapp' => $this->contacto,
-                        'facebook' => $this->facebook,
-                    ]);
 
-                    $this->emit('success-auto-close', [
-                        'message' => 'La orden fue actualizada de manera correcta',
-                    ]);
+                if ($this->order->memberships->count() > 0) {
+
+                    $this->validate();
                 } else {
+
                     $this->validate([
                         'contacto' => 'required|string',
                     ]);
-                    Order::findOrFail($this->order->id)->update([
-                        'status' => $this->status,
-                        'payment_id' => $this->mercadoPago,
-                        'contacto' => $this->comentario,
-                    ]);
-                    User::findOrFail($this->order->customer_id)->update([
-                        'whatsapp' => $this->contacto,
-                    ]);
-                    $this->emit('success-auto-close', [
-                        'message' => 'La orden fue actualizada de manera correcta',
-                    ]);
                 }
+
+                Order::findOrFail($this->order->id)->update([
+                    'status' => $this->status,
+                    'payment_id' => $this->mercadoPago,
+                    'contacto' => $this->comentario,
+                ]);
+                User::findOrFail($this->order->customer_id)->update([
+                    'whatsapp' =>  $this->contacto,
+                    'facebook' => $this->facebook,
+
+                ]);
+                $this->emit('success-auto-close', [
+                    'message' => 'La orden fue actualizada de manera correcta',
+                ]);
             }
 
 

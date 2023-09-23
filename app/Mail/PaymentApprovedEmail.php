@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Auth;
@@ -14,22 +15,21 @@ class PaymentApprovedEmail extends Mailable
     public $message;
     public $name;
     public $subject;
-    public $format;
-    public $articles;
-    public $document;
     public $order;
     public $url;
     public $price;
+    public $date;
 
 
 
-    public function __construct($order, $name, $price)
+    public function __construct(Order $order)
     {
-        $this->subject = 'Confirmación de compra ' . $order;
-        $this->name = $name;
-        $this->order = $order;
+        $this->subject = 'Confirmación de compra ' . $order->id;
+        $this->name = $order->user->name;
+        $this->order = $order->id;
         $this->url = "https://materialdidacticomaca.com/";
-        $this->price= $price;
+        $this->price= $order->amount;
+        $this->date= $order->created_at;
     }
 
     /**

@@ -196,6 +196,9 @@
                                             <a class="btn btn-info btn-link" wire:click="newSales({{ $user->id }})">
                                                 <i class="material-icons">add</i>
                                             </a>
+                                            <a class="btn btn-success btn-link text-danger " onclick="confirmDeleteUser('{{ $user->id }}', '{{ $user->email }}')">
+                                                <i class="material-icons ">close</i>
+                                            </a>
 
                                             @endif
                                         </td>
@@ -217,6 +220,41 @@
                     </div>
                 </div>
             </div>
+            <script>
+                //Confirmar eliminar producto
+                function confirmDeleteUser($id, $name) {
+
+
+
+
+                    //var respuesta = confirm("Realmente desea eliminar: " + $name)
+
+
+                    swal({
+                        title: "Realmente desea eliminar a: " + $name,
+                        //type: "info",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Si, eliminar!",
+                    }).then((result) => {
+                        if (result.value) {
+                            Livewire.emit('deleteUser', $id);
+                          
+                        } else {
+                            Swal.fire('El usuario está seguro :)', '', 'info')
+                        }
+                    });
+
+
+                    // if (respuesta == true) {
+                    //     Livewire.emit('delete', $id);
+                    // } else {
+
+                    //     swal("¡Buen trabajo!", "Tu archivo está seguro :)", "cancel");
+                    // }
+                }
+            </script>
 
         </div>
     </div>

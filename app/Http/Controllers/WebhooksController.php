@@ -58,11 +58,10 @@ class WebhooksController extends Controller
 
                 //enviar correo de materiales
                 if ($materialesComprados) {
-
-                    $notificacion = new PaymentApprovedEmail($order->id, $order->user->name, $order->amount);
+                    $notificacion = new PaymentApprovedEmail($order);
                     Mail::to($order->user->email) //enviar correo al cliente
                         ->send($notificacion);
-                    $notificacion = new PaymentApprovedEmail($order->id, $order->user->name, $order->amount);
+                    $notificacion = new PaymentApprovedEmail($order);
                     Mail::to('arnulfoacosta0887@gmail.com') //copia
                         ->send($notificacion);
                 }
@@ -92,52 +91,14 @@ class WebhooksController extends Controller
                             ->send($correoCopia);
                     }
                 }
-
-
                 break;
             case 'pending':
-                //enviar correo de materiales
-                if ($materialesComprados) {
-
-                    $notificacion = new PaymentApprovedEmail($order->id, $order->user->name, $order->amount . "pending");
-                    Mail::to('arnulfoacosta0887@gmail.com') //copia, dupliacar con correo de cliente
-                        ->send($notificacion);
-                }
-
-                //enviar correo de membresias
-                foreach ($membreships as $membresia) {
-
-                    //validar si es membresia preescolar, se tiene que cambiar cada año
-                    if ($membresia->membership_id == 2006) {
-
-
-                        $correoCopia = new MembresiaPreescolar($order->id, $order->user->name, $order->user->email, $membresia->price . "pending");
-                        Mail::to('arnulfoacosta0887@gmail.com')
-                            ->send($correoCopia);
-                    }
-
-                    if ($membresia->membership_id  == 2007) {
-
-                        $correoCopia = new MembresiaPrimaria($order->id, $order->user->name, $order->user->email, $membresia->price . "pending");
-                        Mail::to('arnulfoacosta0887@gmail.com')
-                            ->send($correoCopia);
-                    }
-                }
-
-
-
-
-
-
                 break;
             case 'in_process':
-
                 break;
             case 'failure':
-
                 break;
             default:
-
                 break;
         }
     }
