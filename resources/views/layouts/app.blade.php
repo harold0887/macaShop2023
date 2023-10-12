@@ -78,7 +78,7 @@
     </form>
 
 
-    @if (Route::is('dashboard','dashboard.*','products.*','memberships.*','category.*','package.*','degrees.*','users.*','comments.*','sales.*'))
+    @if (Route::is('dashboard','dashboard.*','products.*','memberships.*','category.*','package.*','degrees.*','users.*','comments.*','sales.*','ips.*'))
     @include('layouts.page_templates.admin')
 
     @elseif(Route::is('profile.*','customer.*','order.*'))

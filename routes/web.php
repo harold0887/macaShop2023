@@ -11,6 +11,7 @@ use App\Http\Livewire\PackageRender;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\MembershipShow;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IpController;
 use App\Http\Livewire\AccountPackages;
 use App\Http\Livewire\AccountProducts;
 use App\Http\Livewire\Admin\SalesEdit;
@@ -78,12 +79,11 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::get('customer/orders', [MainController::class, 'customerOrders'])->name('customer.orders');
   Route::get('customer/orders/{id}', AccountShowOrder::class)->name('order.show');
-  Route::get('customer/products', AccountProducts::class)->name('customer.products'); 
+  Route::get('customer/products', AccountProducts::class)->name('customer.products');
   Route::get('customer/packages', [MainController::class, 'customerPackages'])->name('customer.packages');
   Route::get('customer/packages/{order}/{id}', AccountShowPackages::class)->name('customer.packages-show');
   Route::get('customer/memberships', [MainController::class, 'customerMemberships'])->name('customer.memberships');
   Route::get('customer/memberships/{order}/{id}', AccountShowMembership::class)->name('customer.membership-show');
- 
 });
 
 
@@ -100,7 +100,7 @@ Route::group(['middleware' => ['role:admin']], function () {
   Route::resource('dashboard/users', UsersController::class)->only(['index', 'update', 'edit']);
   Route::get('dashboard/comments', IndexComments::class)->name('comments.index');
   Route::resource('dashboard/sales', SalesControler::class);
- 
+  Route::resource('dashboard/ips', IpController::class)->only(['index']);
 });
 
 
@@ -142,7 +142,3 @@ Route::POST('createOrder', [MainController::class, 'createOrder'])->name('shop.c
 
 
 Route::post('webhooks', WebhooksController::class);
-
-
-
-

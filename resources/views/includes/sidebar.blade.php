@@ -117,6 +117,12 @@
           <p>Ventas</p>
         </a>
       </li>
+      <li class="nav-item{{ $activePage == 'ips' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('ips.index') }}">
+          <i class="material-icons">circles_ext</i>
+          <p>IPS</p>
+        </a>
+      </li>
     </ul>
   </div>
 </div>
