@@ -105,6 +105,7 @@ Route::group(['middleware' => ['role:admin']], function () {
 
 
 
+
 //guest
 
 Route::get('tienda/productos', ShopRender::class)->name('shop.index');

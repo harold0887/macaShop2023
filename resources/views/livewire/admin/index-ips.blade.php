@@ -77,6 +77,18 @@
                                             @endif
                                             IP
                                         </th>
+                                        <th style="cursor:pointer" wire:click="setSort('tipo')">
+                                            @if($sortField=='tipo')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
+                                            Tipo
+                                        </th>
                                         <th style="cursor:pointer">
                                             Nombre
                                         </th>
@@ -95,6 +107,7 @@
                                     <tr>
                                         <td>{{ $ip->id }}</td>
                                         <td>{{ $ip->ip }}</td>
+                                        <td>{{ $ip->tipo }}</td>
                                         <td>{{ $ip->user->name }}</td>
                                         <td>{{ $ip->user->email }}</td>
                                         <td>{{ $ip->user->id }}</td>
