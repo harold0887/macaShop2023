@@ -470,10 +470,16 @@ class MainController extends Controller
         return view('contact');
     }
 
-    public function customerOrders()
+    public function customerOrders(Request $request)
     {
 
-       
+        Ip::create([
+            'user_id' => Auth::user()->id,
+            'ip' => $request->ip(),
+            'tipo' => 'orders',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
         $orders = Order::where('customer_id', Auth::user()->id)
             ->orderByDesc('created_at', 'desc')
             ->get();
