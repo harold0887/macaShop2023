@@ -19,7 +19,7 @@ namespace App;
 
 
 
-
+use Mchev\Banhammer\Traits\Bannable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -32,7 +32,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
-  
+    use Bannable;
  
  
     
