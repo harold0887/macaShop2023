@@ -112,6 +112,16 @@
                                         <td>{{ $ip->user->email }}</td>
                                         <td>{{ $ip->user->id }}</td>
                                         <td>{{date_format($ip->created_at, 'd-M-Y h:m')}}</td>
+                                        <td>
+                                            <div class="togglebutton" wire:click="changeStatus({{ $ip->user->id }}, '{{ $ip->user->status }}')">
+                                                <label>
+                                                    <input type="checkbox" {{ $ip->user->status == 1 ? 'checked ' : '' }} >
+                                                    <span class="toggle"></span>
+                                                </label>
+                                            </div>
+
+
+                                        </td>
 
 
 

@@ -55,8 +55,11 @@ class IndexUsers extends Component
 
     public function changeStatus($id, $status)
     {
+
+        $user = User::findOrFail($id);
+
         try {
-            $user = User::findOrFail($id);
+
 
             if ($user->hasRole('admin')) {
                 $this->emit('error', [
@@ -64,13 +67,27 @@ class IndexUsers extends Component
                 ]);
             } else {
 
-                $user->update([
-                    'status' => $status == 0 ? true : false
-                ]);
 
-                $this->emit('success-auto-close', [
-                    'message' => 'El cambio se realizo con éxito',
-                ]);
+                if ($status == 1) {
+
+                    $user->ban([
+                        'comment' => 'Revendedor'
+                    ]);
+                    $user->update([
+                        'status' => 0,
+                    ]);
+                    $this->emit('success-auto-close', [
+                        'message' => 'El usuario ha sido bloqueado con éxito',
+                    ]);
+                } else {
+                    $user->unban();
+                    $user->update([
+                        'status' => 1,
+                    ]);
+                    $this->emit('success-auto-close', [
+                        'message' => 'El usuario ha sido desbloqueado con éxito',
+                    ]);
+                }
             }
         } catch (QueryException $e) {
             $this->emit('error', [

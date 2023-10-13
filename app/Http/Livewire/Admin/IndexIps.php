@@ -12,33 +12,48 @@ class IndexIps extends Component
     protected $paginationTheme = 'bootstrap';
     public $sortDirection = 'desc';
     public $sortField = 'id';
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
+    // public function updatingSearch()
+    // {
+    //     $this->resetPage();
+    // }
 
 
     public function render()
     {
-         $ips = Ip::where('ip', 'like', '%' . $this->search . '%')
+
+
+
+        $ips = Ip::query()
+            ->with(['user'])
+            ->when($this->search, function ($query) {
+                $query->where('ip', 'like', '%' . $this->search . '%');
+            })
+            ->orWhereHas('user', function ($query) {
+                $query->where('email', 'like', '%' . $this->search . '%')
+                    ->orWhere('facebook', 'like', '%' . $this->search . '%')
+                    ->orWhere('whatsapp', 'like', '%' . $this->search . '%');
+            })
+
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(100);
+
+
         return view('livewire.admin.index-ips', compact('ips'));
     }
-     //sort
-     public function setSort($field)
-     {
- 
-         $this->sortField = $field;
- 
-         if ($this->sortDirection == 'desc') {
-             $this->sortDirection = 'asc';
-         } else {
-             $this->sortDirection = 'desc';
-         }
-     }
-     public function clearSearch()
-     {
-         $this->reset(['search']);
-     }
+    //sort
+    public function setSort($field)
+    {
+
+        $this->sortField = $field;
+
+        if ($this->sortDirection == 'desc') {
+            $this->sortDirection = 'asc';
+        } else {
+            $this->sortDirection = 'desc';
+        }
+    }
+    public function clearSearch()
+    {
+        $this->reset(['search']);
+    }
 }

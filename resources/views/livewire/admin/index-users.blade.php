@@ -178,6 +178,7 @@
 
 
                                         <td>
+
                                             <div class="togglebutton" wire:click="changeStatus({{ $user->id }}, '{{ $user->status }}')">
                                                 <label>
                                                     <input type="checkbox" {{ $user->status == 1 ? 'checked ' : '' }} name="status">
@@ -240,7 +241,7 @@
                     }).then((result) => {
                         if (result.value) {
                             Livewire.emit('deleteUser', $id);
-                          
+
                         } else {
                             Swal.fire('El usuario está seguro :)', '', 'info')
                         }

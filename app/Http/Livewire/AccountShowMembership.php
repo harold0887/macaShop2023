@@ -2,15 +2,17 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Ip;
 use ErrorException;
 use App\Models\Order;
 use App\Models\Package;
 use App\Models\Product;
+
 use Livewire\Component;
 
 use App\Models\Membership;
-
 use App\Mail\EnvioMaterial;
+use Illuminate\Http\Request;
 use App\Models\Order_Details;
 use App\Http\Helpers\AddLicense;
 use Illuminate\Support\Facades\Auth;
@@ -31,11 +33,11 @@ class AccountShowMembership extends Component
 
     public function mount($order, $id)
     {
-
-        $this->membership = Membership::findOrFail($id);
-        $this->ids=$id;
-
        
+        $this->membership = Membership::findOrFail($id);
+        $this->ids = $id;
+
+
 
         //dd( $this->membership);
         $this->order = Order::findOrFail($order);

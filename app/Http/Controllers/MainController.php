@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ip;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class MainController extends Controller
         //obtener la order
         $order = Order::findOrFail(request('external_reference'));
 
-        
+
 
         switch (request('status')) {
             case 'approved':
@@ -469,15 +470,30 @@ class MainController extends Controller
         return view('contact');
     }
 
-    public function customerOrders()
+    public function customerOrders(Request $request)
     {
+
+        Ip::create([
+            'user_id' => Auth::user()->id,
+            'ip' => $request->ip(),
+            'tipo' => 'orders',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
         $orders = Order::where('customer_id', Auth::user()->id)
             ->orderByDesc('created_at', 'desc')
             ->get();
         return view('account.account-orders', compact('orders'));
     }
-    public function customerMemberships()
+    public function customerMemberships(Request $request)
     {
+        Ip::create([
+            'user_id' => Auth::user()->id,
+            'ip' => $request->ip(),
+            'tipo' => 'membresias',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
         $memberships = Order_Details::join('orders', 'order_details.order_id', '=', 'orders.id')
             ->join('memberships', 'order_details.membership_id', '=', 'memberships.id')
             ->where('orders.customer_id', Auth::user()->id)

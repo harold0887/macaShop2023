@@ -61,6 +61,8 @@ Route::get('/foo', function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/banned', [HomeController::class, 'banned'])->name('banned');
+
 
 Auth::routes();
 
@@ -75,15 +77,18 @@ Route::group(['middleware' => ['auth']], function () {
   Route::put('profile/password', [ProfileController::class, 'password'])->name('profile.password');
 
 
-  //ventas
 
-  Route::get('customer/orders', [MainController::class, 'customerOrders'])->name('customer.orders');
-  Route::get('customer/orders/{id}', AccountShowOrder::class)->name('order.show');
-  Route::get('customer/products', AccountProducts::class)->name('customer.products');
-  Route::get('customer/packages', [MainController::class, 'customerPackages'])->name('customer.packages');
-  Route::get('customer/packages/{order}/{id}', AccountShowPackages::class)->name('customer.packages-show');
-  Route::get('customer/memberships', [MainController::class, 'customerMemberships'])->name('customer.memberships');
-  Route::get('customer/memberships/{order}/{id}', AccountShowMembership::class)->name('customer.membership-show');
+  Route::group(['middleware' => ['auth.banned', 'ip.banned']], function () {
+    //ventas
+
+    Route::get('customer/orders', [MainController::class, 'customerOrders'])->name('customer.orders');
+    Route::get('customer/orders/{id}', AccountShowOrder::class)->name('order.show');
+    Route::get('customer/products', AccountProducts::class)->name('customer.products');
+    Route::get('customer/packages', [MainController::class, 'customerPackages'])->name('customer.packages');
+    Route::get('customer/packages/{order}/{id}', AccountShowPackages::class)->name('customer.packages-show');
+    Route::get('customer/memberships', [MainController::class, 'customerMemberships'])->name('customer.memberships');
+    Route::get('customer/memberships/{order}/{id}', AccountShowMembership::class)->name('customer.membership-show');
+  });
 });
 
 
