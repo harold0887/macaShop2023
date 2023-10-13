@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
 
         //banned
         'auth.banned' => \Mchev\Banhammer\Middleware\AuthBanned::class,
+        'ip.banned' => \Mchev\Banhammer\Middleware\IPBanned::class,
 
     ];
 

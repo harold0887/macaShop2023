@@ -78,8 +78,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-  Route::middleware(['auth.banned'])->group(function () {
-  
+  Route::group(['middleware' => ['auth.banned', 'ip.banned']], function () {
     //ventas
 
     Route::get('customer/orders', [MainController::class, 'customerOrders'])->name('customer.orders');

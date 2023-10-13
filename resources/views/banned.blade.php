@@ -2,7 +2,7 @@
 @extends('errors.layout', [
 'classPage' => 'error-page',
 'activePage' => '403',
-'pageBackground' => asset("material").'/img/bg9 .jpg',
+'pageBackground' => asset("material").'/img/bg9.jpg',
 'navbarClass'=>'text-white',
 'title'=>'Error 403'
 ])
