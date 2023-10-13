@@ -78,7 +78,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-  Route::middleware(['auth.banned'])->group(function () {
+ 
   
     //ventas
 
@@ -89,7 +89,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('customer/packages/{order}/{id}', AccountShowPackages::class)->name('customer.packages-show');
     Route::get('customer/memberships', [MainController::class, 'customerMemberships'])->name('customer.memberships');
     Route::get('customer/memberships/{order}/{id}', AccountShowMembership::class)->name('customer.membership-show');
-  });
+
 });
 
 
