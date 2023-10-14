@@ -71,5 +71,12 @@ class User extends Authenticatable
     {
       return $this->hasMany('App\Models\Order','customer_id');
     }
+
+
+     //relacion con ips, retorna las ordenes de un usuario
+     public function ips()
+     {
+       return $this->hasMany('App\Models\Ips','user_id');
+     }
    
 }

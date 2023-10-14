@@ -135,6 +135,9 @@
                                         <th style="cursor:pointer" wire:click="setSort('role')">
                                             Rol
                                         </th>
+                                        <th style="cursor:pointer" wire:click="setSort('role')">
+                                            Ips
+                                        </th>
                                         <th style="cursor:pointer" wire:click="setSort('status')">Estatus</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -175,6 +178,7 @@
 
 
                                         </td>
+                                        <td>{{$user->ips->count()}}</td>
 
 
                                         <td>
