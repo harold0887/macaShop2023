@@ -47,6 +47,9 @@
 
                             @endif
                         </div>
+                        <div class="col-12">
+                            <small class="text-muted">{{ $lock->count() }} ips bloqueadas,  </small>
+                        </div>
                         @if (isset($ips) && $ips->count() > 0)
                         <div class="table-responsive">
                             <table class="table table-striped">

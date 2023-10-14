@@ -23,11 +23,12 @@ class IndexIps extends Component
     }
 
 
+
     public function render()
     {
 
         $lock = IP::banned()->get();
-
+        
 
 
         $ips = Ips::query()
