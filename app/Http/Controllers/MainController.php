@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ip;
+
+use App\Models\Ips;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -473,7 +474,7 @@ class MainController extends Controller
     public function customerOrders(Request $request)
     {
 
-        Ip::create([
+        Ips::create([
             'user_id' => Auth::user()->id,
             'ip' => $request->ip(),
             'tipo' => 'orders',
@@ -487,7 +488,7 @@ class MainController extends Controller
     }
     public function customerMemberships(Request $request)
     {
-        Ip::create([
+        Ips::create([
             'user_id' => Auth::user()->id,
             'ip' => $request->ip(),
             'tipo' => 'membresias',

@@ -96,10 +96,17 @@
                                             Email
                                         </th>
                                         <th style="cursor:pointer">
-                                            id user
+                                            user id
                                         </th>
-
-                                        <th>Acciones</th>
+                                        <th style="cursor:pointer">
+                                            Fecha
+                                        </th>
+                                        <th style="cursor:pointer">
+                                            Status User
+                                        </th>
+                                        <th style="cursor:pointer">
+                                            Status IP
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -115,10 +122,34 @@
                                         <td>
                                             <div class="togglebutton" wire:click="changeStatus({{ $ip->user->id }}, '{{ $ip->user->status }}')">
                                                 <label>
-                                                    <input type="checkbox" {{ $ip->user->status == 1 ? 'checked ' : '' }} >
+                                                    <input type="checkbox" {{ $ip->user->status == 1 ? 'checked ' : '' }}>
                                                     <span class="toggle"></span>
                                                 </label>
                                             </div>
+
+
+                                        </td>
+                                        <td>
+                                            @foreach($lock as $iplock)
+                                            @if($iplock->ip == $ip->ip)
+                                            <div class="togglebutton">
+                                                <label>
+                                                    <input type="checkbox">
+                                                    <span class="toggle"></span>
+                                                </label>
+                                            </div>
+                                            @else
+                                            <div class="togglebutton" wire:click="bannedIP({{ $ip->ip }})">
+                                                <label>
+                                                    <input type="checkbox" checked>
+                                                    <span class="toggle"></span>
+                                                </label>
+                                            </div>
+                                            @endif
+                                            @endforeach
+
+
+
 
 
                                         </td>
