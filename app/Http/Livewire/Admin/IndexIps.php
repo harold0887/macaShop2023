@@ -29,6 +29,8 @@ class IndexIps extends Component
 
         $lock = IP::banned()->get();
 
+
+
         $ips = Ips::query()
             ->with(['user'])
             ->when($this->search, function ($query) {
@@ -106,22 +108,35 @@ class IndexIps extends Component
         }
     }
 
-    // public function bannedIP($ip)
-    // {
+    public function bannedIP($ip)
+    {
 
+        try {
+            IP::ban($ip);
 
+            $this->emit('success-auto-close', [
+                'message' => 'El usuario ha sido bloqueado con éxito',
+            ]);
+        } catch (QueryException $e) {
+            $this->emit('error', [
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
 
-    //     try {
+    public function UnBannedIP($ip)
+    {
 
+        try {
+            IP::unban($ip);
 
-    //             $this->emit('success-auto-close', [
-    //                 'message' => 'El usuario ha sido bloqueado con éxito',
-    //             ]);
-           
-    //     } catch (QueryException $e) {
-    //         $this->emit('error', [
-    //             'message' => $e->getMessage(),
-    //         ]);
-    //     }
-    // }
+            $this->emit('success-auto-close', [
+                'message' => 'El usuario ha sido bloqueado con éxito',
+            ]);
+        } catch (QueryException $e) {
+            $this->emit('error', [
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
 }

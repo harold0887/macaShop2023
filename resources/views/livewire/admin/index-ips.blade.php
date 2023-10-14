@@ -130,23 +130,34 @@
 
                                         </td>
                                         <td>
+                                            @php
+                                            $exist=0
+                                            @endphp
+
                                             @foreach($lock as $iplock)
+
                                             @if($iplock->ip == $ip->ip)
-                                            <div class="togglebutton">
-                                                <label>
-                                                    <input type="checkbox">
-                                                    <span class="toggle"></span>
-                                                </label>
-                                            </div>
-                                            @else
-                                            <div class="togglebutton" wire:click="bannedIP({{ $ip->ip }})">
-                                                <label>
-                                                    <input type="checkbox" checked>
-                                                    <span class="toggle"></span>
-                                                </label>
-                                            </div>
+                                            @php
+                                            $exist=$exist+1
+                                            @endphp
                                             @endif
                                             @endforeach
+
+
+
+                                            @if($exist >0)
+                                            <button class="btn p-1 btn-outline-danger  p-0 w-100" wire:click="UnBannedIP('{{ $ip->ip }}')">
+                                                <i class="material-icons">close</i>
+                                                desbloquear
+                                            </button>
+
+                                            @else
+                                            <button type="submit" class="btn p-1  btn-outline-success p-0  w-100" wire:click="bannedIP('{{ $ip->ip }}')">
+                                                <i class="material-icons">add</i>
+                                                Bloquear
+                                            </button>
+
+                                            @endif
 
 
 
