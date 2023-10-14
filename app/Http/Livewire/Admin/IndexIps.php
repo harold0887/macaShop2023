@@ -2,9 +2,8 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\User;
-
 use App\Models\Ban;
+use App\User;
 use App\Models\Ips;
 use Livewire\Component;
 use Mchev\Banhammer\IP;
@@ -110,18 +109,15 @@ class IndexIps extends Component
 
     public function bannedIP($ip)
     {
+      
 
-        try {
-            IP::ban($ip);
+            Ban::ban($ip);
+      
 
             $this->emit('success-auto-close', [
                 'message' => 'El usuario ha sido bloqueado con éxito',
             ]);
-        } catch (QueryException $e) {
-            $this->emit('error', [
-                'message' => $e->getMessage(),
-            ]);
-        }
+
     }
 
     public function UnBannedIP($ip)
