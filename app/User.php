@@ -78,5 +78,8 @@ class User extends Authenticatable
      {
        return $this->hasMany('App\Models\Ips','user_id');
      }
+
+
+  
    
 }

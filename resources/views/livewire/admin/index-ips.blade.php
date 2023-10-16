@@ -48,7 +48,7 @@
                             @endif
                         </div>
                         <div class="col-12">
-                            <small class="text-muted">{{ $lock->count() }} ips bloqueadas,  </small>
+                            <small class="text-muted">{{ $lock->count() }} ips bloqueadas, </small>
                         </div>
                         @if (isset($ips) && $ips->count() > 0)
                         <div class="table-responsive">
@@ -110,6 +110,8 @@
                                         <th style="cursor:pointer">
                                             Status IP
                                         </th>
+                                        <th style="cursor:pointer">
+                                            Acciones </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -167,6 +169,12 @@
 
 
                                         </td>
+                                        <td class="td-actions text-center">
+
+                                            <a class="btn btn-success btn-link text-danger " onclick="confirmDeleteIP('{{ $ip->id }}', '{{ $ip->ip }}')">
+                                                <i class="material-icons ">close</i>
+                                            </a>
+                                        </td>
 
 
 
@@ -194,4 +202,31 @@
 
         </div>
     </div>
+
+    <script>
+        //Confirmar eliminar producto
+        function confirmDeleteIP($id, $name) {
+
+
+
+
+            //var respuesta = confirm("Realmente desea eliminar: " + $name)
+
+
+            swal({
+                title: "Realmente desea eliminar la IP: " + $name,
+                //type: "info",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, eliminar!",
+            }).then((result) => {
+                if (result.value) {
+                    Livewire.emit('deleteIP', $id);
+                } else {
+                    Swal.fire('La IP está segura :)', '', 'info')
+                }
+            });
+        }
+    </script>
 </div>

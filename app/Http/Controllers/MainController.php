@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\User;
 use App\Models\Ips;
 use App\Models\Order;
 use App\Models\Product;
@@ -474,13 +475,22 @@ class MainController extends Controller
     public function customerOrders(Request $request)
     {
 
-        Ips::create([
-            'user_id' => Auth::user()->id,
-            'ip' => $request->ip(),
-            'tipo' => 'orders',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        $userIps = Ips::where('user_id', Auth::user()->id)
+            ->where('ip', $request->ip())->get();
+
+
+        if ($userIps->count() == null) {
+            Ips::create([
+                'user_id' => Auth::user()->id,
+                'ip' => $request->ip(),
+                'tipo' => 'orders',
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        }
+
+
+
         $orders = Order::where('customer_id', Auth::user()->id)
             ->orderByDesc('created_at', 'desc')
             ->get();
@@ -488,13 +498,21 @@ class MainController extends Controller
     }
     public function customerMemberships(Request $request)
     {
-        Ips::create([
-            'user_id' => Auth::user()->id,
-            'ip' => $request->ip(),
-            'tipo' => 'membresias',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        $userIps = Ips::where('user_id', Auth::user()->id)
+            ->where('ip', $request->ip())->get();
+
+
+        if ($userIps->count() == null) {
+            Ips::create([
+                'user_id' => Auth::user()->id,
+                'ip' => $request->ip(),
+                'tipo' => 'Membresías',
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        }
+
+
         $memberships = Order_Details::join('orders', 'order_details.order_id', '=', 'orders.id')
             ->join('memberships', 'order_details.membership_id', '=', 'memberships.id')
             ->where('orders.customer_id', Auth::user()->id)

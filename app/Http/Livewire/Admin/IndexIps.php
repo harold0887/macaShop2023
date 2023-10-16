@@ -17,6 +17,9 @@ class IndexIps extends Component
     protected $paginationTheme = 'bootstrap';
     public $sortDirection = 'desc';
     public $sortField = 'id';
+    protected $listeners = [
+        'deleteIP' => 'delete',
+    ];
     public function updatingSearch()
     {
         $this->resetPage();
@@ -28,7 +31,7 @@ class IndexIps extends Component
     {
 
         $lock = IP::banned()->get();
-        
+
 
 
         $ips = Ips::query()
@@ -110,15 +113,14 @@ class IndexIps extends Component
 
     public function bannedIP($ip)
     {
-      
 
-            Ban::ban($ip);
-      
 
-            $this->emit('success-auto-close', [
-                'message' => 'El usuario ha sido bloqueado con éxito',
-            ]);
+        Ban::ban($ip);
 
+
+        $this->emit('success-auto-close', [
+            'message' => 'El usuario ha sido bloqueado con éxito',
+        ]);
     }
 
     public function UnBannedIP($ip)
@@ -133,6 +135,24 @@ class IndexIps extends Component
         } catch (QueryException $e) {
             $this->emit('error', [
                 'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function delete(Ips $ip)
+    {
+        try {
+
+            Ips::destroy($ip->id);
+
+            $this->emit('success-auto-close', [
+                'title' => 'Eliminado!',
+                'message' => 'La IP ha sido eliminada correctamente.',
+            ]);
+        } catch (QueryException $e) {
+
+            $this->emit('error', [
+                'message' => 'Error al eliminar la IP - ' . $e->getMessage(),
             ]);
         }
     }
