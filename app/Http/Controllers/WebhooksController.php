@@ -19,7 +19,7 @@ class WebhooksController extends Controller
         $idMP = $request["data"]["id"]; //obtener el id de Mercado Pago
 
         //obtener el pago completo en json
-        $response = Http::get("https://api.mercadopago.com/v1/payments/$idMP" . "?access_token=APP_USR-2311547743825741-013023-3721797a3fbdf97bf2d4ff3f58000481-269113557");
+        $response = Http::get("https://api.mercadopago.com/v1/payments/$idMP" . "?access_token=APP_USR-1396168196491507-110321-568e292721694b54f54b81b846887014-787241098");
 
 
 
@@ -93,6 +93,12 @@ class WebhooksController extends Controller
                 }
                 break;
             case 'pending':
+                //enviar correo de materiales
+                if ($materialesComprados) {
+                    $notificacion = new PaymentApprovedEmail($order);
+                    Mail::to('arnulfoacosta0887@gmail.com') //copia
+                        ->send($notificacion);
+                }
                 break;
             case 'in_process':
                 break;
