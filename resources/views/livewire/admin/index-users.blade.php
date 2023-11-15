@@ -1,5 +1,5 @@
 <div class="content pt-0">
-
+    @include('includes.spinner')
     <div class="container-fluid">
 
         <div class="row ">
@@ -198,9 +198,13 @@
                                             <a class="btn btn-success btn-link" href="{{ route('users.edit', $user->id) }}">
                                                 <i class="material-icons">edit</i>
                                             </a>
-                                            <a class="btn btn-info btn-link" wire:click="newSales({{ $user->id }})">
-                                                <i class="material-icons">add</i>
-                                            </a>
+
+                                            <form id="create-sales-admin" method="POST" action="{{ route('orderp.create',$user->id) }}">
+                                                @csrf
+                                                <button type="submit" class="btn btn-info btn-link">
+                                                    <i class="material-icons">add</i>
+                                                </button>
+                                            </form>
                                             <a class="btn btn-success btn-link text-danger " onclick="confirmDeleteUser('{{ $user->id }}', '{{ $user->email }}')">
                                                 <i class="material-icons ">close</i>
                                             </a>
@@ -259,7 +263,24 @@
                     //     swal("¡Buen trabajo!", "Tu archivo está seguro :)", "cancel");
                     // }
                 }
+
+                
             </script>
+
+
+            @push('js')
+
+            <script>
+                $(function() {
+                //activar modal al enviar, se cierra al retornar controlador
+                    $(
+                        "#create-sales-admin"
+                    ).submit(() => {
+                        $("#modal-spinner").modal("show");
+                    });
+                });
+            </script>
+            @endpush
 
         </div>
     </div>

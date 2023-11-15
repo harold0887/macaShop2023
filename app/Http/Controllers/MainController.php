@@ -626,4 +626,33 @@ class MainController extends Controller
 
         return redirect()->route('order.show', [$newOrder->id]);
     }
+
+
+    public function createSales(User $user){
+        //return $user;
+
+        //obtener la ultima compra
+        $lastOrder = Order::latest()->first();
+
+
+        try {
+
+            $newOrder = Order::create([
+                'customer_id' => $user->id,
+                'amount' => 350,
+                'status' => 'approved',
+                'payment_type' => 'Externo',
+                'payment_id' => $lastOrder->payment_id + 1,
+                'order_id' => $lastOrder->payment_id + 1,
+                'active' => false,
+            ]);
+
+
+            return redirect()->to('dashboard/sales/' . $newOrder->id . '/edit')->with('success-auto-close', 'Registro exitoso');
+
+            //return back()->with('success', 'Registro exitoso');
+        } catch (QueryException $e) {
+            return back()->with('error', 'Error al guardar el registro - ' .  $e->getMessage());
+        }
+    }
 }

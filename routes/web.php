@@ -107,6 +107,8 @@ Route::group(['middleware' => ['role:admin']], function () {
   Route::get('dashboard/comments', IndexComments::class)->name('comments.index');
   Route::resource('dashboard/sales', SalesControler::class);
   Route::resource('dashboard/ips', IpController::class)->only(['index']);
+
+  Route::post('dashboard/sales/create/{user}', [MainController::class, 'createSales'])->name('orderp.create');
 });
 
 
