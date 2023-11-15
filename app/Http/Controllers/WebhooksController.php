@@ -61,9 +61,9 @@ class WebhooksController extends Controller
                     $notificacion = new PaymentApprovedEmail($order);
                     Mail::to($order->user->email) //enviar correo al cliente
                         ->send($notificacion);
-                    $notificacion = new PaymentApprovedEmail($order);
-                    Mail::to('arnulfoacosta0887@gmail.com') //copia
-                        ->send($notificacion);
+                    // $notificacion = new PaymentApprovedEmail($order);
+                    // Mail::to('arnulfoacosta0887@gmail.com') 
+                    //     ->send($notificacion);
                 }
 
                 //enviar correo de membresias
@@ -76,9 +76,9 @@ class WebhooksController extends Controller
                         Mail::to($order->user->email)
                             ->send($correoCopia);
 
-                        $correoCopia = new MembresiaPreescolar($order->id, $order->user->name, $order->user->email, $membresia->price);
-                        Mail::to('arnulfoacosta0887@gmail.com')
-                            ->send($correoCopia);
+                        // $correoCopia = new MembresiaPreescolar($order->id, $order->user->name, $order->user->email, $membresia->price);
+                        // Mail::to('arnulfoacosta0887@gmail.com')
+                        //     ->send($correoCopia);
                     }
 
                     if ($membresia->membership_id  == 2007) {
@@ -86,19 +86,13 @@ class WebhooksController extends Controller
                         Mail::to($order->user->email)
                             ->send($correoCopia);
 
-                        $correoCopia = new MembresiaPrimaria($order->id, $order->user->name, $order->user->email, $membresia->price);
-                        Mail::to('arnulfoacosta0887@gmail.com')
-                            ->send($correoCopia);
+                        // $correoCopia = new MembresiaPrimaria($order->id, $order->user->name, $order->user->email, $membresia->price);
+                        // Mail::to('arnulfoacosta0887@gmail.com')
+                        //     ->send($correoCopia);
                     }
                 }
                 break;
             case 'pending':
-                //enviar correo de materiales
-                if ($materialesComprados) {
-                    $notificacion = new PaymentApprovedEmail($order);
-                    Mail::to('arnulfoacosta0887@gmail.com') //copia
-                        ->send($notificacion);
-                }
                 break;
             case 'in_process':
                 break;
