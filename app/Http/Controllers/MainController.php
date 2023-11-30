@@ -14,6 +14,7 @@ use App\Mail\MembresiaPreescolar;
 use App\Mail\PaymentApprovedEmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Database\QueryException;
 
 class MainController extends Controller
 {
@@ -628,12 +629,14 @@ class MainController extends Controller
     }
 
 
-    public function createSales(User $user){
+    public function createSales(User $user)
+    {
         //return $user;
 
         //obtener la ultima compra
         $lastOrder = Order::latest()->first();
 
+        //dd($lastOrder);
 
         try {
 
@@ -642,8 +645,8 @@ class MainController extends Controller
                 'amount' => 350,
                 'status' => 'approved',
                 'payment_type' => 'Externo',
-                'payment_id' => $lastOrder->payment_id + 1,
-                'order_id' => $lastOrder->payment_id + 1,
+                'payment_id' => $lastOrder->id + 1,
+                'order_id' => $lastOrder->id + 1,
                 'active' => false,
             ]);
 
@@ -651,7 +654,7 @@ class MainController extends Controller
             return redirect()->to('dashboard/sales/' . $newOrder->id . '/edit')->with('success-auto-close', 'Registro exitoso');
 
             //return back()->with('success', 'Registro exitoso');
-        } catch (QueryException $e) {
+        } catch (\Throwable $e) {
             return back()->with('error', 'Error al guardar el registro - ' .  $e->getMessage());
         }
     }

@@ -36,7 +36,7 @@
                                 </div>
 
                                 <div class="form-group col-md-3">
-                                    <label for="price">Precio publico</label>
+                                    <label for="price">Precio sin descuento</label>
                                     <input type="number" class="form-control" name="price" value="{{ old('price') ?: $product->price }}" step="0.01">
                                     @error('price')
                                     <small class="text-danger"> {{ $message }} </small>

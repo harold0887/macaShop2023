@@ -46,7 +46,7 @@ class ProductsController extends Controller
             'document' => 'required|mimes:pdf,ppt,pptx,zip',
             'itemMain' => 'required|image',
             'price' => 'required',
-            'discount' => 'required',
+            'price_discount' => 'required',
             'grade' => 'required',
             'information' => 'required',
             'items.*' => 'required|image',
@@ -56,9 +56,13 @@ class ProductsController extends Controller
 
 
         $price = number_format((float)request('price'), 2, '.', '');
-        $percentage = request('discount');
-        $price_with_discount = $price - (($price / 100) * $percentage);
+        //$percentage = request('discount');
+        $price_with_discount = number_format((float)request('price_discount'), 2, '.', '');
 
+
+        if ($price_with_discount > $price) {
+            return back()->with('error', 'El precio con descuento no puede ser mayor al precio sin descuento. ');
+        }
 
         try {
 
@@ -75,7 +79,7 @@ class ProductsController extends Controller
                 'name' => request()->file('document')->getClientOriginalName(),
                 'slug' => Str::slug(request('title'), '-'),
                 'format' => request()->file('document')->getClientOriginalExtension(),
-                'discount_percentage' => $percentage,
+                'discount_percentage' => 0,
                 'status' => true
             ]);
 
@@ -83,18 +87,22 @@ class ProductsController extends Controller
 
             $nuevoProducto->categorias()->sync(request('categories'));
 
-            foreach (request('items') as $item) {
-                Item::create([
-                    'photo' => $item->store('items', 'public'),
-                    'products_id' => $nuevoProducto->id
-                ]);
+
+            if (request('items') != null) {
+                foreach (request('items') as $item) {
+                    Item::create([
+                        'photo' => $item->store('items', 'public'),
+                        'products_id' => $nuevoProducto->id
+                    ]);
+                }
             }
 
 
 
 
+
             return back()->with('success', 'Registro exitoso');
-        } catch (QueryException $e) {
+        } catch (\Throwable $e) {
 
             return back()->with('error', 'Error al guardar el registro - ' . $e->getMessage());
         }

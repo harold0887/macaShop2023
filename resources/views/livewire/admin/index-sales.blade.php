@@ -116,7 +116,7 @@
                                             @else
                                             <i class="fa-solid fa-sort mr-1"></i>
                                             @endif
-                                            Pago
+                                            Forma de Pago
                                         </th>
                                         <th style="cursor:pointer" wire:click="setSort('status')">
                                             @if($sortField=='status')
@@ -128,7 +128,7 @@
                                             @else
                                             <i class="fa-solid fa-sort mr-1"></i>
                                             @endif
-                                            Status
+                                            Status de Pago
                                         </th>
                                         <th>
                                             Membresía
@@ -180,7 +180,7 @@
                                             @elseif($order->status == 'cancelled')
                                             <a class="text-danger">
                                                 <i class="material-icons">cancel_presentation</i>
-                                                
+
                                             </a>
                                             @elseif($order->status == 'rejected')
                                             <a class="text-danger">

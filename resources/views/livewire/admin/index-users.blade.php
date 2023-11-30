@@ -1,5 +1,6 @@
 <div class="content pt-0">
     @include('includes.spinner')
+    @include('includes.alert-error')
     <div class="container-fluid">
 
         <div class="row ">

@@ -92,7 +92,7 @@
                                             @else
                                             <i class="fa-solid fa-sort mr-1"></i>
                                             @endif
-                                            Precio
+                                            Precio sin descuento
                                         </th>
                                       
                                         <th style="cursor:pointer" wire:click="setSort('price_with_discount')">
@@ -105,7 +105,7 @@
                                             @else
                                             <i class="fa-solid fa-sort mr-1"></i>
                                             @endif
-                                            Precio final
+                                            Precio con descuento
                                         </th>
                                         <th style="cursor:pointer" wire:click="setSort('folio')">
                                             @if($sortField=='folio')

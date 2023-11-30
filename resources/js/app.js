@@ -433,7 +433,7 @@ function alertFloat(align, message, icon) {
             icon: icon,
             message: message,
         },
-        {
+        {btn-prueba
             type: type[color],
             timer: 3000,
             placement: {

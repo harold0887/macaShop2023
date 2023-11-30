@@ -32,24 +32,27 @@
                                 </div>
 
                                 <div class="form-group col-12 col-md-4">
-                                    <label class="bmd-label-floating">Precio publico</label>
-                                    <input type="number" class="form-control" name="price" value="{{ old('price') }}" step="0.01">
+                                    <label class="bmd-label-floating">Precio sin descuento</label>
+                                    <input id="pricePublic" type="number" class="form-control" name="price" value="{{ old('price') }}" step="0.01">
                                     @error('price')
                                     <small class="text-danger"> {{ $message }} </small>
                                     @enderror
                                 </div>
                                 <div class="form-group col-12 col-md-4">
-                                    <label class="bmd-label-floating">Descuento (porcentaje %)</label>
-                                    <input type="number" class="form-control" name="discount" value="{{ old('discount') }}" step="0.01">
-                                    @error('discount')
+                                    <label class="bmd-label-floating">Precio con descuento</label>
+                                    <input id="price_discount" type="number" class="form-control" name="price_discount" value="{{ old('price_discount') }}" step="0.01">
+                                    @error('price_discount')
                                     <small class="text-danger"> {{ $message }} </small>
                                     @enderror
                                 </div>
 
+
+
+
                             </div>
                             <div class="form-row px-0 mt-5">
                                 <div class="form-group col-12 col-md-4">
-                                    <select name="categories[]" class="selectpicker form-control" data-size="7" data-style="select-with-transition " multiple title="Categoria...">
+                                    <select name="categories[]" class="selectpicker form-control" data-size="7" data-style="select-with-transition " multiple title="Categoria (opcional)...">
 
                                         @if (isset($categories) && $categories->count() > 0)
                                         @foreach ($categories as $category)
@@ -142,9 +145,7 @@
                                         <small class=" text-danger"> {{ $message }} </small>
                                         @enderror
                                     </div>
-
                                 </div>
-
                                 <div class="col-12 col-md-6 col-lg-3 text-center">
                                     <h4 class="title">Imagen principal</h4>
                                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
@@ -166,7 +167,6 @@
                                         <small class=" text-danger"> {{ $message }} </small>
                                         @enderror
                                     </div>
-
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-3 text-center">
                                     <h4 class="title">Fotos (maximo 10 items)</h4>
@@ -189,9 +189,7 @@
                                         <small class=" text-danger"> {{ $message }} </small>
                                         @enderror
                                     </div>
-
                                 </div>
-
                                 <div class="col-12 col-md-6 col-lg-3 text-center">
                                     <h4 class="title">Video (opcional)</h4>
                                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
@@ -213,13 +211,7 @@
                                         <small class=" text-danger"> {{ $message }} </small>
                                         @enderror
                                     </div>
-
                                 </div>
-
-
-
-
-
                             </div>
 
 
@@ -257,10 +249,12 @@
             </div>
         </div>
 
-   
 
 
-</div>
 
-@endsection
-@include('includes.alert-error')
+    </div>
+
+    @include('includes.alert-error')
+
+
+    @endsection
