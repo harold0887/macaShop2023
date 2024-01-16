@@ -26,10 +26,14 @@ class IndexProducts extends Component
 
     public function render()
     {
-            $products = Product::where(function ($query) {
-                $query->where('title', 'like', '%' . $this->search . '%');
-            })->orderBy($this->sortField, $this->sortDirection)
-                ->paginate(50);
+        $products = Product::where(function ($query) {
+            $query->where('title', 'like', '%' . $this->search . '%');
+        })->withCount('sales')
+            ->withCount('descargas')
+            ->orderBy($this->sortField, $this->sortDirection)
+            ->paginate(50);
+
+       
 
         return view('livewire.admin.index-products', compact('products'));
     }

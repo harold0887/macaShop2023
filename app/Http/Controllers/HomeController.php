@@ -7,7 +7,7 @@ use App\Models\Product;
 
 class HomeController extends Controller
 {
-    
+
     public function index()
     {
         $newsMobile = Product::where('title', 'newsMobile')
@@ -20,14 +20,19 @@ class HomeController extends Controller
         //     ->get();
 
         $comments = Comment::where('best', 1)
-        ->where('status', 1)->get();
+            ->where('status', 1)->get();
 
         return view('home', compact('newsMobile', 'newsDesktop', 'comments'));
     }
 
     public function dashboard()
     {
-        return view('dashboard');
+        $topProducts = Product::withCount('sales')
+            ->withSum('sales', 'price')
+            ->orderBy('sales_count', 'desc')
+            ->take(5)
+            ->get();
+        return view('dashboard', compact('topProducts'));
     }
 
     public function profile()
