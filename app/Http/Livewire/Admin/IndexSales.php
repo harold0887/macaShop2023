@@ -24,7 +24,7 @@ class IndexSales extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $sortDirection = 'desc';
-    public $sortField = 'created_at';
+    public $sortField = 'id';
     public function updatingSearch()
     {
         $this->resetPage();

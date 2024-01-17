@@ -8,83 +8,21 @@
                         <div class="card-icon">
                             <i class="material-icons">receipt</i>
                         </div>
-                        <div class="row">
-                            <div class="col-12 text-xs">
-                                <h4 class="card-title font-weight-bold">Resumen de compra - {{$order->id}}
+                        <div class="row ">
+                            <div class="col-12  p-0">
+                                <h6 class="card-title font-weight-bold">Resumen de compra - {{$order->id}}
                                     <a class="btn  btn-link  p-0" href="{{ route('sales.edit', $order->id) }}" target="_blank">
                                         <i class="material-icons text-success">edit</i>
                                     </a>
-                                </h4>
-                                <span class="text-muted">Email: <b>{{ $order->user->email }}</b></span>
-                                <br>
-                                <span class="text-muted">WhatsApp: <b>{{ $order->user->whatsapp }}</b></span>
-
-                                <br>
-                                <span class="text-muted">Facebook: <b>{{ $order->user->facebook }}</b></span>
-
-                                <br>
-                                <span class="text-muted">Fecha: <b>{{ date_format($order->created_at, 'd-M-Y H:i') }}</b></span>
-                                <br>
-                                <span class="text-muted">Total: <b>{{ $order->amount }} MXN</b></span>
-                                <br>
-                                <span class="text-muted">Pago: <b>{{ $order->payment_type }}</b></span>
-                                <br>
-                                <span class="text-muted">Status de pago: <b>
+                                </h6>
 
 
-                                        @if($order->status == 'create')
-                                        <a class="text-warning">
-                                            <i class="material-icons">pending_actions</i>Pendiente de pago.
-                                        </a>
-                                        @elseif ($order->status == 'approved')
-                                        <a class="text-success">
-                                            <i class="material-icons">check_circle</i> Aprobado.
-                                        </a>
-                                        @elseif($order->status == 'pending')
-                                        <a class="text-warning">
-                                            <i class="material-icons">pending</i> Pendiente de confirmación.
-                                        </a>
-                                        @elseif($order->status == 'in_process')
-                                        <a class="text-warning">
-                                            <i class="material-icons">watch_later</i> En proceso.
-                                        </a>
-                                        @elseif($order->status == 'cancelled')
-                                        <a class="text-danger">
-                                            <i class="material-icons">cancel_presentation</i>Cancelado
-                                        </a>
-                                        @elseif($order->status == 'rejected')
-                                        <a class="text-danger">
-                                            <i class="material-icons">cancel</i>Rechazado
-                                        </a>
-                                        @elseif($order->status == 'refund')
-                                        <a class="text-danger">
-                                            <i class="material-icons">settings_backup_restore</i>Reembolsado
-                                        </a>
-                                        @else
-                                        <a>
-                                            <i class="material-icons">warning</i>{{ $order->status }}
-                                        </a>
-                                        @endif
-
-                                    </b>
-                                </span>
-                                <br>
-                                <span class="text-muted">Comentarios: <b>{{ $order->contacto }}</b></span>
-                                <br>
-                                <div class="togglebutton">
-                                    <label>
-                                        <span class="text-muted">Active:
-                                            <input disabled type="checkbox" wire:click="activeOrder()" {{ $order->active == 1 ? 'checked ' : '' }}>
-                                            <span class="toggle"></span>
-                                        </span>
-                                    </label>
-                                </div>
                             </div>
 
                         </div>
                     </div>
                     <div class="card-body row ">
-                        <div class="col-12 col-lg-9 ">
+                        <div class="col-12 col-lg-9 order-2 order-lg-1">
                             <div class="row">
                                 <!-- Content -->
                                 <div class="rgba-black-strong ">
@@ -441,6 +379,65 @@
 
                             </div>
 
+
+                        </div>
+                        <div class="col order-1 order-lg-2">
+                            <span class="text-muted">Status de pago:<b>
+
+                                    @if($order->status == 'create')
+                                    <a class="text-warning">
+                                        <i class="material-icons">pending_actions</i>Pendiente de pago.
+                                    </a>
+                                    @elseif ($order->status == 'approved')
+                                    <a class="text-success">
+                                        <i class="material-icons">check_circle</i>Aprobado.
+                                    </a>
+                                    @elseif($order->status == 'pending')
+                                    <a class="text-warning">
+                                        <i class="material-icons">pending</i>Pendiente de confirmación.
+                                    </a>
+                                    @elseif($order->status == 'in_process')
+                                    <a class="text-warning">
+                                        <i class="material-icons">watch_later</i>En proceso.
+                                    </a>
+                                    @elseif($order->status == 'cancelled')
+                                    <a class="text-danger">
+                                        <i class="material-icons">cancel_presentation</i>Cancelado
+                                    </a>
+                                    @elseif($order->status == 'rejected')
+                                    <a class="text-danger">
+                                        <i class="material-icons">cancel</i>Rechazado
+                                    </a>
+                                    @elseif($order->status == 'refund')
+                                    <a class="text-danger">
+                                        <i class="material-icons">settings_backup_restore</i>Reembolsado
+                                    </a>
+                                    @else
+                                    <a>
+                                        <i class="material-icons">warning</i>{{ $order->status }}
+                                    </a>
+                                    @endif
+
+
+                            </span>
+                            <br>
+                            <span class="font-weight-bold">Email: </span><span class="font-italic">{{ $order->user->email }}</span>
+                            <br>
+                            <span class="font-weight-bold">WhatsApp: </span><span class="font-italic">{{ $order->user->whatsapp }}</span>
+
+                            <br>
+                            <span class="font-weight-bold">Facebook: </span><span class="font-italic">{{ $order->user->facebook }}</span>
+
+                            <br>
+                            <span class="font-weight-bold">Fecha: </span><span class="font-italic">{{ date_format($order->created_at, 'd-M-Y H:i') }}</span>
+                            <br>
+                            <span class="font-weight-bold">Total: </span><span class="font-italic">{{ $order->amount }} MXN</span>
+                            <br>
+                            <span class="font-weight-bold">Pago: </span><span class="font-italic">{{ $order->payment_type }}</span>
+                            <br>
+                            <span class="font-weight-bold">Active: </span><span class="font-italic">{{ $order->active == 1 ? 'Si ' : 'No' }}</span>
+                            <br>
+                            <span class="font-weight-bold">Comentarios: </span><span class="font-italic">{{ $order->contacto }}</span>
 
                         </div>
 

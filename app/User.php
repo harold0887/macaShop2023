@@ -19,10 +19,12 @@ namespace App;
 
 
 
+use App\Models\Order;
 use Mchev\Banhammer\Traits\Bannable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
@@ -73,11 +75,22 @@ class User extends Authenticatable
     }
 
 
-     //relacion con ips, retorna las ordenes de un usuario
+     //relacion con ips, retorna las ips de un usuario
      public function ips()
      {
        return $this->hasMany('App\Models\Ips','user_id');
      }
+
+
+       //Relacion con ventas, retorna las ventas del producto
+   public function sales(): HasMany
+   {
+       return $this->hasMany(Order::class, 'customer_id', 'id');
+   }
+
+
+
+   
 
 
   

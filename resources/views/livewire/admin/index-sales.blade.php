@@ -19,32 +19,25 @@
                     </div>
                     <div class="card-body row">
                         <div class="col-12">
-                            @if ($search != '')
-                            <div class="d-flex mt-2">
-                                <span class="text-base">Borrar filtros </span>
-                                <i class="material-icons my-auto ml-2 text-base text-danger" style="cursor:pointer" wire:click="clearSearch()">close</i>
-                            </div>
-                            @endif
-                        </div>
-                        <div class="col-10 col-md-8 pr-0">
-                            <form class="form-group">
-                                <div class="input-group rounded">
-                                    <input id="input-search" type="search" class="form-control px-3" placeholder="Buscar por orden, email, etc..." wire:model.debounce.500ms='search' style="border-radius: 30px !important">
+                            <div class="row justify-content-between">
+                                <div class="col-12 col-md-8   align-self-md-center">
+                                    <div class="input-group rounded ">
+                                        <input id="input-search" type="search" class="form-control px-3" placeholder=" Buscar por titulo..." wire:model.debounce.500ms='search' style="border-radius: 30px !important">
+                                        @if ($search != '')
+                                        <span class="input-group-text" style="cursor:pointer" wire:click="clearSearch()"><i class="material-icons mx-0 text-lg text-danger">close</i></span>
+                                        @endif
+                                    </div>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col-2 col-lg-1 p-0">
-                            <button type="submit" class="btn bg-transparent   btn-round btn-just-icon p-0" style="border:solid 1px #c09aed">
-                                <i class="material-icons " style="color:#c09aed">search</i>
-                            </button>
+
+                                <div class="col-12 col-md-auto  align-self-md-center">
+                                    <a class="btn btn-primary btn-block" href="{{ route('sales.create') }}">
+                                        <i class="material-icons">add_circle</i>
+                                        <span>Nueva venta</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="col-12 col-md-3">
-                            <a class="btn btn-primary btn-block" href="{{ route('sales.create') }}">
-                                <i class="material-icons">add_circle</i>
-                                <span>Nueva venta</span>
-                            </a>
-                        </div>
                         <div class="col-12">
                             @if ($search != '')
                             <small class="text-primary">{{ $orders->count() }} resultados obtenidos</small>
@@ -83,28 +76,34 @@
                                             Id MP
                                         </th>
                                         <th style="cursor:pointer" wire:click="setSort('created_at')">
-                                            @if($sortField=='created_at')
-                                            @if($sortDirection=='asc')
-                                            <i class="fa-solid fa-arrow-down-a-z"></i>
-                                            @else
-                                            <i class="fa-solid fa-arrow-up-z-a"></i>
-                                            @endif
-                                            @else
-                                            <i class="fa-solid fa-sort mr-1"></i>
-                                            @endif
-                                            Fecha
+                                            <div class="d-flex">
+                                                @if($sortField=='created_at')
+                                                @if($sortDirection=='asc')
+                                                <i class="fa-solid fa-arrow-down-a-z"></i>
+                                                @else
+                                                <i class="fa-solid fa-arrow-up-z-a"></i>
+                                                @endif
+                                                @else
+                                                <i class="fa-solid fa-sort mr-1"></i>
+                                                @endif
+                                                Fecha
+                                            </div>
+
                                         </th>
                                         <th style="cursor:pointer" wire:click="setSort('amount')">
-                                            @if($sortField=='amount')
-                                            @if($sortDirection=='asc')
-                                            <i class="fa-solid fa-arrow-down-a-z"></i>
-                                            @else
-                                            <i class="fa-solid fa-arrow-up-z-a"></i>
-                                            @endif
-                                            @else
-                                            <i class="fa-solid fa-sort mr-1"></i>
-                                            @endif
-                                            Cantidad
+                                            <div class="d-flex">
+                                                @if($sortField=='amount')
+                                                @if($sortDirection=='asc')
+                                                <i class="fa-solid fa-arrow-down-a-z"></i>
+                                                @else
+                                                <i class="fa-solid fa-arrow-up-z-a"></i>
+                                                @endif
+                                                @else
+                                                <i class="fa-solid fa-sort mr-1"></i>
+                                                @endif
+                                                <span>Cantidad</span>
+                                            </div>
+
                                         </th>
                                         <th style="cursor:pointer" wire:click="setSort('payment_type')">
                                             @if($sortField=='payment_type')
@@ -116,38 +115,45 @@
                                             @else
                                             <i class="fa-solid fa-sort mr-1"></i>
                                             @endif
-                                            Forma de Pago
+                                            Pago
                                         </th>
                                         <th style="cursor:pointer" wire:click="setSort('status')">
-                                            @if($sortField=='status')
-                                            @if($sortDirection=='asc')
-                                            <i class="fa-solid fa-arrow-down-a-z"></i>
-                                            @else
-                                            <i class="fa-solid fa-arrow-up-z-a"></i>
-                                            @endif
-                                            @else
-                                            <i class="fa-solid fa-sort mr-1"></i>
-                                            @endif
-                                            Status de Pago
+                                            <div class="d-inline-flex p-0">
+                                                @if($sortField=='status')
+                                                @if($sortDirection=='asc')
+                                                <i class="fa-solid fa-arrow-down-a-z"></i>
+                                                @else
+                                                <i class="fa-solid fa-arrow-up-z-a"></i>
+                                                @endif
+                                                @else
+                                                <i class="fa-solid fa-sort mr-1"></i>
+                                                @endif
+                                                <span>Status</span>
+                                            </div>
+
                                         </th>
                                         <th>
                                             Membresía
                                         </th>
                                         <th>email</th>
-                                        <th style="cursor:pointer" wire:click="setSort('contacto')">
-                                            @if($sortField=='contacto')
-                                            @if($sortDirection=='asc')
-                                            <i class="fa-solid fa-arrow-down-a-z"></i>
-                                            @else
-                                            <i class="fa-solid fa-arrow-up-z-a"></i>
-                                            @endif
-                                            @else
-                                            <i class="fa-solid fa-sort mr-1"></i>
-                                            @endif
-                                            Contacto
-                                        </th>
+
                                         <th>WhatsApp</th>
                                         <th>Facebook</th>
+                                        <th style="cursor:pointer" wire:click="setSort('contacto')">
+                                            <div class="d-flex">
+                                                @if($sortField=='contacto')
+                                                @if($sortDirection=='asc')
+                                                <i class="fa-solid fa-arrow-down-a-z"></i>
+                                                @else
+                                                <i class="fa-solid fa-arrow-up-z-a"></i>
+                                                @endif
+                                                @else
+                                                <i class="fa-solid fa-sort mr-1"></i>
+                                                @endif
+                                                Comentario
+                                            </div>
+
+                                        </th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>

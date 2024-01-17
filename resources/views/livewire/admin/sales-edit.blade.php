@@ -50,6 +50,7 @@
 
 
                                         <div class="form-group col-12 ">
+                                            <label class="bmd-label-floating">Status</label>
                                             <select class="form-control" name="fop" wire:model.defer="status">
                                                 <option value="">Selecciona un estatus...</option>
                                                 <option value="create">Nueva</option>
@@ -65,7 +66,7 @@
                                             <div class="togglebutton">
                                                 <label>
                                                     <span class="text-muted">Active:
-                                                        <input type="checkbox" wire:click="activeOrder()" {{ $order->active == 1 ? 'checked ' : '' }}>
+                                                        <input type="checkbox" wire:change="activeOrder()" {{ $order->active == 1 ? 'checked ' : '' }}>
                                                         <span class="toggle"></span>
                                                     </span>
                                                 </label>
@@ -285,4 +286,4 @@
         </div>
     </div>
 
-    </div>
+</div>

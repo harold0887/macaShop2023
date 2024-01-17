@@ -14,32 +14,27 @@
                         </div>
                         <div class="row">
                             <div class="col-12 col-md-6">
-                                <h4 class="card-title font-weight-bold">Usuarios ({{$users->total()}} registros).</h4>
+                                <h4 class="card-title font-weight-bold">Usuarios ({{$users->total()}} registros)</h4>
                             </div>
 
                         </div>
                     </div>
                     <div class="card-body row">
                         <div class="col-12">
-                            @if ($search != '')
-                            <div class="d-flex mt-2">
-                                <span class="text-base">Borrar filtros </span>
-                                <i class="material-icons my-auto ml-2 text-base text-danger" style="cursor:pointer" wire:click="clearSearch()">close</i>
-                            </div>
-                            @endif
-                        </div>
-                        <div class="col-10 col-md-8 pr-0">
-                            <form class="form-group">
-                                <div class="input-group rounded">
-                                    <input id="input-search" type="search" class="form-control px-3" placeholder=" Buascar por nombre o email..." wire:model.debounce.500ms='search' style="border-radius: 30px !important">
+                            <div class="row justify-content-between">
+                                <div class="col-12 col-md-8   align-self-md-center">
+                                    <div class="input-group rounded ">
+                                        <input id="input-search" type="search" class="form-control px-3" placeholder=" Buscar por titulo..." wire:model.debounce.500ms='search' style="border-radius: 30px !important">
+                                        @if ($search != '')
+                                        <span class="input-group-text" style="cursor:pointer" wire:click="clearSearch()"><i class="material-icons mx-0 text-lg text-danger">close</i></span>
+                                        @endif
+                                    </div>
                                 </div>
-                            </form>
+
+
+                            </div>
                         </div>
-                        <div class="col-2 col-lg-1 p-0">
-                            <button type="submit" class="btn bg-transparent   btn-round btn-just-icon p-0" style="border:solid 1px #c09aed">
-                                <i class="material-icons " style="color:#c09aed">search</i>
-                            </button>
-                        </div>
+
 
 
                         <div class="col-12">
@@ -127,19 +122,57 @@
                                             @endif
                                             Facebook
                                         </th>
-                                        <th style="cursor:pointer">
+                                        <th style="cursor:pointer" wire:click="setSort('sales_count')">
+                                            @if($sortField=='sales_count')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
                                             Ventas
                                         </th>
                                         <th style="cursor:pointer">
                                             Membresías
                                         </th>
-                                        <th style="cursor:pointer" wire:click="setSort('role')">
+                                        <th style="cursor:pointer" wire:click="setSort('roles_count')">
+                                            @if($sortField=='roles_count')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
                                             Rol
                                         </th>
-                                        <th style="cursor:pointer" wire:click="setSort('role')">
-                                            Ips
+                                        <th style="cursor:pointer" wire:click="setSort('ips_count')">
+                                            @if($sortField=='ips_count')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
+                                            IP
                                         </th>
-                                        <th style="cursor:pointer" wire:click="setSort('status')">Estatus</th>
+                                        <th style="cursor:pointer" wire:click="setSort('status')">
+                                            @if($sortField=='status')
+                                            @if($sortDirection=='asc')
+                                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                                            @else
+                                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                                            @endif
+                                            @else
+                                            <i class="fa-solid fa-sort mr-1"></i>
+                                            @endif
+                                            Status
+                                        </th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -153,7 +186,7 @@
                                         <td>{{$user->whatsapp}}</td>
                                         <td>{{$user->facebook}}</td>
                                         <td>
-                                            {{$user->orders->count()}}
+                                            {{$user->sales_count}}
                                         </td>
                                         <td>
                                             @foreach($user->orders as $order)
@@ -167,13 +200,11 @@
                                             @endforeach
                                         </td>
                                         <td>
-
                                             @foreach($user->roles as $role)
                                             @if($role->name =="admin")
                                             <span class="badge badge-info  my-1">
                                                 {{ $role->name }}
                                             </span>
-
                                             @endif
                                             @endforeach
 
@@ -184,7 +215,7 @@
 
                                         <td>
 
-                                            <div class="togglebutton" wire:click="changeStatus({{ $user->id }}, '{{ $user->status }}')">
+                                            <div class="togglebutton" wire:change="changeStatus({{ $user->id }}, '{{ $user->status }}')">
                                                 <label>
                                                     <input type="checkbox" {{ $user->status == 1 ? 'checked ' : '' }} name="status">
                                                     <span class="toggle"></span>
@@ -195,22 +226,25 @@
 
                                         </td>
                                         <td class="td-actions">
-                                            @if ($user->id != Auth::user()->id && $user->role != 'super-admin')
-                                            <a class="btn btn-success btn-link" href="{{ route('users.edit', $user->id) }}">
-                                                <i class="material-icons">edit</i>
-                                            </a>
+                                            <div class="btn-group shadow-none">
+                                                @if ($user->id != Auth::user()->id && $user->role != 'super-admin')
+                                                <a class="btn btn-success btn-link" href="{{ route('users.edit', $user->id) }}">
+                                                    <i class="material-icons">edit</i>
+                                                </a>
 
-                                            <form id="create-sales-admin" method="POST" action="{{ route('orderp.create',$user->id) }}">
-                                                @csrf
-                                                <button type="submit" class="btn btn-info btn-link">
-                                                    <i class="material-icons">add</i>
-                                                </button>
-                                            </form>
-                                            <a class="btn btn-success btn-link text-danger " onclick="confirmDeleteUser('{{ $user->id }}', '{{ $user->email }}')">
-                                                <i class="material-icons ">close</i>
-                                            </a>
+                                                <form id="create-sales-admin" method="POST" action="{{ route('orderp.create',$user->id) }}">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-info btn-link mx-2">
+                                                        <i class="material-icons">add</i>
+                                                    </button>
+                                                </form>
+                                                <a class="btn btn-success btn-link text-danger " onclick="confirmDeleteUser('{{ $user->id }}', '{{ $user->email }}')">
+                                                    <i class="material-icons ">close</i>
+                                                </a>
 
-                                            @endif
+                                                @endif
+                                            </div>
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -264,8 +298,6 @@
                     //     swal("¡Buen trabajo!", "Tu archivo está seguro :)", "cancel");
                     // }
                 }
-
-                
             </script>
 
 
@@ -273,7 +305,7 @@
 
             <script>
                 $(function() {
-                //activar modal al enviar, se cierra al retornar controlador
+                    //activar modal al enviar, se cierra al retornar controlador
                     $(
                         "#create-sales-admin"
                     ).submit(() => {

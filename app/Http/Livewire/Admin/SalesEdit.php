@@ -219,30 +219,36 @@ class SalesEdit extends Component
                         'contacto' => 'required|string',
                     ]);
                 }
+                if ($this->status == "approved") {
+                    Order::findOrFail($this->order->id)->update([
+                        'status' => $this->status,
+                        'payment_id' => $this->mercadoPago,
+                        'contacto' => $this->comentario,
+                    ]);
+                    User::findOrFail($this->order->customer_id)->update([
+                        'whatsapp' =>  $this->contacto,
+                        'facebook' => $this->facebook,
 
-                Order::findOrFail($this->order->id)->update([
-                    'status' => $this->status,
-                    'payment_id' => $this->mercadoPago,
-                    'contacto' => $this->comentario,
-                ]);
-                User::findOrFail($this->order->customer_id)->update([
-                    'whatsapp' =>  $this->contacto,
-                    'facebook' => $this->facebook,
-
+                    ]);
+                    $venta->update([
+                        'active' => $status = true,
+                    ]);
+                    $this->emit('success-auto-close', [
+                        'message' => 'La orden fue actualizada de manera correcta.',
+                    ]);
+                } else {
+                    $this->emit('error', [
+                        'message' => 'El status debe ser approved para activar la orden',
+                    ]);
+                }
+            } else {
+                $venta->update([
+                    'active' => $status = false,
                 ]);
                 $this->emit('success-auto-close', [
-                    'message' => 'La orden fue actualizada de manera correcta',
+                    'message' => 'El status se cambio de manera correcta',
                 ]);
             }
-
-
-
-            $venta->update([
-                'active' => $status == 0 ? true : false,
-            ]);
-            $this->emit('success-auto-close', [
-                'message' => 'El status se cambio de manera correcta',
-            ]);
         } catch (QueryException $e) {
             $this->emit('error', [
                 'message' => $e->getMessage(),
