@@ -394,7 +394,7 @@
                                     </a>
                                     @elseif($order->status == 'pending')
                                     <a class="text-warning">
-                                        <i class="material-icons">pending</i>Pendiente de confirmación.
+                                        <i class="material-icons">pending</i>Deposito pendiente
                                     </a>
                                     @elseif($order->status == 'in_process')
                                     <a class="text-warning">

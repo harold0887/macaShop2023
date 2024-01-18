@@ -45,8 +45,8 @@
                             @endif
                         </div>
                         @if (isset($orders) && $orders->count() > 0)
-                        <div class="table-responsive">
-                            <table class="table table-striped">
+                        <div class="table-responsive ">
+                            <table class="table table-striped text-xs">
                                 <thead>
                                     <tr>
                                         <th style="cursor:pointer" wire:click="setSort('id')">
@@ -136,24 +136,8 @@
                                             Membresía
                                         </th>
                                         <th>email</th>
-
                                         <th>WhatsApp</th>
                                         <th>Facebook</th>
-                                        <th style="cursor:pointer" wire:click="setSort('contacto')">
-                                            <div class="d-flex">
-                                                @if($sortField=='contacto')
-                                                @if($sortDirection=='asc')
-                                                <i class="fa-solid fa-arrow-down-a-z"></i>
-                                                @else
-                                                <i class="fa-solid fa-arrow-up-z-a"></i>
-                                                @endif
-                                                @else
-                                                <i class="fa-solid fa-sort mr-1"></i>
-                                                @endif
-                                                Comentario
-                                            </div>
-
-                                        </th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -169,32 +153,32 @@
                                         <td>
                                             @if($order->status == 'create')
                                             <a class="text-warning">
-                                                <i class="material-icons">pending_actions</i>
+                                                <i class="material-icons">pending_actions</i>Pendiente de pago
                                             </a>
                                             @elseif ($order->status == 'approved')
                                             <a class="text-success">
-                                                <i class="material-icons">check_circle</i>
+                                                <i class="material-icons">check_circle</i>Aprobado
                                             </a>
                                             @elseif($order->status == 'pending')
                                             <a class="text-warning">
-                                                <i class="material-icons">pending</i>
+                                                <i class="material-icons">pending</i>Deposito pendiente
                                             </a>
                                             @elseif($order->status == 'in_process')
                                             <a class="text-warning">
-                                                <i class="material-icons">watch_later</i>
+                                                <i class="material-icons">watch_later</i>En proceso.
                                             </a>
                                             @elseif($order->status == 'cancelled')
                                             <a class="text-danger">
-                                                <i class="material-icons">cancel_presentation</i>
+                                                <i class="material-icons">cancel_presentation</i>Cancelado
 
                                             </a>
                                             @elseif($order->status == 'rejected')
                                             <a class="text-danger">
-                                                <i class="material-icons">cancel</i>
+                                                <i class="material-icons">cancel</i>Rechazado
                                             </a>
                                             @elseif($order->status == 'refunded')
                                             <a class="text-danger">
-                                                <i class="material-icons">settings_backup_restore</i>
+                                                <i class="material-icons">settings_backup_restore</i>Reembolsado
                                             </a>
                                             @else
                                             <a class="text-danger">
@@ -215,9 +199,7 @@
                                         <td>
                                             {{ $order->user->email }}
                                         </td>
-                                        <td>
-                                            {{ $order->contacto }}
-                                        </td>
+
                                         <td>
                                             {{ $order->user->whatsapp }}
                                         </td>
