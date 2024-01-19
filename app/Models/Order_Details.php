@@ -19,6 +19,8 @@ class Order_Details extends Model
          ->orderBy('title','asc');
      }
 
+
+
     
 
 

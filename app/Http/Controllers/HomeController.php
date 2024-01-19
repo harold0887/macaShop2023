@@ -27,12 +27,8 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        $topProducts = Product::withCount('sales')
-            ->withSum('sales', 'price')
-            ->orderBy('sales_count', 'desc')
-            ->take(5)
-            ->get();
-        return view('dashboard', compact('topProducts'));
+       
+        return view('dashboard');
     }
 
     public function profile()

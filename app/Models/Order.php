@@ -32,4 +32,5 @@ class Order extends Model
     {
         return $this->belongsToMany('App\Models\Membership','order_details');
     }
+
 }
