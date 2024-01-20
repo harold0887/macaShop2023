@@ -288,7 +288,7 @@
                                             <option value="12">Diciembre</option>
                                         </select>
                                         @if( $monthSelect != now()->format('m') )
-                                        <i class="material-icons my-auto ml-2 text-base text-danger" style="cursor:pointer" wire:change="$set('monthSelect', '{{now()->format('m')}}')">close</i>
+                                        <i class="material-icons my-auto ml-2 text-base text-danger" style="cursor:pointer" wire:click="$set('monthSelect', '{{now()->format('m')}}')">close</i>
                                         @endif
 
                                     </div>
@@ -346,60 +346,105 @@
                                     <h4 class="card-title">Detalle de ventas por día</h4>
                                 </div>
                                 <div class="card-body ">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="table-responsive table-sales">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
+                                    <div class="table-responsive table-sales mt-2">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
 
-                                                            <th class="font-weight-bold">
-                                                                Titulo
-                                                            </th>
-                                                            <th class="font-weight-bold">
-                                                                Ventas
-                                                            </th>
-                                                            <th class="font-weight-bold">
-                                                                Suma
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
+                                                    <th class="font-weight-bold">
+                                                        Titulo
+                                                    </th>
+                                                    <th class="font-weight-bold">
+                                                        Ventas
+                                                    </th>
+                                                    <th class="font-weight-bold">
+                                                        Suma
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php
+                                                $sumProducts=0;
+                                                $sumPackages=0;
+                                                $sumMemberships=0;
+                                                @endphp
 
+                                                @foreach($productsDay as $product)
+                                                <tr>
+                                                    <td>
+                                                        {{$product->title}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{$product->sales_count}}
+                                                    </td>
+                                                    <td class="text-end">
+                                                        {{ number_format( $product->sales_sum_price,2)}}
+                                                    </td>
+                                                </tr>
+                                                @php
+                                                $sumProducts=$sumProducts+$product->sales_sum_price
+                                                @endphp
+                                                @endforeach
 
-                                                        @foreach($productsDay as $product)
-                                                        <tr>
-
-                                                            <td>
-                                                                {{$product->title}}
-                                                            </td>
-                                                            <td>
-                                                                {{$product->sales_count}}
-                                                            </td>
-                                                            <td class="text-end">
-                                                                {{ number_format( $product->sales_sum_price,2)}}
-                                                            </td>
-                                                        </tr>
-
-                                                        @endforeach
-
-                                                        <tr class="font-weight-bold table-success">
-                                                            <td>Suma de ventas de productos</td>
-                                                            <td></td>
-                                                            <td class="text-end font-weight-bold">{{ number_format( $sum_day_products,2)}} </td>
-                                                        </tr>
-
-
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                <tr class="font-weight-bold table-success">
+                                                    <td>Ventas de productos</td>
+                                                    <td></td>
+                                                    <td class="text-end font-weight-bold">{{ number_format( $sumProducts,2)}} </td>
+                                                </tr>
 
 
+                                                @foreach($packagesDay as $product)
+                                                <tr>
+                                                    <td>
+                                                        {{$product->title}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{$product->sales_count}}
+                                                    </td>
+                                                    <td class="text-end">
+                                                        {{ number_format( $product->sales_sum_price,2)}}
+                                                    </td>
+                                                </tr>
+                                                @php
+                                                $sumPackages=$sumPackages+$product->sales_sum_price
+                                                @endphp
+                                                @endforeach
 
+                                                <tr class="font-weight-bold table-success">
+                                                    <td>Ventas de productos</td>
+                                                    <td></td>
+                                                    <td class="text-end font-weight-bold">{{ number_format( $sumPackages,2)}} </td>
+                                                </tr>
+                                                @foreach($membershipsDay as $product)
+                                                <tr>
+                                                    <td>
+                                                        {{$product->title}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{$product->sales_count}}
+                                                    </td>
+                                                    <td class="text-end">
+                                                        {{ number_format( $product->sales_sum_price,2)}}
+                                                    </td>
+                                                </tr>
+                                                @php
+                                                $sumMemberships=$sumMemberships+$product->sales_sum_price
+                                                @endphp
+                                                @endforeach
 
-                                        </div>
+                                                <tr class="font-weight-bold table-success">
+                                                    <td>Ventas de productos</td>
+                                                    <td></td>
+                                                    <td class="text-end font-weight-bold">{{ number_format( $sumMemberships,2)}} </td>
+                                                </tr>
 
+                                                <tr class="font-weight-bold text-success" style="border-top:solid 2px">
+                                                    <td>Total de ventas</td>
+                                                    <td></td>
+                                                    <td class="text-end ">{{ number_format( $sumMemberships+$sumPackages+$sumProducts,2)}} </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>

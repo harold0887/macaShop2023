@@ -28,12 +28,18 @@ class IndexProducts extends Component
     {
         $products = Product::where(function ($query) {
             $query->where('title', 'like', '%' . $this->search . '%');
-        })->withCount('sales')
+        })->withCount(['sales' => function ($query) {
+            $query->whereHas('order', function ($query) {
+                $query
+                    ->where('status', 'approved')
+                    ->where('payment_type', '!=', 'externo');
+            });
+        }])
             ->withCount('descargas')
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(50);
 
-       
+
 
         return view('livewire.admin.index-products', compact('products'));
     }

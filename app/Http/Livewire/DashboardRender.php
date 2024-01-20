@@ -3,10 +3,12 @@
 namespace App\Http\Livewire;
 
 use App\Models\Order;
-use App\Models\Order_Details;
+use App\Models\Package;
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\Membership;
 use Livewire\WithPagination;
+use App\Models\Order_Details;
 
 class DashboardRender extends Component
 {
@@ -19,51 +21,33 @@ class DashboardRender extends Component
     public $sortDirection = 'desc', $sortField = 'created_at';
 
     public $monthSelect, $monthSelectName, $yearSelect;
-    public $sum_day_products;
-  
-    public  $max_top_products;
+    public $sum_day_products, $sum_day_packages;
+
+    public  $topProducts;
+    public $day;
     protected $paginationTheme = 'bootstrap';
 
     protected $listeners = ['rangeSelect', 'rangeClear'];
 
 
+
+
+
     public function mount()
     {
         $fecha = now();
-        $day = $fecha->format('Y-m-d');
+        $this->day = $fecha->format('Y-m-d');
         $this->monthSelect = $fecha->format('m');
         $this->yearSelect = $fecha->format('Y');
-
-
-        //Obtener todas las ventas del día (productos, paquetes y membresías)
-        $this->salesDay = Order::whereBetween('created_at', [$day . " 00:00:00", $day . " 23:59:59"])
-            ->where('status', 'approved')
-            ->where('payment_type', '!=', 'externo')
-            ->sum('amount');
-
-        //obtener la lista de productos vendidos en el día, relacionados con el numero de ventas y la suma de ventas por producto
-        $this->productsDay = Product::with(['orders'])
-            ->orWhereHas('orders', function ($query) {
-                $query->whereBetween('created_at', [now()->format('Y-m-d') . " 00:00:00", now()->format('Y-m-d') . " 23:59:59"]);
-            })
-            ->withSum('sales', 'price')
-            ->withCount('sales')
-            ->get();
-
-        //obtener la suma de productos del día
-
-        $this->sum_day_products = Order_Details::join('orders', 'order_details.order_id', 'orders.id')
-            ->select('order_details.id')
-            ->where('orders.status', 'approved')
-            ->where('orders.payment_type', '!=', 'externo')
-            ->whereBetween('order_details.created_at', [$day . " 00:00:00", $day . " 23:59:59"])
-            ->sum('order_details.price');
     }
+
 
 
 
     public function render()
     {
+        $day = $this->day;
+
         $orders = Order::query()
             ->with(['user'])
             ->when($this->search, function ($query) {
@@ -93,13 +77,111 @@ class DashboardRender extends Component
             ->where('status', 'approved')
             ->where('payment_type', '!=', 'externo')
             ->sum('amount');
+
         $this->salesRange = Order::whereBetween('created_at', [$this->rangeStart . " 00:00:01", $this->rangeEnd . " 23:59:59"])
+            ->where('status', 'approved')
+            ->where('payment_type', '!=', 'externo')
             ->sum('amount');
 
         $this->setName($this->monthSelect);
 
-        $topProducts = Product::withCount('sales')
-            ->withSum('sales', 'price')
+
+
+
+        //Obtener todas las ventas del día (productos, paquetes y membresías)
+        $this->salesDay = Order::whereBetween('created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+            ->where('status', 'approved')
+            ->where('payment_type', '!=', 'externo')
+            ->sum('amount');
+
+
+        //Obtener todas las ventas de productos del día con el numero de ventas y la suma de ventas de cada producto
+        $this->productsDay = Product::whereHas('orders', function ($query) use ($day) {
+            $query->whereBetween('orders.created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                ->where('status', 'approved')
+                ->where('payment_type', '!=', 'externo');
+        })
+            ->withCount(['sales' => function ($query)  use ($day) {
+                $query->whereBetween('created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                    ->whereHas('order', function ($query) use ($day) {
+                        $query->whereBetween('orders.created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                            ->where('status', 'approved')
+                            ->where('payment_type', '!=', 'externo');
+                    });
+            }])
+            ->withSum(['sales' => function ($query)  use ($day) {
+                $query->whereBetween('created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                    ->whereHas('order', function ($query) use ($day) {
+                        $query->whereBetween('orders.created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                            ->where('status', 'approved')
+                            ->where('payment_type', '!=', 'externo');
+                    });
+            }], 'price')
+            ->get();
+
+
+        //Obtener todas las ventas de paquetes del día con el numero de ventas y la suma de ventas de cada producto
+        $this->packagesDay = Package::whereHas('orders', function ($query) use ($day) {
+            $query->whereBetween('orders.created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                ->where('status', 'approved')
+                ->where('payment_type', '!=', 'externo');
+        })
+            ->withCount(['sales' => function ($query)  use ($day) {
+                $query->whereBetween('created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                    ->whereHas('order', function ($query) use ($day) {
+                        $query->whereBetween('orders.created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                            ->where('status', 'approved')
+                            ->where('payment_type', '!=', 'externo');
+                    });
+            }])
+            ->withSum(['sales' => function ($query)  use ($day) {
+                $query->whereBetween('created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                    ->whereHas('order', function ($query) use ($day) {
+                        $query->whereBetween('orders.created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                            ->where('status', 'approved')
+                            ->where('payment_type', '!=', 'externo');
+                    });
+            }], 'price')
+            ->get();
+
+        //Obtener todas las ventas de membresías del día con el numero de ventas y la suma de ventas de cada producto
+        $this->membershipsDay = Membership::whereHas('orders', function ($query) use ($day) {
+            $query->whereBetween('orders.created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                ->where('status', 'approved')
+                ->where('payment_type', '!=', 'externo');
+        })
+            ->withCount(['sales' => function ($query)  use ($day) {
+                $query->whereBetween('created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                    ->whereHas('order', function ($query) use ($day) {
+                        $query->whereBetween('orders.created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                            ->where('status', 'approved')
+                            ->where('payment_type', '!=', 'externo');
+                    });
+            }])
+            ->withSum(['sales' => function ($query)  use ($day) {
+                $query->whereBetween('created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                    ->whereHas('order', function ($query) use ($day) {
+                        $query->whereBetween('orders.created_at', [$day . " 00:00:00", $day . " 23:59:59"])
+                            ->where('status', 'approved')
+                            ->where('payment_type', '!=', 'externo');
+                    });
+            }], 'price')
+            ->get();
+
+        $this->topProducts = Product::withCount(['sales' => function ($query) {
+            $query->whereHas('order', function ($query) {
+                $query
+                    ->where('status', 'approved')
+                    ->where('payment_type', '!=', 'externo');
+            });
+        }])
+            ->withSum(['sales' => function ($query) {
+                $query->whereHas('order', function ($query) {
+                    $query
+                        ->where('status', 'approved')
+                        ->where('payment_type', '!=', 'externo');
+                });
+            }], 'price')
             ->orderBy('sales_count', 'desc')
             ->take(10)
             ->get();
@@ -107,7 +189,9 @@ class DashboardRender extends Component
 
 
 
-        return view('livewire.dashboard-render', compact('orders', 'topProducts'));
+
+
+        return view('livewire.dashboard-render', compact('orders'));
     }
 
 
