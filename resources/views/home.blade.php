@@ -149,7 +149,7 @@
 
         <div class="row mt-3">
             <div class="col-12">
-                <h2 class=" lg:pt-12 md:text-3xl  text-center  text-2xl">La mejor opción para <span style="color:#A578DA" class="fw-bold">personas que enseñan desde el corazón.</span></h2>
+                <h1 class=" lg:pt-12 md:text-3xl  text-center  text-2xl">La mejor opción para <span style="color:#A578DA" class="fw-bold">personas que enseñan desde el corazón.</span></h1>
                 <p class="text-center mx-2 text-justify">¿Buscas material didáctico o material para decorar el aula? en
                     <span style="color:#A578DA">Material didáctico MaCa
                         <i class="material-icons animate__animated  animate__pulse animate__infinite 	infinite	 animate__slow  text-sm">favorite</i>

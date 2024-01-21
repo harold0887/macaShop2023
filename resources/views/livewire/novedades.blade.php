@@ -1,8 +1,8 @@
 <div class="row mt-5" style="background-color: #a578da;background-image: linear-gradient(180deg, #a578da 0%, #a578da 33%, #ffffff 66%, #ffffff 100%);">
 
-    <h1 class=" text-center  text-2xl  lg:text-4xl   font-bold text-white  py-2 " style="font-family: 'Advent Pro'">
+    <h2 class=" text-center  text-2xl  lg:text-4xl   font-bold text-white  py-2 " style="font-family: 'Advent Pro'">
         Conoce nuestras novedades
-    </h1>
+    </h2>
 
     <div class="novedades-autoplay">
         @if (isset($products) && $products->count() > 0)

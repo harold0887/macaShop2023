@@ -8,9 +8,9 @@
                 </div>
             </div>
             <div class="col-auto r d-flex align-items-center px-0">
-                <h1 class=" text-center   text-2xl  lg:text-4xl   font-bold " style="font-family: 'Advent Pro';color:#A578DA">
+                <h2 class=" text-center   text-2xl  lg:text-4xl   font-bold " style="font-family: 'Advent Pro';color:#A578DA">
                     Los más vendidos
-                </h1>
+                </h2>
             </div>
             <div class="col-12">
                 <p class="text-center">¡Descubre nuestros materiales didácticos más vendidos! </p>
