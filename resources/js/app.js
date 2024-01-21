@@ -1,6 +1,7 @@
 //import 'animate.css';
 $(function () {
     novedadesAutoplay();
+    bestAutoplay();
     showModalLoad();
     //changeSearch();
     showFilters();
@@ -15,6 +16,45 @@ $(function () {
 });
 
 //slider
+
+function bestAutoplay() {
+    $(".best-autoplay").slick({
+        autoplay: true,
+        autoplaySpeed: 2300,
+        arrows: false,
+        infinite: true,
+        responsive: [
+            {
+                breakpoint: 2048,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 700,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
+    });
+}
 
 function novedadesAutoplay() {
     $(".novedades-autoplay").slick({
@@ -53,6 +93,7 @@ function novedadesAutoplay() {
             },
         ],
     });
+
 
     $(".relacionados").slick({
         autoplay: true,
@@ -132,38 +173,38 @@ function novedadesAutoplay() {
         autoplaySpeed: 2300,
         arrows: false,
         infinite: true,
-    
+
         responsive: [
-          {
-            breakpoint: 2048,
-            settings: {
-              slidesToShow: 5,
-              slidesToScroll: 1,
+            {
+                breakpoint: 2048,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                },
             },
-          },
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 4,
-              slidesToScroll: 1,
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                },
             },
-          },
-          {
-            breakpoint: 700,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
+            {
+                breakpoint: 700,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                },
             },
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
             },
-          },
         ],
-      });
+    });
 }
 
 function showloginModal() {
@@ -275,7 +316,7 @@ function confirmDelete() {
 }
 
 
-/* de aqui en adelante es livewire*/ 
+/* de aqui en adelante es livewire*/
 
 
 
@@ -335,10 +376,19 @@ Livewire.on("deleteCartAlert", ($message) => {
 Livewire.on("addCartAlert", function ($product) {
     $("#cartTitle").text($product['title']);
     $("#cartPrice").text($product['price']);
-    $("#cartImage").attr("src",$product['image']);
+    $("#cartImage").attr("src", $product['image']);
     $("#adCart").modal("show");
     //$(".modal-backdrop").remove();
     novedadesAutoplay();
+
+});
+Livewire.on("addCartAlertBest", function ($product) {
+    $("#cartTitle").text($product['title']);
+    $("#cartPrice").text($product['price']);
+    $("#cartImage").attr("src", $product['image']);
+    $("#adCart").modal("show");
+    //$(".modal-backdrop").remove();
+    bestAutoplay();
 });
 
 Livewire.on("showAcordeon", function () {
@@ -433,7 +483,7 @@ function alertFloat(align, message, icon) {
             icon: icon,
             message: message,
         },
-        {btn-prueba
+        {
             type: type[color],
             timer: 3000,
             placement: {
@@ -443,3 +493,5 @@ function alertFloat(align, message, icon) {
         }
     );
 }
+
+
