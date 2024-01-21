@@ -144,16 +144,112 @@
 
 
         <livewire:novedades />
-        <livewire:subscribers-render />
+        <livewire:best-seler />
+
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <h2 class=" lg:pt-12 md:text-3xl  text-center  text-2xl">La mejor opción para <span style="color:#A578DA" class="fw-bold">personas que enseñan desde el corazón.</span></h2>
+                <p class="text-center mx-2 text-justify">¿Buscas material didáctico o material para decorar el aula? en
+                    <span style="color:#A578DA">Material didáctico MaCa
+                        <i class="material-icons animate__animated  animate__pulse animate__infinite 	infinite	 animate__slow  text-sm">favorite</i>
+                    </span> tenemos algo para ti.
+                </p>
+                <div class="row mt-5">
+                    <div class="col-12 col-lg-6 pl-5 pr-4 align-self-center ">
+                        <div class="row ">
+                            <div class="col-auto">
+                                <div class=" rounded p-3" style="background: linear-gradient(140deg,rgba(146,205,250,.5),rgba(215,215,255,.4) 95%);">
+                                    <span style="color:#A578DA" class="material-symbols-outlined animate__animated  animate__pulse animate__infinite 	infinite	 animate__slow ">
+                                        kid_star
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div class="col">
+                                <p class="fw-bold my-0">Contenido de gran calidad</p>
+                                <p class="text-justify">Descarga materiales didácticos con el mejor diseño e imágenes de gran calidad que llamarán la atención de los peques.</p>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-auto">
+                                <div class=" rounded p-3" style="background: linear-gradient(140deg,rgba(146,205,250,.5),rgba(215,215,255,.4) 95%);">
+                                    <span style="color:#A578DA" class="material-symbols-outlined animate__animated  animate__pulse animate__infinite 	infinite	 animate__slow ">
+                                        card_membership
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div class="col">
+                                <p class="fw-bold my-0">Acceso a nuestras membresías</p>
+                                <p class="text-justify">¡Disfruta más de 100 materiales en cada una de nuestras membresías! 
+                                    <strong style="color:#A578DA">Membresía preescolar</strong> y
+                                    <strong style="color:#A578DA">Membresía primaria</strong>, se
+                                    convertirán en tu
+                                    <strong style="color:#A578DA">
+                                        mejor aliado.
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class=" rounded p-3" style="background: linear-gradient(140deg,rgba(146,205,250,.5),rgba(215,215,255,.4) 95%);">
+                                    <span style="color:#A578DA" class="material-symbols-outlined animate__animated  animate__pulse animate__infinite 	infinite	 animate__slow ">
+                                        search
+                                    </span>
+
+
+                                </div>
+
+                            </div>
+                            <div class="col">
+                                <p class="fw-bold my-0">Recursos actualizados</p>
+                                <p class="text-justify">Mejoramos constantemente para ofrecerte un catálogo actualizado de nuestros materiales didácticos.</p>
+                            </div>
+                        </div>
+
+                        <div class="row ">
+                            <div class="col-auto">
+                                <div class=" rounded p-3" style="background: linear-gradient(140deg,rgba(146,205,250,.5),rgba(215,215,255,.4) 95%);">
+                                    <span style="color:#A578DA" class="material-symbols-outlined animate__animated  animate__pulse animate__infinite 	infinite	 animate__slow">
+                                        check_circle
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div class="col">
+                                <p class="fw-bold my-0">Descarga inmediata</p>
+                                <p class="text-justify">Los recursos comprados se pueden descargar inmediatamente desde su cuenta.</p>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <img class="w-100 " style="border-radius: 20px 120px 20px 120px !important" alt="" src="https://img.freepik.com/foto-gratis/retrato-hermosa-maestra-preescolar-hispana-ensenando-sus-alumnos-salon-clases_662251-1614.jpg?w=1380&t=st=1705795985~exp=1705796585~hmac=5bd052840f45312171440aadbf6814ba6ec6d022f54660d8412d0611faae77b1">
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
 
         <div class="row">
             <div class="col-12">
                 <div class="text-center">
-                    <h2 class="pt-5  lg:text-4xl lg:pt-12 md:text-3xl md:font-bold text-center  text-2xl " style="font-size:27px;font-weight:700; color:#4d4d4d">
+                    <h2 class="pt-5  md:text-3xl  text-center  text-2xl ">
                         ¿Aún no estás convencid@?
                     </h2>
 
-                    <p style="color:#4d4d4d">
+                    <p style="color:#4d4d4d" class="mx-2">
                         Mira lo que lo que piensan los clientes de nuestros materiales didácticos.
 
                     </p>
@@ -167,34 +263,31 @@
             <div id="comments-slick" class="coments-autoplay " style="display: show">
                 @if (isset($comments) && $comments->count() > 0)
                 @foreach ($comments as $comment)
-                <div class="px-2  pb-5">
-                    <div class="card card-testimonial ">
-                        <div class="icon icon-primary">
-                            <i class="material-icons">format_quote</i>
-                        </div>
+                <div class="px-5 px-lg-2  pb-5">
+                    <div class="card card-testimonial " @if( $loop->index%2 != 0) style="border: solid 2px #A578DA; border-radius: 5px 5px 70px 5px !important" @else style="border: solid 2px #52CFDD; border-radius: 5px 5px 70px 5px !important" @endif ">
+
                         <div class="card-body ">
-                            <h5 class="card-description" style="height: 120px;">
+                            <h5 class="card-description" style="height: 100px;">
                                 {{Str::limit($comment->comment,200)}}
                             </h5>
                         </div>
                         <div class="card-footer">
 
-                            <h4 class="card-title">
+                            <h4 class="card-title fw-bold" style="color: #A578DA">
                                 @php
                                 $name = explode(" ", $comment->user->name);
                                 echo $name[0];
                                 @endphp
+
                             </h4>
-                            <div class="card-avatar">
+                            <!-- <div class="card-avatar" @if( $loop->index%2 != 0) style="border: solid 2px #A578DA" @else style="border: solid 2px #52CFDD" @endif ">
                                 @if ($comment->user->picture)
                                 <img class="img" src="{{Storage::url($comment->user->picture)}}">
                                 @else
                                 <img class="img" src="{{ asset('material') }}/img/placeholder.jpg" alt="...">
                                 @endif
 
-                            </div>
-
-
+                            </div> -->
 
                         </div>
                     </div>

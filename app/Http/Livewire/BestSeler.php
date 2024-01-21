@@ -8,20 +8,23 @@ use Livewire\Component;
 use App\Models\Membership;
 use Illuminate\Support\Facades\Storage;
 
-class Novedades extends Component
+class BestSeler extends Component
+
 {
     public $img, $title, $price;
+
     public function render()
     {
-        $products = Product::where('status', true)
-            ->where('price', '>', 0)
-            ->take(7)
-            ->orderByDesc('created_at')
+        $products =   Product::withCount('sales')
+
+            ->orderBy('sales_count', 'desc')
+            ->take(10)
             ->get();
-        return view('livewire.novedades', compact('products'));
+
+
+
+        return view('livewire.best-seler', compact('products'));
     }
-
-
     public function addCart($id, $model)
     {
 
