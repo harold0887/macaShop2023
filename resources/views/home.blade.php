@@ -144,7 +144,7 @@
 
 
         <livewire:novedades />
-        <livewire:best-seler />
+      
 
 
         <div class="row mt-3">

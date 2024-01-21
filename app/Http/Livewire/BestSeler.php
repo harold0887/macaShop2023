@@ -61,7 +61,7 @@ class BestSeler extends Component
 
 
             $this->emit('cart:update');
-            $this->emit('addCartAlertBest', [
+            $this->emit('addCart', [
                 'title' => $this->title,
                 'price' => $this->price,
                 'image' => $this->img
