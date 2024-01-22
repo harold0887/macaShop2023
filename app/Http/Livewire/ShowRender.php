@@ -126,7 +126,7 @@ class ShowRender extends Component
 
 
             $this->emit('cart:update');
-            $this->emit('addCartAlert',[
+            $this->emit('addCartAlertRelacionados',[
                 'title' => $this->title,
                 'price'=>$this->price,
                 'image'=>$this->img

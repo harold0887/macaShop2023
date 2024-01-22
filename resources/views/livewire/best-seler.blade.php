@@ -1,10 +1,25 @@
-<div class="row mt-5" style="background-color: #a578da;background-image: linear-gradient(180deg, #a578da 0%, #a578da 33%, #ffffff 66%, #ffffff 100%);">
+<div class="row mt-3" style="background: linear-gradient(140deg,rgba(146,205,250,.5),rgba(215,215,255,.4) 95%);">
 
-    <h2 class=" text-center  text-2xl  lg:text-4xl   font-bold text-white  py-2 " style="font-family: 'Advent Pro'">
-        Conoce nuestras novedades
-    </h2>
+    <div class="col-12">
+        <div class="row justify-content-center">
+            <div class="col-auto  px-0">
+                <div style="width: 80px !important;" class="  ">
+                    @include('includes.svg.prueba')
+                </div>
+            </div>
+            <div class="col-auto r d-flex align-items-center px-0">
+                <h2 class=" text-center   text-2xl  lg:text-4xl   font-bold " style="font-family: 'Advent Pro';color:#A578DA">
+                    Los más vendidos
+                </h2>
+            </div>
+            <div class="col-12">
+                <p class="text-center">¡Descubre nuestros materiales didácticos más vendidos! </p>
+            </div>
+        </div>
 
-    <div class="novedades-autoplay">
+    </div>
+
+    <div class="best-autoplay">
         @if (isset($products) && $products->count() > 0)
         @foreach ($products as $product)
         <div class="px-1">
@@ -83,4 +98,10 @@
 
 
     </div>
+
+
+
+
+
+
 </div>

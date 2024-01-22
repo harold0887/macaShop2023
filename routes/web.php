@@ -46,16 +46,48 @@ use App\Http\Controllers\Admin\MembershipController;
 
 
 
-Route::get('/link', function () {
-  $target = '/home3/materi65/maca/storage/app/public';
-  $link =   '/home3/materi65/public_html/storage';
-  symlink($target, $link);
-  echo "Link done";
+
+
+
+Route::group(['middleware' => ['role:admin']], function () {
+  Route::get('/link', function () {
+    $target = '/home3/materi65/maca/storage/app/public';
+    $link =   '/home3/materi65/public_html/storage';
+    symlink($target, $link);
+    echo "Link done";
+  });
+
+  Route::get('/foo', function () {
+    Artisan::call('storage:link');
+  });
+
+
+  // Clear application cache:
+  Route::get('/clear-cache', function () {
+    Artisan::call('cache:clear');
+    return 'Application cache has been cleared';
+  });
+
+  //Clear route cache:
+  Route::get('/route-cache', function () {
+    Artisan::call('route:cache');
+    return 'Routes cache has been cleared';
+  });
+
+  //Clear config cache:
+  Route::get('/config-cache', function () {
+    Artisan::call('config:cache');
+    return 'Config cache has been cleared';
+  });
+
+  // Clear view cache:
+  Route::get('/view-clear', function () {
+    Artisan::call('view:clear');
+    return 'View cache has been cleared';
+  });
 });
 
-Route::get('/foo', function () {
-  Artisan::call('storage:link');
-});
+
 
 
 
@@ -82,7 +114,7 @@ Route::group(['middleware' => ['auth']], function () {
   Route::group(['middleware' => ['auth.banned', 'ip.banned']], function () {
     //ventas
 
-  
+
     Route::get('customer/orders/{id}', AccountShowOrder::class)->name('order.show');
     Route::get('customer/products', AccountProducts::class)->name('customer.products');
     Route::get('customer/packages', [MainController::class, 'customerPackages'])->name('customer.packages');

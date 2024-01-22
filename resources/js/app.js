@@ -2,6 +2,8 @@
 $(function () {
     novedadesAutoplay();
     bestAutoplay();
+    relacionadosAutoplay();
+    comentsAutoplay();
     showModalLoad();
     //changeSearch();
     showFilters();
@@ -56,6 +58,85 @@ function bestAutoplay() {
     });
 }
 
+function relacionadosAutoplay() {
+    $(".relacionados1").slick({
+        autoplay: true,
+        autoplaySpeed: 2300,
+        arrows: false,
+        dots: true,
+        infinite: true,
+        responsive: [
+            {
+                breakpoint: 2048,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 700,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
+    });
+}
+
+function comentsAutoplay() {
+    $(".coments-autoplay").slick({
+        autoplay: true,
+        autoplaySpeed: 2300,
+        arrows: false,
+        infinite: true,
+
+        responsive: [
+            {
+                breakpoint: 2048,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 700,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
+    });
+}
 function novedadesAutoplay() {
     $(".novedades-autoplay").slick({
         autoplay: true,
@@ -95,116 +176,9 @@ function novedadesAutoplay() {
     });
 
 
-    $(".relacionados").slick({
-        autoplay: true,
-        autoplaySpeed: 2300,
-        arrows: false,
-        infinite: true,
-        responsive: [
-            {
-                breakpoint: 2048,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 700,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ],
-    });
-    $(".relacionados1").slick({
-        autoplay: true,
-        autoplaySpeed: 2300,
-        arrows: false,
-        dots: true,
-        infinite: true,
-        responsive: [
-            {
-                breakpoint: 2048,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 700,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ],
-    });
-    $(".coments-autoplay").slick({
-        autoplay: true,
-        autoplaySpeed: 2300,
-        arrows: false,
-        infinite: true,
 
-        responsive: [
-            {
-                breakpoint: 2048,
-                settings: {
-                    slidesToShow: 5,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 700,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ],
-    });
+
+
 }
 
 function showloginModal() {
@@ -380,6 +354,7 @@ Livewire.on("addCartAlert", function ($product) {
     $("#adCart").modal("show");
     //$(".modal-backdrop").remove();
     novedadesAutoplay();
+    //bestAutoplay();
 
 });
 Livewire.on("addCartAlertBest", function ($product) {
@@ -389,6 +364,15 @@ Livewire.on("addCartAlertBest", function ($product) {
     $("#adCart").modal("show");
     //$(".modal-backdrop").remove();
     bestAutoplay();
+});
+
+Livewire.on("addCartAlertRelacionados", function ($product) {
+    $("#cartTitle").text($product['title']);
+    $("#cartPrice").text($product['price']);
+    $("#cartImage").attr("src", $product['image']);
+    $("#adCart").modal("show");
+    //$(".modal-backdrop").remove();
+    relacionadosAutoplay();
 });
 
 Livewire.on("showAcordeon", function () {

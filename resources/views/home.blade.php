@@ -144,7 +144,7 @@
 
 
         <livewire:novedades />
-      
+        <livewire:best-seler />
 
 
         <div class="row mt-3">
@@ -182,7 +182,7 @@
                             </div>
                             <div class="col">
                                 <p class="fw-bold my-0">Acceso a nuestras membresías</p>
-                                <p class="text-justify">¡Disfruta más de 100 materiales en cada una de nuestras membresías! 
+                                <p class="text-justify">¡Disfruta más de 100 materiales en cada una de nuestras membresías!
                                     <strong style="color:#A578DA">Membresía preescolar</strong> y
                                     <strong style="color:#A578DA">Membresía primaria</strong>, se
                                     convertirán en tu
