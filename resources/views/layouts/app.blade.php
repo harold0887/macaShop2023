@@ -10,7 +10,13 @@
 
     <title>{{ $title.' | Material Didáctico MaCa' ?? 'Material Didáctico Maca' }}</title>
 
+    <!-- no cache -->
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
 
+    <!-- no cache end-->
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -159,10 +165,10 @@
 
 
 
-     <!-- se agrega app con time -->
-    <script src="{{ asset('js/app.js') }}?t=<?=time()?>" type="text/javascript" defer> </script>
+    <!-- se agrega app con time -->
+    <script src="{{ asset('js/app.js') }}?t=<?= time() ?>" type="text/javascript" defer> </script>
 
-  
+
 
 
 
