@@ -159,7 +159,11 @@
 
 
 
-    <script src="{{ asset('js/appAfter.js') }}" defer></script>
+     <!-- se agrega app con time -->
+    <script src="{{ asset('js/app.js') }}?t=<?=time()?>" type="text/javascript" defer> </script>
+
+  
+
 
 
     <!-- slick -->
