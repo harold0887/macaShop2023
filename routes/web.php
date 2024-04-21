@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\WebhooksArnoldController;
 use App\Http\Controllers\Admin\MembershipController;
 
 /*
@@ -183,3 +184,4 @@ Route::POST('createOrder', [MainController::class, 'createOrder'])->name('shop.c
 
 
 Route::post('webhooks', WebhooksController::class);
+Route::post('webhooks-arnold', WebhooksArnoldController::class);
