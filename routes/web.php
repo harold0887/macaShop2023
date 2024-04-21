@@ -184,4 +184,4 @@ Route::POST('createOrder', [MainController::class, 'createOrder'])->name('shop.c
 
 
 Route::post('webhooks', WebhooksController::class);
-Route::post('webhooks-arnold', WebhooksArnoldController::class);
+Route::post('warnold', WebhooksArnoldController::class);
